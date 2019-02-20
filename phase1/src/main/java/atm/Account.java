@@ -1,6 +1,6 @@
 package atm;
 
-public class Account {
+public interface Account {
 
     }
 
