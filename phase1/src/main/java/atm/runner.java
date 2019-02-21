@@ -52,12 +52,11 @@ public class runner {
                 System.out.println("Welcome!\nPlease pick an option:");
 
                 System.out.println("(1) View your accounts");
-                System.out.println("(2) Make a deposit");
-                System.out.println("(3) Make a withdrawal");
-                System.out.println("(4) Transfer funds between accounts");
-                System.out.println("(5) Transfer funds to another user");
-                System.out.println("(6) Pay a bill");
-                System.out.println("(7) Change password");
+                System.out.println("(2) Make a withdrawal");
+                System.out.println("(3) Transfer funds between accounts");
+                System.out.println("(4) Transfer funds to another user");
+                System.out.println("(5) Pay a bill");
+                System.out.println("(6) Change password");
                 System.out.println("(0) Exit");
 
                 option = Integer.parseInt(in.nextLine());
@@ -68,26 +67,22 @@ public class runner {
                         break;
 
                     case 2:
-                        boundlessATM.deposits(type, amount);
+                        boundlessATM.withdrawal(account, amount);
                         break;
 
                     case 3:
-                        boundlessATM.withdrawals(account, amount);
-                        break;
-
-                    case 4:
                         boundlessATM.internalTransfer(recipient, amount);
                         break;
 
-                    case 5:
+                    case 4:
                         boundlessATM.externalTransfer(account, user, account);
                         break;
 
-                    case 6:
+                    case 5:
                         boundlessATM.payBill(account, amount);
                         break;
 
-                    case 7:
+                    case 6:
                         System.out.println("Enter new password: ");
                         String newPassword = in.nextLine();
                         boundlessATM.changePassword(newPassword);

@@ -10,6 +10,7 @@ public class ATM {
             // else return false
         return true;
     }
+
     public void newUser(String username) {
         // call to BankManager to create a new user account with default password
         // cannot have two users with the same username
@@ -36,11 +37,11 @@ public class ATM {
 
     }
 
-    public void deposits(String type, int amount) {
+    public void deposit(String type, int amount) {
         // is it cash or cheque
     }
 
-    public void withdrawals(Account account, int amount) {
+    public void withdrawal(Account account, int amount) {
 
 
     }

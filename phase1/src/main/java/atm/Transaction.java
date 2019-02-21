@@ -24,16 +24,9 @@ public class Transaction {
 //        this.date = ...
     }
 
-    // for paying bills/withdrawls
+    // for paying bills
     public Transaction(Account source, int amount) {
         this.source = source;
-        this.amount = amount;
-//        this.date = ...
-    }
-
-    // for deposits
-    public Transaction(int amount) {
-//        this.recipient = their primary debit account;
         this.amount = amount;
 //        this.date = ...
     }
