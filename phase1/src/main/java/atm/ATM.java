@@ -1,46 +1,52 @@
 package atm;
 
-import java.util.Scanner;
 
 public class ATM {
 
-    private static Scanner reader = new Scanner(System.in);
-
-
-    private static boolean login() {
-        System.out.println("Enter username: ");
-        String username = reader.nextLine();
-        System.out.println("Enter password: ");
-        String password = reader.nextLine();
-
+    protected boolean login(String username, String password) {
         // if username is valid
             // if password matches username
                 // return true
-            // else re-prompt for username and password
+            // else return false
         return true;
     }
-    private static void newUser() {
-        System.out.println("Enter username: ");
-        String username = reader.nextLine();
+    public void newUser(String username) {
         // call to BankManager to create a new user account with default password
         // cannot have two users with the same username
-    }
-
-    private static void menu() {
-
-    }
-
-    private static void accounts() {
+        // bank manager responds with a new user object that is printed so user knows their user/pass
+        // and then this is returned
 
     }
 
-    public static void main(String[] args) {
-        System.out.println("1. Login \n2. Create new user");
-        int option = Integer.parseInt(reader.nextLine());
-        if (option == 1) {
-            login();
-        } else if (option == 2) {
-            newUser();
-        }
+    public void changePassword(String newPassword) {
+        // set user password to newPassword
     }
+
+    public void viewAccounts() {
+        // Accounts stored in HashMap<int, Account>
+        // asks you to type in a number thats associated w one of the ints
+        // then u can view the account info?
+    }
+
+    public void internalTransfer(Account sender, Account recipient, int amount) {
+
+    }
+
+    public void externalTransfer(Account sender, User recipient,  int amount) {
+
+    }
+
+    public void deposits(String type, int amount) {
+        // is it cash or cheque
+    }
+
+    public void withdrawals(Account account, int amount) {
+
+
+    }
+
+    public void payBill(Account account, int amount) {
+
+    }
+
 }
