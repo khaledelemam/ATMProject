@@ -2,28 +2,52 @@ package atm;
 
 public class Transaction {
 
-    private User sender;
-    private User recipient;
+    private Object source;
+    private Object recipient;
     private int amount;
     private Date date;
 
-    public Transaction(User sender, User recipient, int amount) {
-        this.sender = sender;
+
+    // for external transfers
+    public Transaction(User source, User recipient, int amount) {
+        this.source = source;
         this.recipient = recipient;
         this.amount = amount;
-//        this.date = ....
+//        this.date = ...we have to figure out this date class thing lmao
+    }
+
+    // for internal transfers
+    public Transaction(Account source, Account recipient, int amount) {
+        this.source = source;
+        this.recipient = recipient;
+        this.amount = amount;
+//        this.date = ...
+    }
+
+    // for paying bills/withdrawls
+    public Transaction(Account source, int amount) {
+        this.source = source;
+        this.amount = amount;
+//        this.date = ...
+    }
+
+    // for deposits
+    public Transaction(int amount) {
+//        this.recipient = their primary debit account;
+        this.amount = amount;
+//        this.date = ...
     }
 
     public int getAmount() {
         return amount;
     }
 
-    public User getRecipient() {
+    public Object getRecipient() {
         return recipient;
     }
 
-    public User getSender() {
-        return sender;
+    public Object getSource() {
+        return source;
     }
 
     public Date getDate() {
@@ -33,12 +57,12 @@ public class Transaction {
 
     // these will be used when the bank manager reverses a transaction
 
-    public void setSender(User sender) {
-        this.sender = this.recipient;
+    public void setSender(Object source) {
+        this.source = this.source;
 
     }
 
-    public void setRecipient(User recipient) {
+    public void setRecipient(Object recipient) {
         this.recipient = recipient;
     }
 }
