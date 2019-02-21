@@ -11,7 +11,7 @@ public class Transaction {
         this.sender = sender;
         this.recipient = recipient;
         this.amount = amount;
-//        this.date = ...
+//        this.date = ....
     }
 
     public int getAmount() {
