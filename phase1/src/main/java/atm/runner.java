@@ -1,5 +1,6 @@
 package atm;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class runner {
@@ -57,21 +58,51 @@ public class runner {
                 System.out.println("(4) Transfer funds to another user");
                 System.out.println("(5) Pay a bill");
                 System.out.println("(6) Change password");
+                System.out.println("(7) Create new account");
                 System.out.println("(0) Exit");
 
                 option = Integer.parseInt(in.nextLine());
 
                 switch (option) {
                     case 1:
-                        boundlessATM.viewAccounts();
+                        // accounts should be stored in a hashmap where each account is mapped to an id
+                        // so ppl can access account info via typing in the ID
+                        HashMap<int, Account> accounts = boundlessATM.viewAccounts();
+
+                        // view net total
+                        boundlessATM.accountsSummary();
+
+                        boundlessATM.accountInfo();
+
                         break;
 
                     case 2:
+                        boundlessATM.viewAccounts();
+
+                        // this brings up their list of accounts
+
+                        System.out.println("Which account would you like to withdraw from?: ");
+                        int account = Integer.parseInt(in.nextLine());
+
+                        System.out.println("How much would you like to withdraw?: ");
+                        int amount = Integer.parseInt(in.nextLine());
+
                         boundlessATM.withdrawal(account, amount);
                         break;
 
                     case 3:
-                        boundlessATM.internalTransfer(recipient, amount);
+                        System.out.println("From: ");
+                        int recipient = Integer.parseInt(in.nextLine());
+
+                        System.out.println("To: ");
+                        int sender = Integer.parseInt(in.nextLine());
+
+
+                        System.out.println("How much would you like to transfer?: ");
+                        int amount = Integer.parseInt(in.nextLine());
+
+                        boundlessATM.internalTransfer(sender, recipient, amount);
+
                         break;
 
                     case 4:
@@ -87,6 +118,10 @@ public class runner {
                         String newPassword = in.nextLine();
                         boundlessATM.changePassword(newPassword);
                         break;
+                    case 7:
+                        // new account creation
+                        System.out.println("What type of account would you like to open?:");
+                        System.out.println("CHEQUING\nSAVINGS\nLINE OF CREDIT\nCREDIT CARD");
 
                     case 0:
                         System.out.println("Goodbye!\n");
