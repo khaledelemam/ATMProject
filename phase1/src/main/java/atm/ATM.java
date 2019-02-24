@@ -11,6 +11,7 @@ public class ATM {
         // if password matches username
         // return true
         // else return false
+        bankManager.retreive();
         ArrayList<User> users = BankManager.users;
 
         for (int i = 0; i < users.size(); i ++) {
@@ -36,6 +37,7 @@ public class ATM {
         // and then this is returned
         user = new User(username);
         bankManager.setPassword(user);
+        bankManager.store();
 
 
     }
