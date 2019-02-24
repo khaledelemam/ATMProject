@@ -67,7 +67,7 @@ public class runner {
                     case 1:
                         // accounts should be stored in a hashmap where each account is mapped to an id
                         // so ppl can access account info via typing in the ID
-                        HashMap<int, Account> accounts = boundlessATM.viewAccounts();
+                        HashMap<Integer, Account> accounts = boundlessATM.viewAccounts();
 
                         // view net total
                         boundlessATM.accountsSummary();
