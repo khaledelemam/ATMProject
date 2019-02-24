@@ -37,13 +37,12 @@ public class ATM {
         // and then this is returned
         user = new User(username);
         bankManager.setPassowrd(user);
-
-
+        
 
     }
 
     public void changePassword(String newPassword) {
-        // set user password to newPassword
+        user.setPassword(newPassword);
     }
 
     public void viewAccounts() {
