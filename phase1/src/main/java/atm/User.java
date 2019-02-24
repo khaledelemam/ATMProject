@@ -10,8 +10,7 @@ public class User implements Serializable {
     private String username;
     private String password;
     private int numAccounts;
-    private ArrayList<Account> accounts = new ArrayList<>();
-    private HashMap<Integer, Account> acc = new HashMap<>();
+    private HashMap<Integer, Account> accounts= new HashMap<>();
     private ChequingAccount primaryAccount;
 
 
@@ -21,8 +20,7 @@ public class User implements Serializable {
 //        this.accounts = new HashMap<>();
 
         ChequingAccount firstAccount = new ChequingAccount(this);
-        accounts.add(firstAccount);
-        this.acc.put(0, firstAccount);
+        this.accounts.put(0, firstAccount);
     }
 
 
@@ -30,26 +28,12 @@ public class User implements Serializable {
         this.password = password;
     }
 
-
     public String getUsername() {return this.username;}
 
     public String getPassword() {return this.password;}
 
 
-    public void viewAccounts(){
-        for (int i = 0; i < accounts.size(); i++){
-            if (accounts.get(i) instanceof ChequingAccount)
-            System.out.println("("+(i)+")" + " Chequing Account");
-            else if (accounts.get(i) instanceof SavingsAccount)
-                System.out.println("("+(i)+")"  + "Savings Account");
-            else if (accounts.get(i) instanceof CreditCard)
-                System.out.println("("+(i)+")"  + "Credit Card Account");
-            else if (accounts.get(i) instanceof LineOfCredit)
-                System.out.println("("+(i)+")"  + "Line of Credit Account");
-        }
-
-
-    }
+    
 
 
 
