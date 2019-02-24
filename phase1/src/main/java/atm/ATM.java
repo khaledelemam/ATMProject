@@ -11,7 +11,7 @@ public class ATM {
         // if password matches username
         // return true
         // else return false
-        bankManager.retreive();
+        bankManager.retrieve();
         ArrayList<User> users = BankManager.users;
 
         for (int i = 0; i < users.size(); i ++) {
@@ -50,6 +50,7 @@ public class ATM {
         // Accounts stored in HashMap<int, Account>
         // asks you to type in a number thats associated w one of the ints
         // then u can view the account info?
+        
     }
 
     public void internalTransfer(Account sender, Account recipient, int amount) {
