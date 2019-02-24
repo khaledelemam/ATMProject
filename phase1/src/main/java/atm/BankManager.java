@@ -23,7 +23,7 @@ public class BankManager implements Serializable {
 
     public void store(){
         try{
-            FileOutputStream fos= new FileOutputStream("myfile");
+            FileOutputStream fos= new FileOutputStream("file");
             ObjectOutputStream oos= new ObjectOutputStream(fos);
             oos.writeObject(users);
             oos.close();
@@ -36,10 +36,10 @@ public class BankManager implements Serializable {
 
     @SuppressWarnings("unchecked")
 
-    public void retreive(){
+    public void retrieve(){
         try
         {
-            FileInputStream fis = new FileInputStream("myfile");
+            FileInputStream fis = new FileInputStream("file");
             ObjectInputStream ois = new ObjectInputStream(fis);
             users = (ArrayList) ois.readObject();
             ois.close();
