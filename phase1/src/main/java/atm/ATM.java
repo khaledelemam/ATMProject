@@ -1,14 +1,33 @@
 package atm;
 
 
+import java.util.ArrayList;
+
 public class ATM {
+    private User user;
+    private BankManager bankManager = new BankManager();
 
     protected boolean login(String username, String password) {
         // if username is valid
-            // if password matches username
-                // return true
-            // else return false
-        return true;
+        // if password matches username
+        // return true
+        // else return false
+        ArrayList<User> users = BankManager.users;
+
+        for (int i = 0; i < users.size(); i ++) {
+            if (users.get(i).getUsername().equals(username)){
+                if (users.get(i).getPassword().equals(password)){
+                    user = BankManager.users.get(i);
+                    return true;
+
+                }
+
+            }
+
+        }
+        return false;
+
+
     }
 
     public void newUser(String username) {
@@ -16,8 +35,9 @@ public class ATM {
         // cannot have two users with the same username
         // bank manager responds with a new user object that is printed so user knows their user/pass
         // and then this is returned
-        BankManager bankManager = new BankManager();
-        bankManager.createUser(username);
+        user = new User(username);
+        bankManager.setPassowrd(user);
+
 
 
     }

@@ -1,9 +1,15 @@
 package atm;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class BankManager {
 
-    public void createUser(String username){
-        User user = new User(username, "123abc");
+    public static  ArrayList<User> users = new ArrayList<>(10);
+
+    public void setPassowrd(User user){
+        user.setPassword("123abc");
+        users.add(user);
     }
     public void ReverseLastTransaction(){
 

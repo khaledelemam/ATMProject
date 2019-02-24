@@ -21,8 +21,27 @@ public class User {
         this.accounts.put(this.numAccounts, firstAccount);
     }
 
-    public void changePassword (){
+    public User(String username) {
+        this.numAccounts = 0;
+        this.username = username;
+        this.accounts = new HashMap<>();
+
+        ChequingAccount firstAccount = new ChequingAccount(this);
+        this.accounts.put(this.numAccounts, firstAccount);
+    }
+
+
+    public void setPassword (String password){
+        this.password = password;
+        this.username = username;
 
     }
+
+
+    public String getUsername() {return this.username;}
+
+    public String getPassword() {return this.password;}
+
+
 
 }
