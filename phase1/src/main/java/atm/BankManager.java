@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class BankManager {
 
-    public static  ArrayList<User> users = new ArrayList<>(10);
+    public static  ArrayList<User> users = new ArrayList<>();
 
     public void setPassowrd(User user){
         user.setPassword("123abc");
