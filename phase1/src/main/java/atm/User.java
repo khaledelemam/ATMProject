@@ -21,4 +21,8 @@ public class User {
         this.accounts.put(this.numAccounts, firstAccount);
     }
 
+    public void changePassword (){
+
+    }
+
 }

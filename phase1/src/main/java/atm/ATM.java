@@ -16,6 +16,9 @@ public class ATM {
         // cannot have two users with the same username
         // bank manager responds with a new user object that is printed so user knows their user/pass
         // and then this is returned
+        BankManager bankManager = new BankManager();
+        bankManager.createUser(username);
+
 
     }
 
