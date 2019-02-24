@@ -14,42 +14,48 @@ public class runner {
         ATM boundlessATM = new ATM();
 
 
-        while (!loggedIn) {
-            System.out.println("Please pick an option.");
-            System.out.println("(1) Login \n(2) Create new user\n(0) Exit");
-            int option = Integer.parseInt(in.nextLine());
+//        while (!loggedIn) {
+        System.out.println("Please pick an option.");
+        System.out.println("(1) Login \n(2) Create new user\n(0) Exit");
+        int option = Integer.parseInt(in.nextLine());
 
-            switch (option) {
-                case 1:
-                    System.out.println("Enter your username: ");
-                    String username = in.nextLine();
+           while (!loggedIn) {
+               switch (option) {
+                   case 1:
+                       System.out.println("Enter your username: ");
+                       String username = in.nextLine();
 
-                    System.out.println("Enter your password: ");
-                    String password = in.nextLine();
+                       System.out.println("Enter your password: ");
+                       String password = in.nextLine();
 
-                    loggedIn = boundlessATM.login(username, password);
-                    break;
+                       loggedIn = boundlessATM.login(username, password);
+                       if (!loggedIn) {
+                           System.out.println("Invalid username or password");
+                       }
+                       break;
 
-                case 2:
+                   case 2:
 
-                    System.out.println("Enter a username: ");
-                    username = in.nextLine();
+                       System.out.println("Enter a username: ");
+                       username = in.nextLine();
+                       boundlessATM.newUser(username);
+                       loggedIn = true;
 
-                    boundlessATM.newUser(username);
+                       break;
 
-                    System.out.println("Your current password is \" password \".");
-                    break;
+                   case 0:
+                       System.exit(0);
+                       break;
 
-                case 0:
-                    System.exit(0);
-                    break;
+                   default:
+                       System.out.println("Please pick a valid option.");
+                       break;
+               }
+           }
 
-                default:
-                    System.out.println("Please pick a valid option.");
-                    break;
-            }
+//            while (loggedIn) {
 
-            while (loggedIn) {
+
                 System.out.println("Welcome!\nPlease pick an option:");
 
                 System.out.println("(1) View your accounts");
@@ -67,12 +73,14 @@ public class runner {
                     case 1:
                         // accounts should be stored in a hashmap where each account is mapped to an id
                         // so ppl can access account info via typing in the ID
-                        HashMap<Integer, Account> accounts = boundlessATM.viewAccounts();
+//                        HashMap<Integer, Account> accounts = boundlessATM.viewAccounts();
+//
+//                        // view net total
 
-                        // view net total
-                        boundlessATM.accountsSummary();
 
-                        boundlessATM.accountInfo();
+//                        boundlessATM.accountsSummary();
+//
+//                        boundlessATM.accountInfo();
 
                         break;
 
@@ -87,7 +95,7 @@ public class runner {
                         System.out.println("How much would you like to withdraw?: ");
                         int amount = Integer.parseInt(in.nextLine());
 
-                        boundlessATM.withdrawal(account, amount);
+//                        boundlessATM.withdrawal(account, amount);
                         break;
 
                     case 3:
@@ -99,18 +107,18 @@ public class runner {
 
 
                         System.out.println("How much would you like to transfer?: ");
-                        int amount = Integer.parseInt(in.nextLine());
+                        amount = Integer.parseInt(in.nextLine());
 
-                        boundlessATM.internalTransfer(sender, recipient, amount);
+//                        boundlessATM.internalTransfer(sender, recipient, amount);
 
                         break;
 
                     case 4:
-                        boundlessATM.externalTransfer(account, user, account);
+//                        boundlessATM.externalTransfer(account, user, account);
                         break;
 
                     case 5:
-                        boundlessATM.payBill(account, amount);
+//                        boundlessATM.payBill(account, amount);
                         break;
 
                     case 6:
@@ -135,6 +143,6 @@ public class runner {
             }
 
 
-        }
-    }
+//        }
+//    }
 }
