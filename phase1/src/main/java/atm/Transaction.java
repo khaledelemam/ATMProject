@@ -1,22 +1,16 @@
 package atm;
 
 public class Transaction {
+    //we should refactor the name of this to Transfer??
 
-    private Object source;
-    private Object recipient;
+    private Account source;
+    private Account recipient;
     private int amount;
     private Date date;
 
 
-    // for external transfers
-    public Transaction(User source, User recipient, int amount) {
-        this.source = source;
-        this.recipient = recipient;
-        this.amount = amount;
-//        this.date = ...we have to figure out this date class thing lmao
-    }
-
-    // for internal transfers
+    // for  transfers
+    // if its an external transfer, it should pass through <recipient user>.getPrimaryAccount()
     public Transaction(Account source, Account recipient, int amount) {
         this.source = source;
         this.recipient = recipient;
@@ -25,6 +19,8 @@ public class Transaction {
     }
 
     // for paying bills
+    // when it prints to outgoing:
+    // Username, amount
     public Transaction(Account source, int amount) {
         this.source = source;
         this.amount = amount;
@@ -32,30 +28,20 @@ public class Transaction {
     }
 
     public int getAmount() {
-        return amount;
+        return this.amount;
     }
 
-    public Object getRecipient() {
-        return recipient;
-    }
-
-    public Object getSource() {
-        return source;
-    }
 
     public Date getDate() {
-        return date;
+        return this.date;
     }
 
 
     // these will be used when the bank manager reverses a transaction
 
-    public void setSender(Object source) {
-        this.source = this.source;
-
-    }
-
-    public void setRecipient(Object recipient) {
-        this.recipient = recipient;
+    // this creates a new object w the recipient and sender reversed
+    public Transaction reverse(Transaction transaction) {
+        return new Transaction(this.recipient, this.source, this.amount);
     }
 }
+
