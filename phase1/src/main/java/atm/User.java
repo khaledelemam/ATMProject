@@ -10,17 +10,17 @@ public class User implements Serializable {
     private String username;
     private String password;
     private int numAccounts;
-//    private HashMap<Integer, Account> accounts= new HashMap<>();
+    private ArrayList<Account> accounts;
     private ChequingAccount primaryAccount;
 
 
     public User(String username) {
         this.numAccounts = 0;
         this.username = username;
-//        this.accounts = new HashMap<>();
+        this.accounts = new ArrayList<>();
 
         ChequingAccount firstAccount = new ChequingAccount(this);
-//        this.accounts.put(0, firstAccount);
+        this.accounts.add(firstAccount);
     }
 
 
@@ -31,6 +31,8 @@ public class User implements Serializable {
     public String getUsername() {return this.username;}
 
     public String getPassword() {return this.password;}
+
+    public ChequingAccount getPrimaryAccount() { return this.primaryAccount; }
 
 
 
