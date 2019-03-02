@@ -17,13 +17,15 @@ public class BankManager implements Serializable {
 
     }
 
-//    public userRequestAccount(){
-//        for(int i = 0; i< users.size();i++){
-//            if (users.get(i).getRequest() != null){
-//                users.get(i).addAccount(users.get(i).getRequest());
-//            }
-//        }
-//    }
+    //Here by default the bank manager accepts the request but bank manager should have option to reject
+
+    public void  userRequestAccount(){
+        for(int i = 0; i< users.size();i++){
+            if (users.get(i).getRequest() != null){
+                users.get(i).addAccount(users.get(i).getRequest());
+            }
+        }
+    }
 
     public void ReverseLastTransaction(){
 
@@ -31,7 +33,7 @@ public class BankManager implements Serializable {
 
     public void store(){
         try{
-            FileOutputStream fos= new FileOutputStream("file2");
+            FileOutputStream fos= new FileOutputStream("file");
             ObjectOutputStream oos= new ObjectOutputStream(fos);
             oos.writeObject(users);
             oos.close();
@@ -47,7 +49,7 @@ public class BankManager implements Serializable {
     public void retrieve(){
         try
         {
-            FileInputStream fis = new FileInputStream("file2");
+            FileInputStream fis = new FileInputStream("file");
             ObjectInputStream ois = new ObjectInputStream(fis);
             users = (ArrayList) ois.readObject();
             ois.close();

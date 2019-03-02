@@ -12,7 +12,7 @@ public class User implements Serializable {
     private int numAccounts;
     private HashMap<Integer,Account> accounts = new HashMap<>();
     private HashMap<Account,Integer> map = new HashMap<>();
-    private Account request = null;
+    private String request;
 
     // I used two Hashmaps to track the account with the corresponding number. Two are used instead of one because there is no "getKey()" in Hashmaps.
     // This implementation is working so far in accessing user accounts.
@@ -29,15 +29,15 @@ public class User implements Serializable {
         //There should not be a "default" account, the user requests the specific account
         // these accounts are just for testing purposes.
 
-        SavingsAccount s = new SavingsAccount((this));
-        s.setBalance(100);
-        this.accounts.put(1, s);
-        this.map.put(s, 1);
-
-
-        ChequingAccount c = new ChequingAccount(this);
-        this.accounts.put(2, c);
-        this.map.put(c, 2);
+//        SavingsAccount s = new SavingsAccount((this));
+//        s.setBalance(100);
+//        this.accounts.put(1, s);
+//        this.map.put(s, 1);
+//
+//
+//        ChequingAccount c = new ChequingAccount(this);
+//        this.accounts.put(2, c);
+//        this.map.put(c, 2);
 
 
 
@@ -54,10 +54,32 @@ public class User implements Serializable {
     public String getPassword() {return this.password;}
 
 
-    public void addAccount(Account account){
-        SavingsAccount s = new SavingsAccount((this));
-        this.accounts.put(2, s);
-        this.map.put(s, 2);
+
+    public void addAccount(String account){
+
+        Account hold = null;
+
+        if (account.equals("Chequing")){
+            hold = new ChequingAccount(this);
+        }
+
+        else if (account.equals("Savings")){
+            hold = new SavingsAccount((this));
+        }
+        else if (account.equals("Line of Credit")){
+            hold = new LineOfCredit(this);
+        }
+
+        else if (account.equals("Credit Card")){
+            hold = new CreditCard(this);
+        }
+
+        if (hold != null) {
+            int index = accounts.size();
+            this.accounts.put(index + 1, hold);
+            this.map.put(hold, index + 1);
+        }
+
 
     }
 
@@ -96,12 +118,28 @@ public class User implements Serializable {
     }
 
 
-    public Account getRequest(){
+    public String getRequest(){
         return request ;
     }
 
-    public void requestAccount(Account account){
-        request = account;
+    public void requestAccount(String account){
+
+        if (account.equals("Chequing")){
+            request = "Chequing";
+
+        }
+        else if (account.equals("Savings")){
+            request ="Savings";
+        }
+        else if (account.equals("Line of Credit")){
+           request =  "Line of Credit";
+
+        }
+        else if (account.equals("Credit Card")){
+           request =  "Credit Card";
+
+        }
+
     }
 
 }
