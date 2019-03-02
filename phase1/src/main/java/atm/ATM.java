@@ -72,6 +72,7 @@ public class ATM {
     public void withdrawal(int account, int amount) {
         Account  acc = user.getAccount(account);
         acc.setBalance(-amount);
+        bankManager.store();
 
     }
 

@@ -17,6 +17,14 @@ public class BankManager implements Serializable {
 
     }
 
+//    public userRequestAccount(){
+//        for(int i = 0; i< users.size();i++){
+//            if (users.get(i).getRequest() != null){
+//                users.get(i).addAccount(users.get(i).getRequest());
+//            }
+//        }
+//    }
+
     public void ReverseLastTransaction(){
 
     }

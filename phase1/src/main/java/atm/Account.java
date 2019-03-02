@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public abstract class Account implements Serializable {
 
+    private static final long serialVersionUID = 10L;
     private User owner;
-//    private int balance;
     private Transaction lastTransaction;
     private Date dateOpened;
 
