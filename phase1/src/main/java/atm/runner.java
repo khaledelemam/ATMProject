@@ -55,7 +55,6 @@ public class runner {
 
 //            while (loggedIn) {
 
-
                 System.out.println("Welcome!\nPlease pick an option:");
 
                 System.out.println("(1) View your accounts");
