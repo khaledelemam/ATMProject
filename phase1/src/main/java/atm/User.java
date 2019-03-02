@@ -54,6 +54,17 @@ public class User implements Serializable {
 
     }
 
+    public Account getAccount(int acc){
+
+        for(int i = 1 ; i <=accounts.size(); i++){
+            if (acc== i) {
+                return accounts.get(i);
+            }
+        }
+        return null;
+
+    }
+
     public void requestAccount(Account account){
         request = account;
     }

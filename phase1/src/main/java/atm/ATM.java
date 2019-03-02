@@ -17,6 +17,7 @@ public class ATM {
         for (int i = 0; i < users.size(); i ++) {
             if (users.get(i).getUsername().equals(username)){
                 if (users.get(i).getPassword().equals(password)){
+                    System.out.println(5);
                     user = bankManager.users.get(i);
                     return true;
 
@@ -62,12 +63,15 @@ public class ATM {
 
     }
 
-    public void deposit(String type, int amount) {
+    public void deposit(int account , int amount) {
         // is it cash or cheque
+
+
     }
 
-    public void withdrawal(Account account, int amount) {
-
+    public void withdrawal(int account, int amount) {
+        Account  acc = user.getAccount(account);
+        acc.setBalance(-amount);
 
     }
 

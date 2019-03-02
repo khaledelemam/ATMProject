@@ -4,11 +4,12 @@ public class ChequingAccount extends Account {
 
     public ChequingAccount(User owner) {
         super(owner);
+
     }
+
 
     @Override
     public String toString() {
         return "Chequing Account";
     }
-    //
 }
