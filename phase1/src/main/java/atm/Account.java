@@ -5,26 +5,21 @@ import java.io.Serializable;
 public abstract class Account implements Serializable {
 
     private User owner;
-    private int balance;
+//    private int balance;
     private Transaction lastTransaction;
     private Date dateOpened;
 
     public Account(User owner) {
         this.owner = owner;
-        this.balance = 0;
         this.lastTransaction = null;
 //        this.dateOpened = getCurrentDate
     }
 
-    public int getBalance() {
-        return this.balance;
-    }
+    public abstract int getBalance();
 
     // this takes in either a negative balance if money was taken from the account
     // or positive balance if money is added
-    public void setBalance(int amount) {
-        this.balance += balance;
-    }
+    public abstract void setBalance(int amount);
 
     public User getOwner() { return this.owner; }
 

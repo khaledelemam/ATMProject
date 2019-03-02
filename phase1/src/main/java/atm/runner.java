@@ -76,11 +76,7 @@ public class runner {
 //                        HashMap<Integer, Account> accounts = boundlessATM.viewAccounts();
 //
 //                        // view net total
-
-
-//                        boundlessATM.accountsSummary();
-//
-//                        boundlessATM.accountInfo();
+                        boundlessATM.viewBalance();
 
                         break;
 

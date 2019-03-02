@@ -79,4 +79,14 @@ public class ATM {
 
     }
 
+    public void viewBalance() {
+        // Accounts stored in HashMap<int, Account>
+        // asks you to type in a number thats associated w one of the ints
+        // then u can view the account info?
+        //test
+        user.viewBalance();
+    }
+
+
+
 }
