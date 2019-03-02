@@ -6,4 +6,10 @@ public class SavingsAccount extends Account {
         super(owner);
     }
 
+    @Override
+    public String toString() {
+        return "Savings Account";
+    }
+
+
 }
