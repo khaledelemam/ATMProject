@@ -12,12 +12,12 @@ public class ATM {
         // return true
         // else return false
         bankManager.retrieve();
-        ArrayList<User> users = BankManager.users;
+        ArrayList<User> users = bankManager.users;
 
         for (int i = 0; i < users.size(); i ++) {
             if (users.get(i).getUsername().equals(username)){
                 if (users.get(i).getPassword().equals(password)){
-                    user = BankManager.users.get(i);
+                    user = bankManager.users.get(i);
                     return true;
 
                 }

@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class BankManager implements Serializable {
 
-    public static ArrayList<User> users = new ArrayList<>();
+    public  ArrayList<User> users = new ArrayList<>();
 
     public void setPassword(User user){
         String password = "123abc";
