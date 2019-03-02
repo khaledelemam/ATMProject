@@ -10,7 +10,7 @@ public class BankManager implements Serializable {
     public  ArrayList<User> users = new ArrayList<>();
 
     public void setPassword(User user){
-        String password = "123abc";
+        String password = "1";
         user.setPassword(password);
         users.add(user);
         System.out.println("Your current password is " + password);

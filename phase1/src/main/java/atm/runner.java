@@ -95,17 +95,18 @@ public class runner {
                         break;
 
                     case 3:
+                        boundlessATM.viewAccounts();
                         System.out.println("From: ");
-                        int recipient = Integer.parseInt(in.nextLine());
+                        int from = Integer.parseInt(in.nextLine());
 
                         System.out.println("To: ");
-                        int sender = Integer.parseInt(in.nextLine());
+                        int to = Integer.parseInt(in.nextLine());
 
 
                         System.out.println("How much would you like to transfer?: ");
                         amount = Integer.parseInt(in.nextLine());
 
-//                        boundlessATM.internalTransfer(sender, recipient, amount);
+                        boundlessATM.internalTransfer(from, to, amount);
 
                         break;
 

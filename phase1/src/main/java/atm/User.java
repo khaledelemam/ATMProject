@@ -30,6 +30,7 @@ public class User implements Serializable {
         // these accounts are just for testing purposes.
 
         SavingsAccount s = new SavingsAccount((this));
+        s.setBalance(100);
         this.accounts.put(1, s);
         this.map.put(s, 1);
 
