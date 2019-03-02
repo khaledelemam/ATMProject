@@ -55,7 +55,14 @@ public class ATM {
         user.viewAccounts();
     }
 
-    public void internalTransfer(Account sender, Account recipient, int amount) {
+    public void internalTransfer(int from, int to , int amount) {
+        Account accFrom = user.getAccount(from);
+        Account  accTo = user.getAccount(to);
+        accFrom.setBalance(-amount);
+        accTo.setBalance(amount);
+        bankManager.store();
+
+
 
     }
 
@@ -81,10 +88,6 @@ public class ATM {
     }
 
     public void viewBalance() {
-        // Accounts stored in HashMap<int, Account>
-        // asks you to type in a number thats associated w one of the ints
-        // then u can view the account info?
-        //test
         user.viewBalance();
     }
 
