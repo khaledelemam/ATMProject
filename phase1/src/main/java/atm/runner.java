@@ -15,6 +15,7 @@ public class runner {
 
 
 //        while (!loggedIn) {
+
         System.out.println("Please pick an option.");
         System.out.println("(1) Login \n(2) Create new user\n(0) Exit");
         int option = Integer.parseInt(in.nextLine());
@@ -63,7 +64,7 @@ public class runner {
                 System.out.println("(4) Transfer funds to another user");
                 System.out.println("(5) Pay a bill");
                 System.out.println("(6) Change password");
-                System.out.println("(7) Create new account");
+                System.out.println("(7) Request new account");
                 System.out.println("(8) Deposit");
                 System.out.println("(0) Exit");
 
@@ -115,7 +116,7 @@ public class runner {
                         break;
 
                     case 5:
-//                        boundlessATM.payBill(account, amount);
+//                        boundlessATM.payBill();
                         break;
 
                     case 6:
@@ -126,7 +127,10 @@ public class runner {
                     case 7:
                         // new account creation
                         System.out.println("What type of account would you like to open?:");
-                        System.out.println("CHEQUING\nSAVINGS\nLINE OF CREDIT\nCREDIT CARD");
+                        System.out.println("(1) CHEQUING\n(2) SAVINGS\n(3) LINE OF CREDIT\n (4) CREDIT CARD");
+                        account = Integer.parseInt(in.nextLine());
+                        boundlessATM.requestAccount(account);
+                        break;
 
                     case 8:
                         // new account creation

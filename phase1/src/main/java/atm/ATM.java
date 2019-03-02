@@ -83,14 +83,47 @@ public class ATM {
 
     }
 
-    public void payBill(Account account, int amount) {
+
+    public void payBill(){
 
     }
+
 
     public void viewBalance() {
         user.viewBalance();
     }
 
+    public void requestAccount(int account){
+        if (account == 1){
+            user.requestAccount("Chequing");
+
+        }
+        else if (account == 2){
+            user.requestAccount("Savings");
+
+        }
+        else if (account == 3){
+            user.requestAccount("Line of Credit");
+
+        }
+        else if (account == 4){
+            user.requestAccount("Credit Card");
+
+        }
+
+        bankManager.store();
+
+
+
+    }
+
+
+   // temporary method to test account creation by bank manager
+    public void testAccountCreation() {
+        bankManager.userRequestAccount();
+        bankManager.store();
+
+    }
 
 
 }
