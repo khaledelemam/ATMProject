@@ -6,4 +6,9 @@ public class LineOfCredit extends Account {
        super(owner);
     }
 
+    @Override
+    public String toString() {
+        return "Line of Credit Account";
+    }
+
 }
