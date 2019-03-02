@@ -6,5 +6,9 @@ public class ChequingAccount extends Account {
         super(owner);
     }
 
-
+    @Override
+    public String toString() {
+        return "Chequing Account";
+    }
+    //
 }

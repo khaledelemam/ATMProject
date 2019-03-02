@@ -6,4 +6,9 @@ public class CreditCard extends Account {
         super(owner);
     }
 
+    @Override
+    public String toString() {
+        return "Credit Card Account";
+    }
+
 }
