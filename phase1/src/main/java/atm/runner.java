@@ -57,13 +57,14 @@ public class runner {
 
                 System.out.println("Welcome!\nPlease pick an option:");
 
-                System.out.println("(1) View your accounts");
+                System.out.println("(1) View your balance");
                 System.out.println("(2) Make a withdrawal");
                 System.out.println("(3) Transfer funds between accounts");
                 System.out.println("(4) Transfer funds to another user");
                 System.out.println("(5) Pay a bill");
                 System.out.println("(6) Change password");
                 System.out.println("(7) Create new account");
+                System.out.println("(8) Deposit");
                 System.out.println("(0) Exit");
 
                 option = Integer.parseInt(in.nextLine());
@@ -94,7 +95,7 @@ public class runner {
                         System.out.println("How much would you like to withdraw?: ");
                         int amount = Integer.parseInt(in.nextLine());
 
-//                        boundlessATM.withdrawal(account, amount);
+                        boundlessATM.withdrawal(account, amount);
                         break;
 
                     case 3:
@@ -129,6 +130,23 @@ public class runner {
                         // new account creation
                         System.out.println("What type of account would you like to open?:");
                         System.out.println("CHEQUING\nSAVINGS\nLINE OF CREDIT\nCREDIT CARD");
+
+                    case 8:
+                        // new account creation
+                        boundlessATM.viewAccounts();
+
+                        // this brings up their list of accounts
+
+                        System.out.println("Which account would you like to deposit to: ");
+                        account = Integer.parseInt(in.nextLine());
+
+                        System.out.println("How much would you like to deposit ?: ");
+                        amount = Integer.parseInt(in.nextLine());
+
+                        boundlessATM.deposit(account,amount);
+
+                        break;
+
 
                     case 0:
                         System.out.println("Goodbye!\n");
