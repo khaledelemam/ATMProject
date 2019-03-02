@@ -33,9 +33,7 @@ public class User implements Serializable {
     public String getPassword() {return this.password;}
 
     public ChequingAccount getPrimaryAccount() { return this.primaryAccount; }
-
-
-//testing
+// testing git
 
 
 
