@@ -1,0 +1,6 @@
+lindsay, cheque, 250
+david, cash, 5
+david, cash, 20
+david, cash, 50
+lindsay, cheque, 134
+david, cash, 20
