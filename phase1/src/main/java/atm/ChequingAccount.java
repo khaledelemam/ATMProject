@@ -1,11 +1,18 @@
 package atm;
 
+import java.text.DecimalFormat;
+
 public class ChequingAccount extends Account {
     private int balance;
+    private DecimalFormat currencyFormat = new DecimalFormat("0.00");
 
     public ChequingAccount(User owner) {
         super(owner);
 
+    }
+    @Override
+    public String getBalance() {
+        return currencyFormat.format(this.balance);
     }
 
     @Override
