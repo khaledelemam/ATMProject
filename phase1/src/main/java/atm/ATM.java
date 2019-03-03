@@ -93,7 +93,12 @@ public class ATM {
 
     public void externalTransfer(Account sender, User recipient,  int amount) {
         sender.setBalance((-amount));
-        if ;
+        if (recipient.getPrimaryAccount() == null) {
+            ChequingAccount to = recipient.getPrimaryAccount();
+        }
+        else {
+
+        }
     }
 
     public void deposit(int account , int amount) {
