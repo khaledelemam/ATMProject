@@ -23,7 +23,7 @@ public class User implements Serializable {
     public User(String username) {
         this.numAccounts = 0;
         this.username = username;
-
+        primaryAccount = null;
 
 
 
@@ -141,5 +141,5 @@ public class User implements Serializable {
         }
 
     }
-
+    public void setPrimaryAccount(ChequingAccount acc){primaryAccount = acc;}
 }
