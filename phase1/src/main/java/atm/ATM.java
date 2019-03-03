@@ -12,6 +12,7 @@ public class ATM {
         // return true
         // else return false
         bankManager.retrieve();
+
         ArrayList<User> users = bankManager.users;
 
         for (int i = 0; i < users.size(); i ++) {
