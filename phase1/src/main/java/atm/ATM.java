@@ -60,7 +60,7 @@ public class ATM {
         // bank manager responds with a new user object that is printed so user knows their user/pass
         // and then this is returned
         user = new User(username);
-        bankManager.setPassword(user);
+        bankManager.setUserPassword(user);
         requestAccount(account);
 
         bankManager.store();
