@@ -85,6 +85,9 @@ public class ATM {
         Account  accTo = user.getAccount(to);
         accFrom.setBalance(-amount);
         accTo.setBalance(amount);
+        Transaction intTransfer = new Transaction(accFrom,accTo,amount);
+        accTo.setLastTransaction(intTransfer);
+        accFrom.setLastTransaction(intTransfer);
         bankManager.store();
 
 
@@ -92,13 +95,15 @@ public class ATM {
     }
 
     public void externalTransfer(Account sender, User recipient,  int amount) {
-        sender.setBalance((-amount));
-        if (recipient.getPrimaryAccount() == null) {
+        if (recipient.getPrimaryAccount() != null) {
             ChequingAccount to = recipient.getPrimaryAccount();
+            to.setBalance(amount);
+            sender.setBalance(-amount);
+            Transaction extTransfer = new Transaction(sender, to, amount);
+            sender.setLastTransaction(extTransfer);
+            to.setLastTransaction(extTransfer);
         }
-        else {
-
-        }
+        bankManager.store();
     }
 
     public void deposit(int account , int amount) {
