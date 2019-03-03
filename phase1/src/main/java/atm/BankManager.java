@@ -20,11 +20,10 @@ public class BankManager implements Serializable {
         return this.password;
     }
 
-    public void setPassword(User user){
+    public void setUserPassword(User user){
         String password = "1";
         user.setPassword(password);
         users.add(user);
-//        System.out.println("Your current password is " + password);
 
     }
 
