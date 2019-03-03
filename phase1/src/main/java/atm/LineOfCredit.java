@@ -1,8 +1,15 @@
 package atm;
 
 public class LineOfCredit extends Account {
+    private int balance;
+
     public LineOfCredit(User owner) {
        super(owner);
+    }
+
+
+    public double getBalance() {
+        return this.balance;
     }
 
     // this takes in either a negative balance if money was taken from the account
