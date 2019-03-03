@@ -92,6 +92,8 @@ public class ATM {
 
     public void changePassword(String newPassword) {
         user.setPassword(newPassword);
+        bankManager.store();
+
     }
 
     public void viewAccounts() {
