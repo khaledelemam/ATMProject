@@ -27,7 +27,8 @@ public class runner {
                 String password = in.nextLine();
 
                 if (boundlessATM.adminCheck(password)) {
-                    System.out.println("(1) Check/Approve users requests");
+                    System.out.println("(1) Check/Approve new users requests");
+                    System.out.println("(1) Check/Approve existing users requests");
                     System.out.println("(2) Reverse users transactions");
                     System.out.println("(3) SetDate");
 
@@ -35,11 +36,15 @@ public class runner {
 
                     switch (option2) {
                         case 1:
-                            boundlessATM.testAccountCreation();
+                            boundlessATM.newAccountCreation();
                             break;
                         case 2:
+                            boundlessATM.usersRequests();
+                            break;
 
                         case 3:
+
+                        case 4:
 
                     }
                     break;

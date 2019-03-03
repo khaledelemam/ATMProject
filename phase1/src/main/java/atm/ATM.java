@@ -193,11 +193,16 @@ public class ATM {
     }
 
 
-   // temporary method to test account creation by bank manager
-    public void testAccountCreation() {
+
+    public void newAccountCreation() {
         bankManager.createUser();
         bankManager.store();
 
+    }
+
+    public void usersRequests(){
+        bankManager.userRequestAccount();
+        bankManager.store();
     }
 
     public String getUserPassword(){
