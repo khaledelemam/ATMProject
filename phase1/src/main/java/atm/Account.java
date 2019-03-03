@@ -1,25 +1,26 @@
 package atm;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
-public abstract class Account implements Serializable {
+public abstract class Account implements Serializable, DecimalFormat {
 
     private static final long serialVersionUID = 10L;
     private User owner;
-    private Transaction lastTransaction;
+    protected Transaction lastTransaction;
     private Date dateOpened;
+    protected double balance;
 
     public Account(User owner) {
         this.owner = owner;
         this.lastTransaction = null;
+        this.balance = 0;
 //        this.dateOpened = getCurrentDate
     }
 
-    public abstract int getBalance();
+    public abstract double getBalance();
 
-    // this takes in either a negative balance if money was taken from the account
-    // or positive balance if money is added
-    public abstract void setBalance(int amount);
+    public abstract void setBalance(double amount);
 
     public User getOwner() { return this.owner; }
 

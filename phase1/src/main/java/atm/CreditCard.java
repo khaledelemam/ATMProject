@@ -11,10 +11,8 @@ public class CreditCard extends Account {
         return this.balance;
     }
 
-    // this takes in either a negative balance if money was taken from the account
-    // or positive balance if money is added
     public void setBalance(int amount) {
-        this.balance += amount;
+        this.balance -= amount;
     }
 
     @Override

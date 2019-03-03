@@ -13,6 +13,7 @@ public class User implements Serializable {
     private HashMap<Integer,Account> accounts = new HashMap<>();
     private HashMap<Account,Integer> map = new HashMap<>();
     private String request;
+    private ChequingAccount primaryAccount;
 
     // I used two Hashmaps to track the account with the corresponding number. Two are used instead of one because there is no "getKey()" in Hashmaps.
     // This implementation is working so far in accessing user accounts.
@@ -52,7 +53,6 @@ public class User implements Serializable {
     public String getUsername() {return this.username;}
 
     public String getPassword() {return this.password;}
-
 
 
     public void addAccount(String account){
