@@ -31,13 +31,38 @@ public class ATM {
 
     }
 
-    public void newUser(String username) {
+
+
+    public boolean login2(String username){
+        bankManager.retrieve();
+        ArrayList<User> users = bankManager.users;
+
+        for (int i = 0; i < users.size(); i ++) {
+            if (users.get(i).getUsername().equals(username)){
+                    user = bankManager.users.get(i);
+                    return true;
+                }
+
+
+
+        }
+        return false;
+
+
+
+    }
+
+
+
+    public void newUser(String username, int account) {
         // call to BankManager to create a new user account with default password
         // cannot have two users with the same username
         // bank manager responds with a new user object that is printed so user knows their user/pass
         // and then this is returned
         user = new User(username);
         bankManager.setPassword(user);
+        requestAccount(account);
+
         bankManager.store();
 
 
@@ -118,11 +143,25 @@ public class ATM {
     }
 
 
+
+    public boolean adminCheck(String password){
+
+        if(password.equals(bankManager.getPassword())){
+            return true;
+        }
+        else return false;
+    }
+
+
    // temporary method to test account creation by bank manager
     public void testAccountCreation() {
         bankManager.userRequestAccount();
         bankManager.store();
 
+    }
+
+    public String getUserPassword(){
+            return user.getPassword();
     }
 
 
