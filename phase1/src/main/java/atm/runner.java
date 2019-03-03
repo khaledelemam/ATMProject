@@ -1,5 +1,6 @@
 package atm;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -7,7 +8,7 @@ public class runner {
 
     // static date object goes here
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Scanner in = new Scanner(System.in);
         boolean loggedIn = false;
@@ -165,7 +166,15 @@ public class runner {
                             break;
 
                         case 5:
-//                        boundlessATM.payBill();
+
+                            boundlessATM.viewAccounts();
+                            System.out.println("From: ");
+                            from = Integer.parseInt(in.nextLine());
+
+                            System.out.println("How much would you like to pay?: ");
+                            amount = Integer.parseInt(in.nextLine());
+
+                            boundlessATM.payBill(from, amount);
                             break;
 
                         case 6:
