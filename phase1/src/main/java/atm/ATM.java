@@ -59,10 +59,28 @@ public class ATM {
         // cannot have two users with the same username
         // bank manager responds with a new user object that is printed so user knows their user/pass
         // and then this is returned
-        user = new User(username);
-        bankManager.setUserPassword(user);
-        requestAccount(account);
+       String request = null;
 
+        if (account == 1){
+            request = "Chequing";
+        }
+        else if (account == 2){
+            request ="Savings";
+        }
+        else if (account == 3){
+            request =  "Line of Credit";
+
+        }
+        else if (account == 4){
+            request =  "Credit Card";
+
+        }
+
+        ArrayList<String> arr = new ArrayList<>();
+        arr.add(username);
+        arr.add(request);
+
+        bankManager.requests.add(arr);
         bankManager.store();
 
 
@@ -166,7 +184,7 @@ public class ATM {
 
    // temporary method to test account creation by bank manager
     public void testAccountCreation() {
-        bankManager.userRequestAccount();
+        bankManager.createUser();
         bankManager.store();
 
     }

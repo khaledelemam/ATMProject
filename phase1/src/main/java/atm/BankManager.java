@@ -10,6 +10,7 @@ public class BankManager implements Serializable {
     private String password;
 
     public  ArrayList<User> users = new ArrayList<>();
+    public  ArrayList<ArrayList<String>> requests  = new ArrayList<>();
 
 
     public BankManager(){
@@ -31,6 +32,32 @@ public class BankManager implements Serializable {
     // a new user. Maybe use text file to store user names and accounts of requests? Also i am not sure if that is true. I know this is true regarding creating
     // new account for an existing user.
     public void createUser(){
+        for(int i = 0; i< requests.size();i++){
+            for(int j = 0; j < requests.get(i).size();j++){
+                User user = new User(requests.get(i).get(0));
+                if (requests.get(i).get(1).equals("Chequing")){
+                    user.addAccount("Chequing");
+
+                }
+                else if (requests.get(i).get(1).equals("Savings")){
+                    user.addAccount("Savings");
+
+                }
+                else if (requests.get(i).get(1).equals("Line of Credit")){
+                    user.addAccount("Line of Credit");
+
+                }
+                else if (requests.get(i).get(1).equals("Credit Card")){
+                    user.addAccount("Credit Card");
+                }
+                setUserPassword(user);
+
+            }
+
+        }
+
+
+
 
     }
 
