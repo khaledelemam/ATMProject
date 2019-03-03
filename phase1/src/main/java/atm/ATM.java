@@ -93,7 +93,7 @@ public class ATM {
 
     public void externalTransfer(Account sender, User recipient,  int amount) {
         sender.setBalance((-amount));
-        recipient.
+        if ;
     }
 
     public void deposit(int account , int amount) {
