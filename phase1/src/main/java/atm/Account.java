@@ -3,7 +3,7 @@ package atm;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 
-public abstract class Account implements Serializable, DecimalFormat {
+public abstract class Account extends DecimalFormat  implements Serializable{
 
     private static final long serialVersionUID = 10L;
     private User owner;
