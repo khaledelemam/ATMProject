@@ -10,7 +10,7 @@ public abstract class Account implements Serializable {
     protected Transaction lastTransaction;
     private Date dateOpened;
     protected double balance;
-    DecimalFormat currencyFormat = new DecimalFormat("0.00");
+    private DecimalFormat currencyFormat = new DecimalFormat("0.00");
 
     public Account(User owner) {
         this.owner = owner;

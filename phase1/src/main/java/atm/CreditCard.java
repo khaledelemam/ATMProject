@@ -7,10 +7,6 @@ public class CreditCard extends Account {
         super(owner);
     }
 
-    public double getBalance() {
-        return this.balance;
-    }
-
     public void setBalance(double amount) {
         this.balance -= amount;
     }
