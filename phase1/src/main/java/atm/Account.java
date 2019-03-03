@@ -3,13 +3,14 @@ package atm;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 
-public abstract class Account extends DecimalFormat  implements Serializable{
+public abstract class Account implements Serializable {
 
     private static final long serialVersionUID = 10L;
     private User owner;
     protected Transaction lastTransaction;
     private Date dateOpened;
     protected double balance;
+    private DecimalFormat currencyFormat = new DecimalFormat("0.00");
 
     public Account(User owner) {
         this.owner = owner;
@@ -18,7 +19,9 @@ public abstract class Account extends DecimalFormat  implements Serializable{
 //        this.dateOpened = getCurrentDate
     }
 
-    public abstract double getBalance();
+    public String getBalance() {
+        return currencyFormat.format(this.balance);
+    }
 
     public abstract void setBalance(double amount);
 
