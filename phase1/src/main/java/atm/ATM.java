@@ -137,9 +137,9 @@ public class ATM {
 
     }
 
-    public void withdrawal(int account, int amount) throws InsufficientFundsException {
+    public void withdrawal(int account, int amount) {
         Account  acc = user.getAccount(account);
-        checkSufficientFunds(acc, amount);
+        //checkSufficientFunds(acc, amount);
         acc.setBalance(-amount);
         bankManager.store();
 

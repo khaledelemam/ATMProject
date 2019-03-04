@@ -147,14 +147,8 @@ public class runner {
 
                             System.out.println("How much would you like to withdraw?: ");
                             int amount = Integer.parseInt(in.nextLine());
-
-                            try {
                                 boundlessATM.withdrawal(account, amount);
 
-                            }catch (InsufficientFundsException e) {
-
-                                System.out.println(e.getMessage());
-                            }
                             break;
 
                         case 3:
