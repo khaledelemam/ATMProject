@@ -29,4 +29,6 @@ public class ChequingAccount extends Account {
             }
         }
     }
+    @Override
+    public double getDoubleBalance() {return this.balance;}
 }

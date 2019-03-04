@@ -24,4 +24,7 @@ public class CreditCard extends Account {
         return "Credit Card Account";
     }
 
+    @Override
+    public double getDoubleBalance() {return this.balance;}
+
 }

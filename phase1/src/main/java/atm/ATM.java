@@ -1,10 +1,13 @@
 package atm;
 
+import java.io.*;
 import java.util.ArrayList;
 
 public class ATM {
+
     private User user;
     private BankManager bankManager = new BankManager();
+    private Date date;
 
     protected boolean login(String username, String password) {
         // if username is valid
@@ -12,6 +15,7 @@ public class ATM {
         // return true
         // else return false
         bankManager.retrieve();
+
         ArrayList<User> users = bankManager.users;
 
         for (int i = 0; i < users.size(); i ++) {
@@ -59,10 +63,28 @@ public class ATM {
         // cannot have two users with the same username
         // bank manager responds with a new user object that is printed so user knows their user/pass
         // and then this is returned
-        user = new User(username);
-        bankManager.setUserPassword(user);
-        requestAccount(account);
+       String request = null;
 
+        if (account == 1){
+            request = "Chequing";
+        }
+        else if (account == 2){
+            request ="Savings";
+        }
+        else if (account == 3){
+            request =  "Line of Credit";
+
+        }
+        else if (account == 4){
+            request =  "Credit Card";
+
+        }
+
+        ArrayList<String> arr = new ArrayList<>();
+        arr.add(username);
+        arr.add(request);
+
+        bankManager.requests.add(arr);
         bankManager.store();
 
 
@@ -70,6 +92,8 @@ public class ATM {
 
     public void changePassword(String newPassword) {
         user.setPassword(newPassword);
+        bankManager.store();
+
     }
 
     public void viewAccounts() {
@@ -121,7 +145,16 @@ public class ATM {
 
     }
 
-    public void payBill(){
+
+    public void payBill(int account, int amount) throws IOException {
+        Account  acc = user.getAccount(account);
+        acc.setBalance(-amount);
+        bankManager.store();
+
+        PrintWriter billPayer = new PrintWriter(new FileWriter("outgoing.txt"));
+        billPayer.println("%user payed $%amount on %date.");
+        billPayer.close();
+
     }
 
 
@@ -164,11 +197,16 @@ public class ATM {
     }
 
 
-   // temporary method to test account creation by bank manager
-    public void testAccountCreation() {
-        bankManager.userRequestAccount();
+
+    public void newAccountCreation() {
+        bankManager.createUser();
         bankManager.store();
 
+    }
+
+    public void usersRequests(){
+        bankManager.userRequestAccount();
+        bankManager.store();
     }
 
     public String getUserPassword(){

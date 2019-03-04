@@ -33,5 +33,6 @@ public class SavingsAccount extends Account {
         return "Savings Account";
     }
 
-
+    @Override
+    public double getDoubleBalance() {return this.balance;}
 }

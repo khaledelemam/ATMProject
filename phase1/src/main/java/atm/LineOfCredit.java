@@ -24,4 +24,7 @@ public class LineOfCredit extends Account {
         return "Line of Credit Account";
     }
 
+    @Override
+    public double getDoubleBalance() {return this.balance;}
+
 }

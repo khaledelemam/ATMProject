@@ -34,7 +34,8 @@ public abstract class Account implements Serializable {
     public void setLastTransaction(Transaction newTransaction) {
         this.lastTransaction = newTransaction;
     }
-    public double getDoubleBalance() { return this.balance;}
+
+    public abstract double getDoubleBalance();
 
 }
 
