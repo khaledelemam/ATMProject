@@ -141,7 +141,13 @@ public class runner {
                             System.out.println("How much would you like to withdraw?: ");
                             int amount = Integer.parseInt(in.nextLine());
 
-                            boundlessATM.withdrawal(account, amount);
+                            try {
+                                boundlessATM.withdrawal(account, amount);
+
+                            }catch (InsufficientFundsException e) {
+
+                                System.out.println(e.getMessage());
+                            }
                             break;
 
                         case 3:
@@ -156,12 +162,20 @@ public class runner {
                             System.out.println("How much would you like to transfer?: ");
                             amount = Integer.parseInt(in.nextLine());
 
-                            boundlessATM.internalTransfer(from, to, amount);
+                            try {
+                                boundlessATM.internalTransfer(from, to, amount);
+                            } catch (InsufficientFundsException e){
+                                System.out.println(e.getMessage());
+                            }
 
                             break;
 
                         case 4:
-//                        boundlessATM.externalTransfer(account, user, account);
+                            //try {
+ //                       boundlessATM.externalTransfer(account, user, account);
+                           // }catch(InsufficientFundsException e){
+                             //   System.out.println(e.getMessage());
+                               // }
                             break;
 
                         case 5:
