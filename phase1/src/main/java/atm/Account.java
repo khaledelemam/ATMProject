@@ -9,19 +9,15 @@ public abstract class Account implements Serializable {
     private User owner;
     protected Transaction lastTransaction;
     private Date dateOpened;
-    protected double balance;
-    private DecimalFormat currencyFormat = new DecimalFormat("0.00");
 
     public Account(User owner) {
         this.owner = owner;
         this.lastTransaction = null;
-        this.balance = 0;
+
 //        this.dateOpened = getCurrentDate
     }
 
-    public String getBalance() {
-        return currencyFormat.format(this.balance);
-    }
+    public abstract String  getBalance();
 
     public abstract void setBalance(double amount);
 

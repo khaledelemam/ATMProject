@@ -109,7 +109,6 @@ public class User implements Serializable {
 
     public void viewBalance (){
         for(int i = 1 ; i <=accounts.size(); i++){
-            String str = Integer.toString(map.get(accounts.get(i)));
             System.out.println(accounts.get(i) +": " + accounts.get(i).getBalance()) ;
 
         }
