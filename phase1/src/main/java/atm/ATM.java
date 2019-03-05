@@ -146,8 +146,8 @@ public class ATM {
 
         int i = 1;
         while (line != null) {
-
             line = depositReader.readLine();
+
             i++;
         }
 
