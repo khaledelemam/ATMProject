@@ -27,11 +27,9 @@ public class BankManager implements Serializable {
 
     }
 
-    // Bank manger has to initial user, currently new users are initialized in ATM automatically but the bank manager should have the option to accept or reject
-    // a new user. Maybe use text file to store user names and accounts of requests? Also i am not sure if that is true. I know this is true regarding creating
-    // new account for an existing user.
+
     public void createUser(){
-        retrieveNew();
+        retrieveRequests();
         for(int i = 0; i< requests.size();i++){
 //            for(int j = 0; j < requests.get(i).size();j++) {
                 if (CreditScore.getRandomDoubleBetweenRange() > 0) {
@@ -54,6 +52,7 @@ public class BankManager implements Serializable {
 //            }
         }
         requests.clear();
+        storeRequests();
 
 
     }
@@ -111,7 +110,7 @@ public class BankManager implements Serializable {
 
 
 
-    public void storeNew(){
+    public void storeRequests(){
         try{
             FileOutputStream fos= new FileOutputStream("file2");
             ObjectOutputStream oos= new ObjectOutputStream(fos);
@@ -126,7 +125,7 @@ public class BankManager implements Serializable {
 
     @SuppressWarnings("unchecked")
 
-    public void retrieveNew() {
+    public void retrieveRequests() {
         try {
             FileInputStream fis = new FileInputStream("file2");
             ObjectInputStream ois = new ObjectInputStream(fis);

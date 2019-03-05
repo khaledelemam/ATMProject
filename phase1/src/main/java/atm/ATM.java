@@ -70,6 +70,10 @@ public class ATM {
         // cannot have two users with the same username
         // bank manager responds with a new user object that is printed so user knows their user/pass
         // and then this is returned
+        File f = new File("file2");
+        if (f.exists()) {
+            bankManager.retrieveRequests();
+        }
        String request = null;
 
         if (account == 1){
@@ -92,7 +96,7 @@ public class ATM {
         arr.add(request);
 
         bankManager.requests.add(arr);
-        bankManager.storeNew();
+        bankManager.storeRequests();
 
 
     }
