@@ -33,9 +33,9 @@ public class runner {
                     if (boundlessATM.adminCheck(password)) {
 
                         System.out.println("(1) Check/Approve new users requests");
-                        System.out.println("(1) Check/Approve existing users requests");
-                        System.out.println("(2) Reverse users transactions");
-                        System.out.println("(3) SetDate");
+                        System.out.println("(2) Check/Approve existing users requests");
+                        System.out.println("(3) Reverse users transactions");
+                        System.out.println("(4) SetDate");
 
                         int option2 = Integer.parseInt(in.nextLine());
 
