@@ -34,30 +34,26 @@ public class BankManager implements Serializable {
     public void createUser(){
         retrieve();
         for(int i = 0; i< requests.size();i++){
-            for(int j = 0; j < requests.get(i).size();j++){
-                User user = new User(requests.get(i).get(0));
-                if (requests.get(i).get(1).equals("Chequing")){
-                    user.addAccount("Chequing");
+            for(int j = 0; j < requests.get(i).size();j++) {
+                if (CreditScore.getRandomDoubleBetweenRange() > 250) {
+                    User user = new User(requests.get(i).get(0));
+                    if (requests.get(i).get(1).equals("Chequing")) {
+                        user.addAccount("Chequing");
+
+                    } else if (requests.get(i).get(1).equals("Savings")) {
+                        user.addAccount("Savings");
+
+                    } else if (requests.get(i).get(1).equals("Line of Credit")) {
+                        user.addAccount("Line of Credit");
+
+                    } else if (requests.get(i).get(1).equals("Credit Card")) {
+                        user.addAccount("Credit Card");
+                    }
+                    setUserPassword(user);
 
                 }
-                else if (requests.get(i).get(1).equals("Savings")){
-                    user.addAccount("Savings");
-
-                }
-                else if (requests.get(i).get(1).equals("Line of Credit")){
-                    user.addAccount("Line of Credit");
-
-                }
-                else if (requests.get(i).get(1).equals("Credit Card")){
-                    user.addAccount("Credit Card");
-                }
-                setUserPassword(user);
-
             }
-
         }
-
-
 
 
     }
@@ -67,7 +63,9 @@ public class BankManager implements Serializable {
     public void  userRequestAccount(){
         for(int i = 0; i< users.size();i++){
             if (users.get(i).getRequest() != null){
-                users.get(i).addAccount(users.get(i).getRequest());
+                if (CreditScore.getRandomDoubleBetweenRange() > 250) {
+                    users.get(i).addAccount(users.get(i).getRequest());
+                }
             }
         }
     }
