@@ -20,37 +20,49 @@ public class runner {
         System.out.println("Please type in a number to pick an option.");
         System.out.println("(1) Admin \n(2) User\n(0) Exit");
         int option = Integer.parseInt(in.nextLine());
+        boolean admin = false;
 
         switch(option) {
+
             case 1:
+                while (!admin) {
                 System.out.println("Enter admin password:");
                 String password = in.nextLine();
+                admin= boundlessATM.adminCheck(password);
 
-                if (boundlessATM.adminCheck(password)) {
-                    System.out.println("(1) Check/Approve new users requests");
-                    System.out.println("(1) Check/Approve existing users requests");
-                    System.out.println("(2) Reverse users transactions");
-                    System.out.println("(3) SetDate");
+                    if (boundlessATM.adminCheck(password)) {
 
-                    int option2 = Integer.parseInt(in.nextLine());
+                        System.out.println("(1) Check/Approve new users requests");
+                        System.out.println("(2) Check/Approve existing users requests");
+                        System.out.println("(3) Reverse users transactions");
+                        System.out.println("(4) SetDate");
 
-                    switch (option2) {
-                        case 1:
-                            boundlessATM.newAccountCreation();
-                            break;
-                        case 2:
-                            boundlessATM.usersRequests();
-                            break;
+                        int option2 = Integer.parseInt(in.nextLine());
 
-                        case 3:
+                        switch (option2) {
+                            case 1:
+                                boundlessATM.newAccountCreation();
+                                break;
+                            case 2:
+                                boundlessATM.usersRequests();
+                                break;
 
-                        case 4:
+                            case 3:
+
+                            case 4:
+
+                        }
+                        break;
+
 
                     }
-                    break;
+                    else{
+                        System.out.println("Invalid admin password");
 
+                    }
 
                 }
+                break;
 
 
             case 2:

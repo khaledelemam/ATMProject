@@ -18,8 +18,11 @@ public class ATM {
         bankManager.retrieve();
 
         ArrayList<User> users = bankManager.users;
-
+        for (int i = 0; i < users.size(); i ++){
+            System.out.println(users.get(i).getUsername());
+        }
         for (int i = 0; i < users.size(); i ++) {
+
             if (users.get(i).getUsername().equals(username)){
                 if (users.get(i).getPassword().equals(password)){
                     System.out.println(5);
@@ -31,7 +34,9 @@ public class ATM {
             }
 
         }
+        bankManager.store();
         return false;
+
 
 
     }
@@ -51,6 +56,7 @@ public class ATM {
 
 
         }
+        bankManager.store();
         return false;
 
 
@@ -86,7 +92,7 @@ public class ATM {
         arr.add(request);
 
         bankManager.requests.add(arr);
-        bankManager.store();
+        bankManager.storeNew();
 
 
     }
@@ -215,12 +221,17 @@ public class ATM {
 
 
     public void newAccountCreation() {
+        File f = new File("file");
+        if (f.exists()) {
+            bankManager.retrieve();
+        }
         bankManager.createUser();
         bankManager.store();
 
     }
 
     public void usersRequests(){
+        bankManager.retrieve();
         bankManager.userRequestAccount();
         bankManager.store();
     }
