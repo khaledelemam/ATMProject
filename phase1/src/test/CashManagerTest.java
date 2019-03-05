@@ -1,5 +1,10 @@
 import atm.CashManager;
 import org.junit.Before;
+import org.junit.Test;
+
+import java.util.Scanner;
+
+import static org.junit.Assert.assertTrue;
 
 public class CashManagerTest {
 
@@ -15,7 +20,7 @@ public class CashManagerTest {
         cm = new CashManager(denominations, threshold);
     }
 
-    /*
+
     @Test
     public void alertTest(){
         cm.changeDenom(0,-15);
@@ -30,5 +35,5 @@ public class CashManagerTest {
         String msg = "15 5 dollar bills left, please restock";
         assertTrue(alertMsgs[0].equalsIgnoreCase(""));
     }
-    */
+
 }
