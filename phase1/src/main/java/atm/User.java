@@ -44,6 +44,10 @@ public class User implements Serializable {
 
 
     }
+    @Override
+    public String toString() {
+        return this.username;
+    }
 
 
     public void setPassword (String password){
