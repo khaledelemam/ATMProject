@@ -1,5 +1,6 @@
 package atm;
 
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -141,10 +142,21 @@ public class ATM {
         bankManager.store();
     }
 
-    public void deposit(int account , int amount) {
-        // is it cash or cheque
+    public void deposit(int account, double amount) throws IOException {
+        File deposits = new File("deposits.txt");
+        BufferedReader depositReader = new BufferedReader(new FileReader(deposits));
+
+        String line = depositReader.readLine();
+
+        int i = 1;
+        while (line != null) {
+
+            line = depositReader.readLine();
+            i++;
+        }
 
 
+        depositReader.close();
     }
 
     public void withdrawal(int account, int amount) {
@@ -152,19 +164,23 @@ public class ATM {
         //checkSufficientFunds(acc, amount);
         acc.setBalance(-amount);
         bankManager.store();
-
     }
 
 
     public void payBill(int account, int amount) throws IOException {
-        Account  acc = user.getAccount(account);
+        Account acc = user.getAccount(account);
         acc.setBalance(-amount);
-        bankManager.store();
 
-        PrintWriter billPayer = new PrintWriter(new FileWriter("outgoing.txt"));
-        billPayer.println("%user payed $%amount on %date.");
+
+        File outgoing = new File("outgoing.txt");
+        System.out.println(outgoing.canWrite());
+        System.out.println(outgoing.getAbsoluteFile());
+        System.out.println(outgoing.getCanonicalPath());
+        PrintWriter billPayer = new PrintWriter(new FileWriter("outgoing", true));
+        billPayer.println(user + " payed $" + amount + " on " + date);
         billPayer.close();
 
+        bankManager.store();
     }
 
 
