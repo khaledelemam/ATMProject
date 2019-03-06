@@ -140,7 +140,6 @@ public class runner {
                             System.out.println("(5) Pay a bill");
                             System.out.println("(6) Change password");
                             System.out.println("(7) Request new account");
-                            System.out.println("(8) Deposit");
                             System.out.println("(0) Exit");
 
                             option = Integer.parseInt(in.nextLine());
@@ -229,22 +228,6 @@ public class runner {
                                     account = Integer.parseInt(in.nextLine());
                                     boundlessATM.requestAccount(account);
                                     break;
-
-                                case 8:
-                                    // new account creation
-                                    //boundlessATM.viewAccounts();
-
-                                    // this brings up their list of accounts
-
-                                    //System.out.println("Which account would you like to deposit to: ");
-                                    //account = Integer.parseInt(in.nextLine());
-
-                                    //System.out.println("How much would you like to deposit ?: ");
-                                    //amount = Integer.parseInt(in.nextLine());
-
-
-                                    break;
-
 
                                 case 0:
                                     System.out.println("Goodbye!\n");
