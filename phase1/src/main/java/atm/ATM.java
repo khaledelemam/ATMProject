@@ -148,10 +148,10 @@ public class ATM {
 
         String line = depositReader.readLine();
 
-        Date date = new Date();
+        Date testDate = new Date();
 
         while (line != null) {
-            if (line.equals(date.toString())) {
+            if (line.equals(testDate.toString())) {
                 line = depositReader.readLine();
                 while (!(line.equals(""))) {
                     String[] deposit = line.split(" ");
@@ -161,7 +161,10 @@ public class ATM {
                 depositReader.close();
                 break;
             }
+            line = depositReader.readLine();
         }
+
+
 
 
         for (String[] item: todaysDeposits) {

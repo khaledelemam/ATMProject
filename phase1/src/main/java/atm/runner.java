@@ -12,12 +12,18 @@ public class runner {
 
         Scanner in = new Scanner(System.in);
 
-        boolean main = true;
         ATM boundlessATM = new ATM();
 
+        try {
+            boundlessATM.deposit();
+        } catch (InsufficientFundsException e) {
+            //ignore
+        }
+
+        boolean main = true;
 
         while (main) {
-            boolean newUser  = false;
+            boolean newUser = false;
 
             System.out.println("Please type in a number to pick an option.");
             System.out.println("(1) Admin \n(2) User\n");
