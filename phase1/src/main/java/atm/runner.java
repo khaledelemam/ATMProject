@@ -166,7 +166,11 @@ public class runner {
 
                                     System.out.println("How much would you like to withdraw?: ");
                                     int amount = Integer.parseInt(in.nextLine());
-                                    boundlessATM.withdrawal(account, amount);
+                                    try {
+                                        boundlessATM.withdrawal(account, amount);
+                                    }catch (InsufficientFundsException e) {
+                                        System.out.println(e.getMessage());
+                                    }
 
                                     break;
 
@@ -206,8 +210,11 @@ public class runner {
 
                                     System.out.println("How much would you like to pay?: ");
                                     amount = Integer.parseInt(in.nextLine());
-
-                                    boundlessATM.payBill(from, amount);
+                                    try {
+                                        boundlessATM.payBill(from, amount);
+                                    }catch (InsufficientFundsException e) {
+                                        System.out.println(e.getMessage());
+                                    }
                                     break;
 
                                 case 6:
@@ -225,17 +232,16 @@ public class runner {
 
                                 case 8:
                                     // new account creation
-                                    boundlessATM.viewAccounts();
+                                    //boundlessATM.viewAccounts();
 
                                     // this brings up their list of accounts
 
-                                    System.out.println("Which account would you like to deposit to: ");
-                                    account = Integer.parseInt(in.nextLine());
+                                    //System.out.println("Which account would you like to deposit to: ");
+                                    //account = Integer.parseInt(in.nextLine());
 
-                                    System.out.println("How much would you like to deposit ?: ");
-                                    amount = Integer.parseInt(in.nextLine());
+                                    //System.out.println("How much would you like to deposit ?: ");
+                                    //amount = Integer.parseInt(in.nextLine());
 
-                                    boundlessATM.deposit(account, amount);
 
                                     break;
 
