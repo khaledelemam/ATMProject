@@ -140,21 +140,37 @@ public class ATM {
         bankManager.store();
     }
 
-    public void deposit(int account, double amount) throws IOException {
+    public void deposit() throws IOException {
         File deposits = new File("deposits.txt");
         BufferedReader depositReader = new BufferedReader(new FileReader(deposits));
+        ArrayList<String[]> todaysDeposits = new ArrayList<>();
 
         String line = depositReader.readLine();
 
-        int i = 1;
         while (line != null) {
+            if (line.equals(date.toString())) {
+                while (line.equals("\n")) {
+                    line = depositReader.readLine();
+                    String[] deposit = line.trim().split(" ");
+                    todaysDeposits.add(deposit);
+                }
+            }
             line = depositReader.readLine();
-
-            i++;
         }
 
-
         depositReader.close();
+
+        for (String[] item: todaysDeposits) {
+            String username = item[0];
+            String type = item[1];
+            Double amountToDeposit = Double.parseDouble(item[3]);
+
+            // check if user is in system
+            if (checkExistingUser(username) != null) {
+                user = checkExistingUser(username);
+                user.getPrimaryAccount().setBalance(amountToDeposit);
+            }
+        }
     }
 
     public void withdrawal(int account, int amount) throws InsufficientFundsException{
