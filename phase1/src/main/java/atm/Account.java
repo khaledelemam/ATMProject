@@ -11,12 +11,9 @@ public abstract class Account implements Serializable {
 
     private static final long serialVersionUID = 10L;
 
-
-
     public abstract String  getBalance();
 
     public abstract void setBalance(double amount) throws InsufficientFundsException;
-
 
     public abstract Date getDateOpened();
 
@@ -24,6 +21,7 @@ public abstract class Account implements Serializable {
 
     public abstract void setLastTransaction(Transaction newTransaction);
 
+    public abstract double getNetTotal();
 
     public abstract double getDoubleBalance();
 
