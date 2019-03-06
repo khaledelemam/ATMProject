@@ -140,7 +140,7 @@ public class ATM {
         bankManager.store();
     }
 
-    public void deposit() throws IOException {
+    public void deposit() throws IOException, InsufficientFundsException {
         File deposits = new File("deposits.txt");
         BufferedReader depositReader = new BufferedReader(new FileReader(deposits));
         ArrayList<String[]> todaysDeposits = new ArrayList<>();
