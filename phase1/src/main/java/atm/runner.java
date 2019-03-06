@@ -57,6 +57,20 @@ public class runner {
                                     break;
 
                                 case 3:
+                                    System.out.println("Type the username of the user you want to reverse a transaction for: ");
+                                    String user = in.nextLine();
+                                    boundlessATM.viewAccounts(user);
+                                    System.out.println("Which account would you like to reverse the transaction from?");
+                                    int acc = Integer.parseInt(in.nextLine());
+                                    try {
+                                        boundlessATM.reverseTransaction(user, acc);
+                                    }catch (InsufficientFundsException e) {
+                                        System.out.println(e.getMessage());
+                                    }
+
+
+
+
 
                                 case 4:
                                     boundlessATM.date();

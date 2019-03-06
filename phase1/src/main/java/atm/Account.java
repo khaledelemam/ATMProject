@@ -13,7 +13,6 @@ public abstract class Account implements Serializable {
 
 
 
-
     public abstract String  getBalance();
 
     public abstract void setBalance(double amount) throws InsufficientFundsException;

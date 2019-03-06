@@ -8,8 +8,7 @@ public class CreditCard extends Account {
     private DecimalFormat currencyFormat = new DecimalFormat("0.00");
     protected Transaction lastTransaction;
 
-    public CreditCard(User owner) {
-        super(owner);
+    public CreditCard() {
 
     }
     @Override
