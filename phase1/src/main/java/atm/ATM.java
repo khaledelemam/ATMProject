@@ -128,13 +128,14 @@ public class ATM {
 
 
     }
-    public void externalTransfer(Account sender, User recipient,  int amount) throws InsufficientFundsException {
+    public void externalTransfer(int sender, User recipient,  int amount) throws InsufficientFundsException {
         if (recipient.getPrimaryAccount() != null) {
+            Account accFrom = user.getAccount(sender);
             ChequingAccount to = recipient.getPrimaryAccount();
             to.setBalance(amount);
-            sender.setBalance(-amount);
-            Transaction extTransfer = new Transaction(sender, to, amount);
-            sender.setLastTransaction(extTransfer);
+            accFrom.setBalance(-amount);
+            Transaction extTransfer = new Transaction(accFrom, to, amount);
+            accFrom.setLastTransaction(extTransfer);
             to.setLastTransaction(extTransfer);
         }
         bankManager.store();
@@ -264,7 +265,7 @@ public class ATM {
 
         for (int i = 0; i < users.size(); i ++) {
             if (users.get(i).getUsername().equals(username)){
-                users.get(i);
+                return users.get(i);
             }
         }
         bankManager.store();

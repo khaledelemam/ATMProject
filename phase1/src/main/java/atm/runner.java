@@ -194,11 +194,21 @@ public class runner {
                                     break;
 
                                 case 4:
-                                    //try {
-                                    //                       boundlessATM.externalTransfer(account, user, account);
-                                    // }catch(InsufficientFundsException e){
-                                    //   System.out.println(e.getMessage());
-                                    // }
+                                    System.out.println("To whom do you want to transfer to?: ");
+                                    String userTo = in.nextLine();
+                                    User user = boundlessATM.checkExistingUser(userTo);
+                                    if (user != null) {
+                                        System.out.println("How much money would you like to transfer?: ");
+                                        amount = Integer.parseInt(in.nextLine());
+                                        boundlessATM.viewAccounts();
+                                        System.out.println("From which account would you like to transfer money?: ");
+                                        int accFrom = Integer.parseInt(in.nextLine());
+                                        try {
+                                        boundlessATM.externalTransfer(accFrom, user, amount);
+                                        }catch(InsufficientFundsException e){
+                                        System.out.println(e.getMessage());
+                                        }
+                                    }
                                     break;
 
                                 case 5:
