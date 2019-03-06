@@ -8,8 +8,7 @@ public class SavingsAccount extends Account {
     private DecimalFormat currencyFormat = new DecimalFormat("0.00");
     protected Transaction lastTransaction;
 
-    public SavingsAccount(User owner) {
-        super(owner);
+    public SavingsAccount() {
     }
 
     @Override

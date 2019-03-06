@@ -9,8 +9,7 @@ public class LineOfCredit extends Account {
     protected Transaction lastTransaction;
 
 
-    public LineOfCredit(User owner) {
-       super(owner);
+    public LineOfCredit() {
     }
 
     @Override

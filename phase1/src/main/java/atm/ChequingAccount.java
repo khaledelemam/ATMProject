@@ -8,10 +8,9 @@ public class ChequingAccount extends Account {
     private DecimalFormat currencyFormat = new DecimalFormat("0.00");
     protected Transaction lastTransaction;
 
-    public ChequingAccount(User owner) {
-        super(owner);
-
+    public ChequingAccount() {
     }
+
     @Override
     public String getBalance() {
         return currencyFormat.format(this.balance);

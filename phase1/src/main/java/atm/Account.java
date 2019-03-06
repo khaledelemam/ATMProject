@@ -10,19 +10,14 @@ import java.text.DecimalFormat;
 public abstract class Account implements Serializable {
 
     private static final long serialVersionUID = 10L;
-    private User owner;
 
 
-    public Account(User owner) {
-        this.owner = owner;
 
-    }
 
     public abstract String  getBalance();
 
     public abstract void setBalance(double amount) throws InsufficientFundsException;
 
-    public User getOwner() { return this.owner; }
 
     public abstract Date getDateOpened();
 

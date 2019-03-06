@@ -64,20 +64,20 @@ public class User implements Serializable {
         Account hold = null;
 
         if (account.equals("Chequing")){
-            hold = new ChequingAccount(this);
+            hold = new ChequingAccount();
             if (primaryAccount == null)
             primaryAccount =(ChequingAccount) hold;
         }
 
         else if (account.equals("Savings")){
-            hold = new SavingsAccount((this));
+            hold = new SavingsAccount();
         }
         else if (account.equals("Line of Credit")){
-            hold = new LineOfCredit(this);
+            hold = new LineOfCredit();
         }
 
         else if (account.equals("Credit Card")){
-            hold = new CreditCard(this);
+            hold = new CreditCard();
         }
 
         if (hold != null) {
