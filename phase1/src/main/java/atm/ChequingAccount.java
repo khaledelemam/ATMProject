@@ -41,9 +41,16 @@ public class ChequingAccount extends Account {
     public void setLastTransaction(Transaction newTransaction) {
         this.lastTransaction = newTransaction;
     }
+
+    @Override
+    public double getNetTotal() {
+        return this.balance;
+    }
+
     public Transaction getLastTransaction() {
         return this.lastTransaction;
     }
+
     public Date getDateOpened() {
         return dateOpened;
     }
