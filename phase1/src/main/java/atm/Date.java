@@ -17,8 +17,10 @@ public class Date extends java.util.Date implements Serializable {
     //    private DateFormat sdf;
     //private static int today; //???
 
+
+
     public Date() {
-        File f = new File("date");
+        File f = new File(filename);
         if (f.exists()) {
             try {
                 FileInputStream fis = new FileInputStream(filename);
@@ -31,13 +33,14 @@ public class Date extends java.util.Date implements Serializable {
 
             } catch (ClassNotFoundException c) {
                 System.out.println("Class not found");
-                this.day = 1;
-                this.month = 1;
-                this.year = 2019;
-                System.out.println(this);
                 c.printStackTrace();
             }
 
+        } else {
+            this.day = 1;
+            this.month = 1;
+            this.year = 2019;
+            store();
         }
 
     }
@@ -58,6 +61,10 @@ public class Date extends java.util.Date implements Serializable {
             this.month = 1;
             this.year++;
         }
+        store();
+    }
+
+    private void store() {
         try {
             FileOutputStream fos = new FileOutputStream(filename);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -71,7 +78,12 @@ public class Date extends java.util.Date implements Serializable {
 
     @Override
     public String toString() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        return dateFormat.format(this);
+//        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String yyyy = Integer.toString(this.year);
+        String MM = Integer.toString(this.month);
+        String dd = Integer.toString(this.day);
+        StringBuilder thisDate = new StringBuilder();
+        thisDate.append(yyyy + "-" + MM + "-" + dd);
+        return String.valueOf(thisDate);
     }
 }
