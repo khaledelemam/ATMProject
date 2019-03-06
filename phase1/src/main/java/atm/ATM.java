@@ -273,14 +273,18 @@ public class ATM {
     // does not update user balance correctly
     public void reverseTransaction(String username, int account) throws InsufficientFundsException{
         bankManager.ReverseLastTransaction(username,account);
+        System.out.println(username);
         bankManager.store();
     }
 
-    public void viewAccounts(String name){
+    public void viewAccountsManager(String name){
         User user  = checkExistingUser(name);
         user.viewAccounts();
+        bankManager.store();
+
 
     }
+
 
 
 }

@@ -58,13 +58,15 @@ public class BankManager implements Serializable {
     public void ReverseLastTransaction(String username, int account)throws InsufficientFundsException{
         // only withdraw in mind right now.
         User user = checkExistingUser(username);
-        if (checkExistingUser(username) != null){
+        if (user!= null){
            Account acc = user.getAccount(account);
            Transaction transaction = acc.getLastTransaction();
            double money = transaction.getAmount();
            ReverseATM rATM = new ReverseATM();
             System.out.println(user.getUsername());
            rATM.ReverseWithdrawal(user, acc, money);
+//            System.out.println(username);
+//            System.out.println(user.getAccount(1).getBalance());
         }
 
     }
@@ -81,6 +83,7 @@ public class BankManager implements Serializable {
             }
         }
 //       store();
+        System.out.println(8);
         return null;
     }
 

@@ -4,12 +4,12 @@ public class ReverseATM {
 
 
     public void ReverseWithdrawal(User user, Account acc, double amount) throws InsufficientFundsException{
-        System.out.println(amount);
-        System.out.println(acc.getBalance());
+//        System.out.println(amount);
+//        System.out.println(acc.getBalance());
         acc.setBalance(amount);
-        System.out.println(acc.getBalance());
-//        Transaction add = new Transaction(acc, amount);
-//        acc.setLastTransaction(add);
+//        System.out.println(acc.getBalance());
+        Transaction add = new Transaction(acc, amount);
+        acc.setLastTransaction(add);
 
     }
 
