@@ -80,14 +80,14 @@ public class ATM {
             UsernameTakenException u = new UsernameTakenException();
             throw u;
         }
+        else {
+            ArrayList<String> arr = new ArrayList<>();
+            arr.add(username);
+            arr.add(request);
 
-        ArrayList<String> arr = new ArrayList<>();
-        arr.add(username);
-        arr.add(request);
-
-        bankManager.requests.add(arr);
-        bankManager.storeRequests();
-
+            bankManager.requests.add(arr);
+            bankManager.storeRequests();
+        }
 
     }
 

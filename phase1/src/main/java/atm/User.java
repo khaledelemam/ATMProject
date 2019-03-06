@@ -134,4 +134,6 @@ public class User implements Serializable {
     public void setPrimaryAccount(ChequingAccount acc){ this.primaryAccount = acc;}
 
     public ChequingAccount getPrimaryAccount() {return this.primaryAccount;}
+
+
 }
