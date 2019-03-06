@@ -11,22 +11,22 @@ public class runner {
     public static void main(String[] args) throws IOException {
 
         Scanner in = new Scanner(System.in);
-        boolean loggedIn = false;
-        boolean exit = false;
-        boolean run = true;
+
+
         boolean main = true;
         ATM boundlessATM = new ATM();
 
 
         while (main) {
             System.out.println("Please type in a number to pick an option.");
-            System.out.println("(1) Admin \n(2) User\n(0) Exit");
+            System.out.println("(1) Admin \n(2) User\n");
             int option = Integer.parseInt(in.nextLine());
-            boolean admin = false;
+
 
             switch (option) {
 
                 case 1:
+                    boolean admin = false;
                     while (!admin) {
                         System.out.println("Enter admin password:");
                         String password = in.nextLine();
@@ -75,6 +75,7 @@ public class runner {
                         case 1:
                             System.out.println("Have you logged in before?\n (1) Yes \n (2) No");
                             int log = Integer.parseInt(in.nextLine());
+                            boolean loggedIn = false;
 
                             switch (log) {
                                 case 1:
@@ -118,11 +119,11 @@ public class runner {
                             String name = in.nextLine();
                             boundlessATM.newUser(name, account);
                             System.out.println("Please wait till tomorrow for processing");
-                            exit = true;
+
                     }
+                    boolean run = true;
                     while (run) {
 
-                        if (!exit) {
 
 
                             System.out.println("\nWelcome!\nPlease pick an option:");
@@ -246,7 +247,7 @@ public class runner {
                         }
                     }
 
-            }
+
 
 
         }
