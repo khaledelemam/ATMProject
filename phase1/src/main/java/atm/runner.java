@@ -139,8 +139,12 @@ public class runner {
                             int account = Integer.parseInt(in.nextLine());
                             System.out.println("Enter your preferred username:");
                             String name = in.nextLine();
-                            boundlessATM.newUser(name, account);
                             System.out.println("Please wait till the manager processes your request");
+                            try {
+                                boundlessATM.newUser(name, account);
+                            }catch (UsernameTakenException u) {
+                                System.out.println(u.getMessage());
+                            }
                             newUser = true;
 
                     }
