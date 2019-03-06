@@ -59,6 +59,14 @@ public class BankManager implements Serializable {
 
     }
 
+
+
+    public void setDate(){
+        Date date = new Date();
+        System.out.println(date);
+
+    }
+
     public void store(){
         try{
             FileOutputStream fos= new FileOutputStream("file");

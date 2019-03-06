@@ -271,6 +271,9 @@ public class ATM {
         bankManager.store();
         return null;
     }
+    public void date(){
+        bankManager.setDate();
+    }
 
 
 }

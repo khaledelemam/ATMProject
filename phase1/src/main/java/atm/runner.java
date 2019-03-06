@@ -53,6 +53,7 @@ public class runner {
                                 case 3:
 
                                 case 4:
+                                    boundlessATM.date();
 
                             }
                             break;
