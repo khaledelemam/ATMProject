@@ -1,6 +1,7 @@
 package atm;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -10,6 +11,7 @@ public class User implements Serializable {
     private String username;
     private String password;
     private int numAccounts;
+    private DecimalFormat currencyFormat = new DecimalFormat("0.00");
     private HashMap<Integer,Account> accounts = new HashMap<>();
     private HashMap<Account,Integer> map = new HashMap<>();
     private String request;
@@ -135,5 +137,12 @@ public class User implements Serializable {
 
     public ChequingAccount getPrimaryAccount() {return this.primaryAccount;}
 
+    public String netUserBalance() {
+        double netTotal = 0;
+        for (int k = 0; k < accounts.size(); k++){
+            netTotal += accounts.get(k).getNetTotal();
+        }
+        return currencyFormat.format(netTotal);
+    }
 
 }

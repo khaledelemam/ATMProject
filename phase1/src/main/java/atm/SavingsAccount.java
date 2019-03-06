@@ -53,6 +53,7 @@ public class SavingsAccount extends Account {
     public Transaction getLastTransaction() {
         return this.lastTransaction;
     }
+
     public Date getDateOpened() {
         return dateOpened;
     }
