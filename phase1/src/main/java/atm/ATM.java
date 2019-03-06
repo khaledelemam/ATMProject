@@ -250,5 +250,18 @@ public class ATM {
             throw e;
         }
     }
+    public User checkExistingUser(String username){
+        bankManager.retrieve();
+        ArrayList<User> users = bankManager.users;
+
+        for (int i = 0; i < users.size(); i ++) {
+            if (users.get(i).getUsername().equals(username)){
+                users.get(i);
+            }
+        }
+        bankManager.store();
+        return null;
+    }
+
 
 }
