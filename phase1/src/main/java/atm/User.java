@@ -68,7 +68,7 @@ public class User implements Serializable {
         if (account.equals("Chequing")){
             hold = new ChequingAccount();
             if (primaryAccount == null)
-            primaryAccount =(ChequingAccount) hold;
+            primaryAccount = (ChequingAccount) hold;
         }
 
         else if (account.equals("Savings")){
@@ -124,7 +124,7 @@ public class User implements Serializable {
     public void viewAccountInfo() {
         for(int i = 1 ; i <= accounts.size(); i++) {
             Account account = accounts.get(i);
-            System.out.println(account + ": " + account.getBalance());
+            System.out.println(account + ": $" + account.getBalance());
             System.out.println("Date opened: " + account.getDateOpened());
             if (account.getLastTransaction() != null) {
                 System.out.println("Last Transaction\n" + account.getLastTransaction());
