@@ -175,7 +175,7 @@ public class ATM {
             // check if user is in system
             if (checkExistingUser(username) != null) {
                 user = checkExistingUser(username);
-                user.getPrimaryAccount().setBalance(amount);
+//                user.getPrimaryAccount().setBalance(amount);
             }
         }
     }
