@@ -190,12 +190,12 @@ public class ATM {
         acc.setBalance(-amount);
 
 
-        File outgoing = new File("outgoing.txt");
+        File outgoing = new File("phase1/src/main/java/atm/outgoing.txt");
         System.out.println(outgoing.canWrite());
         System.out.println(outgoing.getAbsoluteFile());
         System.out.println(outgoing.getCanonicalPath());
-        PrintWriter billPayer = new PrintWriter(new FileWriter("outgoing", true));
-        billPayer.println(user + " payed $" + amount + " on " + date);
+        PrintWriter billPayer = new PrintWriter(new FileWriter("phase1/src/main/java/atm/outgoing.txt", true));
+        billPayer.println(user + " paid $" + amount + " on " + date);
         billPayer.close();
 
         bankManager.store();
