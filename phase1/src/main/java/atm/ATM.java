@@ -142,7 +142,6 @@ public class ATM {
     }
 
     public void deposit() throws IOException, InsufficientFundsException {
-        System.out.println(77);
         File deposits = new File("phase1/src/main/java/atm/deposits.txt");
         BufferedReader depositReader = new BufferedReader(new FileReader(deposits));
         ArrayList<String[]> todaysDeposits = new ArrayList<>();
@@ -165,20 +164,17 @@ public class ATM {
             line = depositReader.readLine();
         }
 
-
-        System.out.println(88);
-        System.out.println(todaysDeposits.size());
         for (String[] item: todaysDeposits) {
             String username = item[0];
-            System.out.println(username);
             String type = item[1];
             Double amount = Double.parseDouble(item[2]);
 
             // check if user is in system
 
-            if (checkExistingUser(username) != null) {
-                user = checkExistingUser(username);
-//                user.getPrimaryAccount().setBalance(amount);
+            user = checkExistingUser(username);
+            if (user != null) {
+                user.getPrimaryAccount().setBalance(amount);
+                bankManager.store();
             }
         }
     }

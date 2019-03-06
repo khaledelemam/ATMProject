@@ -3,7 +3,7 @@ package atm;
 import java.text.DecimalFormat;
 
 public class LineOfCredit extends Account {
-    private int balance;
+    private double balance;
     private DecimalFormat currencyFormat = new DecimalFormat("0.00");
 
 

@@ -3,7 +3,7 @@ package atm;
 import java.text.DecimalFormat;
 
 public class ChequingAccount extends Account {
-    private int balance;
+    private double balance;
     private DecimalFormat currencyFormat = new DecimalFormat("0.00");
 
     public ChequingAccount(User owner) {
