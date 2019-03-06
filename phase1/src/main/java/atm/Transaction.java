@@ -1,6 +1,8 @@
 package atm;
 
-public class Transaction {
+import java.io.Serializable;
+
+public class Transaction implements Serializable {
     //we should refactor the name of this to Transfer??
 
     private Account source;
