@@ -65,6 +65,8 @@ public class User implements Serializable {
 
         if (account.equals("Chequing")){
             hold = new ChequingAccount(this);
+            if (primaryAccount == null)
+            primaryAccount =(ChequingAccount) hold;
         }
 
         else if (account.equals("Savings")){
