@@ -16,10 +16,15 @@ public class SavingsAccount extends Account {
         return currencyFormat.format(this.balance);
     }
 
-    public void setBalance(double amount) {
+    @Override
+    public void setBalance(double amount) throws InsufficientFundsException {
         if (this.balance >= 0) {
             if (this.balance >= amount || amount >= 0) {
                 this.balance += amount;
+            }
+            else{
+                InsufficientFundsException e = new InsufficientFundsException();
+                throw e;
             }
         }
     }

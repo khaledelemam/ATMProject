@@ -19,7 +19,7 @@ public abstract class Account implements Serializable {
 
     public abstract String  getBalance();
 
-    public abstract void setBalance(double amount);
+    public abstract void setBalance(double amount) throws InsufficientFundsException;
 
     public User getOwner() { return this.owner; }
 

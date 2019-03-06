@@ -117,7 +117,6 @@ public class ATM {
 
     public void internalTransfer(int from, int to , int amount) throws InsufficientFundsException {
         Account accFrom = user.getAccount(from);
-        checkSufficientFunds(accFrom, amount);
         Account  accTo = user.getAccount(to);
         accFrom.setBalance(-amount);
         accTo.setBalance(amount);
@@ -130,7 +129,6 @@ public class ATM {
 
     }
     public void externalTransfer(Account sender, User recipient,  int amount) throws InsufficientFundsException {
-        checkSufficientFunds(sender, amount);
         if (recipient.getPrimaryAccount() != null) {
             ChequingAccount to = recipient.getPrimaryAccount();
             to.setBalance(amount);
@@ -159,7 +157,7 @@ public class ATM {
         depositReader.close();
     }
 
-    public void withdrawal(int account, int amount) {
+    public void withdrawal(int account, int amount) throws InsufficientFundsException{
         Account  acc = user.getAccount(account);
         //checkSufficientFunds(acc, amount);
         acc.setBalance(-amount);
@@ -167,7 +165,7 @@ public class ATM {
     }
 
 
-    public void payBill(int account, int amount) throws IOException {
+    public void payBill(int account, int amount) throws IOException, InsufficientFundsException {
         Account acc = user.getAccount(account);
         acc.setBalance(-amount);
 
