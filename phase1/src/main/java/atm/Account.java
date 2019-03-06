@@ -3,18 +3,19 @@ package atm;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 
+
+// Make sure to keep everything abstract because instance variables are not overridden!
+
+
 public abstract class Account implements Serializable {
 
     private static final long serialVersionUID = 10L;
     private User owner;
-    protected Transaction lastTransaction;
-    private Date dateOpened;
+
 
     public Account(User owner) {
         this.owner = owner;
-        this.lastTransaction = null;
 
-//        this.dateOpened = getCurrentDate
     }
 
     public abstract String  getBalance();
@@ -23,17 +24,12 @@ public abstract class Account implements Serializable {
 
     public User getOwner() { return this.owner; }
 
-    public Date getDateOpened() {
-        return dateOpened;
-    }
+    public abstract Date getDateOpened();
 
-    public Transaction getLastTransaction() {
-        return this.lastTransaction;
-    }
+    public  abstract Transaction getLastTransaction();
 
-    public void setLastTransaction(Transaction newTransaction) {
-        this.lastTransaction = newTransaction;
-    }
+    public abstract void setLastTransaction(Transaction newTransaction);
+
 
     public abstract double getDoubleBalance();
 
