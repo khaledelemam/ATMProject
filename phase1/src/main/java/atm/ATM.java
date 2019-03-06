@@ -178,26 +178,25 @@ public class ATM {
     }
 
 
-    public void payBill(int account, int amount) throws IOException, InsufficientFundsException {
+    public void payBill(int account, double amount) throws IOException, InsufficientFundsException {
         Account acc = user.getAccount(account);
         acc.setBalance(-amount);
 
-
         File outgoing = new File("phase1/src/main/java/atm/outgoing.txt");
-        System.out.println(outgoing.canWrite());
-        System.out.println(outgoing.getAbsoluteFile());
-        System.out.println(outgoing.getCanonicalPath());
         PrintWriter billPayer = new PrintWriter(new FileWriter("phase1/src/main/java/atm/outgoing.txt", true));
-        billPayer.println(user + " paid $" + amount + " on " + date);
+        Transaction billPayment = new Transaction(acc, amount);
+        billPayer.println(billPayment);
         billPayer.close();
 
         bankManager.store();
     }
 
+//
+//    public void viewBalance() {
+//        user.viewBalance();
+//    }
 
-    public void viewBalance() {
-        user.viewBalance();
-    }
+    public void viewAccountInfo() { user.viewAccountInfo();}
 
     public void requestAccount(int account){
         if (account == 1){
@@ -214,16 +213,9 @@ public class ATM {
         }
         else if (account == 4){
             user.requestAccount("Credit Card");
-
         }
-
         bankManager.store();
-
-
-
     }
-
-
 
     public boolean adminCheck(String password){
 

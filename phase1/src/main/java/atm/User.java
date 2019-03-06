@@ -114,14 +114,23 @@ public class User implements Serializable {
 
     }
 
+//
+//    public void viewBalance (){
+//        for(int i = 1 ; i <=accounts.size(); i++){
+//            System.out.println(accounts.get(i) +": " + accounts.get(i).getBalance()) ;
+//        }
+//    }
 
-    public void viewBalance (){
-        for(int i = 1 ; i <=accounts.size(); i++){
-            System.out.println(accounts.get(i) +": " + accounts.get(i).getBalance()) ;
+    public void viewAccountInfo() {
+        for(int i = 1 ; i <= accounts.size(); i++) {
+            Account account = accounts.get(i);
+            System.out.println(account + ": " + account.getBalance());
+            System.out.println("Date opened: " + account.getDateOpened());
+            if (account.getLastTransaction() != null) {
+                System.out.println("Last Transaction\n" + account.getLastTransaction());
+            }
 
         }
-
-
     }
 
 

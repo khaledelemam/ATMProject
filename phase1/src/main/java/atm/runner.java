@@ -155,7 +155,7 @@ public class runner {
 
                             System.out.println("\nWelcome!\nPlease pick an option:");
 
-                            System.out.println("(1) View your balance");
+                            System.out.println("(1) View accounts info");
                             System.out.println("(2) Make a withdrawal");
                             System.out.println("(3) Transfer funds between accounts");
                             System.out.println("(4) Transfer funds to another user");
@@ -173,11 +173,10 @@ public class runner {
 //                        HashMap<Integer, Account> accounts = boundlessATM.viewAccounts();
 //
 //                        // view net total
-                                    boundlessATM.viewBalance();
-
+                                    boundlessATM.viewAccountInfo();
                                     break;
 
-                                case 2:
+                                case 2: // withdrawal
                                     boundlessATM.viewAccounts();
 
                                     // this brings up their list of accounts
@@ -195,7 +194,7 @@ public class runner {
 
                                     break;
 
-                                case 3:
+                                case 3: // internal transfer
                                     boundlessATM.viewAccounts();
                                     System.out.println("From: ");
                                     int from = Integer.parseInt(in.nextLine());
@@ -215,7 +214,7 @@ public class runner {
 
                                     break;
 
-                                case 4:
+                                case 4: // external transfer
                                     System.out.println("To whom do you want to transfer to?: ");
                                     String userTo = in.nextLine();
                                     User user = boundlessATM.checkExistingUser(userTo);
@@ -233,8 +232,7 @@ public class runner {
                                     }
                                     break;
 
-                                case 5:
-
+                                case 5: // pay bill
                                     boundlessATM.viewAccounts();
                                     System.out.println("From: ");
                                     from = Integer.parseInt(in.nextLine());
@@ -248,7 +246,7 @@ public class runner {
                                     }
                                     break;
 
-                                case 6:
+                                case 6: // change password
                                     System.out.println("Enter new password: ");
                                     String newPassword = in.nextLine();
                                     boundlessATM.changePassword(newPassword);
@@ -261,7 +259,7 @@ public class runner {
                                     boundlessATM.requestAccount(account);
                                     break;
 
-                                case 0:
+                                case 0: // exit
                                     System.out.println("Goodbye!\n");
                                     run = false;
                                     break;
