@@ -181,8 +181,9 @@ public class ATM {
 
     public void withdrawal(int account, int amount) throws InsufficientFundsException{
         Account  acc = user.getAccount(account);
-        //checkSufficientFunds(acc, amount);
         acc.setBalance(-amount);
+        Transaction withdrawal = new Transaction(acc, amount);
+        acc.setLastTransaction(withdrawal);
         bankManager.store();
     }
 
@@ -264,23 +265,39 @@ public class ATM {
             return user.getPassword();
     }
 
-    public User checkExistingUser(String username){
-        File f = new File("file");
-        if (f.exists()) {
-            bankManager.retrieve();
-        }
-        ArrayList<User> users = bankManager.users;
 
-        for (int i = 0; i < users.size(); i ++) {
-            if (users.get(i).getUsername().equals(username)){
-                return users.get(i);
-            }
-        }
-        bankManager.store();
-        return null;
+    public User checkExistingUser(String username) {
+//        File f = new File("file");
+//        if (f.exists()) {
+//            bankManager.retrieve();
+//        }
+//        ArrayList<User> users = bankManager.users;
+//
+//        for (int i = 0; i < users.size(); i ++) {
+//            if (users.get(i).getUsername().equals(username)){
+//                return users.get(i);
+//            }
+//        }
+//        bankManager.store();
+//        return null;
+       return  bankManager.checkExistingUser(username);
     }
+
+
     public void date(){
         bankManager.setDate();
+    }
+
+    // does not update user balance correctly
+    public void reverseTransaction(String username, int account) throws InsufficientFundsException{
+        bankManager.ReverseLastTransaction(username,account);
+        bankManager.store();
+    }
+
+    public void viewAccounts(String name){
+        User user  = checkExistingUser(name);
+        user.viewAccounts();
+
     }
 
 
