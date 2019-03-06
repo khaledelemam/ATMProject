@@ -134,14 +134,11 @@ public class runner {
 
 
                         case 2:
-                            System.out.println("What type of account would you like to open?:");
-                            System.out.println("(1) CHEQUING\n(2) SAVINGS\n(3) LINE OF CREDIT\n(4) CREDIT CARD");
-                            int account = Integer.parseInt(in.nextLine());
                             System.out.println("Enter your preferred username:");
                             String name = in.nextLine();
                             System.out.println("Please wait till the manager processes your request");
                             try {
-                                boundlessATM.newUser(name, account);
+                                boundlessATM.newUser(name);
                             }catch (UsernameTakenException u) {
                                 System.out.println(u.getMessage());
                             }

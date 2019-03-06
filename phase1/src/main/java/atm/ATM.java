@@ -65,7 +65,7 @@ public class ATM {
 
 
 
-    public void newUser(String username, int account) throws UsernameTakenException{
+    public void newUser(String username) throws UsernameTakenException{
         // call to BankManager to create a new user account with default password
         // cannot have two users with the same username
         // bank manager responds with a new user object that is printed so user knows their user/pass
@@ -74,26 +74,13 @@ public class ATM {
         if (f.exists()) {
             bankManager.retrieveRequests();
         }
-       String request = null;
+       String request = "Chequing";
 
-        if (account == 1){
-            request = "Chequing";
-        }
-        else if (account == 2){
-            request ="Savings";
-        }
-        else if (account == 3){
-            request =  "Line of Credit";
-
-        }
-        else if (account == 4){
-            request =  "Credit Card";
-
-        }
         if (checkExistingUser(username) != null){
             UsernameTakenException u = new UsernameTakenException();
             throw u;
         }
+
         ArrayList<String> arr = new ArrayList<>();
         arr.add(username);
         arr.add(request);

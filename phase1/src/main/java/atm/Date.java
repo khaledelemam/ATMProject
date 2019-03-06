@@ -18,23 +18,28 @@ public class Date extends java.util.Date implements Serializable {
     //private static int today; //???
 
     public Date() {
-        try {
-            FileInputStream fis = new FileInputStream(filename);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            Date today = (Date) ois.readObject();
-            ois.close();
-            fis.close();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
+        File f = new File("date");
+        if (f.exists()) {
+            try {
+                FileInputStream fis = new FileInputStream(filename);
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                Date today = (Date) ois.readObject();
+                ois.close();
+                fis.close();
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
 
-        } catch (ClassNotFoundException c) {
-            System.out.println("Class not found");
-            this.day = 1;
-            this.month = 1;
-            this.year = 2019;
-            System.out.println(this);
-            c.printStackTrace();
+            } catch (ClassNotFoundException c) {
+                System.out.println("Class not found");
+                this.day = 1;
+                this.month = 1;
+                this.year = 2019;
+                System.out.println(this);
+                c.printStackTrace();
+            }
+
         }
+
     }
 
     public void setDate(int day, int month, int year) {
