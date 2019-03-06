@@ -142,34 +142,39 @@ public class ATM {
     }
 
     public void deposit() throws IOException, InsufficientFundsException {
-        File deposits = new File("deposits.txt");
+        File deposits = new File("phase1/src/main/java/atm/deposits.txt");
         BufferedReader depositReader = new BufferedReader(new FileReader(deposits));
         ArrayList<String[]> todaysDeposits = new ArrayList<>();
 
         String line = depositReader.readLine();
 
+        Date testDate = new Date();
+
         while (line != null) {
-            if (line.equals(date.toString())) {
-                while (line.equals("\n")) {
-                    line = depositReader.readLine();
-                    String[] deposit = line.trim().split(" ");
+            if (line.equals(testDate.toString())) {
+                line = depositReader.readLine();
+                while (!(line.equals(""))) {
+                    String[] deposit = line.split(" ");
                     todaysDeposits.add(deposit);
+                    line = depositReader.readLine();
                 }
+                depositReader.close();
+                break;
             }
             line = depositReader.readLine();
         }
 
-        depositReader.close();
-
         for (String[] item: todaysDeposits) {
             String username = item[0];
             String type = item[1];
-            Double amountToDeposit = Double.parseDouble(item[3]);
+            Double amount = Double.parseDouble(item[2]);
 
             // check if user is in system
-            if (checkExistingUser(username) != null) {
-                user = checkExistingUser(username);
-                user.getPrimaryAccount().setBalance(amountToDeposit);
+
+            user = checkExistingUser(username);
+            if (user != null) {
+                user.getPrimaryAccount().setBalance(amount);
+                bankManager.store();
             }
         }
     }
@@ -187,12 +192,12 @@ public class ATM {
         acc.setBalance(-amount);
 
 
-        File outgoing = new File("outgoing.txt");
+        File outgoing = new File("phase1/src/main/java/atm/outgoing.txt");
         System.out.println(outgoing.canWrite());
         System.out.println(outgoing.getAbsoluteFile());
         System.out.println(outgoing.getCanonicalPath());
-        PrintWriter billPayer = new PrintWriter(new FileWriter("outgoing", true));
-        billPayer.println(user + " payed $" + amount + " on " + date);
+        PrintWriter billPayer = new PrintWriter(new FileWriter("phase1/src/main/java/atm/outgoing.txt", true));
+        billPayer.println(user + " paid $" + amount + " on " + date);
         billPayer.close();
 
         bankManager.store();
@@ -260,7 +265,10 @@ public class ATM {
     }
 
     public User checkExistingUser(String username){
-        bankManager.retrieve();
+        File f = new File("file");
+        if (f.exists()) {
+            bankManager.retrieve();
+        }
         ArrayList<User> users = bankManager.users;
 
         for (int i = 0; i < users.size(); i ++) {
@@ -270,6 +278,9 @@ public class ATM {
         }
         bankManager.store();
         return null;
+    }
+    public void date(){
+        bankManager.setDate();
     }
 
 
