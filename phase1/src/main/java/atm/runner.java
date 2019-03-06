@@ -13,245 +13,246 @@ public class runner {
         Scanner in = new Scanner(System.in);
         boolean loggedIn = false;
         boolean exit = false;
+        boolean run = true;
+        boolean main = true;
         ATM boundlessATM = new ATM();
 
 
+        while (main) {
+            System.out.println("Please type in a number to pick an option.");
+            System.out.println("(1) Admin \n(2) User\n(0) Exit");
+            int option = Integer.parseInt(in.nextLine());
+            boolean admin = false;
 
-        System.out.println("Please type in a number to pick an option.");
-        System.out.println("(1) Admin \n(2) User\n(0) Exit");
-        int option = Integer.parseInt(in.nextLine());
-        boolean admin = false;
+            switch (option) {
 
-        switch(option) {
+                case 1:
+                    while (!admin) {
+                        System.out.println("Enter admin password:");
+                        String password = in.nextLine();
+                        admin = boundlessATM.adminCheck(password);
 
-            case 1:
-                while (!admin) {
-                System.out.println("Enter admin password:");
-                String password = in.nextLine();
-                admin= boundlessATM.adminCheck(password);
+                        if (boundlessATM.adminCheck(password)) {
 
-                    if (boundlessATM.adminCheck(password)) {
+                            System.out.println("(1) Check/Approve new users requests");
+                            System.out.println("(2) Check/Approve existing users requests");
+                            System.out.println("(3) Reverse users transactions");
+                            System.out.println("(4) SetDate");
 
-                        System.out.println("(1) Check/Approve new users requests");
-                        System.out.println("(2) Check/Approve existing users requests");
-                        System.out.println("(3) Reverse users transactions");
-                        System.out.println("(4) SetDate");
+                            int option2 = Integer.parseInt(in.nextLine());
 
-                        int option2 = Integer.parseInt(in.nextLine());
+                            switch (option2) {
+                                case 1:
+                                    boundlessATM.newAccountCreation();
+                                    break;
+                                case 2:
+                                    boundlessATM.usersRequests();
+                                    break;
 
-                        switch (option2) {
-                            case 1:
-                                boundlessATM.newAccountCreation();
-                                break;
-                            case 2:
-                                boundlessATM.usersRequests();
-                                break;
+                                case 3:
 
-                            case 3:
+                                case 4:
 
-                            case 4:
-
-                        }
-                        break;
-
-
-                    }
-                    else{
-                        System.out.println("Invalid admin password");
-
-                    }
-
-                }
-                break;
+                            }
+                            break;
 
 
-            case 2:
-                System.out.println("(1) Login");
-                System.out.println("(2) Request new bank account");
-                int hold = Integer.parseInt(in.nextLine());
-
-                switch (hold) {
-                    case 1:
-                        System.out.println("Have you logged in before?\n (1) Yes \n (2) No");
-                        int log = Integer.parseInt(in.nextLine());
-
-                        switch (log) {
-                            case 1:
-                                while (!loggedIn) {
-
-                                    System.out.println("Enter your username: ");
-                                    String username = in.nextLine();
-
-                                    System.out.println("Enter your password: ");
-                                    String password2 = in.nextLine();
-
-                                    loggedIn = boundlessATM.login(username, password2);
-                                    if (!loggedIn) {
-                                        System.out.println("Invalid username or password");
-                                    }
-                                }
-
-                            case 2:
-                                while (!loggedIn) {
-
-                                    System.out.println("Enter your username: ");
-                                    String username = in.nextLine();
-                                    loggedIn = boundlessATM.login2(username);
-
-                                    if (!loggedIn) {
-                                        System.out.println("Invalid username ");
-                                    }
-
-                                    else{
-                                        System.out.println("Your current password is: " + boundlessATM.getUserPassword());
-                                    }
-                                }
+                        } else {
+                            System.out.println("Invalid admin password");
 
                         }
-                        break;
+
+                    }
+                    break;
 
 
-                    case 2:
-                        System.out.println("What type of account would you like to open?:");
-                        System.out.println("(1) CHEQUING\n(2) SAVINGS\n(3) LINE OF CREDIT\n(4) CREDIT CARD");
-                        int account = Integer.parseInt(in.nextLine());
-                        System.out.println("Enter your preferred username:");
-                        String name = in.nextLine();
-                        boundlessATM.newUser(name, account);
-                        System.out.println("Please wait till tomorrow for processing");
-                        exit = true;
-                }
+                case 2:
+                    System.out.println("(1) Login");
+                    System.out.println("(2) Request new bank account");
+                    int hold = Integer.parseInt(in.nextLine());
 
-                if (!exit) {
-
-                    System.out.println("Welcome!\nPlease pick an option:");
-
-                    System.out.println("(1) View your balance");
-                    System.out.println("(2) Make a withdrawal");
-                    System.out.println("(3) Transfer funds between accounts");
-                    System.out.println("(4) Transfer funds to another user");
-                    System.out.println("(5) Pay a bill");
-                    System.out.println("(6) Change password");
-                    System.out.println("(7) Request new account");
-                    System.out.println("(8) Deposit");
-                    System.out.println("(0) Exit");
-
-                    option = Integer.parseInt(in.nextLine());
-
-                    switch (option) {
+                    switch (hold) {
                         case 1:
-                            // accounts should be stored in a hashmap where each account is mapped to an id
-                            // so ppl can access account info via typing in the ID
+                            System.out.println("Have you logged in before?\n (1) Yes \n (2) No");
+                            int log = Integer.parseInt(in.nextLine());
+
+                            switch (log) {
+                                case 1:
+                                    while (!loggedIn) {
+
+                                        System.out.println("Enter your username: ");
+                                        String username = in.nextLine();
+
+                                        System.out.println("Enter your password: ");
+                                        String password2 = in.nextLine();
+
+                                        loggedIn = boundlessATM.login(username, password2);
+                                        if (!loggedIn) {
+                                            System.out.println("Invalid username or password");
+                                        }
+                                    }
+
+                                case 2:
+                                    while (!loggedIn) {
+
+                                        System.out.println("Enter your username: ");
+                                        String username = in.nextLine();
+                                        loggedIn = boundlessATM.login2(username);
+
+                                        if (!loggedIn) {
+                                            System.out.println("Invalid username ");
+                                        } else {
+                                            System.out.println("Your current password is: " + boundlessATM.getUserPassword());
+                                        }
+                                    }
+
+                            }
+                            break;
+
+
+                        case 2:
+                            System.out.println("What type of account would you like to open?:");
+                            System.out.println("(1) CHEQUING\n(2) SAVINGS\n(3) LINE OF CREDIT\n(4) CREDIT CARD");
+                            int account = Integer.parseInt(in.nextLine());
+                            System.out.println("Enter your preferred username:");
+                            String name = in.nextLine();
+                            boundlessATM.newUser(name, account);
+                            System.out.println("Please wait till tomorrow for processing");
+                            exit = true;
+                    }
+                    while (run) {
+
+                        if (!exit) {
+
+
+                            System.out.println("\nWelcome!\nPlease pick an option:");
+
+                            System.out.println("(1) View your balance");
+                            System.out.println("(2) Make a withdrawal");
+                            System.out.println("(3) Transfer funds between accounts");
+                            System.out.println("(4) Transfer funds to another user");
+                            System.out.println("(5) Pay a bill");
+                            System.out.println("(6) Change password");
+                            System.out.println("(7) Request new account");
+                            System.out.println("(8) Deposit");
+                            System.out.println("(0) Exit");
+
+                            option = Integer.parseInt(in.nextLine());
+
+                            switch (option) {
+                                case 1:
+                                    // accounts should be stored in a hashmap where each account is mapped to an id
+                                    // so ppl can access account info via typing in the ID
 //                        HashMap<Integer, Account> accounts = boundlessATM.viewAccounts();
 //
 //                        // view net total
-                            boundlessATM.viewBalance();
+                                    boundlessATM.viewBalance();
 
-                            break;
+                                    break;
 
-                        case 2:
-                            boundlessATM.viewAccounts();
+                                case 2:
+                                    boundlessATM.viewAccounts();
 
-                            // this brings up their list of accounts
+                                    // this brings up their list of accounts
 
-                            System.out.println("Which account would you like to withdraw from?: ");
-                            int account = Integer.parseInt(in.nextLine());
+                                    System.out.println("Which account would you like to withdraw from?: ");
+                                    int account = Integer.parseInt(in.nextLine());
 
-                            System.out.println("How much would you like to withdraw?: ");
-                            int amount = Integer.parseInt(in.nextLine());
-                                boundlessATM.withdrawal(account, amount);
+                                    System.out.println("How much would you like to withdraw?: ");
+                                    int amount = Integer.parseInt(in.nextLine());
+                                    boundlessATM.withdrawal(account, amount);
 
-                            break;
+                                    break;
 
-                        case 3:
-                            boundlessATM.viewAccounts();
-                            System.out.println("From: ");
-                            int from = Integer.parseInt(in.nextLine());
+                                case 3:
+                                    boundlessATM.viewAccounts();
+                                    System.out.println("From: ");
+                                    int from = Integer.parseInt(in.nextLine());
 
-                            System.out.println("To: ");
-                            int to = Integer.parseInt(in.nextLine());
+                                    System.out.println("To: ");
+                                    int to = Integer.parseInt(in.nextLine());
 
 
-                            System.out.println("How much would you like to transfer?: ");
-                            amount = Integer.parseInt(in.nextLine());
+                                    System.out.println("How much would you like to transfer?: ");
+                                    amount = Integer.parseInt(in.nextLine());
 
-                            try {
-                                boundlessATM.internalTransfer(from, to, amount);
-                            } catch (InsufficientFundsException e){
-                                System.out.println(e.getMessage());
+                                    try {
+                                        boundlessATM.internalTransfer(from, to, amount);
+                                    } catch (InsufficientFundsException e) {
+                                        System.out.println(e.getMessage());
+                                    }
+
+                                    break;
+
+                                case 4:
+                                    //try {
+                                    //                       boundlessATM.externalTransfer(account, user, account);
+                                    // }catch(InsufficientFundsException e){
+                                    //   System.out.println(e.getMessage());
+                                    // }
+                                    break;
+
+                                case 5:
+
+                                    boundlessATM.viewAccounts();
+                                    System.out.println("From: ");
+                                    from = Integer.parseInt(in.nextLine());
+
+                                    System.out.println("How much would you like to pay?: ");
+                                    amount = Integer.parseInt(in.nextLine());
+
+                                    boundlessATM.payBill(from, amount);
+                                    break;
+
+                                case 6:
+                                    System.out.println("Enter new password: ");
+                                    String newPassword = in.nextLine();
+                                    boundlessATM.changePassword(newPassword);
+                                    break;
+                                case 7:
+                                    // new account creation
+                                    System.out.println("What type of account would you like to open?:");
+                                    System.out.println("(1) CHEQUING\n(2) SAVINGS\n(3) LINE OF CREDIT\n (4) CREDIT CARD");
+                                    account = Integer.parseInt(in.nextLine());
+                                    boundlessATM.requestAccount(account);
+                                    break;
+
+                                case 8:
+                                    // new account creation
+                                    boundlessATM.viewAccounts();
+
+                                    // this brings up their list of accounts
+
+                                    System.out.println("Which account would you like to deposit to: ");
+                                    account = Integer.parseInt(in.nextLine());
+
+                                    System.out.println("How much would you like to deposit ?: ");
+                                    amount = Integer.parseInt(in.nextLine());
+
+                                    boundlessATM.deposit(account, amount);
+
+                                    break;
+
+
+                                case 0:
+                                    System.out.println("Goodbye!\n");
+                                    run = false;
+                                    break;
+
+                                default:
+                                    System.out.println("Invalid option");
+                                    break;
                             }
-
-                            break;
-
-                        case 4:
-                            //try {
- //                       boundlessATM.externalTransfer(account, user, account);
-                           // }catch(InsufficientFundsException e){
-                             //   System.out.println(e.getMessage());
-                               // }
-                            break;
-
-                        case 5:
-
-                            boundlessATM.viewAccounts();
-                            System.out.println("From: ");
-                            from = Integer.parseInt(in.nextLine());
-
-                            System.out.println("How much would you like to pay?: ");
-                            amount = Integer.parseInt(in.nextLine());
-
-                            boundlessATM.payBill(from, amount);
-                            break;
-
-                        case 6:
-                            System.out.println("Enter new password: ");
-                            String newPassword = in.nextLine();
-                            boundlessATM.changePassword(newPassword);
-                            break;
-                        case 7:
-                            // new account creation
-                            System.out.println("What type of account would you like to open?:");
-                            System.out.println("(1) CHEQUING\n(2) SAVINGS\n(3) LINE OF CREDIT\n (4) CREDIT CARD");
-                            account = Integer.parseInt(in.nextLine());
-                            boundlessATM.requestAccount(account);
-                            break;
-
-                        case 8:
-                            // new account creation
-                            boundlessATM.viewAccounts();
-
-                            // this brings up their list of accounts
-
-                            System.out.println("Which account would you like to deposit to: ");
-                            account = Integer.parseInt(in.nextLine());
-
-                            System.out.println("How much would you like to deposit ?: ");
-                            amount = Integer.parseInt(in.nextLine());
-
-                            boundlessATM.deposit(account, amount);
-
-                            break;
-
-
-                        case 0:
-                            System.out.println("Goodbye!\n");
-                            loggedIn = false;
-                            break;
-
-                        default:
-                            System.out.println("Invalid option");
-                            break;
+                        }
                     }
-                }
+
+            }
+
+
         }
 
 
-
-
-        }
-
-
-
+    }
 
 
 }
