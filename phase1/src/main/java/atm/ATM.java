@@ -258,12 +258,6 @@ public class ATM {
             return user.getPassword();
     }
 
-    public void checkSufficientFunds (Account acc, int amount)throws InsufficientFundsException{
-        if (acc.getDoubleBalance() < amount){
-            InsufficientFundsException e = new InsufficientFundsException();
-            throw e;
-        }
-    }
     public User checkExistingUser(String username){
         bankManager.retrieve();
         ArrayList<User> users = bankManager.users;
