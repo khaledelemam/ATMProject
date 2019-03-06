@@ -126,22 +126,7 @@ public class User implements Serializable {
     }
 
     public void requestAccount(String account){
-
-        if (account.equals("Chequing")){
-            request = "Chequing";
-
-        }
-        else if (account.equals("Savings")){
-            request ="Savings";
-        }
-        else if (account.equals("Line of Credit")){
-           request =  "Line of Credit";
-
-        }
-        else if (account.equals("Credit Card")){
-           request =  "Credit Card";
-
-        }
+        request = account;
 
     }
     public void setPrimaryAccount(ChequingAccount acc){primaryAccount = acc;}

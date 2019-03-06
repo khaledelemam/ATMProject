@@ -20,36 +20,18 @@ public class BankManager implements Serializable {
         return this.password;
     }
 
-    public void setUserPassword(User user){
-        String password = "1";
-        user.setPassword(password);
-        users.add(user);
 
-    }
 
 
     public void createUser(){
         retrieveRequests();
         for(int i = 0; i< requests.size();i++){
-//            for(int j = 0; j < requests.get(i).size();j++) {
                 if (CreditScore.getRandomDoubleBetweenRange() > 0) {
                     User user = new User(requests.get(i).get(0));
-                    if (requests.get(i).get(1).equals("Chequing")) {
-                        user.addAccount("Chequing");
-
-                    } else if (requests.get(i).get(1).equals("Savings")) {
-                        user.addAccount("Savings");
-
-                    } else if (requests.get(i).get(1).equals("Line of Credit")) {
-                        user.addAccount("Line of Credit");
-
-                    } else if (requests.get(i).get(1).equals("Credit Card")) {
-                        user.addAccount("Credit Card");
-                    }
+                    user.addAccount(requests.get(i).get(1));
                     setUserPassword(user);
 
                 }
-//            }
         }
         requests.clear();
         storeRequests();
@@ -57,6 +39,11 @@ public class BankManager implements Serializable {
 
     }
 
+    public void setUserPassword(User user) {
+        String password = "1";
+        user.setPassword(password);
+        users.add(user);
+    }
 
     public void  userRequestAccount(){
         for(int i = 0; i< users.size();i++){
