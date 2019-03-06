@@ -12,12 +12,13 @@ public class runner {
 
         Scanner in = new Scanner(System.in);
 
-
         boolean main = true;
         ATM boundlessATM = new ATM();
 
 
         while (main) {
+            boolean newUser  = false;
+
             System.out.println("Please type in a number to pick an option.");
             System.out.println("(1) Admin \n(2) User\n");
             int option = Integer.parseInt(in.nextLine());
@@ -118,11 +119,15 @@ public class runner {
                             System.out.println("Enter your preferred username:");
                             String name = in.nextLine();
                             boundlessATM.newUser(name, account);
-                            System.out.println("Please wait till tomorrow for processing");
+                            System.out.println("Please wait till the manager processes your request");
+                            newUser = true;
 
                     }
+
+
+
                     boolean run = true;
-                    while (run) {
+                    while (run && !newUser) {
 
 
 
