@@ -255,7 +255,7 @@ public class runner {
                                 case 7:
                                     // new account creation
                                     System.out.println("What type of account would you like to open?:");
-                                    System.out.println("(1) CHEQUING\n(2) SAVINGS\n(3) LINE OF CREDIT\n (4) CREDIT CARD");
+                                    System.out.println("(1) CHEQUING\n(2) SAVINGS\n(3) LINE OF CREDIT\n(4) CREDIT CARD");
                                     account = Integer.parseInt(in.nextLine());
                                     boundlessATM.requestAccount(account);
                                     break;

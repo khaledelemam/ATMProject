@@ -125,10 +125,11 @@ public class User implements Serializable {
         for(int i = 1 ; i <= accounts.size(); i++) {
             Account account = accounts.get(i);
             System.out.println(account + ": $" + account.getBalance());
-            System.out.println("Date opened: " + account.getDateOpened());
             if (account.getLastTransaction() != null) {
                 System.out.println("Last Transaction\n" + account.getLastTransaction());
             }
+            System.out.println("Date opened: " + account.getDateOpened() + "\n");
+
 
         }
     }
