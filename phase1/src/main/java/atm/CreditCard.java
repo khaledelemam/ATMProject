@@ -9,7 +9,9 @@ public class CreditCard extends Account {
     protected Transaction lastTransaction;
 
     public CreditCard() {
-
+        this.balance = 0;
+//        this.dateOpened = date;
+        this.lastTransaction = null;
     }
     @Override
     public String getBalance() {

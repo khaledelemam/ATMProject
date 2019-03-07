@@ -9,7 +9,10 @@ public class LineOfCredit extends Account {
     protected Transaction lastTransaction;
 
 
-    public LineOfCredit() {
+    public LineOfCredit() {this.balance = 0;
+//        this.dateOpened = date;
+        this.lastTransaction = null;
+
     }
 
     @Override

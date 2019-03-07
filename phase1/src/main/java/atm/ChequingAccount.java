@@ -9,6 +9,9 @@ public class ChequingAccount extends Account {
     protected Transaction lastTransaction;
 
     public ChequingAccount() {
+        this.balance = 0;
+//        this.dateOpened = date;
+        this.lastTransaction = null;
     }
 
     @Override

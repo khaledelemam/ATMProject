@@ -9,6 +9,9 @@ public class SavingsAccount extends Account {
     protected Transaction lastTransaction;
 
     public SavingsAccount() {
+        this.balance = 0;
+//        this.dateOpened = date;
+        this.lastTransaction = null;
     }
 
     @Override
