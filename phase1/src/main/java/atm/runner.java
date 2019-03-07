@@ -173,8 +173,11 @@ public class runner {
                                     // so ppl can access account info via typing in the ID
 //                        HashMap<Integer, Account> accounts = boundlessATM.viewAccounts();
 //
-//                        // view net total
-                                    boundlessATM.viewAccountInfo();
+//                                  // TODO:  view net total
+                                    //boundlessATM.viewAccountInfo();
+                                    for (String account: boundlessATM.viewAccountInfo()) {
+                                        System.out.println(account);
+                                    }
                                     break;
 
                                 case 2: // withdrawal

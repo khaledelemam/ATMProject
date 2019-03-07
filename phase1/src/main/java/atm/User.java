@@ -1,5 +1,7 @@
 package atm;
 
+import com.sun.xml.internal.fastinfoset.util.StringArray;
+
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -121,19 +123,22 @@ public class User implements Serializable {
 //        }
 //    }
 
-    public void viewAccountInfo() {
+    public ArrayList<String> viewAccountInfo() {
+        ArrayList<String> accountsInfo = new ArrayList<>();
         for(int i = 1 ; i <= accounts.size(); i++) {
             Account account = accounts.get(i);
-            System.out.println(account + ": $" + account.getBalance());
             if (account.getLastTransaction() != null) {
-                System.out.println("Last Transaction\n" + account.getLastTransaction());
+                accountsInfo.add("\n" + account + ": $" + account.getBalance() +
+                        "\nDate opened: " + account.getDateOpened() +
+                        "\nLast Transaction:\n" + account.getLastTransaction());
+            } else {
+                accountsInfo.add("\n" + account + ": $" + account.getBalance() +
+                            "\nDate opened: " + account.getDateOpened() +
+                            "\nLast Transaction:\n" + account.getLastTransaction());
             }
-            System.out.println("Date opened: " + account.getDateOpened() + "\n");
-
-
         }
+        return accountsInfo;
     }
-
 
     public String getRequest(){
         return request ;

@@ -57,4 +57,5 @@ public class ChequingAccount extends Account {
     public Date getDateOpened() {
         return dateOpened;
     }
+
 }

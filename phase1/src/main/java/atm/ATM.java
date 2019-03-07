@@ -196,7 +196,7 @@ public class ATM {
 //        user.viewBalance();
 //    }
 
-    public void viewAccountInfo() { user.viewAccountInfo();}
+    public ArrayList<String> viewAccountInfo() { return user.viewAccountInfo();}
 
     public void requestAccount(int account){
         if (account == 1){
