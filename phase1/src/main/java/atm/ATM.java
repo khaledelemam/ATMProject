@@ -191,12 +191,13 @@ public class ATM {
         bankManager.store();
     }
 
-//
-//    public void viewBalance() {
-//        user.viewBalance();
-//    }
-
-    public ArrayList<String> viewAccountInfo() { return user.viewAccountInfo();}
+    public String viewAccountsInfo() {
+        String accInfo = "Net total: " + user.netUserBalance() + "\n";
+        for (String account: user.accountInfo()) {
+            accInfo += account;
+        }
+        return accInfo;
+    }
 
     public void requestAccount(int account){
         if (account == 1){

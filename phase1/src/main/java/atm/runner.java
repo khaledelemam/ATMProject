@@ -169,15 +169,7 @@ public class runner {
 
                             switch (option) {
                                 case 1:
-                                    // accounts should be stored in a hashmap where each account is mapped to an id
-                                    // so ppl can access account info via typing in the ID
-//                        HashMap<Integer, Account> accounts = boundlessATM.viewAccounts();
-//
-//                                  // TODO:  view net total
-                                    //boundlessATM.viewAccountInfo();
-                                    for (String account: boundlessATM.viewAccountInfo()) {
-                                        System.out.println(account);
-                                    }
+                                    System.out.println(boundlessATM.viewAccountsInfo());
                                     break;
 
                                 case 2: // withdrawal

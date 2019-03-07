@@ -116,14 +116,7 @@ public class User implements Serializable {
 
     }
 
-//
-//    public void viewBalance (){
-//        for(int i = 1 ; i <=accounts.size(); i++){
-//            System.out.println(accounts.get(i) +": " + accounts.get(i).getBalance()) ;
-//        }
-//    }
-
-    public ArrayList<String> viewAccountInfo() {
+    public ArrayList<String> accountInfo() {
         ArrayList<String> accountsInfo = new ArrayList<>();
         for(int i = 1 ; i <= accounts.size(); i++) {
             Account account = accounts.get(i);
@@ -154,7 +147,7 @@ public class User implements Serializable {
 
     public String netUserBalance() {
         double netTotal = 0;
-        for (int k = 0; k < accounts.size(); k++){
+        for (int k = 1; k < accounts.size(); k++){
             netTotal += accounts.get(k).getNetTotal();
         }
         return currencyFormat.format(netTotal);
