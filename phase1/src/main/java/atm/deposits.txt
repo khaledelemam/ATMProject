@@ -1,5 +1,6 @@
-2019-03-06
+0-0-0
 amanda cheque 34.33
+amanda cheque 24.67
 lindsay cheque 250.23
 david cash 5
 
