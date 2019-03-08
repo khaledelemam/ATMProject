@@ -1,7 +1,6 @@
 package atm;
 
 import java.io.*;
-import java.util.*;
 
 public class CashManager {
 
@@ -20,16 +19,18 @@ public class CashManager {
         return this.denominations;
     }
 
-    public void changeDenom(int index, int amount){
+    public boolean changeDenom(int index, int amount){
         if (index < 0 | index > 3){
-            //exception?
+            return false;
+
         }
         else{
             if (checkDenom(index, amount)){
                 denominations[index] += amount;
+                return true;
             }
             else{
-                //error message
+                return false;
             }
         }
     }
@@ -56,15 +57,16 @@ public class CashManager {
         }
     }
 
+    // not working at the moment.
     public void update(String filePath){
         //FileReader file = new FileReader("alert.txt");
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
             for (int i = 0; i< 4; i++){
-                if(denominations[i] < threshold){
+                /*if(denominations[i] < threshold){
                     writer.write(denominations[i] + " " + getBill(i) + " left, please restock");
-                    writer.newLine();
-                }
+                    //writer.newLine();
+                }*/
             }
         } catch (IOException e) {
             e.printStackTrace();
