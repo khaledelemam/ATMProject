@@ -123,7 +123,7 @@ public class User implements Serializable {
             if (account.getLastTransaction() != null) {
                 accountsInfo.add("\n" + account + ": $" + account.getBalance() +
                         "\nDate opened: " + account.getDateOpened() +
-                        "\nLast Transaction:\n" + account.getLastTransaction());
+                        "\n--Last Transaction--\n" + account.getLastTransaction());
             } else {
                 accountsInfo.add("\n" + account + ": $" + account.getBalance() +
                             "\nDate opened: " + account.getDateOpened());

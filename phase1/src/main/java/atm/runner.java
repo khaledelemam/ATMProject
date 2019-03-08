@@ -180,7 +180,8 @@ public class runner {
                                     System.out.println("Which account would you like to withdraw from?: ");
                                     int account = Integer.parseInt(in.nextLine());
 
-                                    System.out.println("How much would you like to withdraw?: ");
+                                    System.out.println("How much would you like to withdraw?:\n" +
+                                            "Denominations available: $5, $10, $15, $20");
                                     int cashAmount = Integer.parseInt(in.nextLine());
                                     try {
                                         boundlessATM.withdrawal(account, cashAmount);

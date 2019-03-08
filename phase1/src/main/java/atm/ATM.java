@@ -155,6 +155,7 @@ public class ATM {
         }
     }
 
+
     public void withdrawal(int account, int amount) throws InsufficientFundsException{
         Account  acc = user.getAccount(account);
         acc.setBalance(-amount);
@@ -169,10 +170,14 @@ public class ATM {
         acc.setBalance(-amount);
 
         File outgoing = new File("phase1/src/main/java/atm/outgoing.txt");
-        PrintWriter billPayer = new PrintWriter(new FileWriter("phase1/src/main/java/atm/outgoing.txt", true));
+        PrintWriter billPayer = new PrintWriter(new FileWriter("phase1/src/main/java/atm/outgoing.txt",
+                true));
         Transaction billPayment = new Transaction(acc, amount);
         billPayer.println(billPayment);
         billPayer.close();
+
+        Transaction bill = new Transaction(acc, amount);
+        acc.setLastTransaction(bill);
 
         bankManager.store();
     }
