@@ -2,6 +2,6 @@ package atm;
 
 public class UsernameTakenException extends Exception {
     public UsernameTakenException(){
-        super("Sorry, this username is already taken. Please choose a new username.");
+        super("Sorry, a user with this username already exists.");
     }
 }

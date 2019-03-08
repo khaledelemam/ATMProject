@@ -3,37 +3,25 @@ package atm;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 
+
+// Make sure to keep everything abstract because instance variables are not overridden!
+
+
 public abstract class Account implements Serializable {
 
     private static final long serialVersionUID = 10L;
-    private User owner;
-    protected Transaction lastTransaction;
-    private Date dateOpened;
-
-    public Account(User owner) {
-        this.owner = owner;
-        this.lastTransaction = null;
-
-//        this.dateOpened = getCurrentDate
-    }
 
     public abstract String  getBalance();
 
-    public abstract void setBalance(double amount);
+    public abstract void setBalance(double amount) throws InsufficientFundsException;
 
-    public User getOwner() { return this.owner; }
+    public abstract Date getDateOpened();
 
-    public Date getDateOpened() {
-        return dateOpened;
-    }
+    public  abstract Transaction getLastTransaction();
 
-    public Transaction getLastTransaction() {
-        return this.lastTransaction;
-    }
+    public abstract void setLastTransaction(Transaction newTransaction);
 
-    public void setLastTransaction(Transaction newTransaction) {
-        this.lastTransaction = newTransaction;
-    }
+    public abstract double getNetTotal();
 
     public abstract double getDoubleBalance();
 

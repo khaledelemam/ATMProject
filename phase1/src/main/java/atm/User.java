@@ -1,6 +1,9 @@
 package atm;
 
+import com.sun.xml.internal.fastinfoset.util.StringArray;
+
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -10,6 +13,7 @@ public class User implements Serializable {
     private String username;
     private String password;
     private int numAccounts;
+    private DecimalFormat currencyFormat = new DecimalFormat("0.00");
     private HashMap<Integer,Account> accounts = new HashMap<>();
     private HashMap<Account,Integer> map = new HashMap<>();
     private String request;
@@ -23,7 +27,7 @@ public class User implements Serializable {
     public User(String username) {
         this.numAccounts = 0;
         this.username = username;
-        primaryAccount = null;
+        this.primaryAccount = null;
 
 
 
@@ -44,6 +48,10 @@ public class User implements Serializable {
 
 
     }
+    @Override
+    public String toString() {
+        return this.username;
+    }
 
 
     public void setPassword (String password){
@@ -60,18 +68,20 @@ public class User implements Serializable {
         Account hold = null;
 
         if (account.equals("Chequing")){
-            hold = new ChequingAccount(this);
+            hold = new ChequingAccount();
+            if (primaryAccount == null)
+            primaryAccount = (ChequingAccount) hold;
         }
 
         else if (account.equals("Savings")){
-            hold = new SavingsAccount((this));
+            hold = new SavingsAccount();
         }
         else if (account.equals("Line of Credit")){
-            hold = new LineOfCredit(this);
+            hold = new LineOfCredit();
         }
 
         else if (account.equals("Credit Card")){
-            hold = new CreditCard(this);
+            hold = new CreditCard();
         }
 
         if (hold != null) {
@@ -106,41 +116,41 @@ public class User implements Serializable {
 
     }
 
-
-    public void viewBalance (){
-        for(int i = 1 ; i <=accounts.size(); i++){
-            System.out.println(accounts.get(i) +": " + accounts.get(i).getBalance()) ;
-
+    public ArrayList<String> accountInfo() {
+        ArrayList<String> accountsInfo = new ArrayList<>();
+        for(int i = 1 ; i <= accounts.size(); i++) {
+            Account account = accounts.get(i);
+            if (account.getLastTransaction() != null) {
+                accountsInfo.add("\n" + account + ": $" + account.getBalance() +
+                        "\nDate opened: " + account.getDateOpened() +
+                        "\nLast Transaction:\n" + account.getLastTransaction());
+            } else {
+                accountsInfo.add("\n" + account + ": $" + account.getBalance() +
+                            "\nDate opened: " + account.getDateOpened() +
+                            "\nLast Transaction:\n" + account.getLastTransaction());
+            }
         }
-
-
+        return accountsInfo;
     }
-
 
     public String getRequest(){
         return request ;
     }
 
     public void requestAccount(String account){
-
-        if (account.equals("Chequing")){
-            request = "Chequing";
-
-        }
-        else if (account.equals("Savings")){
-            request ="Savings";
-        }
-        else if (account.equals("Line of Credit")){
-           request =  "Line of Credit";
-
-        }
-        else if (account.equals("Credit Card")){
-           request =  "Credit Card";
-
-        }
+        request = account;
 
     }
-    public void setPrimaryAccount(ChequingAccount acc){primaryAccount = acc;}
+    public void setPrimaryAccount(ChequingAccount acc){ this.primaryAccount = acc;}
 
-    public ChequingAccount getPrimaryAccount() {return primaryAccount;}
+    public ChequingAccount getPrimaryAccount() {return this.primaryAccount;}
+
+    public String netUserBalance() {
+        double netTotal = 0;
+        for (int k = 1; k < accounts.size(); k++){
+            netTotal += accounts.get(k).getNetTotal();
+        }
+        return currencyFormat.format(netTotal);
+    }
+
 }

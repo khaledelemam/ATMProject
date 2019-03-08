@@ -3,12 +3,16 @@ package atm;
 import java.text.DecimalFormat;
 
 public class LineOfCredit extends Account {
-    private int balance;
+    private Date dateOpened;
+    private double balance;
     private DecimalFormat currencyFormat = new DecimalFormat("0.00");
+    protected Transaction lastTransaction;
 
 
-    public LineOfCredit(User owner) {
-       super(owner);
+    public LineOfCredit() {this.balance = 0;
+//        this.dateOpened = date;
+        this.lastTransaction = null;
+
     }
 
     @Override
@@ -26,5 +30,21 @@ public class LineOfCredit extends Account {
 
     @Override
     public double getDoubleBalance() {return this.balance;}
+
+    public void setLastTransaction(Transaction newTransaction) {
+        this.lastTransaction = newTransaction;
+    }
+
+    @Override
+    public double getNetTotal() {
+        return -this.balance;
+    }
+
+    public Transaction getLastTransaction() {
+        return this.lastTransaction;
+    }
+    public Date getDateOpened() {
+        return dateOpened;
+    }
 
 }

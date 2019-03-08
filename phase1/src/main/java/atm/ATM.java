@@ -1,5 +1,6 @@
 package atm;
 
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -17,8 +18,11 @@ public class ATM {
         bankManager.retrieve();
 
         ArrayList<User> users = bankManager.users;
-
+        for (int i = 0; i < users.size(); i ++){
+            System.out.println(users.get(i).getUsername());
+        }
         for (int i = 0; i < users.size(); i ++) {
+
             if (users.get(i).getUsername().equals(username)){
                 if (users.get(i).getPassword().equals(password)){
                     System.out.println(5);
@@ -30,7 +34,9 @@ public class ATM {
             }
 
         }
+        bankManager.store();
         return false;
+
 
 
     }
@@ -50,6 +56,7 @@ public class ATM {
 
 
         }
+        bankManager.store();
         return false;
 
 
@@ -58,35 +65,29 @@ public class ATM {
 
 
 
-    public void newUser(String username, int account) {
+    public void newUser(String username) throws UsernameTakenException{
         // call to BankManager to create a new user account with default password
         // cannot have two users with the same username
         // bank manager responds with a new user object that is printed so user knows their user/pass
         // and then this is returned
-       String request = null;
-
-        if (account == 1){
-            request = "Chequing";
+        File f = new File("file2");
+        if (f.exists()) {
+            bankManager.retrieveRequests();
         }
-        else if (account == 2){
-            request ="Savings";
+       String request = "Chequing";
+
+        if (checkExistingUser(username) != null){
+            UsernameTakenException u = new UsernameTakenException();
+            throw u;
         }
-        else if (account == 3){
-            request =  "Line of Credit";
+        else {
+            ArrayList<String> arr = new ArrayList<>();
+            arr.add(username);
+            arr.add(request);
 
+            bankManager.requests.add(arr);
+            bankManager.storeRequests();
         }
-        else if (account == 4){
-            request =  "Credit Card";
-
-        }
-
-        ArrayList<String> arr = new ArrayList<>();
-        arr.add(username);
-        arr.add(request);
-
-        bankManager.requests.add(arr);
-        bankManager.store();
-
 
     }
 
@@ -106,7 +107,6 @@ public class ATM {
 
     public void internalTransfer(int from, int to , int amount) throws InsufficientFundsException {
         Account accFrom = user.getAccount(from);
-        checkSufficientFunds(accFrom, amount);
         Account  accTo = user.getAccount(to);
         accFrom.setBalance(-amount);
         accTo.setBalance(amount);
@@ -118,48 +118,85 @@ public class ATM {
 
 
     }
-    public void externalTransfer(Account sender, User recipient,  int amount) throws InsufficientFundsException {
-        checkSufficientFunds(sender, amount);
+    public void externalTransfer(int sender, User recipient,  int amount) throws InsufficientFundsException {
         if (recipient.getPrimaryAccount() != null) {
+            Account accFrom = user.getAccount(sender);
             ChequingAccount to = recipient.getPrimaryAccount();
             to.setBalance(amount);
-            sender.setBalance(-amount);
-            Transaction extTransfer = new Transaction(sender, to, amount);
-            sender.setLastTransaction(extTransfer);
+            accFrom.setBalance(-amount);
+            Transaction extTransfer = new Transaction(accFrom, to, amount);
+            accFrom.setLastTransaction(extTransfer);
             to.setLastTransaction(extTransfer);
         }
         bankManager.store();
     }
 
-    public void deposit(int account , int amount) {
-        // is it cash or cheque
+    public void deposit() throws IOException, InsufficientFundsException {
+        File deposits = new File("phase1/src/main/java/atm/deposits.txt");
+        BufferedReader depositReader = new BufferedReader(new FileReader(deposits));
+        ArrayList<String[]> todaysDeposits = new ArrayList<>();
 
+        String line = depositReader.readLine();
 
+        Date testDate = new Date();
+
+        while (line != null) {
+            if (line.equals(testDate.toString())) {
+                line = depositReader.readLine();
+                while (!(line.equals(""))) {
+                    String[] deposit = line.split(" ");
+                    todaysDeposits.add(deposit);
+                    line = depositReader.readLine();
+                }
+                depositReader.close();
+                break;
+            }
+            line = depositReader.readLine();
+        }
+
+        for (String[] item: todaysDeposits) {
+            String username = item[0];
+            String type = item[1];
+            Double amount = Double.parseDouble(item[2]);
+
+            // check if user is in system
+
+            user = checkExistingUser(username);
+            if (user != null) {
+                user.getPrimaryAccount().setBalance(amount);
+                bankManager.store();
+            }
+        }
     }
 
-    public void withdrawal(int account, int amount) {
+    public void withdrawal(int account, int amount) throws InsufficientFundsException{
         Account  acc = user.getAccount(account);
-        //checkSufficientFunds(acc, amount);
         acc.setBalance(-amount);
+        Transaction withdrawal = new Transaction(acc, amount);
+        acc.setLastTransaction(withdrawal);
         bankManager.store();
-
     }
 
 
-    public void payBill(int account, int amount) throws IOException {
-        Account  acc = user.getAccount(account);
+    public void payBill(int account, double amount) throws IOException, InsufficientFundsException {
+        Account acc = user.getAccount(account);
         acc.setBalance(-amount);
-        bankManager.store();
 
-        PrintWriter billPayer = new PrintWriter(new FileWriter("outgoing.txt"));
-        billPayer.println("%user payed $%amount on %date.");
+        File outgoing = new File("phase1/src/main/java/atm/outgoing.txt");
+        PrintWriter billPayer = new PrintWriter(new FileWriter("phase1/src/main/java/atm/outgoing.txt", true));
+        Transaction billPayment = new Transaction(acc, amount);
+        billPayer.println(billPayment);
         billPayer.close();
 
+        bankManager.store();
     }
 
-
-    public void viewBalance() {
-        user.viewBalance();
+    public String viewAccountsInfo() {
+        String accInfo = "Net total: " + user.netUserBalance() + "\n";
+        for (String account: user.accountInfo()) {
+            accInfo += account;
+        }
+        return accInfo;
     }
 
     public void requestAccount(int account){
@@ -177,16 +214,9 @@ public class ATM {
         }
         else if (account == 4){
             user.requestAccount("Credit Card");
-
         }
-
         bankManager.store();
-
-
-
     }
-
-
 
     public boolean adminCheck(String password){
 
@@ -199,12 +229,17 @@ public class ATM {
 
 
     public void newAccountCreation() {
+        File f = new File("file");
+        if (f.exists()) {
+            bankManager.retrieve();
+        }
         bankManager.createUser();
         bankManager.store();
 
     }
 
     public void usersRequests(){
+        bankManager.retrieve();
         bankManager.userRequestAccount();
         bankManager.store();
     }
@@ -213,11 +248,44 @@ public class ATM {
             return user.getPassword();
     }
 
-    public void checkSufficientFunds (Account acc, int amount)throws InsufficientFundsException{
-        if (acc.getDoubleBalance() < amount){
-            InsufficientFundsException e = new InsufficientFundsException();
-            throw e;
-        }
+
+    public User checkExistingUser(String username) {
+//        File f = new File("file");
+//        if (f.exists()) {
+//            bankManager.retrieve();
+//        }
+//        ArrayList<User> users = bankManager.users;
+//
+//        for (int i = 0; i < users.size(); i ++) {
+//            if (users.get(i).getUsername().equals(username)){
+//                return users.get(i);
+//            }
+//        }
+//        bankManager.store();
+//        return null;
+       return  bankManager.checkExistingUser(username);
     }
+
+
+    public void date(){
+        bankManager.setDate();
+    }
+
+    // does not update user balance correctly
+    public void reverseTransaction(String username, int account) throws InsufficientFundsException{
+        bankManager.ReverseLastTransaction(username,account);
+        System.out.println(username);
+        bankManager.store();
+    }
+
+    public void viewAccountsManager(String name){
+        User user  = checkExistingUser(name);
+        user.viewAccounts();
+        bankManager.store();
+
+
+    }
+
+
 
 }

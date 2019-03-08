@@ -1,6 +1,12 @@
-lindsay, cheque, 250.23
-david, cash, 5
-david, cash, 20
-david, cash, 50
-lindsay, cheque, 134.34
-david, cash, 20
+2019-03-06
+amanda cheque 34.33
+lindsay cheque 250.23
+david cash 5
+
+2019-03-11
+david cash 20
+
+2019-03-12
+david cash 50
+lindsay cheque 134.34
+david cash 20

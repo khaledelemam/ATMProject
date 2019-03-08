@@ -8,7 +8,6 @@ import java.util.Arrays;
 public class BankManager implements Serializable {
 
     private String password;
-
     public  ArrayList<User> users = new ArrayList<>();
     public  ArrayList<ArrayList<String>> requests  = new ArrayList<>();
 
@@ -21,58 +20,78 @@ public class BankManager implements Serializable {
         return this.password;
     }
 
-    public void setUserPassword(User user){
+
+
+
+    public void createUser(){
+        retrieveRequests();
+        for(int i = 0; i< requests.size();i++){
+                if (CreditScore.getRandomDoubleBetweenRange() > 0) {
+                    User user = new User(requests.get(i).get(0));
+                    user.addAccount(requests.get(i).get(1));
+                    setUserPassword(user);
+
+                }
+        }
+        requests.clear();
+        storeRequests();
+
+
+    }
+
+    public void setUserPassword(User user) {
         String password = "1";
         user.setPassword(password);
         users.add(user);
-
     }
-
-    // Bank manger has to initial user, currently new users are initialized in ATM automatically but the bank manager should have the option to accept or reject
-    // a new user. Maybe use text file to store user names and accounts of requests? Also i am not sure if that is true. I know this is true regarding creating
-    // new account for an existing user.
-    public void createUser(){
-        retrieve();
-        for(int i = 0; i< requests.size();i++){
-            for(int j = 0; j < requests.get(i).size();j++){
-                User user = new User(requests.get(i).get(0));
-                if (requests.get(i).get(1).equals("Chequing")){
-                    user.addAccount("Chequing");
-
-                }
-                else if (requests.get(i).get(1).equals("Savings")){
-                    user.addAccount("Savings");
-
-                }
-                else if (requests.get(i).get(1).equals("Line of Credit")){
-                    user.addAccount("Line of Credit");
-
-                }
-                else if (requests.get(i).get(1).equals("Credit Card")){
-                    user.addAccount("Credit Card");
-                }
-                setUserPassword(user);
-
-            }
-
-        }
-
-
-
-
-    }
-
-    //Here by default the bank manager accepts the request but bank manager should have option to reject new accounts.
 
     public void  userRequestAccount(){
         for(int i = 0; i< users.size();i++){
             if (users.get(i).getRequest() != null){
-                users.get(i).addAccount(users.get(i).getRequest());
+                if (CreditScore.getRandomDoubleBetweenRange() > 0) {
+                    users.get(i).addAccount(users.get(i).getRequest());
+                }
             }
         }
     }
 
-    public void ReverseLastTransaction(){
+    public void ReverseLastTransaction(String username, int account)throws InsufficientFundsException{
+        // only withdraw in mind right now.
+        User user = checkExistingUser(username);
+        if (user!= null){
+           Account acc = user.getAccount(account);
+           Transaction transaction = acc.getLastTransaction();
+           double money = transaction.getAmount();
+           ReverseATM rATM = new ReverseATM();
+            System.out.println(user.getUsername());
+           rATM.ReverseWithdrawal(user, acc, money);
+//            System.out.println(username);
+//            System.out.println(user.getAccount(1).getBalance());
+        }
+
+    }
+
+    public User checkExistingUser(String username){
+        File f = new File("file");
+        if (f.exists()) {
+            retrieve();
+        }
+
+        for (int i = 0; i < users.size(); i ++) {
+            if (users.get(i).getUsername().equals(username)){
+                return users.get(i);
+            }
+        }
+//       store();
+        System.out.println(8);
+        return null;
+    }
+
+
+
+    public void setDate(){
+        Date date = new Date();
+        System.out.println(date);
 
     }
 
@@ -81,7 +100,6 @@ public class BankManager implements Serializable {
             FileOutputStream fos= new FileOutputStream("file");
             ObjectOutputStream oos= new ObjectOutputStream(fos);
             oos.writeObject(users);
-            oos.writeObject(requests);
             oos.close();
             fos.close();
         }catch(IOException ioe){
@@ -97,6 +115,43 @@ public class BankManager implements Serializable {
             FileInputStream fis = new FileInputStream("file");
             ObjectInputStream ois = new ObjectInputStream(fis);
             users = (ArrayList) ois.readObject();
+            ois.close();
+            fis.close();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+//            return;
+        } catch (ClassNotFoundException c) {
+            System.out.println("Class not found");
+            c.printStackTrace();
+//            return;
+        }
+//        for (User tmp : users) {
+//            System.out.println(tmp);
+//        }
+
+    }
+
+
+
+    public void storeRequests(){
+        try{
+            FileOutputStream fos= new FileOutputStream("file2");
+            ObjectOutputStream oos= new ObjectOutputStream(fos);
+            oos.writeObject(requests);
+            oos.close();
+            fos.close();
+        }catch(IOException ioe){
+            ioe.printStackTrace();
+        }
+
+    }
+
+    @SuppressWarnings("unchecked")
+
+    public void retrieveRequests() {
+        try {
+            FileInputStream fis = new FileInputStream("file2");
+            ObjectInputStream ois = new ObjectInputStream(fis);
             requests = (ArrayList) ois.readObject();
             ois.close();
             fis.close();
@@ -113,6 +168,14 @@ public class BankManager implements Serializable {
 //        }
 
     }
+
+
+
+
+
+
+
+
 
 
 }

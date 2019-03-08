@@ -3,12 +3,15 @@ package atm;
 import java.text.DecimalFormat;
 
 public class SavingsAccount extends Account {
-
+    private Date dateOpened;
     private double balance;
     private DecimalFormat currencyFormat = new DecimalFormat("0.00");
+    protected Transaction lastTransaction;
 
-    public SavingsAccount(User owner) {
-        super(owner);
+    public SavingsAccount() {
+        this.balance = 0;
+//        this.dateOpened = date;
+        this.lastTransaction = null;
     }
 
     @Override
@@ -16,10 +19,15 @@ public class SavingsAccount extends Account {
         return currencyFormat.format(this.balance);
     }
 
-    public void setBalance(double amount) {
+    @Override
+    public void setBalance(double amount) throws InsufficientFundsException {
         if (this.balance >= 0) {
             if (this.balance >= amount || amount >= 0) {
                 this.balance += amount;
+            }
+            else{
+                InsufficientFundsException e = new InsufficientFundsException();
+                throw e;
             }
         }
     }
@@ -35,4 +43,21 @@ public class SavingsAccount extends Account {
 
     @Override
     public double getDoubleBalance() {return this.balance;}
+
+    public void setLastTransaction(Transaction newTransaction) {
+        this.lastTransaction = newTransaction;
+    }
+
+    @Override
+    public double getNetTotal() {
+        return this.balance;
+    }
+
+    public Transaction getLastTransaction() {
+        return this.lastTransaction;
+    }
+
+    public Date getDateOpened() {
+        return dateOpened;
+    }
 }
