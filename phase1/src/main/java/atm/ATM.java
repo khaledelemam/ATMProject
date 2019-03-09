@@ -124,6 +124,7 @@ public class ATM {
 
         String line = depositReader.readLine();
 
+        // TODO: remove when date object added
         Date testDate = new Date();
 
         while (line != null) {
@@ -146,7 +147,6 @@ public class ATM {
             Double amount = Double.parseDouble(item[2]);
 
             // check if user is in system
-
             user = checkExistingUser(username);
             if (user != null) {
                 user.getPrimaryAccount().setBalance(amount);
