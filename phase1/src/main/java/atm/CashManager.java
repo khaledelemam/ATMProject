@@ -15,18 +15,19 @@ public class CashManager {
         this.threshold = threshold;
     }
 
-    public int[] getDenom(){
+    public int[] getDenominations(){
         return this.denominations;
     }
 
-    public boolean changeDenom(int index, int amount){
-        if (index < 0 | index > 3){
+
+    public boolean changeDenom(int bill, int amount){
+        if (bill != 5 | bill != 10 | bill != 20 | bill !=50){
             return false;
 
         }
         else{
-            if (checkDenom(index, amount)){
-                denominations[index] += amount;
+            if (checkDenom(getIndex(bill), amount)){
+                denominations[getIndex(bill)] += amount;
                 return true;
             }
             else{
@@ -35,8 +36,9 @@ public class CashManager {
         }
     }
 
+
     //might remove
-    private boolean checkDenom(int index, int amount){
+    public boolean checkDenom(int index, int amount){
         if (denominations[index] + amount < 0){
             return false;
         }
@@ -45,12 +47,24 @@ public class CashManager {
         }
     }
 
-    private String getBill(int index){
-        if (index == 0){
+    private int getIndex(int bill){
+        if (bill == 5){
+            return 0;
+        }else if (bill == 5){
+            return 1;
+        }else if (bill == 5){
+            return 2;
+        }else{
+            return 3;
+        }
+    }
+
+    private String getBill(int bill){
+        if (bill == 5){
             return "5 dollar bill(s)";
-        }else if(index == 1){
+        }else if(bill == 10){
             return "10 dollar bill(s)";
-        }else if(index == 2){
+        }else if(bill == 20){
             return "20 dollar bill(s)";
         }else{
             return "50 dollar bill(s)";
