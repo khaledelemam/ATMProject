@@ -1,0 +1,12 @@
+Date
+--
+- day: int
+- month: int
+- year: int
+--
++ getDay(), getMonth(), getYear(): int
++ getFilename(): String
++ setDate(): void
++ update(): void
+- store(): void
++ toString(): String

@@ -1,0 +1,14 @@
+CashManager
+--
+- denominations: int[ ]
+- threshold: int
+--
++ CashManager(denominations: int[ ], threshold: int)
++ getDenominations(): int[ ] --> not being used
++ getDenom(bill: int): int
++ changeDenom(bill: int, amount: int): boolean
++ checkDenom(bill: int, amount: int): boolean --> 'might remove'
+- getIndex(bill: int): int
+- getBill(bill: int): String
++ update(filePath: String): void
++ toString(): String

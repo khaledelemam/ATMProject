@@ -1,0 +1,26 @@
+User
+--
+_- serialVersionUID_
+- username: String
+- password: String
+- numAccounts: int --> might not be used
+- currencyFormat: DecimalFormat
+- accounts: HashMap<Integer,Account>
+- map: HashMap<Account,Integer>
+- request: String
+- primaryAccount: ChequingAccount
+--
++ User(username: String)
++ toString(): String
++ setPassword(password: String): void
++ getUsername(): String
++ getPassword(): String
++ addAccount(account: String): void
++ viewAccounts(): void
++ getAccount(acc: int): Account
++ accountInfo(): ArrayList<String>
++ getRequest(): String
++ requestAccount(account: String): void
++ setPrimaryAccoun(acc: ChequingAccount): void --> not being used
++ getPrimaryAccount(): ChequingAccount
++ netUserBalance(): String

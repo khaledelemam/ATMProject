@@ -1,0 +1,29 @@
+ATM
+--
+- user: User
+- bankManager: BankManager
+- date: Date
+- denoms: int[ ]
+- cashManager: CashManager
+--
+# login(username: String, password: String): boolean
+# login2(username: String): boolean
++ newUser(username: String): void
++ changePassword(newPassword: String): void
++ viewAccounts(): void
++ internalTransfer(from: int, to: int, amount: double): void
++ externalTransfer(sender: int, recipient: User, amount: double):  void
++ deposit(): void
++ withdrawl(account: int, amount: int): void
++ payBill(account: int, amount: double): void
++ viewAccountsInfo(): String
++ requestAccount(account: int): void
++ adminCheck(password: String): boolean
++ newAccountCreation(): void
++ usersRequests(): void
++ getUserPassword(): String
++ checkExistingUser(username: String): User
++ date(): void
++ reverseTransaction(username: String, account: int): void
++ viewAccountsManager(name: String): void
++ getCashManager(): CashManager
