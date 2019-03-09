@@ -25,25 +25,16 @@ public class CashManager {
         return denominations[getIndex(bill)];
     }
 
-
-    public boolean changeDenom(int bill, int amount){
-        if (bill != 5 | bill != 10 | bill != 20 | bill !=50){
-            return false;
-
+    //bill must be 5, 10, 20, or 50
+    public void changeDenom(int bill, int amount){
+        if (checkDenom(bill, amount)){
+            denominations[getIndex(bill)] += amount;
         }
         else{
-            if (checkDenom(bill, amount)){
-                denominations[getIndex(bill)] += amount;
-                return true;
-            }
-            else{
-                return false;
-            }
+                //negative balance exception
         }
     }
 
-
-    //might remove
     public boolean checkDenom(int bill, int amount){
         if (denominations[getIndex(bill)] + amount < 0){
             return false;
@@ -56,38 +47,42 @@ public class CashManager {
     private int getIndex(int bill){
         if (bill == 5){
             return 0;
-        }else if (bill == 5){
+        }else if (bill == 10){
             return 1;
-        }else if (bill == 5){
+        }else if (bill == 20){
             return 2;
-        }else{
+        }else if (bill == 50){
             return 3;
-        }
+        }else
+            //returns an impossible index
+            return -99;
     }
 
-    private String getBill(int bill){
-        if (bill == 5){
-            return "5 dollar bill(s)";
-        }else if(bill == 10){
-            return "10 dollar bill(s)";
-        }else if(bill == 20){
-            return "20 dollar bill(s)";
+    private String getBill(int index){
+        if (index == 0){
+            return "five-dollar bill(s)";
+        }else if(index == 1){
+            return "ten-dollar bill(s)";
+        }else if(index == 2){
+            return "twenty-dollar bill(s)";
         }else{
-            return "50 dollar bill(s)";
+            return "fifty-dollar bill(s)";
         }
     }
 
-    // not working at the moment.
+    // sends an alert when a denomination falls below the threshold
     public void update(String filePath){
-        //FileReader file = new FileReader("alert.txt");
+        File file = new File(filePath);
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+            PrintWriter writer = new PrintWriter(new FileWriter(file));
             for (int i = 0; i< 4; i++){
                 if(denominations[i] < threshold){
-                    writer.write(denominations[i] + " " + getBill(i) + " left, please restock");
-                    writer.newLine();
+                    //Testing purposes. Will remove print statmement later
+                    System.out.println("went under threshold for bill " + getBill(i));
+                    writer.println(denominations[i] + " " + getBill(i) + " left, please restock");
                 }
             }
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
