@@ -1,0 +1,11 @@
+/Account/
+--
+_- serialVersionUID_
+--
+/+ getBalance(): String/
+/+ setBalance(amount: double): void/
+/+ getDateOpened(): Date/
+/+ getLastTransaction(): Transaction/
+/+ setLastTransaction(newTransaction: Transaction): void/
+/+ getNetTotal(): double/
+/+ getDoubleBalance(): double/

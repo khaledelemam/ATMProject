@@ -1,0 +1,16 @@
+ChequingAccount
+--
+- dateOpened: Date
+- balance: double
+- currencyFormat: DecimalFormat
+# lastTransaction: Transaction
+--
++ ChequingAccount()
++ getBalance(): String
++ toString(): String
++ setBalance(amount: double): void
++ getDoubleBalance(): double
++ setLastTransaction(newTransaction: Transaction): void
++ getNetTotal(): double
++ getLastTransaction(): Transaction
++ getDateOpened(): Date
