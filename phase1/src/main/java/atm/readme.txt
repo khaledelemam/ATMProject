@@ -1,5 +1,14 @@
 ----- How to use the program -----
 
+--- How to run as admin ---
+
+(1) Approve user requests
+(2) Reverse transactions
+(3) Set the date
+
+* must log in before running any admin tasks *
+    > password: 123
+
 --- How to register as a user ---
 
 (1) Login as a user
