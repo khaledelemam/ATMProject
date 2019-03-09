@@ -1,0 +1,16 @@
+CreditCard
+--
+- dateOpened: Date
+- balance: double
+- currencyFormat: DecimalFormat
+# lastTransaction: Transaction
+--
++ CreditCard()
++ getBalance(): String
++ setBalance(amount: double): void
++ toString(): String
++ getDoubleBalance(): double
++ setLastTransaction(newTransaction: Transaction): void
++ getNetTotal(): double
++ getLastTransaction(): Transaction
++ getDateOpened(): Date
