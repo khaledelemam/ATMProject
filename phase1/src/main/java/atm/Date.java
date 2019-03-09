@@ -17,6 +17,19 @@ public class Date extends java.util.Date implements Serializable {
     //    private DateFormat sdf;
     //private static int today; //???
 
+    public static void main(String[] args) {
+        Date today = new Date();
+
+        System.out.println(today);
+        today.update();
+        System.out.println(today);
+
+        Date other = new Date();
+        System.out.println(other);
+        System.out.println(today);
+        System.out.println(other);
+        System.out.println(today);
+    }
 
 
     public Date() {
@@ -28,6 +41,10 @@ public class Date extends java.util.Date implements Serializable {
                 Date today = (Date) ois.readObject();
                 ois.close();
                 fis.close();
+
+                this.day = today.getDay();
+                this.month = today.getMonth();
+                this.year = today.getYear();
             } catch (IOException ioe) {
                 ioe.printStackTrace();
 
@@ -43,6 +60,21 @@ public class Date extends java.util.Date implements Serializable {
             store();
         }
 
+    }
+
+    @Override
+    public int getDay() {
+        return this.day;
+    }
+
+    @Override
+    public int getMonth() {
+        return this.month;
+    }
+
+    @Override
+    public int getYear() {
+        return this.year;
     }
 
     public void setDate(int day, int month, int year) {
