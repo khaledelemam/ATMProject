@@ -26,7 +26,7 @@ public class CashManager {
 
         }
         else{
-            if (checkDenom(getIndex(bill), amount)){
+            if (checkDenom(bill, amount)){
                 denominations[getIndex(bill)] += amount;
                 return true;
             }
@@ -38,8 +38,8 @@ public class CashManager {
 
 
     //might remove
-    public boolean checkDenom(int index, int amount){
-        if (denominations[index] + amount < 0){
+    public boolean checkDenom(int bill, int amount){
+        if (denominations[getIndex(bill)] + amount < 0){
             return false;
         }
         else{
