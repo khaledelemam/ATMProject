@@ -41,6 +41,10 @@ public class Date extends java.util.Date implements Serializable {
                 Date today = (Date) ois.readObject();
                 ois.close();
                 fis.close();
+
+                this.day = today.getDay();
+                this.month = today.getMonth();
+                this.year = today.getYear();
             } catch (IOException ioe) {
                 ioe.printStackTrace();
 
