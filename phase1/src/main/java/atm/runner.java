@@ -1,5 +1,6 @@
 package atm;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -9,7 +10,6 @@ public class runner {
 
 
     public static void main(String[] args) throws IOException {
-        Date date = new Date();
 
         Scanner in = new Scanner(System.in);
 
@@ -26,7 +26,14 @@ public class runner {
         while (main) {
             boolean newUser = false;
 
-            System.out.println("Today is " + date);
+            File f = new File(Date.getFilename());
+            if (f.exists()) {
+                Date date = new Date();
+                System.out.println("Today is " + date);
+            } else {
+                System.out.println("Admin, please set the date.");
+            }
+
             System.out.println("Please type in a number to pick an option.");
             System.out.println("(1) Admin \n(2) User\n");
             int option = Integer.parseInt(in.nextLine());
@@ -264,6 +271,8 @@ public class runner {
                                 case 0: // exit
                                     System.out.println("Goodbye!\n");
                                     run = false;
+                                    Date date = new Date();
+                                    date.update();
                                     break;
 
                                 default:

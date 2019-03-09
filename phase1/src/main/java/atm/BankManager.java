@@ -91,6 +91,7 @@ public class BankManager implements Serializable {
 
     public void setDate(){
         Date date = new Date();
+        date.setDate();
         System.out.println(date);
 
     }

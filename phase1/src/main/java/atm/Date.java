@@ -27,8 +27,9 @@ public class Date extends java.util.Date implements Serializable {
         Date other = new Date();
         System.out.println(other);
         System.out.println(today);
+        other.update();
         System.out.println(other);
-        System.out.println(today);
+        System.out.println("today is " + today);
     }
 
 
@@ -53,13 +54,13 @@ public class Date extends java.util.Date implements Serializable {
                 c.printStackTrace();
             }
 
-        } else {
-            this.day = 1;
-            this.month = 1;
-            this.year = 2019;
-            store();
+
         }
 
+    }
+
+    public static String getFilename() {
+        return filename;
     }
 
     @Override
@@ -77,10 +78,11 @@ public class Date extends java.util.Date implements Serializable {
         return this.year;
     }
 
-    public void setDate(int day, int month, int year) {
-        this.month = month;
-        this.day = day;
-        this.year = year;
+    public void setDate() {
+        this.month = 1;
+        this.day = 1;
+        this.year = 2019;
+        store();
     }
 
     public void update() {
