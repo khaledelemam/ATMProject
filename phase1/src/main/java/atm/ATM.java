@@ -37,11 +37,7 @@ public class ATM {
         bankManager.store();
         return false;
 
-
-
     }
-
-
 
     public boolean login2(String username){
         bankManager.retrieve();
@@ -52,17 +48,10 @@ public class ATM {
                     user = bankManager.users.get(i);
                     return true;
                 }
-
-
-
         }
         bankManager.store();
         return false;
-
-
-
     }
-
 
 
     public void newUser(String username) throws UsernameTakenException{
@@ -88,8 +77,8 @@ public class ATM {
             bankManager.requests.add(arr);
             bankManager.storeRequests();
         }
-
     }
+
 
     public void changePassword(String newPassword) {
         user.setPassword(newPassword);
@@ -97,15 +86,12 @@ public class ATM {
 
     }
 
+
     public void viewAccounts() {
-        // Accounts stored in HashMap<int, Account>
-        // asks you to type in a number thats associated w one of the ints
-        // then u can view the account info?
-        //test
         user.viewAccounts();
     }
 
-    public void internalTransfer(int from, int to , int amount) throws InsufficientFundsException {
+    public void internalTransfer(int from, int to , double amount) throws InsufficientFundsException {
         Account accFrom = user.getAccount(from);
         Account  accTo = user.getAccount(to);
         accFrom.setBalance(-amount);
@@ -118,7 +104,7 @@ public class ATM {
 
 
     }
-    public void externalTransfer(int sender, User recipient,  int amount) throws InsufficientFundsException {
+    public void externalTransfer(int sender, User recipient,  double amount) throws InsufficientFundsException {
         if (recipient.getPrimaryAccount() != null) {
             Account accFrom = user.getAccount(sender);
             ChequingAccount to = recipient.getPrimaryAccount();
@@ -169,6 +155,7 @@ public class ATM {
         }
     }
 
+
     public void withdrawal(int account, int amount) throws InsufficientFundsException{
         Account  acc = user.getAccount(account);
         acc.setBalance(-amount);
@@ -183,10 +170,14 @@ public class ATM {
         acc.setBalance(-amount);
 
         File outgoing = new File("phase1/src/main/java/atm/outgoing.txt");
-        PrintWriter billPayer = new PrintWriter(new FileWriter("phase1/src/main/java/atm/outgoing.txt", true));
+        PrintWriter billPayer = new PrintWriter(new FileWriter("phase1/src/main/java/atm/outgoing.txt",
+                true));
         Transaction billPayment = new Transaction(acc, amount);
         billPayer.println(billPayment);
         billPayer.close();
+
+        Transaction bill = new Transaction(acc, amount);
+        acc.setLastTransaction(bill);
 
         bankManager.store();
     }

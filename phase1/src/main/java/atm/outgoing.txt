@@ -1,3 +1,6 @@
 khaled payed $20 on null
 khaled payed $10 on null
 khaled payed $10 on null
+Sender: Chequing Account
+Amount: 34.22
+Date: null
