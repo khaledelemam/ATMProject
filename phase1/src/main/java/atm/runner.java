@@ -87,18 +87,21 @@ public class runner {
                                     boundlessATM.date();
 
                                 case 5:
+                                    String filepath = "phase1/src/main/java/atm/alerts.txt";
                                     System.out.println(boundlessATM.getCashManager());
                                     int[] bills = {5,10,20,50};
                                     for (int i = 0; i< 4; i++){
                                         System.out.println("How many $" + bills[i] + " bills would you like to add?");
-                                        int amount = in.nextInt();
+                                        int amount = Integer.parseInt(in.nextLine());
                                         while (!boundlessATM.getCashManager().checkDenom(bills[i],amount)){
                                             System.out.println("Sorry, that would result in a denomination less than 0");
                                             System.out.println("Please enter a different amount");
-                                            amount = in.nextInt();
+                                            amount = Integer.parseInt(in.nextLine());
                                         }
                                         boundlessATM.getCashManager().changeDenom(bills[i],amount);
                                     }
+                                    boundlessATM.getCashManager().update(filepath);
+                                    break;
 
                             }
                             break;
