@@ -15,8 +15,14 @@ public class CashManager {
         this.threshold = threshold;
     }
 
+    //returns the array of denominations
     public int[] getDenominations(){
         return this.denominations;
+    }
+
+    //returns a single denomination
+    public int getDenom(int bill){
+        return denominations[getIndex(bill)];
     }
 
 
@@ -77,14 +83,23 @@ public class CashManager {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
             for (int i = 0; i< 4; i++){
-                /*if(denominations[i] < threshold){
+                if(denominations[i] < threshold){
                     writer.write(denominations[i] + " " + getBill(i) + " left, please restock");
-                    //writer.newLine();
-                }*/
+                    writer.newLine();
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public String toString(){
+        String s = "$5 dollar bills: " + getDenom(5) + "\n" +
+                "$10 dollar bills: " + getDenom(10) + "\n" +
+                "$20 dollar bills: " + getDenom(20) + "\n" +
+                "$50 dollar bills: " + getDenom(50) + "\n";
+
+        return s;
     }
 
 }

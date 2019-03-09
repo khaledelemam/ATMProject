@@ -9,6 +9,9 @@ public class ATM {
     private User user;
     private BankManager bankManager = new BankManager();
     private Date date;
+    //the denominations for cashManager. Will be removed in the future
+    private int[] denoms = {50,50,50,50};
+    private CashManager cashManager = new CashManager(denoms,20);
 
     protected boolean login(String username, String password) {
         // if username is valid
@@ -277,6 +280,7 @@ public class ATM {
 
     }
 
-
-
+    public CashManager getCashManager() {
+        return cashManager;
+    }
 }
