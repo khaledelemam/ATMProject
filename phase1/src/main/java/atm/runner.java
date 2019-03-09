@@ -45,6 +45,7 @@ public class runner {
                             System.out.println("(2) Check/Approve existing users requests");
                             System.out.println("(3) Reverse users transactions");
                             System.out.println("(4) SetDate");
+                            System.out.println("(5) Change Cash Denominations");
 
                             int option2 = Integer.parseInt(in.nextLine());
 
@@ -75,6 +76,20 @@ public class runner {
 
                                 case 4:
                                     boundlessATM.date();
+
+                                case 5:
+                                    System.out.println(boundlessATM.getCashManager());
+                                    int[] bills = {5,10,20,50};
+                                    for (int i = 0; i< 4; i++){
+                                        System.out.println("How many $" + bills[i] + " bills would you like to add?");
+                                        int amount = in.nextInt();
+                                        while (!boundlessATM.getCashManager().checkDenom(bills[i],amount)){
+                                            System.out.println("Sorry, that would result in a denomination less than 0");
+                                            System.out.println("Please enter a different amount");
+                                            amount = in.nextInt();
+                                        }
+                                        boundlessATM.getCashManager().changeDenom(bills[i],amount);
+                                    }
 
                             }
                             break;
