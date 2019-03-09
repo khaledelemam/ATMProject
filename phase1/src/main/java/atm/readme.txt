@@ -8,6 +8,7 @@
 
 * must log in before running any admin tasks *
     > password: 123
+    > set date if the date did not show in the home screen
 
 --- How to register as a user ---
 
