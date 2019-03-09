@@ -1,5 +1,14 @@
 ----- How to use the program -----
 
+--- How to run as admin ---
+
+(1) Approve user requests
+(2) Reverse transactions
+(3) Set the date
+
+* must log in before running any admin tasks *
+    > password: 123
+
 --- How to register as a user ---
 
 (1) Login as a user
@@ -31,6 +40,6 @@
 
 - Have money deposited to your account
     > Cash/cheques are deposited according to what is in the file "deposits.txt"
-    > File format: username - type (cash or cheque) - amount deposited
+    > Only one bill can be deposited at a time, and must be a valid denomination ($5, $10, $20, $50)
 
 --- Other features ---

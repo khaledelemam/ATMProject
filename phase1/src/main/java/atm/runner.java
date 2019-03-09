@@ -6,9 +6,10 @@ import java.util.Scanner;
 
 public class runner {
 
-    // static date object goes here
+
 
     public static void main(String[] args) throws IOException {
+        Date date = new Date();
 
         Scanner in = new Scanner(System.in);
 
@@ -25,6 +26,7 @@ public class runner {
         while (main) {
             boolean newUser = false;
 
+            System.out.println("Today is " + date);
             System.out.println("Please type in a number to pick an option.");
             System.out.println("(1) Admin \n(2) User\n");
             int option = Integer.parseInt(in.nextLine());
