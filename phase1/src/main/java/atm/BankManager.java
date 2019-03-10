@@ -8,22 +8,22 @@ import java.util.Arrays;
 public class BankManager implements Serializable {
 
     private String password;
-    public  ArrayList<User> users = new ArrayList<>();
-    public  ArrayList<ArrayList<String>> requests  = new ArrayList<>();
+    ArrayList<User> users = new ArrayList<>();
+    ArrayList<ArrayList<String>> requests  = new ArrayList<>();
 
 
     public BankManager(){
         this.password = "123";
     }
 
-    public String getPassword(){
+    String getPassword(){
         return this.password;
     }
 
 
 
 
-    public void createUser(){
+    void createUser(){
         File f = new File("file2");
         if (f.exists()) {
             retrieveRequests();
@@ -42,13 +42,13 @@ public class BankManager implements Serializable {
 
     }
 
-    public void setUserPassword(User user) {
+    void setUserPassword(User user) {
         String password = "1";
         user.setPassword(password);
         users.add(user);
     }
 
-    public void  userRequestAccount(){
+    void  userRequestAccount(){
         for(int i = 0; i< users.size();i++){
             if (users.get(i).getRequest() != null){
                 if (CreditScore.getRandomDoubleBetweenRange() > 0) {
@@ -59,21 +59,23 @@ public class BankManager implements Serializable {
         }
     }
 
-    public void ReverseLastTransaction(String username, int account)throws InsufficientFundsException{
+    void ReverseLastTransaction(String username, int account)throws InsufficientFundsException{
         User user = checkExistingUser(username);
         if (user!= null){
             Account acc = user.getAccount(account);
             Transaction transaction = acc.getLastTransaction();
             ReverseATM rATM = new ReverseATM();
-            if (transaction.getRecipient() == null) {
-                rATM.ReverseWithdrawal(acc, transaction);
-            } else {
+            if (transaction.getRecipient() != null) {
                 rATM.ReverseTransaction(acc, transaction);
+                System.out.println("Reversed transaction for: " + username);
+            }
+            else{
+                System.out.println("The last transaction is not a transfer between accounts.");
             }
         }
     }
 
-    public User checkExistingUser(String username){
+    User checkExistingUser(String username){
         File f = new File("file");
         if (f.exists()) {
             retrieve();
@@ -89,14 +91,14 @@ public class BankManager implements Serializable {
 
 
 
-    public void setDate(){
+    void setDate(){
         Date date = new Date();
         date.setDate();
         System.out.println(date);
 
     }
 
-    public void store(){
+    void store(){
         try{
             FileOutputStream fos = new FileOutputStream("file");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -111,7 +113,7 @@ public class BankManager implements Serializable {
 
     @SuppressWarnings("unchecked")
 
-    public void retrieve() {
+    void retrieve() {
         try {
             FileInputStream fis = new FileInputStream("file");
             ObjectInputStream ois = new ObjectInputStream(fis);
@@ -132,7 +134,7 @@ public class BankManager implements Serializable {
 
 
 
-    public void storeRequests(){
+    void storeRequests(){
         try{
             FileOutputStream fos= new FileOutputStream("file2");
             ObjectOutputStream oos= new ObjectOutputStream(fos);
@@ -147,7 +149,7 @@ public class BankManager implements Serializable {
 
     @SuppressWarnings("unchecked")
 
-    public void retrieveRequests() {
+    void retrieveRequests() {
         try {
             FileInputStream fis = new FileInputStream("file2");
             ObjectInputStream ois = new ObjectInputStream(fis);
