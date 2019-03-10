@@ -60,12 +60,18 @@ public class BankManager implements Serializable {
         // only withdraw in mind right now.
         User user = checkExistingUser(username);
         if (user!= null){
-           Account acc = user.getAccount(account);
-           Transaction transaction = acc.getLastTransaction();
-           double money = transaction.getAmount();
-           ReverseATM rATM = new ReverseATM();
-            System.out.println(user.getUsername());
-           rATM.ReverseWithdrawal(user, acc, money);
+            Account acc = user.getAccount(account);
+            Transaction transaction = acc.getLastTransaction();
+//            double money = transaction.getAmount();
+            ReverseATM rATM = new ReverseATM();
+            if (transaction.getRecipient() == null) {
+//                rATM.ReverseWithdrawal(user, acc, money);
+                rATM.ReverseWithdrawal(user, acc, transaction);
+            } else {
+                rATM.ReverseTransaction(acc, transaction);
+            }
+
+
         }
 
     }
