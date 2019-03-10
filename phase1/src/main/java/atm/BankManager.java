@@ -66,8 +66,6 @@ public class BankManager implements Serializable {
            ReverseATM rATM = new ReverseATM();
             System.out.println(user.getUsername());
            rATM.ReverseWithdrawal(user, acc, money);
-//            System.out.println(username);
-//            System.out.println(user.getAccount(1).getBalance());
         }
 
     }
@@ -120,11 +118,9 @@ public class BankManager implements Serializable {
             fis.close();
         } catch (IOException ioe) {
             ioe.printStackTrace();
-//            return;
         } catch (ClassNotFoundException c) {
             System.out.println("Class not found");
             c.printStackTrace();
-//            return;
         }
 //        for (User tmp : users) {
 //            System.out.println(tmp);
@@ -158,11 +154,9 @@ public class BankManager implements Serializable {
             fis.close();
         } catch (IOException ioe) {
             ioe.printStackTrace();
-//            return;
         } catch (ClassNotFoundException c) {
             System.out.println("Class not found");
             c.printStackTrace();
-//            return;
         }
 //        for (User tmp : users) {
 //            System.out.println(tmp);
