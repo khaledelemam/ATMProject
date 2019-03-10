@@ -131,7 +131,6 @@ public class User implements Serializable {
 
     public void requestAccount(String account){ request = account; }
 
-
     public ChequingAccount getPrimaryAccount() { return this.primaryAccount; }
 
     public String netUserBalance() {

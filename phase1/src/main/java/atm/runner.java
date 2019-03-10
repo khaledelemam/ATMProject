@@ -209,9 +209,9 @@ public class runner {
                                     int account = Integer.parseInt(in.nextLine());
 
                                     System.out.println("How much would you like to withdraw?:\n" +
-                                            "Denominations available: $5, $10, $15, $20");
+                                            "Denominations available: $5, $10, $20, $50");
 
-                                    System.out.println("How many $5 bills : ");
+                                    System.out.println("How many $5 bills: ");
                                     int fives = Integer.parseInt(in.nextLine());
 
                                     System.out.println("How many $10 bills: ");
