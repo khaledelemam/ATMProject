@@ -10,9 +10,9 @@ public class CashManager {
     // Sends alert when denomination falls below this amount
     private int threshold;
 
-    public CashManager(int[] denominations, int threshold){
-        this.denominations = denominations;
+    public CashManager(int threshold) throws IOException {
         this.threshold = threshold;
+        cashFromFile();
     }
 
     //returns the array of denominations
@@ -71,20 +71,30 @@ public class CashManager {
         }
     }
 
-    // sends an alert when a denomination falls below the threshold
-    public void update(String filePath){
-        File file = new File(filePath);
-        try {
-            PrintWriter writer = new PrintWriter(new FileWriter(file));
-            for (int i = 0; i< 4; i++){
-                if(denominations[i] < threshold){
-                    writer.println(denominations[i] + " " + getBill(i) + " left, please restock");
-                }
-            }
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+    //sets denominations as the values from text file
+    private void cashFromFile() throws IOException {
+        File file = new File("phase1/src/main/java/atm/cash.txt");
+        BufferedReader cashReader = new BufferedReader(new FileReader(file));
+
+        int[] denominations = new int[4];
+
+        for (int i = 0; i <4; i++){
+            denominations[i] = Integer.parseInt(cashReader.readLine());
         }
+        this.denominations = denominations;
+    }
+
+
+    // sends an alert when a denomination falls below the threshold
+    public void update(String filePath) throws IOException {
+        File file = new File(filePath);
+        PrintWriter writer = new PrintWriter(new FileWriter(file));
+        for (int i = 0; i< 4; i++){
+            if(denominations[i] < threshold){
+                writer.println(denominations[i] + " " + getBill(i) + " left, please restock");
+            }
+        }
+        writer.close();
     }
 
     public String toString(){
