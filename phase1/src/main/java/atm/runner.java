@@ -161,6 +161,8 @@ public class runner {
                                             System.out.println("Your current password is: " + boundlessATM.getUserPassword());
                                         }
                                     //}
+                                    break;
+
                             }
                             break;
 
@@ -181,7 +183,6 @@ public class runner {
                             System.out.println("Invalid option");
                             break;
                     }
-                    stayInLoop = false;
                     }
 
 
