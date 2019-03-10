@@ -24,9 +24,10 @@ public class runner {
         }
         System.out.println(time.toString());
 
-//        boolean main = true;
+
         while (!time.toString().equals("12:00:00")) {
             boolean newUser = false;
+            time = ZonedDateTime.now().toLocalTime().truncatedTo(ChronoUnit.SECONDS);
 
             File f = new File(Date.getFilename());
             if (f.exists()) {
