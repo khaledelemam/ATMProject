@@ -17,7 +17,7 @@ public class Transaction implements Serializable {
         this.source = source;
         this.recipient = recipient;
         this.amount = amount;
-        this.date = date;
+        this.date = new Date();
     }
 
     // this is used for withdrawals
@@ -25,7 +25,7 @@ public class Transaction implements Serializable {
     public Transaction(Account source, double amount) {
         this.source = source;
         this.amount = amount;
-        this.date = date;
+        this.date = new Date();
     }
 
     @Override
