@@ -2,15 +2,17 @@ package atm;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
+import java.time.LocalTime;
 
 public class runner {
 
 
-
     public static void main(String[] args) throws IOException, NegativeDenominationException {
 
+        LocalTime time = ZonedDateTime.now().toLocalTime().truncatedTo(ChronoUnit.SECONDS);
         Scanner in = new Scanner(System.in);
         Date date = new Date();
         ATM boundlessATM = new ATM();
@@ -20,9 +22,10 @@ public class runner {
         } catch (InsufficientFundsException e) {
             e.getMessage();
         }
+        System.out.println(time.toString());
 
-        boolean main = true;
-        while (main) {
+//        boolean main = true;
+        while (!time.toString().equals("12:00:00")) {
             boolean newUser = false;
 
             File f = new File(Date.getFilename());
@@ -35,7 +38,7 @@ public class runner {
             }
 
             System.out.println("Please type in a number to pick an option.");
-            System.out.println("(1) Admin \n(2) User\n(3) Close for the day");
+            System.out.println("(1) Admin \n(2) User\n");
 
             try {
                 int option = Integer.parseInt(in.nextLine());
@@ -48,7 +51,8 @@ public class runner {
                         System.out.println("Enter admin password:");
                         String password = in.nextLine();
                         admin = boundlessATM.adminCheck(password);
-
+                    boolean adminLoggedIn = true;
+                    while (adminLoggedIn) {
                         if (boundlessATM.adminCheck(password)) {
 
                             System.out.println("(1) Check/Approve new users requests");
@@ -56,6 +60,7 @@ public class runner {
                             System.out.println("(3) Reverse users transactions");
                             System.out.println("(4) SetDate");
                             System.out.println("(5) Change Cash Denominations");
+                            System.out.println("(0) Exit");
 
                             int option2 = Integer.parseInt(in.nextLine());
 
@@ -76,7 +81,7 @@ public class runner {
                                     int acc = Integer.parseInt(in.nextLine());
                                     try {
                                         boundlessATM.reverseTransaction(user, acc);
-                                    }catch (InsufficientFundsException e) {
+                                    } catch (InsufficientFundsException e) {
                                         System.out.println(e.getMessage());
                                     }
                                     break;
@@ -88,26 +93,28 @@ public class runner {
                                 case 5: // restock machine
                                     String filepath = "phase1/src/main/java/atm/alerts.txt";
                                     System.out.println(boundlessATM.getCashManager());
-                                    int[] bills = {5,10,20,50};
-                                    for (int i = 0; i< 4; i++){
+                                    int[] bills = {5, 10, 20, 50};
+                                    for (int i = 0; i < 4; i++) {
                                         System.out.println("How many $" + bills[i] + " bills would you like to add?");
                                         int amount = Integer.parseInt(in.nextLine());
-                                        while (!boundlessATM.getCashManager().checkDenom(bills[i],amount)){
+                                        while (!boundlessATM.getCashManager().checkDenom(bills[i], amount)) {
                                             System.out.println("Sorry, that would result in a denomination less than 0");
                                             System.out.println("Please enter a different amount");
                                             amount = Integer.parseInt(in.nextLine());
                                         }
-                                        boundlessATM.getCashManager().changeDenom(bills[i],amount);
+                                        boundlessATM.getCashManager().changeDenom(bills[i], amount);
                                     }
                                     boundlessATM.getCashManager().update(filepath);
                                     break;
-                            }
-                            break;
+                                case 0:
+                                    adminLoggedIn = false;
+                                    break;
 
-
+                        }
                         } else {
                             System.out.println("Invalid admin password");
                         }
+                    }
                     }
                     break;
 
@@ -180,7 +187,7 @@ public class runner {
                     }
 
                     boolean run = true;
-                    while (run && !newUser) {
+                    while (run && !newUser && !time.toString().equals("12:00:00")) {
 
                             System.out.println("\nWelcome!\nPlease pick an option:");
 
@@ -193,9 +200,13 @@ public class runner {
                             System.out.println("(7) Request new account");
                             System.out.println("(0) Log out");
 
-                            option = Integer.parseInt(in.nextLine());
-
-                            switch (option) {
+                            int option3 = -1;
+                                try {
+                                    option3 = Integer.parseInt(in.nextLine());
+                                }catch (NumberFormatException n){
+                                    System.out.println("Please enter a valid input");
+                                }
+                            switch (option3) {
                                 case 1: // view accounts info
                                     System.out.println(boundlessATM.viewAccountsInfo());
                                     break;
@@ -311,14 +322,21 @@ public class runner {
                                     break;
                             }
                         }
-                    break;
-                case 3: // exit program
-                    date.update();
-                    System.exit(0);
+
+
                 }
             } catch (NumberFormatException n) {
                 System.out.println("Please enter a valid input");
             }
         }
+
+        date.update();
+        System.exit(0);
+
     }
+
+
+
+
+
 }
