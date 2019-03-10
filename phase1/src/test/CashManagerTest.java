@@ -1,13 +1,17 @@
+/*
 import atm.CashManager;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.*;
 import java.util.Scanner;
 
 import static org.junit.Assert.assertTrue;
+*/
 
 public class CashManagerTest {
 
+    /*
     private String filePath;
     private CashManager cm;
 
@@ -15,7 +19,7 @@ public class CashManagerTest {
     public void setUp(){
         int threshold = 20;
         int[] denominations = {30,30,30,30};
-        filePath = "CashManagerTest.txt";
+        filePath = "CashManagerTest";
 
         cm = new CashManager(denominations, threshold);
     }
@@ -23,17 +27,20 @@ public class CashManagerTest {
 
     @Test
     public void alertTest(){
-        cm.changeDenom(0,-15);
-        cm.update(filePath);
-        String[] alertMsgs = new String[4];
-
-        Scanner input = new Scanner(filePath);
-        for(int i = 0; i < 4; i++){
-            alertMsgs[i] = input.nextLine();
+        String path = getClass().getResource(filePath).getPath();
+        try {
+            FileInputStream reader = new FileInputStream(path);
+            System.out.println(reader.read());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
+
         String msg = "15 5 dollar bills left, please restock";
-        assertTrue(alertMsgs[0].equalsIgnoreCase(""));
+        //assertTrue(alertMsgs[0].equalsIgnoreCase(msg));
     }
+    */
 
 }
