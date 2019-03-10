@@ -9,7 +9,7 @@ public class runner {
 
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, NegativeDenominationException {
 
         Scanner in = new Scanner(System.in);
 
