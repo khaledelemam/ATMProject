@@ -2,8 +2,10 @@ package atm;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
+import java.time.LocalTime;
 
 public class runner {
 
@@ -11,6 +13,7 @@ public class runner {
 
     public static void main(String[] args) throws IOException, NegativeDenominationException {
 
+        LocalTime time = ZonedDateTime.now().toLocalTime().truncatedTo(ChronoUnit.SECONDS);
         Scanner in = new Scanner(System.in);
         Date date = new Date();
         ATM boundlessATM = new ATM();
@@ -20,9 +23,10 @@ public class runner {
         } catch (InsufficientFundsException e) {
             e.getMessage();
         }
+        System.out.println(time.toString());
 
-        boolean main = true;
-        while (main) {
+//        boolean main = true;
+        while (!time.toString().equals("12:00:00")) {
             boolean newUser = false;
 
             File f = new File(Date.getFilename());
@@ -184,7 +188,7 @@ public class runner {
                     }
 
                     boolean run = true;
-                    while (run && !newUser) {
+                    while (run && !newUser && !time.toString().equals("12:00:00")) {
 
                             System.out.println("\nWelcome!\nPlease pick an option:");
 
@@ -319,14 +323,21 @@ public class runner {
                                     break;
                             }
                         }
-                    break;
-                case 3: // exit program
-                    date.update();
-                    System.exit(0);
+
+
                 }
             } catch (NumberFormatException n) {
                 System.out.println("Please enter a valid input");
             }
         }
+
+        date.update();
+        System.exit(0);
+
     }
+
+
+
+
+
 }
