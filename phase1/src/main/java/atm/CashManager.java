@@ -10,6 +10,7 @@ public class CashManager {
     private final int threshold = 20;
 
     private String cashFile = "phase1/src/main/java/atm/cash.txt";
+    private String alertFile = "phase1/src/main/java/atm/alerts.txt";
 
     public CashManager() throws IOException {
         cashFromFile();
@@ -96,8 +97,8 @@ public class CashManager {
 
 
     // sends an alert when a denomination falls below the threshold
-    public void update(String filePath) throws IOException {
-        File file = new File(filePath);
+    public void update() throws IOException {
+        File file = new File(alertFile);
         PrintWriter writer = new PrintWriter(new FileWriter(file));
         for (int i = 0; i< 4; i++){
             if(denominations[i] < threshold){
