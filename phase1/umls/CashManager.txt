@@ -6,8 +6,8 @@ CashManager
 + CashManager(denominations: int[ ], threshold: int)
 + getDenominations(): int[ ] --> not being used
 + getDenom(bill: int): int
-+ changeDenom(bill: int, amount: int): boolean
-+ checkDenom(bill: int, amount: int): boolean --> 'might remove'
++ changeDenom(bill: int, amount: int):
++ checkDenom(bill: int, amount: int): boolean
 - getIndex(bill: int): int
 - getBill(bill: int): String
 + update(filePath: String): void
