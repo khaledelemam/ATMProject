@@ -43,7 +43,7 @@ public class runner {
 
             switch (option) {
 
-                case 1:
+                case 1: // admin login
                     boolean admin = false;
                     while (!admin) {
                         System.out.println("Enter admin password:");
@@ -61,15 +61,15 @@ public class runner {
                             int option2 = Integer.parseInt(in.nextLine());
 
                             switch (option2) {
-                                case 1:
+                                case 1: // new user requests
                                     boundlessATM.newAccountCreation();
                                     break;
 
-                                case 2:
+                                case 2: // user requests
                                     boundlessATM.usersRequests();
                                     break;
 
-                                case 3:
+                                case 3: // reverse transaction
                                     System.out.println("Type the username of the user you want to reverse a transaction for: ");
                                     String user = in.nextLine();
                                     boundlessATM.viewAccountsManager(user);
@@ -82,11 +82,11 @@ public class runner {
                                     }
                                     break;
 
-                                case 4:
+                                case 4: // set date
                                     boundlessATM.date();
                                     break;
 
-                                case 5:
+                                case 5: // restock machhine
                                     String filepath = "phase1/src/main/java/atm/alerts.txt";
                                     System.out.println(boundlessATM.getCashManager());
                                     int[] bills = {5,10,20,50};
@@ -102,21 +102,17 @@ public class runner {
                                     }
                                     boundlessATM.getCashManager().update(filepath);
                                     break;
-
                             }
                             break;
 
 
                         } else {
                             System.out.println("Invalid admin password");
-
                         }
-
                     }
                     break;
 
-
-                case 2:
+                case 2: // user login
                     boolean stayInLoop = true;
                     while (stayInLoop) {
 
@@ -126,14 +122,13 @@ public class runner {
 
                     switch (hold) {
 
-                        case 1:
+                        case 1: // previous login
                             System.out.println("Have you logged in before?\n (1) Yes \n (2) No");
                             int log = Integer.parseInt(in.nextLine());
                             boolean loggedIn = false;
 
                             switch (log) {
-                                case 1:
-                                    //while (!loggedIn) {
+                                case 1: // previous login
 
                                         System.out.println("Enter your username: ");
                                         String username = in.nextLine();
@@ -149,30 +144,24 @@ public class runner {
                                         else{
                                             stayInLoop = false;
                                         }
-                                    //}
                                     break;
 
-                                case 2:
-                                    //while (!loggedIn) {
+                                case 2: // first login
+                                    System.out.println("Enter your username: ");
+                                    String username2 = in.nextLine();
+                                    loggedIn = boundlessATM.login2(username2);
 
-                                        System.out.println("Enter your username: ");
-                                        String username2 = in.nextLine();
-                                        loggedIn = boundlessATM.login2(username2);
-
-                                        if (!loggedIn) {
-                                            System.out.println("Invalid username ");
-                                        } else {
-                                            System.out.println("Your current password is: " + boundlessATM.getUserPassword());
-                                            stayInLoop = false;
-                                        }
-                                    //}
+                                    if (!loggedIn) {
+                                        System.out.println("Invalid username ");
+                                    } else {
+                                        System.out.println("Your current password is: " + boundlessATM.getUserPassword());
+                                        stayInLoop = false;
+                                    }
                                     break;
-
                             }
                             break;
 
-
-                        case 2:
+                        case 2: // request new user
                             System.out.println("Enter your preferred username:");
                             String name = in.nextLine();
                             System.out.println("Please wait till the manager processes your request");
@@ -187,14 +176,11 @@ public class runner {
                         default:
                             System.out.println("Invalid option");
                             break;
+                        }
                     }
-                    }
-
 
                     boolean run = true;
                     while (run && !newUser) {
-
-
 
                             System.out.println("\nWelcome!\nPlease pick an option:");
 
@@ -210,7 +196,7 @@ public class runner {
                             option = Integer.parseInt(in.nextLine());
 
                             switch (option) {
-                                case 1:
+                                case 1: // view accounts info
                                     System.out.println(boundlessATM.viewAccountsInfo());
                                     break;
 
@@ -312,24 +298,13 @@ public class runner {
                             }
                         }
                     break;
-
-
-                case 3:
+                case 3: // exit program
                     date.update();
                     System.exit(0);
                 }
-
-
             } catch (NumberFormatException n) {
                 System.out.println("Please enter a valid input");
             }
-
-
-
         }
-
-
     }
-
-
 }

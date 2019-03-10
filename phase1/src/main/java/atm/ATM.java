@@ -86,9 +86,7 @@ public class ATM {
     public void changePassword(String newPassword) {
         user.setPassword(newPassword);
         bankManager.store();
-
     }
-
 
     public void viewAccounts() {
         user.viewAccounts();
@@ -156,6 +154,16 @@ public class ATM {
             if (user != null) {
                 user.getPrimaryAccount().setBalance(amount);
                 bankManager.store();
+
+                if (type.equalsIgnoreCase("cash")) {
+                    int billType = amount.intValue();
+
+                    try {
+                        cashManager.changeDenom(billType, 1);
+                    } catch (NegativeDenominationException e){
+                        e.getMessage();
+                    }
+                }
             }
         }
     }
@@ -167,6 +175,13 @@ public class ATM {
         Transaction withdrawal = new Transaction(acc, amount);
         acc.setLastTransaction(withdrawal);
         bankManager.store();
+
+        try {
+            cashManager.changeDenom(amount, -1);
+        } catch (NegativeDenominationException | IOException e){
+            e.getMessage();
+        }
+
     }
 
 
@@ -246,19 +261,6 @@ public class ATM {
 
 
     public User checkExistingUser(String username) {
-//        File f = new File("file");
-//        if (f.exists()) {
-//            bankManager.retrieve();
-//        }
-//        ArrayList<User> users = bankManager.users;
-//
-//        for (int i = 0; i < users.size(); i ++) {
-//            if (users.get(i).getUsername().equals(username)){
-//                return users.get(i);
-//            }
-//        }
-//        bankManager.store();
-//        return null;
        return  bankManager.checkExistingUser(username);
     }
 

@@ -30,7 +30,7 @@ public class CashManager {
             denominations[getIndex(bill)] += amount;
             writeToFile();
         }
-        else{
+        else {
             NegativeDenominationException e = new NegativeDenominationException();
             throw e;
         }
