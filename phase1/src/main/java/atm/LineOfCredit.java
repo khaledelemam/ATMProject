@@ -10,7 +10,7 @@ public class LineOfCredit extends Account {
 
 
     public LineOfCredit() {this.balance = 0;
-        this.dateOpened = new Date();
+//        this.dateOpened = date;
         this.lastTransaction = null;
 
     }

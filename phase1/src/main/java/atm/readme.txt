@@ -38,7 +38,6 @@
     > Only one account can be requested at a time per user
 
 - Change your password
-    *** after creating a new user, must change password or else choose 'No' when prompted 'Have you logged in before?'
 
 - Have money deposited to your account
     > Cash/cheques are deposited according to what is in the file "deposits.txt"

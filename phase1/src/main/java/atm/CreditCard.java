@@ -10,7 +10,7 @@ public class CreditCard extends Account {
 
     public CreditCard() {
         this.balance = 0;
-        this.dateOpened = new Date();
+//        this.dateOpened = date;
         this.lastTransaction = null;
     }
     @Override

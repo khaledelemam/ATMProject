@@ -10,7 +10,7 @@ public class SavingsAccount extends Account {
 
     public SavingsAccount() {
         this.balance = 0;
-        this.dateOpened = new Date();
+//        this.dateOpened = date;
         this.lastTransaction = null;
     }
 

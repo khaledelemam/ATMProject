@@ -12,18 +12,20 @@ public class Transaction implements Serializable {
     private static final long serialVersionUID = 100L;
 
     // for  transfers
+    // if its an external transfer, it should pass through <recipient user>.getPrimaryAccount()
     public Transaction(Account source, Account recipient, double amount) {
         this.source = source;
         this.recipient = recipient;
         this.amount = amount;
-        this.date = new Date();
+        this.date = date;
     }
 
     // this is used for withdrawals
+    // Username, amount
     public Transaction(Account source, double amount) {
         this.source = source;
         this.amount = amount;
-        this.date = new Date();
+        this.date = date;
     }
 
     @Override
@@ -31,11 +33,11 @@ public class Transaction implements Serializable {
         if (this.recipient != null) {
             return ("Sender: " + this.source + "\n" +
                     "Recipient: " + this.recipient + "\n" +
-                    "Amount: $" + this.amount + "\n" +
+                    "Amount: " + this.amount + "\n" +
                     "Date: " + this.date);
         } else {
             return ("Sender: " + this.source + "\n" +
-                    "Amount: $" + this.amount + "\n" +
+                    "Amount: " + this.amount + "\n" +
                     "Date: " + this.date);
         }
     }

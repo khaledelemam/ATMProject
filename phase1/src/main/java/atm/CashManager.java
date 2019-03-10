@@ -7,12 +7,11 @@ public class CashManager {
     // index 0,1,2,3 represents 5,10,20,50 dollar bills
     private int[] denominations;
 
-    private int threshold;
+    private final int threshold = 20;
 
     private String cashFile = "phase1/src/main/java/atm/cash.txt";
 
-    public CashManager(int threshold) throws IOException {
-        this.threshold = threshold;
+    public CashManager() throws IOException {
         cashFromFile();
     }
 
