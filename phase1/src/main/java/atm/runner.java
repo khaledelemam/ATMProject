@@ -52,7 +52,8 @@ public class runner {
                         System.out.println("Enter admin password:");
                         String password = in.nextLine();
                         admin = boundlessATM.adminCheck(password);
-
+                    boolean adminLoggedIn = true;
+                    while (adminLoggedIn) {
                         if (boundlessATM.adminCheck(password)) {
 
                             System.out.println("(1) Check/Approve new users requests");
@@ -60,6 +61,7 @@ public class runner {
                             System.out.println("(3) Reverse users transactions");
                             System.out.println("(4) SetDate");
                             System.out.println("(5) Change Cash Denominations");
+                            System.out.println("(0) Exit");
 
                             int option2 = Integer.parseInt(in.nextLine());
 
@@ -80,7 +82,7 @@ public class runner {
                                     int acc = Integer.parseInt(in.nextLine());
                                     try {
                                         boundlessATM.reverseTransaction(user, acc);
-                                    }catch (InsufficientFundsException e) {
+                                    } catch (InsufficientFundsException e) {
                                         System.out.println(e.getMessage());
                                     }
                                     break;
@@ -92,26 +94,28 @@ public class runner {
                                 case 5: // restock machine
                                     String filepath = "phase1/src/main/java/atm/alerts.txt";
                                     System.out.println(boundlessATM.getCashManager());
-                                    int[] bills = {5,10,20,50};
-                                    for (int i = 0; i< 4; i++){
+                                    int[] bills = {5, 10, 20, 50};
+                                    for (int i = 0; i < 4; i++) {
                                         System.out.println("How many $" + bills[i] + " bills would you like to add?");
                                         int amount = Integer.parseInt(in.nextLine());
-                                        while (!boundlessATM.getCashManager().checkDenom(bills[i],amount)){
+                                        while (!boundlessATM.getCashManager().checkDenom(bills[i], amount)) {
                                             System.out.println("Sorry, that would result in a denomination less than 0");
                                             System.out.println("Please enter a different amount");
                                             amount = Integer.parseInt(in.nextLine());
                                         }
-                                        boundlessATM.getCashManager().changeDenom(bills[i],amount);
+                                        boundlessATM.getCashManager().changeDenom(bills[i], amount);
                                     }
                                     boundlessATM.getCashManager().update(filepath);
                                     break;
-                            }
-                            break;
+                                case 0:
+                                    adminLoggedIn = false;
+                                    break;
 
-
+                        }
                         } else {
                             System.out.println("Invalid admin password");
                         }
+                    }
                     }
                     break;
 
@@ -214,7 +218,21 @@ public class runner {
 
                                     System.out.println("How much would you like to withdraw?:\n" +
                                             "Denominations available: $5, $10, $15, $20");
-                                    int cashAmount = Integer.parseInt(in.nextLine());
+
+                                    System.out.println("How many $5 bills : ");
+                                    int fives = Integer.parseInt(in.nextLine());
+
+                                    System.out.println("How many $10 bills: ");
+                                    int tens = Integer.parseInt(in.nextLine());
+
+                                    System.out.println("How many $20 bills: ");
+                                    int twenties = Integer.parseInt(in.nextLine());
+
+                                    System.out.println("How many $50 bills: ");
+                                    int fifties = Integer.parseInt(in.nextLine());
+
+                                    int[] cashAmount = new int[]{fives, tens, twenties, fifties};
+
                                     try {
                                         boundlessATM.withdrawal(account, cashAmount);
                                     }catch (InsufficientFundsException e) {

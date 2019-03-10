@@ -73,10 +73,7 @@ public class BankManager implements Serializable {
             } else {
                 rATM.ReverseTransaction(acc, transaction);
             }
-
-
         }
-
     }
 
     public User checkExistingUser(String username){
@@ -90,7 +87,6 @@ public class BankManager implements Serializable {
                 return users.get(i);
             }
         }
-//       store();
         return null;
     }
 
@@ -105,8 +101,8 @@ public class BankManager implements Serializable {
 
     public void store(){
         try{
-            FileOutputStream fos= new FileOutputStream("file");
-            ObjectOutputStream oos= new ObjectOutputStream(fos);
+            FileOutputStream fos = new FileOutputStream("file");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(users);
             oos.close();
             fos.close();

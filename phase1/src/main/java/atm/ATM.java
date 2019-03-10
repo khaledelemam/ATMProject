@@ -169,21 +169,31 @@ public class ATM {
     }
 
 
-    public void withdrawal(int account, int amount) throws InsufficientFundsException{
-        Account  acc = user.getAccount(account);
+    public void withdrawal(int account, int[] cashAmounts) throws InsufficientFundsException {
+
+        int amount = (cashAmounts[0] * 5) +
+                (cashAmounts[1] * 10) +
+                (cashAmounts[2] * 20) +
+                (cashAmounts[3] * 50);
+
+        Account acc = user.getAccount(account);
         acc.setBalance(-amount);
         Transaction withdrawal = new Transaction(acc, amount);
         acc.setLastTransaction(withdrawal);
         bankManager.store();
 
         try {
-            cashManager.changeDenom(amount, -1);
-        } catch (NegativeDenominationException | IOException e){
+            cashManager.changeDenom(5, cashAmounts[0]);
+            cashManager.changeDenom(10, cashAmounts[1]);
+            cashManager.changeDenom(20, cashAmounts[2]);
+            cashManager.changeDenom(50, cashAmounts[3]);
+        } catch (NegativeDenominationException e){
             e.getMessage();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
-
 
     public void payBill(int account, double amount) throws IOException, InsufficientFundsException {
         Account acc = user.getAccount(account);
@@ -205,7 +215,7 @@ public class ATM {
     public String viewAccountsInfo() {
         String accInfo = "Net total: " + user.netUserBalance() + "\n";
         for (String account: user.accountInfo()) {
-            accInfo += account;
+            accInfo += account + "\n";
         }
         return accInfo;
     }
