@@ -23,6 +23,8 @@ public class SavingsAccount extends Account {
     public void setBalance(double amount) throws InsufficientFundsException {
         if (this.balance >= 0) {
             if (this.balance >= amount || amount >= 0) {
+//           TODO: double check this logic: if ((amount < 0 && this.balance >= Math.abs(amount)) || amount >= 0) {
+//                  ...above if condition might not take into account negative <amount> that is greater than <balance>
                 this.balance += amount;
             }
             else{
