@@ -39,8 +39,8 @@ public class Date extends java.util.Date implements Serializable {
         }
     }
 
+    /* Get name of byte file that stores date. */
     public static String getFilename() {
-        /* Get name of byte file that stores date. */
         return filename;
     }
 
@@ -59,8 +59,8 @@ public class Date extends java.util.Date implements Serializable {
         return this.year;
     }
 
+    /* Set date to be the current working day. */
     public void setToday() {
-        /* Set date to be the current working day. */
         try {
             FileInputStream fis = new FileInputStream(filename);
             ObjectInputStream ois = new ObjectInputStream(fis);
@@ -81,18 +81,18 @@ public class Date extends java.util.Date implements Serializable {
         }
     }
 
+    /* Set current date to beginning of the year */
     public void setDate() {
-        /* Set current date to beginning of the year */
         this.month = 1;
         this.day = 1;
         this.year = 2019;
         store();
     }
 
+    /*Update the current date
+     * Assume: each month has 31 days
+     **/
     public void update() {
-        /*Update the current date
-         * Assume: each month has 31 days
-         **/
         this.day++;
         if (this.day == 31) {
             this.day = 1;
@@ -105,8 +105,8 @@ public class Date extends java.util.Date implements Serializable {
         store();
     }
 
+    /* Store current date.*/
     private void store() {
-        /* Store current date.*/
         try {
             FileOutputStream fos = new FileOutputStream(filename);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
