@@ -62,6 +62,7 @@ public class runner {
                                 case 1:
                                     boundlessATM.newAccountCreation();
                                     break;
+
                                 case 2:
                                     boundlessATM.usersRequests();
                                     break;
@@ -79,12 +80,9 @@ public class runner {
                                     }
                                     break;
 
-
-
-
-
                                 case 4:
                                     boundlessATM.date();
+                                    break;
 
                                 case 5:
                                     String filepath = "phase1/src/main/java/atm/alerts.txt";
