@@ -185,7 +185,7 @@ public class ATM {
             cashManager.changeDenom(10, -cashAmounts[1]);
             cashManager.changeDenom(20, -cashAmounts[2]);
             cashManager.changeDenom(50, -cashAmounts[3]);
-            cashManager.update();
+            getCashManager().update();
         } catch (NegativeDenominationException e){
             e.getMessage();
         } catch (IOException e) {
@@ -278,7 +278,7 @@ public class ATM {
         bankManager.setDate();
     }
 
-    // TODO: does not update user balance correctly
+
     public void reverseTransaction(String username, int account) throws InsufficientFundsException{
         bankManager.ReverseLastTransaction(username,account);
         System.out.println("Reversed transaction for: " + username);
