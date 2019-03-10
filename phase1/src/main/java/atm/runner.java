@@ -39,7 +39,7 @@ public class runner {
             }
 
             System.out.println("Please type in a number to pick an option.");
-            System.out.println("(1) Admin \n(2) User\n(3) Close for the day");
+            System.out.println("(1) Admin \n(2) User\n");
 
             try {
                 int option = Integer.parseInt(in.nextLine());
