@@ -139,11 +139,15 @@ public class runner {
                                         String username = in.nextLine();
 
                                         System.out.println("Enter your password: ");
-                                        String password2 = in.nextLine();
+                                        String password = in.nextLine();
 
-                                        loggedIn = boundlessATM.login(username, password2);
+                                        loggedIn = boundlessATM.login(username, password);
+
                                         if (!loggedIn) {
                                             System.out.println("Invalid username or password");
+                                        }
+                                        else{
+                                            stayInLoop = false;
                                         }
                                     //}
                                     break;
@@ -159,6 +163,7 @@ public class runner {
                                             System.out.println("Invalid username ");
                                         } else {
                                             System.out.println("Your current password is: " + boundlessATM.getUserPassword());
+                                            stayInLoop = false;
                                         }
                                     //}
                                     break;
