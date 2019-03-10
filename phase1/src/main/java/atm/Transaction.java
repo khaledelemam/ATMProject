@@ -12,7 +12,6 @@ public class Transaction implements Serializable {
     private static final long serialVersionUID = 100L;
 
     // for  transfers
-    // if its an external transfer, it should pass through <recipient user>.getPrimaryAccount()
     public Transaction(Account source, Account recipient, double amount) {
         this.source = source;
         this.recipient = recipient;
@@ -21,7 +20,6 @@ public class Transaction implements Serializable {
     }
 
     // this is used for withdrawals
-    // Username, amount
     public Transaction(Account source, double amount) {
         this.source = source;
         this.amount = amount;
@@ -53,13 +51,9 @@ public class Transaction implements Serializable {
     public Account getSource() {
         return this.source;
     }
+
     public Date getDate() {
         return this.date;
-    }
-
-    // this creates a new object w the recipient and sender reversed
-    public Transaction reverse(Transaction transaction) {
-        return new Transaction(this.recipient, this.source, this.amount);
     }
 }
 
