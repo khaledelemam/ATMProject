@@ -10,7 +10,6 @@ import java.time.LocalTime;
 public class runner {
 
 
-
     public static void main(String[] args) throws IOException, NegativeDenominationException {
 
         LocalTime time = ZonedDateTime.now().toLocalTime().truncatedTo(ChronoUnit.SECONDS);
@@ -201,9 +200,13 @@ public class runner {
                             System.out.println("(7) Request new account");
                             System.out.println("(0) Log out");
 
-                            option = Integer.parseInt(in.nextLine());
-
-                            switch (option) {
+                            int option3 = -1;
+                                try {
+                                    option3 = Integer.parseInt(in.nextLine());
+                                }catch (NumberFormatException n){
+                                    System.out.println("Please enter a valid input");
+                                }
+                            switch (option3) {
                                 case 1: // view accounts info
                                     System.out.println(boundlessATM.viewAccountsInfo());
                                     break;
