@@ -91,7 +91,6 @@ public class runner {
                                     break;
 
                                 case 5: // restock machine
-                                    String filepath = "phase1/src/main/java/atm/alerts.txt";
                                     System.out.println(boundlessATM.getCashManager());
                                     int[] bills = {5, 10, 20, 50};
                                     for (int i = 0; i < 4; i++) {
@@ -104,7 +103,7 @@ public class runner {
                                         }
                                         boundlessATM.getCashManager().changeDenom(bills[i], amount);
                                     }
-                                    boundlessATM.getCashManager().update(filepath);
+                                    boundlessATM.getCashManager().update();
                                     break;
                                 case 0:
                                     adminLoggedIn = false;
