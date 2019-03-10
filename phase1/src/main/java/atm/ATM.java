@@ -8,8 +8,8 @@ public class ATM {
 
     private User user;
     private BankManager bankManager = new BankManager();
-    private Date date;
     private CashManager cashManager = new CashManager(20);
+    private Date date = new Date();
 
     public ATM() throws IOException {
     }
@@ -128,11 +128,12 @@ public class ATM {
 
         String line = depositReader.readLine();
 
-        // TODO: remove when date object added
-        Date testDate = new Date();
-
+        File f = new File(Date.getFilename());
+        if (f.exists()) {
+            date.setToday();
+        }
         while (line != null) {
-            if (line.equals(testDate.toString())) {
+            if (line.equals(date.toString())) {
                 line = depositReader.readLine();
                 while (!(line.equals(""))) {
                     String[] deposit = line.split(" ");

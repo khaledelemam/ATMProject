@@ -12,7 +12,7 @@ public class runner {
     public static void main(String[] args) throws IOException, NegativeDenominationException {
 
         Scanner in = new Scanner(System.in);
-
+        Date date = new Date();
         ATM boundlessATM = new ATM();
 
         try {
@@ -28,7 +28,7 @@ public class runner {
 
             File f = new File(Date.getFilename());
             if (f.exists()) {
-                Date date = new Date();
+                date.setToday();
                 System.out.println("Today is " + date);
             } else {
                 System.out.println("Admin, please set the date.");
@@ -299,7 +299,6 @@ public class runner {
 
 
                 case 3:
-                    Date date = new Date();
                     date.update();
                     System.exit(0);
                 }

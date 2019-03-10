@@ -7,7 +7,7 @@ import java.io.Serializable;
 /*Keep track of date in ATM.*/
 public class Date extends java.util.Date implements Serializable {
 
-    /* Day, month and year of current date. */
+    /* Day, month and year of date. */
     private int day;
     private int month;
     private int year;
@@ -56,6 +56,28 @@ public class Date extends java.util.Date implements Serializable {
     @Override
     public int getYear() {
         return this.year;
+    }
+
+    public void setToday() {
+        /* Set date to be the current working day. */
+        try {
+            FileInputStream fis = new FileInputStream(filename);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            Date today = (Date) ois.readObject();
+            ois.close();
+            fis.close();
+
+            this.day = today.getDay();
+            this.month = today.getMonth();
+            this.year = today.getYear();
+
+        } catch (
+                IOException ioe) {
+            ioe.printStackTrace();
+        } catch (ClassNotFoundException c) {
+            System.out.println("Class not found");
+            c.printStackTrace();
+        }
     }
 
     public void setDate() {
