@@ -35,7 +35,7 @@ public class runner {
             }
 
             System.out.println("Please type in a number to pick an option.");
-            System.out.println("(1) Admin \n(2) User\n");
+            System.out.println("(1) Admin \n(2) User\n(3) Close for the day");
             int option = Integer.parseInt(in.nextLine());
 
 
@@ -62,6 +62,7 @@ public class runner {
                                 case 1:
                                     boundlessATM.newAccountCreation();
                                     break;
+
                                 case 2:
                                     boundlessATM.usersRequests();
                                     break;
@@ -79,15 +80,11 @@ public class runner {
                                     }
                                     break;
 
-
-
-
-
                                 case 4:
                                     boundlessATM.date();
+                                    break;
 
                                 case 5:
-                                    String filepath = "phase1/src/main/java/atm/alerts.txt";
                                     System.out.println(boundlessATM.getCashManager());
                                     int[] bills = {5,10,20,50};
                                     for (int i = 0; i< 4; i++){
@@ -100,7 +97,7 @@ public class runner {
                                         }
                                         boundlessATM.getCashManager().changeDenom(bills[i],amount);
                                     }
-                                    boundlessATM.getCashManager().update(filepath);
+                                    boundlessATM.getCashManager().update();
                                     break;
 
                             }
@@ -172,6 +169,7 @@ public class runner {
                             }
                             newUser = true;
 
+
                     }
 
 
@@ -190,7 +188,7 @@ public class runner {
                             System.out.println("(5) Pay a bill");
                             System.out.println("(6) Change password");
                             System.out.println("(7) Request new account");
-                            System.out.println("(0) Exit");
+                            System.out.println("(0) Log out");
 
                             option = Integer.parseInt(in.nextLine());
 
@@ -286,11 +284,9 @@ public class runner {
                                     boundlessATM.requestAccount(account);
                                     break;
 
-                                case 0: // exit
+                                case 0: // log out
                                     System.out.println("Goodbye!\n");
                                     run = false;
-                                    Date date = new Date();
-                                    date.update();
                                     break;
 
                                 default:
@@ -298,7 +294,14 @@ public class runner {
                                     break;
                             }
                         }
-                    }
+                    break;
+
+
+                case 3:
+                    Date date = new Date();
+                    date.update();
+                    System.exit(0);
+                }
 
 
 
