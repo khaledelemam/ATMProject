@@ -1,21 +1,26 @@
 ----- How to use the program -----
 
---- How to run as admin ---
+- program will close at system's midnight
+- assumed each month has 31 days
 
-(1) Approve user requests
-(2) Reverse transactions
-(3) Set the date
+--- How to run as admin ---
 
 * must log in before running any admin tasks *
     > password: 123
-    > set date if the date did not show in the home screen
+    > set date if the date did not show in the home screen (only one time)
+
+(1) Approve new user requests
+(2) Approve account requests for existing users
+(3) Reverse transactions
+(4) Set the date
+(5) Restock denominations
 
 --- How to register as a user ---
 
 (1) Login as a user
 (2) Request a new user account
 (3) Wait until administrator approves your account, based on your credit score
-* you have to login as an admin to approve the user request*
+* you have to login as an admin to approve the user request *
 (5) Once approved by the admin, you can login and will be given your temporary password
 
 --- What you can do as a registered user ---
