@@ -2,13 +2,17 @@ CashManager
 --
 - denominations: int[ ]
 - threshold: int
+- cashFile: String
+- alertFile: String
 --
-+ CashManager(denominations: int[ ], threshold: int)
-+ getDenominations(): int[ ] --> not being used
++ CashManager()
++ getDenominations(): int[ ]
 + getDenom(bill: int): int
-+ changeDenom(bill: int, amount: int):
++ changeDenom(bill: int, amount: int): void
 + checkDenom(bill: int, amount: int): boolean
 - getIndex(bill: int): int
 - getBill(bill: int): String
-+ update(filePath: String): void
+- cashFromFile(): void
+- writeToFile(): void
++ update(): void
 + toString(): String

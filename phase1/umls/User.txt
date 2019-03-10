@@ -3,7 +3,6 @@ User
 _- serialVersionUID_
 - username: String
 - password: String
-- numAccounts: int --> might not be used
 - currencyFormat: DecimalFormat
 - accounts: HashMap<Integer,Account>
 - map: HashMap<Account,Integer>
@@ -21,6 +20,5 @@ _- serialVersionUID_
 + accountInfo(): ArrayList<String>
 + getRequest(): String
 + requestAccount(account: String): void
-+ setPrimaryAccoun(acc: ChequingAccount): void --> not being used
 + getPrimaryAccount(): ChequingAccount
 + netUserBalance(): String
