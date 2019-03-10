@@ -1,7 +1,6 @@
 package atm;
 
 import java.io.Serializable;
-import java.text.DecimalFormat;
 import java.time.temporal.Temporal;
 
 public class Transaction implements Serializable {
@@ -9,12 +8,10 @@ public class Transaction implements Serializable {
     private Account source;
     private Account recipient;
     private double amount;
-    private DecimalFormat currencyFormat = new DecimalFormat("0.00");
     private Date date;
     private static final long serialVersionUID = 100L;
 
     // for  transfers
-    // if its an external transfer, it should pass through <recipient user>.getPrimaryAccount()
     public Transaction(Account source, Account recipient, double amount) {
         this.source = source;
         this.recipient = recipient;
@@ -23,7 +20,6 @@ public class Transaction implements Serializable {
     }
 
     // this is used for withdrawals
-    // Username, amount
     public Transaction(Account source, double amount) {
         this.source = source;
         this.amount = amount;
@@ -35,11 +31,11 @@ public class Transaction implements Serializable {
         if (this.recipient != null) {
             return ("Sender: " + this.source + "\n" +
                     "Recipient: " + this.recipient + "\n" +
-                    "Amount: $" + currencyFormat.format(this.amount) + "\n" +
+                    "Amount: $" + this.amount + "\n" +
                     "Date: " + this.date);
         } else {
             return ("Sender: " + this.source + "\n" +
-                    "Amount: $" + currencyFormat.format(this.amount) + "\n" +
+                    "Amount: $" + this.amount + "\n" +
                     "Date: " + this.date);
         }
     }
