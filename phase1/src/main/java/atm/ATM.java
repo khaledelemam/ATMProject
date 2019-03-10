@@ -95,17 +95,18 @@ public class ATM {
     }
 
     public void internalTransfer(int from, int to , double amount) throws InsufficientFundsException {
-        Account accFrom = user.getAccount(from);
-        Account  accTo = user.getAccount(to);
-        accFrom.setBalance(-amount);
-        accTo.setBalance(amount);
-        Transaction intTransfer = new Transaction(accFrom,accTo,amount);
-        accTo.setLastTransaction(intTransfer);
-        accFrom.setLastTransaction(intTransfer);
-        bankManager.store();
-
-
-
+        try {
+            Account accFrom = user.getAccount(from);
+            Account accTo = user.getAccount(to);
+            accFrom.setBalance(-amount);
+            accTo.setBalance(amount);
+            Transaction intTransfer = new Transaction(accFrom, accTo, amount);
+            accTo.setLastTransaction(intTransfer);
+            accFrom.setLastTransaction(intTransfer);
+            bankManager.store();
+        } catch (NullPointerException n) {
+            System.out.println("You only have one account. Please request another account.");
+        }
     }
     public void externalTransfer(int sender, User recipient,  double amount) throws InsufficientFundsException {
         if (recipient.getPrimaryAccount() != null) {
@@ -266,7 +267,7 @@ public class ATM {
         bankManager.setDate();
     }
 
-    // does not update user balance correctly
+    // TODO: does not update user balance correctly
     public void reverseTransaction(String username, int account) throws InsufficientFundsException{
         bankManager.ReverseLastTransaction(username,account);
         System.out.println(username);
