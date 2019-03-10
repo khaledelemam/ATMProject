@@ -7,15 +7,15 @@ public class CashManager {
     // index 0,1,2,3 represents 5,10,20,50 dollar bills
     private int[] denominations;
 
-    // Sends alert when denomination falls below this amount
     private int threshold;
 
-    public CashManager(int[] denominations, int threshold){
-        this.denominations = denominations;
+    private String cashFile = "phase1/src/main/java/atm/cash.txt";
+
+    public CashManager(int threshold) throws IOException {
         this.threshold = threshold;
+        cashFromFile();
     }
 
-    //returns the array of denominations
     public int[] getDenominations(){
         return this.denominations;
     }
@@ -26,9 +26,10 @@ public class CashManager {
     }
 
     //bill must be 5, 10, 20, or 50
-    public void changeDenom(int bill, int amount) throws NegativeDenominationException{
+    public void changeDenom(int bill, int amount) throws NegativeDenominationException, IOException {
         if (checkDenom(bill, amount)){
             denominations[getIndex(bill)] += amount;
+            writeToFile();
         }
         else{
             NegativeDenominationException e = new NegativeDenominationException();
@@ -71,20 +72,40 @@ public class CashManager {
         }
     }
 
-    // sends an alert when a denomination falls below the threshold
-    public void update(String filePath){
-        File file = new File(filePath);
-        try {
-            PrintWriter writer = new PrintWriter(new FileWriter(file));
-            for (int i = 0; i< 4; i++){
-                if(denominations[i] < threshold){
-                    writer.println(denominations[i] + " " + getBill(i) + " left, please restock");
-                }
-            }
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+    //sets denominations as the values from text file
+    private void cashFromFile() throws IOException {
+        File file = new File(cashFile);
+        BufferedReader cashReader = new BufferedReader(new FileReader(file));
+
+        int[] denominations = new int[4];
+
+        for (int i = 0; i <4; i++){
+            denominations[i] = Integer.parseInt(cashReader.readLine());
         }
+        this.denominations = denominations;
+    }
+
+    //writes current denominations to file
+    private void writeToFile() throws IOException {
+        File file = new File(cashFile);
+        PrintWriter writer = new PrintWriter(new FileWriter(file));
+        for (int i = 0; i< 4; i++){
+            writer.println(denominations[i]);
+        }
+        writer.close();
+    }
+
+
+    // sends an alert when a denomination falls below the threshold
+    public void update(String filePath) throws IOException {
+        File file = new File(filePath);
+        PrintWriter writer = new PrintWriter(new FileWriter(file));
+        for (int i = 0; i< 4; i++){
+            if(denominations[i] < threshold){
+                writer.println(denominations[i] + " " + getBill(i) + " left, please restock");
+            }
+        }
+        writer.close();
     }
 
     public String toString(){
