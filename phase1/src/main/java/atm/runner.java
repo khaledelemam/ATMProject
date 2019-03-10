@@ -18,7 +18,7 @@ public class runner {
         try {
             boundlessATM.deposit();
         } catch (InsufficientFundsException e) {
-            //ignore
+            e.getMessage();
         }
 
         boolean main = true;
@@ -85,7 +85,7 @@ public class runner {
                                     boundlessATM.date();
                                     break;
 
-                                case 5: // restock machhine
+                                case 5: // restock machine
                                     String filepath = "phase1/src/main/java/atm/alerts.txt";
                                     System.out.println(boundlessATM.getCashManager());
                                     int[] bills = {5,10,20,50};
@@ -115,35 +115,35 @@ public class runner {
                     boolean stayInLoop = true;
                     while (stayInLoop) {
 
-                    System.out.println("(1) Login");
-                    System.out.println("(2) Request new bank account");
-                    int hold = Integer.parseInt(in.nextLine());
+                        System.out.println("(1) Login");
+                        System.out.println("(2) Request new bank account");
+                        int hold = Integer.parseInt(in.nextLine());
 
-                    switch (hold) {
+                        switch (hold) {
 
-                        case 1: // previous login
-                            System.out.println("Have you logged in before?\n (1) Yes \n (2) No");
-                            int log = Integer.parseInt(in.nextLine());
-                            boolean loggedIn = false;
+                            case 1: // previous login
+                                System.out.println("Have you logged in before?\n (1) Yes \n (2) No");
+                                int log = Integer.parseInt(in.nextLine());
+                                boolean loggedIn = false;
 
-                            switch (log) {
-                                case 1: // previous login
+                                switch (log) {
+                                    case 1: // previous login
 
-                                        System.out.println("Enter your username: ");
-                                        String username = in.nextLine();
+                                            System.out.println("Enter your username: ");
+                                            String username = in.nextLine();
 
-                                        System.out.println("Enter your password: ");
-                                        String password = in.nextLine();
+                                            System.out.println("Enter your password: ");
+                                            String password = in.nextLine();
 
-                                        loggedIn = boundlessATM.login(username, password);
+                                            loggedIn = boundlessATM.login(username, password);
 
-                                        if (!loggedIn) {
-                                            System.out.println("Invalid username or password");
-                                        }
-                                        else{
-                                            stayInLoop = false;
-                                        }
-                                    break;
+                                            if (!loggedIn) {
+                                                System.out.println("Invalid username or password");
+                                            }
+                                            else{
+                                                stayInLoop = false;
+                                            }
+                                        break;
 
                                 case 2: // first login
                                     System.out.println("Enter your username: ");
