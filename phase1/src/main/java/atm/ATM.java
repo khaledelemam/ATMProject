@@ -180,10 +180,10 @@ public class ATM {
         bankManager.store();
 
         try {
-            cashManager.changeDenom(5, cashAmounts[0]);
-            cashManager.changeDenom(10, cashAmounts[1]);
-            cashManager.changeDenom(20, cashAmounts[2]);
-            cashManager.changeDenom(50, cashAmounts[3]);
+            cashManager.changeDenom(5, -cashAmounts[0]);
+            cashManager.changeDenom(10, -cashAmounts[1]);
+            cashManager.changeDenom(20, -cashAmounts[2]);
+            cashManager.changeDenom(50, -cashAmounts[3]);
         } catch (NegativeDenominationException e){
             e.getMessage();
         } catch (IOException e) {
