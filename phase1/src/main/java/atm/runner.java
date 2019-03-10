@@ -22,7 +22,6 @@ public class runner {
         }
 
         boolean main = true;
-
         while (main) {
             boolean newUser = false;
 
@@ -171,6 +170,7 @@ public class runner {
                                 System.out.println(u.getMessage());
                             }
                             newUser = true;
+                            stayInLoop = false;
                             break;
 
                         default:
