@@ -1,0 +1,17 @@
+<diagram program="umletino" version="14.3.0"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>230</x><y>180</y><w>100</w><h>30</h></coordinates><panel_attributes>Exception</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>390</x><y>60</y><w>210</w><h>50</h></coordinates><panel_attributes>InsufficientFundsException
+--
+--
++ InsufficientFundsException()
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>390</x><y>200</y><w>210</w><h>50</h></coordinates><panel_attributes>InvalidPasswordException
+--
+--
++ InvalidPasswordException()
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>390</x><y>130</y><w>210</w><h>50</h></coordinates><panel_attributes>InvalidUserException
+--
+--
++ InvalidUserException()
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>390</x><y>270</y><w>210</w><h>50</h></coordinates><panel_attributes>UsernameTakenException
+--
+--
++ UsernameTakenException()
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>270</x><y>80</y><w>140</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;100;120;10</additional_attributes></element><element><id>Relation</id><coordinates><x>270</x><y>150</y><w>140</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;30;120;10</additional_attributes></element><element><id>Relation</id><coordinates><x>270</x><y>200</y><w>140</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;120;20</additional_attributes></element><element><id>Relation</id><coordinates><x>270</x><y>200</y><w>140</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;120;90</additional_attributes></element></diagram>

@@ -1,0 +1,68 @@
+<diagram program="umletino" version="14.3.0"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>356</x><y>262</y><w>100</w><h>30</h></coordinates><panel_attributes>&lt;&lt;Serializable&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>126</x><y>132</y><w>210</w><h>170</h></coordinates><panel_attributes>Date
+--
+- day: int
+- month: int
+- year: int
+--
++ getDay(), getMonth(), getYear(): int
++ getFilename(): String
++ setDate(): void
++ update(): void
+- store(): void
++ toString(): String</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>326</x><y>232</y><w>100</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>80;30;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>116</x><y>332</y><w>350</w><h>260</h></coordinates><panel_attributes>BankManager
+--
+- password: String
++ users: ArrayList&lt;User&gt;
++ requests: ArrayList&lt;ArrayList&lt;String&gt;&gt;
+--
++ BankManager()
++ getPassword(): String
++ createUser(): void
++ setUserPassword(user: User): void
++ userRequestAccount(): void
++ ReverseLastTransaction(username: String, account: int): void
++ checkExistingUser(username: String): User 
++ setDate(): void
++ store(): void
++ retrieve(): void
++ storeRequests(): void
++ retrieveRequests(): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>296</x><y>282</y><w>130</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>110;10;10;50</additional_attributes></element><element><id>UMLClass</id><coordinates><x>376</x><y>52</y><w>370</w><h>180</h></coordinates><panel_attributes>Transaction
+--
+- source: Account
+- recipient: Account
+- amount: double
+- date: Date
+_ -serialVersionUID_
+--
++ Transaction(source: Account, recipient: Account, amount: double)
++ toString(): String
++ getAmount(): double
++ getDate(): date
++ reverse(transaction: Transaction): Transaction
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>400</x><y>282</y><w>100</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;80;30</additional_attributes></element><element><id>UMLClass</id><coordinates><x>486</x><y>262</y><w>290</w><h>380</h></coordinates><panel_attributes>User
+--
+_- serialVersionUID_
+- username: String
+- password: String
+- numAccounts: int --&gt; might not be used
+- currencyFormat: DecimalFormat
+- accounts: HashMap&lt;Integer,Account&gt;
+- map: HashMap&lt;Account,Integer&gt;
+- request: String
+- primaryAccount: ChequingAccount
+--
++ User(username: String)
++ toString(): String
++ setPassword(password: String): void
++ getUsername(): String
++ getPassword(): String
++ addAccount(account: String): void
++ viewAccounts(): void
++ getAccount(acc: int): Account
++ accountInfo(): ArrayList&lt;String&gt;
++ getRequest(): String
++ requestAccount(account: String): void
++ setPrimaryAccoun(acc: ChequingAccount): void
++ getPrimaryAccount(): ChequingAccount
++ netUserBalance(): String</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>410</x><y>222</y><w>150</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;40;130;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>180</x><y>60</y><w>100</w><h>30</h></coordinates><panel_attributes>java.util.Date</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>220</x><y>80</y><w>30</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element></diagram>

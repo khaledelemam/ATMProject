@@ -1,0 +1,22 @@
+<diagram program="umletino" version="14.3.0"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>240</x><y>120</y><w>290</w><h>200</h></coordinates><panel_attributes>CashManager
+--
+- denominations: int[ ]
+- threshold: int
+--
++ CashManager(denominations: int[ ], threshold: int)
++ getDenominations(): int[ ] --&gt; not being used
++ getDenom(bill: int): int
++ changeDenom(bill: int, amount: int): boolean
++ checkDenom(bill: int, amount: int): boolean
+- getIndex(bill: int): int
+- getBill(bill: int): String
++ update(filePath: String): void
++ toString(): String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>240</x><y>350</y><w>290</w><h>50</h></coordinates><panel_attributes>CreditScore
+--
+--
+_+ getRandomDoubleBetweenRange(): double_
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>240</x><y>430</y><w>380</w><h>50</h></coordinates><panel_attributes>ReverseATM
+--
+--
++ ReverseWithdrawal(user: User, acc: Account, amount: double): void
+</panel_attributes><additional_attributes></additional_attributes></element></diagram>
