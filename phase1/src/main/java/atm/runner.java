@@ -37,8 +37,9 @@ public class runner {
 
             System.out.println("Please type in a number to pick an option.");
             System.out.println("(1) Admin \n(2) User\n(3) Close for the day");
-            int option = Integer.parseInt(in.nextLine());
 
+            try {
+                int option = Integer.parseInt(in.nextLine());
 
             switch (option) {
 
@@ -304,6 +305,9 @@ public class runner {
                     System.exit(0);
                 }
 
+            } catch (NumberFormatException n) {
+                System.out.println("Please enter a valid input");
+            }
 
 
 
