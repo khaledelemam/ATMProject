@@ -210,7 +210,21 @@ public class runner {
 
                                     System.out.println("How much would you like to withdraw?:\n" +
                                             "Denominations available: $5, $10, $15, $20");
-                                    int cashAmount = Integer.parseInt(in.nextLine());
+
+                                    System.out.println("How many $5 bills : ");
+                                    int fives = Integer.parseInt(in.nextLine());
+
+                                    System.out.println("How many $10 bills: ");
+                                    int tens = Integer.parseInt(in.nextLine());
+
+                                    System.out.println("How many $20 bills: ");
+                                    int twenties = Integer.parseInt(in.nextLine());
+
+                                    System.out.println("How many $50 bills: ");
+                                    int fifties = Integer.parseInt(in.nextLine());
+
+                                    int[] cashAmount = new int[]{fives, tens, twenties, fifties};
+
                                     try {
                                         boundlessATM.withdrawal(account, cashAmount);
                                     }catch (InsufficientFundsException e) {

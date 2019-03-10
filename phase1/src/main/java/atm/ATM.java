@@ -169,42 +169,30 @@ public class ATM {
     }
 
 
-    public void withdrawal(int account, int amount) throws InsufficientFundsException {
+    public void withdrawal(int account, int[] cashAmounts) throws InsufficientFundsException {
+
+        int amount = (cashAmounts[0] * 5) +
+                (cashAmounts[1] * 10) +
+                (cashAmounts[2] * 20) +
+                (cashAmounts[3] * 50);
+
         Account acc = user.getAccount(account);
         acc.setBalance(-amount);
         Transaction withdrawal = new Transaction(acc, amount);
         acc.setLastTransaction(withdrawal);
         bankManager.store();
 
-        boolean withdrawn = false;
-        int[] toWithdraw = new int[]{0, 0, 0, 0};
-
-        while (!withdrawn) {
-            if (amount % 5 == 0) {
-                int[] cashAmounts = new int[]{50, 20, 10, 5};
-
-                int i = 3;
-                int j = 0;
-                for (int bill : cashAmounts) {
-                    int num = amount / bill;
-                    toWithdraw[j] = num;
-                    amount -= (cashAmounts[i] * num);
-                    i--;
-                    j++;
-
-                    try {
-                        cashManager.changeDenom(bill, num);
-                    } catch (NegativeDenominationException | IOException e) {
-                        e.getMessage();
-                    }
-                }
-
-                if (amount == 0) {
-                    withdrawn = true;
-                    break;
-                }
-            } else break;
+        try {
+            cashManager.changeDenom(5, cashAmounts[0]);
+            cashManager.changeDenom(10, cashAmounts[1]);
+            cashManager.changeDenom(20, cashAmounts[2]);
+            cashManager.changeDenom(50, cashAmounts[3]);
+        } catch (NegativeDenominationException e){
+            e.getMessage();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
     }
 
     public void payBill(int account, double amount) throws IOException, InsufficientFundsException {
