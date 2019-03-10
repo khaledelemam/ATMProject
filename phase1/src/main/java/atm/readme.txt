@@ -15,6 +15,7 @@
 (1) Login as a user
 (2) Request a new user account
 (3) Wait until administrator approves your account, based on your credit score
+* you have to login as an admin to approve the user request*
 (5) Once approved by the admin, you can login and will be given your temporary password
 
 --- What you can do as a registered user ---
