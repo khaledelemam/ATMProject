@@ -15,6 +15,7 @@
 (1) Login as a user
 (2) Request a new user account
 (3) Wait until administrator approves your account, based on your credit score
+* you have to login as an admin to approve the user request*
 (5) Once approved by the admin, you can login and will be given your temporary password
 
 --- What you can do as a registered user ---
@@ -42,5 +43,9 @@
 - Have money deposited to your account
     > Cash/cheques are deposited according to what is in the file "deposits.txt"
     > Only one bill can be deposited at a time, and must be a valid denomination ($5, $10, $20, $50)
+    > FILE FORMAT: user type amount
+        > type can be "cash" or "cheque"
+        > amount does not include "$"
+        > deposit only occurs if the user exists in the system already
 
 --- Other features ---

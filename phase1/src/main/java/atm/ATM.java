@@ -202,7 +202,7 @@ public class ATM {
         PrintWriter billPayer = new PrintWriter(new FileWriter("phase1/src/main/java/atm/outgoing.txt",
                 true));
         Transaction billPayment = new Transaction(acc, amount);
-        billPayer.println(billPayment);
+        billPayer.println(user + " payed $" + amount + " on " + date);
         billPayer.close();
 
         Transaction bill = new Transaction(acc, amount);
