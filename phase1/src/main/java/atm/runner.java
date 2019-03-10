@@ -10,7 +10,6 @@ import java.time.LocalTime;
 public class runner {
 
 
-
     public static void main(String[] args) throws IOException, NegativeDenominationException {
 
         LocalTime time = ZonedDateTime.now().toLocalTime().truncatedTo(ChronoUnit.SECONDS);
