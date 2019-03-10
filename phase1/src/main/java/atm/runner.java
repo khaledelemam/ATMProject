@@ -28,6 +28,7 @@ public class runner {
 
             File f = new File(Date.getFilename());
             if (f.exists()) {
+                // .setToday() opens date file, but date file doesn't exist until BankManager sets the date initially
                 date.setToday();
                 System.out.println("Today is " + date);
             } else {

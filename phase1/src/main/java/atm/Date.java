@@ -40,6 +40,7 @@ public class Date extends java.util.Date implements Serializable {
     }
 
     public static String getFilename() {
+        /* Get name of byte file that stores date. */
         return filename;
     }
 
@@ -81,7 +82,7 @@ public class Date extends java.util.Date implements Serializable {
     }
 
     public void setDate() {
-        /*Set current date to beginning of the year*/
+        /* Set current date to beginning of the year */
         this.month = 1;
         this.day = 1;
         this.year = 2019;

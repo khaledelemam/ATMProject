@@ -8,7 +8,7 @@ public class ATM {
 
     private User user;
     private BankManager bankManager = new BankManager();
-    private CashManager cashManager = new CashManager(20);
+    private CashManager cashManager = new CashManager();
     private Date date = new Date();
 
     public ATM() throws IOException {
