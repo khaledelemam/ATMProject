@@ -42,5 +42,9 @@
 - Have money deposited to your account
     > Cash/cheques are deposited according to what is in the file "deposits.txt"
     > Only one bill can be deposited at a time, and must be a valid denomination ($5, $10, $20, $50)
+    > FILE FORMAT: user type amount
+        > type can be "cash" or "cheque"
+        > amount does not include "$"
+        > deposit only occurs if the user exists in the system already
 
 --- Other features ---
