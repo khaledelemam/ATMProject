@@ -3,9 +3,11 @@ Date
 - day: int
 - month: int
 - year: int
+_- filename: String_
 --
-+ getDay(), getMonth(), getYear(): int
++ Date()
 + getFilename(): String
++ getDay(), getMonth(), getYear(): int
 + setDate(): void
 + update(): void
 - store(): void

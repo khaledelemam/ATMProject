@@ -10,7 +10,7 @@ BankManager
 + setUserPassword(user: User): void
 + userRequestAccount(): void
 + ReverseLastTransaction(username: String, account: int): void
-+ checkExistingUser(username: String): User --> sketch...
++ checkExistingUser(username: String): User
 + setDate(): void
 + store(): void
 + retrieve(): void
