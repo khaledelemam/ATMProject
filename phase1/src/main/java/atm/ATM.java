@@ -22,9 +22,6 @@ public class ATM {
         bankManager.retrieve();
 
         ArrayList<User> users = bankManager.users;
-        for (int i = 0; i < users.size(); i ++){
-            System.out.println(users.get(i).getUsername());
-        }
         for (int i = 0; i < users.size(); i ++) {
 
             if (users.get(i).getUsername().equals(username)){
