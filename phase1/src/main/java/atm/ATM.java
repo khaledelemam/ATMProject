@@ -125,7 +125,7 @@ public class ATM {
 
         File f = new File(Date.getFilename());
         if (f.exists()) {
-            //date.setToday();
+            date.setToday();
         }
         while (line != null) {
             if (line.equals(date.toString())) {
