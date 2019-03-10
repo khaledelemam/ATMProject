@@ -9,7 +9,7 @@ public class ATM {
     private User user;
     private BankManager bankManager = new BankManager();
     private Date date;
-    private CashManager cashManager = new CashManager(20);
+    private CashManager cashManager = new CashManager();
 
     public ATM() throws IOException {
     }
