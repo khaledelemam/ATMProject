@@ -50,6 +50,7 @@ public class BankManager implements Serializable {
             if (users.get(i).getRequest() != null){
                 if (CreditScore.getRandomDoubleBetweenRange() > 0) {
                     users.get(i).addAccount(users.get(i).getRequest());
+                    users.get(i).requestAccount(null);
                 }
             }
         }
