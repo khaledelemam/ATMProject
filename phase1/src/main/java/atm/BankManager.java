@@ -84,7 +84,6 @@ public class BankManager implements Serializable {
             }
         }
 //       store();
-        System.out.println(8);
         return null;
     }
 

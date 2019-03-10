@@ -29,7 +29,6 @@ public class ATM {
 
             if (users.get(i).getUsername().equals(username)){
                 if (users.get(i).getPassword().equals(password)){
-                    System.out.println(5);
                     user = bankManager.users.get(i);
                     return true;
 
