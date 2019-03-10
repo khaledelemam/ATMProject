@@ -46,6 +46,13 @@ public class Transaction implements Serializable {
         return this.amount;
     }
 
+    public Account getRecipient() {
+        return this.recipient;
+    }
+
+    public Account getSource() {
+        return this.source;
+    }
     public Date getDate() {
         return this.date;
     }
