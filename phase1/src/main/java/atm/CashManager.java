@@ -26,12 +26,13 @@ public class CashManager {
     }
 
     //bill must be 5, 10, 20, or 50
-    public void changeDenom(int bill, int amount){
+    public void changeDenom(int bill, int amount) throws NegativeDenominationException{
         if (checkDenom(bill, amount)){
             denominations[getIndex(bill)] += amount;
         }
         else{
-                //negative balance exception
+            NegativeDenominationException e = new NegativeDenominationException();
+            throw e;
         }
     }
 
@@ -77,8 +78,6 @@ public class CashManager {
             PrintWriter writer = new PrintWriter(new FileWriter(file));
             for (int i = 0; i< 4; i++){
                 if(denominations[i] < threshold){
-                    //Testing purposes. Will remove print statmement later
-                    System.out.println("went under threshold for bill " + getBill(i));
                     writer.println(denominations[i] + " " + getBill(i) + " left, please restock");
                 }
             }
