@@ -24,7 +24,10 @@ public class BankManager implements Serializable {
 
 
     public void createUser(){
-        retrieveRequests();
+        File f = new File("file2");
+        if (f.exists()) {
+            retrieveRequests();
+        }
         for(int i = 0; i< requests.size();i++){
                 if (CreditScore.getRandomDoubleBetweenRange() > 0) {
                     User user = new User(requests.get(i).get(0));
