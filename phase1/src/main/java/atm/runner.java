@@ -113,6 +113,7 @@ public class runner {
                         }
                         } else {
                             System.out.println("Invalid admin password");
+                            adminLoggedIn = false;
                         }
                     }
                     }
