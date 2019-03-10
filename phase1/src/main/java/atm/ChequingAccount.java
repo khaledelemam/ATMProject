@@ -10,7 +10,7 @@ public class ChequingAccount extends Account {
 
     public ChequingAccount() {
         this.balance = 0;
-//        this.dateOpened = date;
+        this.dateOpened = new Date();
         this.lastTransaction = null;
     }
 
