@@ -3,7 +3,7 @@ package atm;
 public class ReverseATM {
 
 
-    public void ReverseWithdrawal(User user, Account acc, Transaction trans) throws InsufficientFundsException{
+    public void ReverseWithdrawal( Account acc, Transaction trans) throws InsufficientFundsException{
         double amount = trans.getAmount();
         acc.setBalance(amount);
         Transaction add = new Transaction(acc, amount);

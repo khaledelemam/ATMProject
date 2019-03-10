@@ -18,6 +18,7 @@
 --- How to register as a user ---
 
 (1) Login as a user
+*default password for user is "1"*
 (2) Request a new user account
 (3) Wait until administrator approves your account, based on your credit score
 * you have to login as an admin to approve the user request *
