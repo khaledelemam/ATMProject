@@ -22,9 +22,6 @@ public class ATM {
         bankManager.retrieve();
 
         ArrayList<User> users = bankManager.users;
-        for (int i = 0; i < users.size(); i ++){
-            System.out.println(users.get(i).getUsername());
-        }
         for (int i = 0; i < users.size(); i ++) {
 
             if (users.get(i).getUsername().equals(username)){
@@ -183,10 +180,10 @@ public class ATM {
         bankManager.store();
 
         try {
-            cashManager.changeDenom(5, cashAmounts[0]);
-            cashManager.changeDenom(10, cashAmounts[1]);
-            cashManager.changeDenom(20, cashAmounts[2]);
-            cashManager.changeDenom(50, cashAmounts[3]);
+            cashManager.changeDenom(5, -cashAmounts[0]);
+            cashManager.changeDenom(10, -cashAmounts[1]);
+            cashManager.changeDenom(20, -cashAmounts[2]);
+            cashManager.changeDenom(50, -cashAmounts[3]);
         } catch (NegativeDenominationException e){
             e.getMessage();
         } catch (IOException e) {

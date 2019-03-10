@@ -131,12 +131,11 @@ public class User implements Serializable {
 
     public void requestAccount(String account){ request = account; }
 
-
     public ChequingAccount getPrimaryAccount() { return this.primaryAccount; }
 
     public String netUserBalance() {
         double netTotal = 0;
-        for (int k = 1; k < accounts.size(); k++){
+        for (int k = 1; k <= accounts.size(); k++){
             netTotal += accounts.get(k).getNetTotal();
         }
         return currencyFormat.format(netTotal);
