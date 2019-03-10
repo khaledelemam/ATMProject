@@ -3,14 +3,12 @@ package atm;
 import java.text.DecimalFormat;
 
 public class SavingsAccount extends Account {
-    private Date dateOpened;
     private double balance;
     private DecimalFormat currencyFormat = new DecimalFormat("0.00");
     protected Transaction lastTransaction;
 
     public SavingsAccount() {
         this.balance = 0;
-//        this.dateOpened = date;
         this.lastTransaction = null;
     }
 
@@ -57,7 +55,4 @@ public class SavingsAccount extends Account {
         return this.lastTransaction;
     }
 
-    public Date getDateOpened() {
-        return dateOpened;
-    }
 }

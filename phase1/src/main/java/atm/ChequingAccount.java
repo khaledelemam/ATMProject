@@ -3,14 +3,13 @@ package atm;
 import java.text.DecimalFormat;
 
 public class ChequingAccount extends Account {
-    private Date dateOpened;
+
     private double balance;
     private DecimalFormat currencyFormat = new DecimalFormat("0.00");
     protected Transaction lastTransaction;
 
     public ChequingAccount() {
         this.balance = 0;
-//        this.dateOpened = date;
         this.lastTransaction = null;
     }
 
@@ -52,10 +51,6 @@ public class ChequingAccount extends Account {
 
     public Transaction getLastTransaction() {
         return this.lastTransaction;
-    }
-
-    public Date getDateOpened() {
-        return dateOpened;
     }
 
 }

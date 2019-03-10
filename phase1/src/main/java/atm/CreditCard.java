@@ -3,14 +3,12 @@ package atm;
 import java.text.DecimalFormat;
 
 public class CreditCard extends Account {
-    private Date dateOpened;
     private double balance;
     private DecimalFormat currencyFormat = new DecimalFormat("0.00");
     protected Transaction lastTransaction;
 
     public CreditCard() {
         this.balance = 0;
-//        this.dateOpened = date;
         this.lastTransaction = null;
     }
     @Override
@@ -42,8 +40,6 @@ public class CreditCard extends Account {
     public Transaction getLastTransaction() {
         return this.lastTransaction;
     }
-    public Date getDateOpened() {
-        return dateOpened;
-    }
+
 
 }

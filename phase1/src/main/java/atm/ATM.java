@@ -8,8 +8,8 @@ public class ATM {
 
     private User user;
     private BankManager bankManager = new BankManager();
-    private Date date;
     private CashManager cashManager = new CashManager();
+    private Date date = new Date();
 
     public ATM() throws IOException {
     }
@@ -22,14 +22,10 @@ public class ATM {
         bankManager.retrieve();
 
         ArrayList<User> users = bankManager.users;
-        for (int i = 0; i < users.size(); i ++){
-            System.out.println(users.get(i).getUsername());
-        }
         for (int i = 0; i < users.size(); i ++) {
 
             if (users.get(i).getUsername().equals(username)){
                 if (users.get(i).getPassword().equals(password)){
-                    System.out.println(5);
                     user = bankManager.users.get(i);
                     return true;
 
@@ -87,26 +83,25 @@ public class ATM {
     public void changePassword(String newPassword) {
         user.setPassword(newPassword);
         bankManager.store();
-
     }
-
 
     public void viewAccounts() {
         user.viewAccounts();
     }
 
     public void internalTransfer(int from, int to , double amount) throws InsufficientFundsException {
-        Account accFrom = user.getAccount(from);
-        Account  accTo = user.getAccount(to);
-        accFrom.setBalance(-amount);
-        accTo.setBalance(amount);
-        Transaction intTransfer = new Transaction(accFrom,accTo,amount);
-        accTo.setLastTransaction(intTransfer);
-        accFrom.setLastTransaction(intTransfer);
-        bankManager.store();
-
-
-
+        try {
+            Account accFrom = user.getAccount(from);
+            Account accTo = user.getAccount(to);
+            accFrom.setBalance(-amount);
+            accTo.setBalance(amount);
+            Transaction intTransfer = new Transaction(accFrom, accTo, amount);
+            accTo.setLastTransaction(intTransfer);
+            accFrom.setLastTransaction(intTransfer);
+            bankManager.store();
+        } catch (NullPointerException n) {
+            System.out.println("You only have one account. Please request another account.");
+        }
     }
     public void externalTransfer(int sender, User recipient,  double amount) throws InsufficientFundsException {
         if (recipient.getPrimaryAccount() != null) {
@@ -128,11 +123,12 @@ public class ATM {
 
         String line = depositReader.readLine();
 
-        // TODO: remove when date object added
-        Date testDate = new Date();
-
+        File f = new File(Date.getFilename());
+        if (f.exists()) {
+            date.setToday();
+        }
         while (line != null) {
-            if (line.equals(testDate.toString())) {
+            if (line.equals(date.toString())) {
                 line = depositReader.readLine();
                 while (!(line.equals(""))) {
                     String[] deposit = line.split(" ");
@@ -155,19 +151,46 @@ public class ATM {
             if (user != null) {
                 user.getPrimaryAccount().setBalance(amount);
                 bankManager.store();
+
+                if (type.equalsIgnoreCase("cash")) {
+                    int billType = amount.intValue();
+
+                    try {
+                        cashManager.changeDenom(billType, 1);
+                    } catch (NegativeDenominationException e){
+                        e.getMessage();
+                    }
+                }
             }
         }
     }
 
 
-    public void withdrawal(int account, int amount) throws InsufficientFundsException{
-        Account  acc = user.getAccount(account);
+    public void withdrawal(int account, int[] cashAmounts) throws InsufficientFundsException {
+
+        int amount = (cashAmounts[0] * 5) +
+                (cashAmounts[1] * 10) +
+                (cashAmounts[2] * 20) +
+                (cashAmounts[3] * 50);
+
+        Account acc = user.getAccount(account);
         acc.setBalance(-amount);
         Transaction withdrawal = new Transaction(acc, amount);
         acc.setLastTransaction(withdrawal);
         bankManager.store();
-    }
 
+        try {
+            cashManager.changeDenom(5, -cashAmounts[0]);
+            cashManager.changeDenom(10, -cashAmounts[1]);
+            cashManager.changeDenom(20, -cashAmounts[2]);
+            cashManager.changeDenom(50, -cashAmounts[3]);
+        } catch (NegativeDenominationException e){
+            e.getMessage();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     public void payBill(int account, double amount) throws IOException, InsufficientFundsException {
         Account acc = user.getAccount(account);
@@ -189,7 +212,7 @@ public class ATM {
     public String viewAccountsInfo() {
         String accInfo = "Net total: " + user.netUserBalance() + "\n";
         for (String account: user.accountInfo()) {
-            accInfo += account;
+            accInfo += account + "\n";
         }
         return accInfo;
     }
@@ -245,19 +268,6 @@ public class ATM {
 
 
     public User checkExistingUser(String username) {
-//        File f = new File("file");
-//        if (f.exists()) {
-//            bankManager.retrieve();
-//        }
-//        ArrayList<User> users = bankManager.users;
-//
-//        for (int i = 0; i < users.size(); i ++) {
-//            if (users.get(i).getUsername().equals(username)){
-//                return users.get(i);
-//            }
-//        }
-//        bankManager.store();
-//        return null;
        return  bankManager.checkExistingUser(username);
     }
 
@@ -266,10 +276,10 @@ public class ATM {
         bankManager.setDate();
     }
 
-    // does not update user balance correctly
+    // TODO: does not update user balance correctly
     public void reverseTransaction(String username, int account) throws InsufficientFundsException{
         bankManager.ReverseLastTransaction(username,account);
-        System.out.println(username);
+        System.out.println("Reversed transaction for: " + username);
         bankManager.store();
     }
 

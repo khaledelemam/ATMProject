@@ -89,11 +89,7 @@ public class User implements Serializable {
             this.accounts.put(index + 1, hold);
             this.map.put(hold, index + 1);
         }
-
-
     }
-
-
 
     public void viewAccounts(){
         for(int i = 1 ; i <=accounts.size(); i++){
@@ -101,8 +97,6 @@ public class User implements Serializable {
             System.out.println("(" +str + ")" +accounts.get(i));
 
         }
-
-
     }
 
     public Account getAccount(int acc){
@@ -113,7 +107,6 @@ public class User implements Serializable {
             }
         }
         return null;
-
     }
 
     public ArrayList<String> accountInfo() {
@@ -136,17 +129,13 @@ public class User implements Serializable {
         return request ;
     }
 
-    public void requestAccount(String account){
-        request = account;
+    public void requestAccount(String account){ request = account; }
 
-    }
-    public void setPrimaryAccount(ChequingAccount acc){ this.primaryAccount = acc;}
-
-    public ChequingAccount getPrimaryAccount() {return this.primaryAccount;}
+    public ChequingAccount getPrimaryAccount() { return this.primaryAccount; }
 
     public String netUserBalance() {
         double netTotal = 0;
-        for (int k = 1; k < accounts.size(); k++){
+        for (int k = 1; k <= accounts.size(); k++){
             netTotal += accounts.get(k).getNetTotal();
         }
         return currencyFormat.format(netTotal);

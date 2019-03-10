@@ -24,7 +24,10 @@ public class BankManager implements Serializable {
 
 
     public void createUser(){
-        retrieveRequests();
+        File f = new File("file2");
+        if (f.exists()) {
+            retrieveRequests();
+        }
         for(int i = 0; i< requests.size();i++){
                 if (CreditScore.getRandomDoubleBetweenRange() > 0) {
                     User user = new User(requests.get(i).get(0));
@@ -50,6 +53,7 @@ public class BankManager implements Serializable {
             if (users.get(i).getRequest() != null){
                 if (CreditScore.getRandomDoubleBetweenRange() > 0) {
                     users.get(i).addAccount(users.get(i).getRequest());
+                    users.get(i).requestAccount(null);
                 }
             }
         }
@@ -59,16 +63,17 @@ public class BankManager implements Serializable {
         // only withdraw in mind right now.
         User user = checkExistingUser(username);
         if (user!= null){
-           Account acc = user.getAccount(account);
-           Transaction transaction = acc.getLastTransaction();
-           double money = transaction.getAmount();
-           ReverseATM rATM = new ReverseATM();
-            System.out.println(user.getUsername());
-           rATM.ReverseWithdrawal(user, acc, money);
-//            System.out.println(username);
-//            System.out.println(user.getAccount(1).getBalance());
+            Account acc = user.getAccount(account);
+            Transaction transaction = acc.getLastTransaction();
+//            double money = transaction.getAmount();
+            ReverseATM rATM = new ReverseATM();
+            if (transaction.getRecipient() == null) {
+//                rATM.ReverseWithdrawal(user, acc, money);
+                rATM.ReverseWithdrawal(user, acc, transaction);
+            } else {
+                rATM.ReverseTransaction(acc, transaction);
+            }
         }
-
     }
 
     public User checkExistingUser(String username){
@@ -82,8 +87,6 @@ public class BankManager implements Serializable {
                 return users.get(i);
             }
         }
-//       store();
-        System.out.println(8);
         return null;
     }
 
@@ -98,8 +101,8 @@ public class BankManager implements Serializable {
 
     public void store(){
         try{
-            FileOutputStream fos= new FileOutputStream("file");
-            ObjectOutputStream oos= new ObjectOutputStream(fos);
+            FileOutputStream fos = new FileOutputStream("file");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(users);
             oos.close();
             fos.close();
@@ -120,11 +123,9 @@ public class BankManager implements Serializable {
             fis.close();
         } catch (IOException ioe) {
             ioe.printStackTrace();
-//            return;
         } catch (ClassNotFoundException c) {
             System.out.println("Class not found");
             c.printStackTrace();
-//            return;
         }
 //        for (User tmp : users) {
 //            System.out.println(tmp);
@@ -158,11 +159,9 @@ public class BankManager implements Serializable {
             fis.close();
         } catch (IOException ioe) {
             ioe.printStackTrace();
-//            return;
         } catch (ClassNotFoundException c) {
             System.out.println("Class not found");
             c.printStackTrace();
-//            return;
         }
 //        for (User tmp : users) {
 //            System.out.println(tmp);

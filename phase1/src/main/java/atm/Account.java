@@ -8,14 +8,19 @@ import java.text.DecimalFormat;
 
 
 public abstract class Account implements Serializable {
-
+    private Date dateOpened;
     private static final long serialVersionUID = 10L;
 
-    public abstract String  getBalance();
+    public Account() {
+        this.dateOpened = new Date();
+    }
+    public abstract String getBalance();
 
     public abstract void setBalance(double amount) throws InsufficientFundsException;
 
-    public abstract Date getDateOpened();
+    public Date getDateOpened() {
+        return dateOpened;
+    }
 
     public  abstract Transaction getLastTransaction();
 
@@ -26,5 +31,3 @@ public abstract class Account implements Serializable {
     public abstract double getDoubleBalance();
 
 }
-
-

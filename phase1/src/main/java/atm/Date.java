@@ -3,35 +3,17 @@ package atm;
 
 import java.io.*;
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
-/*Keep track of time in ATM.*/
+/*Keep track of date in ATM.*/
 public class Date extends java.util.Date implements Serializable {
 
+    /* Day, month and year of date. */
     private int day;
     private int month;
     private int year;
+
+    /* Name of byte stream file. */
     private static final String filename = "date";
-
-    //    private DateFormat sdf;
-    //private static int today; //???
-
-    public static void main(String[] args) {
-        Date today = new Date();
-
-        System.out.println(today);
-        today.update();
-        System.out.println(today);
-
-        Date other = new Date();
-        System.out.println(other);
-        System.out.println(today);
-        other.update();
-        System.out.println(other);
-        System.out.println("today is " + today);
-    }
-
 
     public Date() {
         File f = new File(filename);
@@ -46,6 +28,7 @@ public class Date extends java.util.Date implements Serializable {
                 this.day = today.getDay();
                 this.month = today.getMonth();
                 this.year = today.getYear();
+
             } catch (IOException ioe) {
                 ioe.printStackTrace();
 
@@ -53,12 +36,10 @@ public class Date extends java.util.Date implements Serializable {
                 System.out.println("Class not found");
                 c.printStackTrace();
             }
-
-
         }
-
     }
 
+    /* Get name of byte file that stores date. */
     public static String getFilename() {
         return filename;
     }
@@ -78,6 +59,29 @@ public class Date extends java.util.Date implements Serializable {
         return this.year;
     }
 
+    /* Set date to be the current working day. */
+    public void setToday() {
+        try {
+            FileInputStream fis = new FileInputStream(filename);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            Date today = (Date) ois.readObject();
+            ois.close();
+            fis.close();
+
+            this.day = today.getDay();
+            this.month = today.getMonth();
+            this.year = today.getYear();
+
+        } catch (
+                IOException ioe) {
+            ioe.printStackTrace();
+        } catch (ClassNotFoundException c) {
+            System.out.println("Class not found");
+            c.printStackTrace();
+        }
+    }
+
+    /* Set current date to beginning of the year */
     public void setDate() {
         this.month = 1;
         this.day = 1;
@@ -85,6 +89,9 @@ public class Date extends java.util.Date implements Serializable {
         store();
     }
 
+    /*Update the current date
+     * Assume: each month has 31 days
+     **/
     public void update() {
         this.day++;
         if (this.day == 31) {
@@ -98,6 +105,7 @@ public class Date extends java.util.Date implements Serializable {
         store();
     }
 
+    /* Store current date.*/
     private void store() {
         try {
             FileOutputStream fos = new FileOutputStream(filename);
@@ -112,12 +120,13 @@ public class Date extends java.util.Date implements Serializable {
 
     @Override
     public String toString() {
-//        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String yyyy = Integer.toString(this.year);
         String MM = Integer.toString(this.month);
         String dd = Integer.toString(this.day);
+
         StringBuilder thisDate = new StringBuilder();
         thisDate.append(yyyy + "-" + MM + "-" + dd);
+
         return String.valueOf(thisDate);
     }
 }
