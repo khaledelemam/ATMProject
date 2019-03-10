@@ -131,7 +131,6 @@ public class User implements Serializable {
 
     public void requestAccount(String account){ request = account; }
 
-    public void setPrimaryAccount(ChequingAccount acc){ this.primaryAccount = acc;}
 
     public ChequingAccount getPrimaryAccount() { return this.primaryAccount; }
 

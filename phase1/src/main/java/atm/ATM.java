@@ -215,7 +215,7 @@ public class ATM {
     public String viewAccountsInfo() {
         String accInfo = "Net total: " + user.netUserBalance() + "\n";
         for (String account: user.accountInfo()) {
-            accInfo += account;
+            accInfo += account + "\n";
         }
         return accInfo;
     }
