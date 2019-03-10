@@ -12,6 +12,7 @@
 (1) Approve new user requests
 (2) Approve account requests for existing users
 (3) Reverse transactions
+*Bank manager reverses transactions between accounts.*
 (4) Set the date
 (5) Restock denominations
 

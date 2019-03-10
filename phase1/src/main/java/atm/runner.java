@@ -25,7 +25,7 @@ public class runner {
         System.out.println(time.toString());
 
 
-        while (!time.toString().equals("12:00:00")) {
+        while (!time.toString().equals("00:00:00")) {
             boolean newUser = false;
             time = ZonedDateTime.now().toLocalTime().truncatedTo(ChronoUnit.SECONDS);
 
