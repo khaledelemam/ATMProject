@@ -8,13 +8,21 @@ import java.text.DecimalFormat;
 
 
 public abstract class Account implements Serializable {
+
+    double balance;
+    private DecimalFormat currencyFormat = new DecimalFormat("0.00");
+    private Transaction lastTransaction;
     private Date dateOpened;
     private static final long serialVersionUID = 10L;
 
     public Account() {
+        this.lastTransaction = null;
+        this.balance = 0;
         this.dateOpened = new Date();
     }
-    public abstract String getBalance();
+    public String getBalance(){
+        return currencyFormat.format(balance);
+    }
 
     public abstract void setBalance(double amount) throws InsufficientFundsException;
 
@@ -22,12 +30,16 @@ public abstract class Account implements Serializable {
         return dateOpened;
     }
 
-    public  abstract Transaction getLastTransaction();
+    public Transaction getLastTransaction(){
+        return lastTransaction;
+    }
 
-    public abstract void setLastTransaction(Transaction newTransaction);
+    public void setLastTransaction(Transaction newTransaction){
+        lastTransaction = newTransaction;
+    }
 
-    public abstract double getNetTotal();
+    public abstract  double getNetTotal();
 
-    public abstract double getDoubleBalance();
+
 
 }
