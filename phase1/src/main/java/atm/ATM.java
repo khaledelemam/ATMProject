@@ -14,11 +14,7 @@ public class ATM {
     public ATM() throws IOException {
     }
 
-    protected boolean login(String username, String password) {
-        // if username is valid
-        // if password matches username
-        // return true
-        // else return false
+    boolean login(String username, String password) {
         bankManager.retrieve();
 
         ArrayList<User> users = bankManager.users;
@@ -39,7 +35,7 @@ public class ATM {
 
     }
 
-    public boolean login2(String username){
+    boolean login2(String username){
         bankManager.retrieve();
         ArrayList<User> users = bankManager.users;
 
@@ -54,11 +50,7 @@ public class ATM {
     }
 
 
-    public void newUser(String username) throws UsernameTakenException{
-        // call to BankManager to create a new user account with default password
-        // cannot have two users with the same username
-        // bank manager responds with a new user object that is printed so user knows their user/pass
-        // and then this is returned
+    void newUser(String username) throws UsernameTakenException{
         File f = new File("file2");
         if (f.exists()) {
             bankManager.retrieveRequests();
@@ -80,16 +72,16 @@ public class ATM {
     }
 
 
-    public void changePassword(String newPassword) {
+    void changePassword(String newPassword) {
         user.setPassword(newPassword);
         bankManager.store();
     }
 
-    public void viewAccounts() {
+    void viewAccounts() {
         user.viewAccounts();
     }
 
-    public void internalTransfer(int from, int to , double amount) throws InsufficientFundsException {
+    void internalTransfer(int from, int to , double amount) throws InsufficientFundsException {
         try {
             Account accFrom = user.getAccount(from);
             Account accTo = user.getAccount(to);
@@ -103,7 +95,7 @@ public class ATM {
             System.out.println("You only have one account. Please request another account.");
         }
     }
-    public void externalTransfer(int sender, User recipient,  double amount) throws InsufficientFundsException {
+    void externalTransfer(int sender, User recipient,  double amount) throws InsufficientFundsException {
         if (recipient.getPrimaryAccount() != null) {
             Account accFrom = user.getAccount(sender);
             ChequingAccount to = recipient.getPrimaryAccount();
@@ -116,7 +108,7 @@ public class ATM {
         bankManager.store();
     }
 
-    public void deposit() throws IOException, InsufficientFundsException {
+    void deposit() throws IOException, InsufficientFundsException {
         File deposits = new File("phase1/src/main/java/atm/deposits.txt");
         BufferedReader depositReader = new BufferedReader(new FileReader(deposits));
         ArrayList<String[]> todaysDeposits = new ArrayList<>();
@@ -167,7 +159,7 @@ public class ATM {
     }
 
 
-    public void withdrawal(int account, int[] cashAmounts) throws InsufficientFundsException {
+    void withdrawal(int account, int[] cashAmounts) throws InsufficientFundsException {
 
         int amount = (cashAmounts[0] * 5) +
                 (cashAmounts[1] * 10) +
@@ -194,7 +186,7 @@ public class ATM {
 
     }
 
-    public void payBill(int account, double amount) throws IOException, InsufficientFundsException {
+    void payBill(int account, double amount) throws IOException, InsufficientFundsException {
         Account acc = user.getAccount(account);
         acc.setBalance(-amount);
 
@@ -211,7 +203,7 @@ public class ATM {
         bankManager.store();
     }
 
-    public String viewAccountsInfo() {
+    String viewAccountsInfo() {
         String accInfo = "Net total: " + user.netUserBalance() + "\n";
         for (String account: user.accountInfo()) {
             accInfo += account + "\n";
@@ -219,7 +211,7 @@ public class ATM {
         return accInfo;
     }
 
-    public void requestAccount(int account){
+    void requestAccount(int account){
         if (account == 1){
             user.requestAccount("Chequing");
 
@@ -238,7 +230,7 @@ public class ATM {
         bankManager.store();
     }
 
-    public boolean adminCheck(String password){
+    boolean adminCheck(String password){
 
         if(password.equals(bankManager.getPassword())){
             return true;
@@ -248,44 +240,45 @@ public class ATM {
 
 
 
-    public void newAccountCreation() {
+    void newAccountCreation() {
         File f = new File("file");
         if (f.exists()) {
             bankManager.retrieve();
         }
         bankManager.createUser();
+        System.out.println("New users created.");
         bankManager.store();
 
     }
 
-    public void usersRequests(){
+    void usersRequests(){
         bankManager.retrieve();
         bankManager.userRequestAccount();
+        System.out.println("New accounts created");
         bankManager.store();
     }
 
-    public String getUserPassword(){
+    String getUserPassword(){
             return user.getPassword();
     }
 
 
-    public User checkExistingUser(String username) {
+    User checkExistingUser(String username) {
        return  bankManager.checkExistingUser(username);
     }
 
 
-    public void date(){
+    void date(){
         bankManager.setDate();
     }
 
 
-    public void reverseTransaction(String username, int account) throws InsufficientFundsException{
+    void reverseTransaction(String username, int account) throws InsufficientFundsException{
         bankManager.ReverseLastTransaction(username,account);
-        System.out.println("Reversed transaction for: " + username);
         bankManager.store();
     }
 
-    public void viewAccountsManager(String name){
+    void viewAccountsManager(String name){
         User user  = checkExistingUser(name);
         user.viewAccounts();
         bankManager.store();
@@ -293,7 +286,7 @@ public class ATM {
 
     }
 
-    public CashManager getCashManager() {
+    CashManager getCashManager() {
         return cashManager;
     }
 }

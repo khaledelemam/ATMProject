@@ -1,10 +1,12 @@
 /Account/
 --
+- dateOpened: Date
 _- serialVersionUID_
 --
++ Account()
 /+ getBalance(): String/
 /+ setBalance(amount: double): void/
-/+ getDateOpened(): Date/
++ getDateOpened(): Date
 /+ getLastTransaction(): Transaction/
 /+ setLastTransaction(newTransaction: Transaction): void/
 /+ getNetTotal(): double/

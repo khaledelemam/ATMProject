@@ -12,7 +12,6 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     private String username;
     private String password;
-    private int numAccounts;
     private DecimalFormat currencyFormat = new DecimalFormat("0.00");
     private HashMap<Integer,Account> accounts = new HashMap<>();
     private HashMap<Account,Integer> map = new HashMap<>();
@@ -25,24 +24,8 @@ public class User implements Serializable {
 
 
     public User(String username) {
-        this.numAccounts = 0;
         this.username = username;
         this.primaryAccount = null;
-
-
-
-        //There should not be a "default" account, the user requests the specific account
-        // these accounts are just for testing purposes.
-
-//        SavingsAccount s = new SavingsAccount((this));
-//        s.setBalance(100);
-//        this.accounts.put(1, s);
-//        this.map.put(s, 1);
-//
-//
-//        ChequingAccount c = new ChequingAccount(this);
-//        this.accounts.put(2, c);
-//        this.map.put(c, 2);
 
 
 
@@ -54,16 +37,16 @@ public class User implements Serializable {
     }
 
 
-    public void setPassword (String password){
+    void setPassword (String password){
         this.password = password;
     }
 
-    public String getUsername() {return this.username;}
+    String getUsername() {return this.username;}
 
-    public String getPassword() {return this.password;}
+    String getPassword() {return this.password;}
 
 
-    public void addAccount(String account){
+    void addAccount(String account){
 
         Account hold = null;
 
@@ -91,7 +74,7 @@ public class User implements Serializable {
         }
     }
 
-    public void viewAccounts(){
+    void viewAccounts(){
         for(int i = 1 ; i <=accounts.size(); i++){
             String str = Integer.toString(map.get(accounts.get(i)));
             System.out.println("(" +str + ")" +accounts.get(i));
@@ -99,7 +82,7 @@ public class User implements Serializable {
         }
     }
 
-    public Account getAccount(int acc){
+    Account getAccount(int acc){
 
         for(int i = 1 ; i <=accounts.size(); i++){
             if (acc== i) {
@@ -109,7 +92,7 @@ public class User implements Serializable {
         return null;
     }
 
-    public ArrayList<String> accountInfo() {
+    ArrayList<String> accountInfo() {
         ArrayList<String> accountsInfo = new ArrayList<>();
         for(int i = 1 ; i <= accounts.size(); i++) {
             Account account = accounts.get(i);
@@ -125,15 +108,15 @@ public class User implements Serializable {
         return accountsInfo;
     }
 
-    public String getRequest(){
+    String getRequest(){
         return request ;
     }
 
-    public void requestAccount(String account){ request = account; }
+    void requestAccount(String account){ request = account; }
 
-    public ChequingAccount getPrimaryAccount() { return this.primaryAccount; }
+    ChequingAccount getPrimaryAccount() { return this.primaryAccount; }
 
-    public String netUserBalance() {
+    String netUserBalance() {
         double netTotal = 0;
         for (int k = 1; k <= accounts.size(); k++){
             netTotal += accounts.get(k).getNetTotal();

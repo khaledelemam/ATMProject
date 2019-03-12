@@ -1,20 +1,10 @@
 package atm;
 
-import java.text.DecimalFormat;
 
 public class SavingsAccount extends Account {
-    private double balance;
-    private DecimalFormat currencyFormat = new DecimalFormat("0.00");
-    protected Transaction lastTransaction;
 
     public SavingsAccount() {
-        this.balance = 0;
-        this.lastTransaction = null;
-    }
-
-    @Override
-    public String getBalance() {
-        return currencyFormat.format(this.balance);
+        super();
     }
 
     @Override
@@ -31,7 +21,9 @@ public class SavingsAccount extends Account {
     }
 
     public void addInterest() {
-        this.balance = this.balance * 0.1;
+        double hold  = this.balance * 0.1;
+        this.balance = hold + this.balance;
+
     }
 
     @Override
@@ -40,19 +32,8 @@ public class SavingsAccount extends Account {
     }
 
     @Override
-    public double getDoubleBalance() {return this.balance;}
-
-    public void setLastTransaction(Transaction newTransaction) {
-        this.lastTransaction = newTransaction;
-    }
-
-    @Override
     public double getNetTotal() {
         return this.balance;
-    }
-
-    public Transaction getLastTransaction() {
-        return this.lastTransaction;
     }
 
 }

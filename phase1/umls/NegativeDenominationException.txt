@@ -1,0 +1,4 @@
+NegativeDenominationException
+--
+--
++ NegativeDenominationException()

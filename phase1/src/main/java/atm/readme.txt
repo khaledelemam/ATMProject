@@ -12,16 +12,19 @@
 (1) Approve new user requests
 (2) Approve account requests for existing users
 (3) Reverse transactions
+*Bank manager reverses transactions between accounts.*
 (4) Set the date
 (5) Restock denominations
 
 --- How to register as a user ---
 
 (1) Login as a user
+*default password for user is "1"*
 (2) Request a new user account
 (3) Wait until administrator approves your account, based on your credit score
 * you have to login as an admin to approve the user request *
 (5) Once approved by the admin, you can login and will be given your temporary password
+*temporary password is 1*
 
 --- What you can do as a registered user ---
 

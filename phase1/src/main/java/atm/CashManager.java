@@ -21,12 +21,12 @@ public class CashManager {
     }
 
     //returns a single denomination
-    public int getDenom(int bill){
+    int getDenom(int bill){
         return denominations[getIndex(bill)];
     }
 
     //bill must be 5, 10, 20, or 50
-    public void changeDenom(int bill, int amount) throws NegativeDenominationException, IOException {
+    void changeDenom(int bill, int amount) throws NegativeDenominationException, IOException {
         if (checkDenom(bill, amount)){
             denominations[getIndex(bill)] += amount;
             writeToFile();
@@ -37,7 +37,7 @@ public class CashManager {
         }
     }
 
-    public boolean checkDenom(int bill, int amount){
+    boolean checkDenom(int bill, int amount){
         if (denominations[getIndex(bill)] + amount < 0){
             return false;
         }
@@ -97,7 +97,7 @@ public class CashManager {
 
 
     // sends an alert when a denomination falls below the threshold
-    public void update() throws IOException {
+    void update() throws IOException {
         File file = new File(alertFile);
         PrintWriter writer = new PrintWriter(new FileWriter(file));
         for (int i = 0; i< 4; i++){

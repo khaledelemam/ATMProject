@@ -4,10 +4,12 @@ Transaction
 - recipient: Account
 - amount: double
 - date: Date
-_ -serialVersionUID_
+_- serialVersionUID_
 --
 + Transaction(source: Account, recipient: Account, amount: double)
++ Transaction(source: Account, amount: double)
 + toString(): String
 + getAmount(): double
++ getRecipient(): Account
++ getSource(): Account
 + getDate(): date
-+ reverse(transaction: Transaction): Transaction

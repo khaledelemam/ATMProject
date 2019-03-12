@@ -2,9 +2,8 @@ ATM
 --
 - user: User
 - bankManager: BankManager
-- date: Date
-- denoms: int[ ]
 - cashManager: CashManager
+- date: Date
 --
 # login(username: String, password: String): boolean
 # login2(username: String): boolean
@@ -14,7 +13,7 @@ ATM
 + internalTransfer(from: int, to: int, amount: double): void
 + externalTransfer(sender: int, recipient: User, amount: double):  void
 + deposit(): void
-+ withdrawl(account: int, amount: int): void
++ withdrawl(account: int, cashAmounts: int[ ]): void
 + payBill(account: int, amount: double): void
 + viewAccountsInfo(): String
 + requestAccount(account: int): void

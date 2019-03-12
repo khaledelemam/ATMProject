@@ -1,4 +1,5 @@
 ReverseATM
 --
 --
-+ ReverseWithdrawal(user: User, acc: Account, amount: double): void
++ ReverseWithdrawal(acc: Account, trans: Transaction): void
++ ReverseTransaction(acc: Account, trans: Transaction): void

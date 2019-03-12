@@ -1,6 +1,5 @@
 SavingsAccount
 --
-- dateOpened: Date
 - balance: double
 - currencyFormat: DecimalFormat
 # lastTransaction: Transaction
@@ -14,4 +13,3 @@ SavingsAccount
 + setLastTransaction(newTransaction: Transaction): void
 + getNetTotal(): double
 + getLastTransaction(): Transaction
-+ getDateOpened(): Date
