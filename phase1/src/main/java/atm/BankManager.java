@@ -86,6 +86,7 @@ public class BankManager implements Serializable {
                 return users.get(i);
             }
         }
+        store();
         return null;
     }
 

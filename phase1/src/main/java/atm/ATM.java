@@ -50,28 +50,6 @@ public class ATM {
     }
 
 
-    void newUser(String username) throws UsernameTakenException{
-        File f = new File("file2");
-        if (f.exists()) {
-            bankManager.retrieveRequests();
-        }
-       String request = "Chequing";
-
-        if (checkExistingUser(username) != null){
-            UsernameTakenException u = new UsernameTakenException();
-            throw u;
-        }
-        else {
-            ArrayList<String> arr = new ArrayList<>();
-            arr.add(username);
-            arr.add(request);
-
-            bankManager.requests.add(arr);
-            bankManager.storeRequests();
-        }
-    }
-
-
     void changePassword(String newPassword) {
         user.setPassword(newPassword);
         bankManager.store();
@@ -122,10 +100,12 @@ public class ATM {
         while (line != null) {
             if (line.equals(date.toString())) {
                 line = depositReader.readLine();
+
                 while (!(line.equals(""))) {
                     String[] deposit = line.split(" ");
                     todaysDeposits.add(deposit);
                     line = depositReader.readLine();
+                    if (line == null) break;
                 }
                 depositReader.close();
                 break;
@@ -143,18 +123,19 @@ public class ATM {
             if (user != null) {
                 user.getPrimaryAccount().setBalance(amount);
                 bankManager.store();
-
-                if (type.equalsIgnoreCase("cash")) {
-                    int billType = amount.intValue();
-
-                    try {
-                        cashManager.changeDenom(billType, 1);
-                        cashManager.update();
-                    } catch (NegativeDenominationException e){
-                        e.getMessage();
-                    }
-                }
             }
+
+//                if (type.equalsIgnoreCase("cash")) {
+//                    int billType = amount.intValue();
+//
+//                    try {
+//                        cashManager.changeDenom(billType, 1);
+//                        cashManager.update();
+//                    } catch (NegativeDenominationException e){
+//                        e.getMessage();
+//                    }
+//                }
+//            }
         }
     }
 
@@ -236,6 +217,28 @@ public class ATM {
             return true;
         }
         else return false;
+    }
+
+
+    void newUser(String username) throws UsernameTakenException{
+        File f = new File("file2");
+        if (f.exists()) {
+            bankManager.retrieveRequests();
+        }
+        String request = "Chequing";
+
+        if (checkExistingUser(username) != null){
+            UsernameTakenException u = new UsernameTakenException();
+            throw u;
+        }
+        else {
+            ArrayList<String> arr = new ArrayList<>();
+            arr.add(username);
+            arr.add(request);
+
+            bankManager.requests.add(arr);
+            bankManager.storeRequests();
+        }
     }
 
 
