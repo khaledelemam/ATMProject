@@ -9,8 +9,8 @@ public class CashManager {
 
     private final int threshold = 20;
 
-    private String cashFile = "phase1/src/main/java/atm/cash.txt";
-    private String alertFile = "phase1/src/main/java/atm/alerts.txt";
+    private String cashFile = "phase2/src/main/java/atm/cash.txt";
+    private String alertFile = "phase2/src/main/java/atm/alerts.txt";
 
     public CashManager() throws IOException {
         cashFromFile();

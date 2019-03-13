@@ -76,6 +76,17 @@ public class BankManager implements Serializable {
     }
 
     User checkExistingUser(String username){
+        for (int i = 0; i < users.size(); i ++) {
+            if (users.get(i).getUsername().equals(username)){
+                return users.get(i);
+            }
+        }
+
+        return null;
+    }
+
+
+    User checkExistingUserDeposit(String username){
         File f = new File("file");
         if (f.exists()) {
             retrieve();
@@ -89,6 +100,7 @@ public class BankManager implements Serializable {
         store();
         return null;
     }
+
 
 
 

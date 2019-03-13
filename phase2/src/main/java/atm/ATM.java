@@ -30,6 +30,7 @@ public class ATM {
             }
 
         }
+        System.out.println(99);
         bankManager.store();
         return false;
 
@@ -59,35 +60,35 @@ public class ATM {
         user.viewAccounts();
     }
 
-    void internalTransfer(int from, int to , double amount) throws InsufficientFundsException {
-        try {
-            Account accFrom = user.getAccount(from);
-            Account accTo = user.getAccount(to);
-            accFrom.setBalance(-amount);
-            accTo.setBalance(amount);
-            Transaction intTransfer = new Transaction(accFrom, accTo, amount);
-            accTo.setLastTransaction(intTransfer);
-            accFrom.setLastTransaction(intTransfer);
-            bankManager.store();
-        } catch (NullPointerException n) {
-            System.out.println("You only have one account. Please request another account.");
-        }
-    }
-    void externalTransfer(int sender, User recipient,  double amount) throws InsufficientFundsException {
-        if (recipient.getPrimaryAccount() != null) {
-            Account accFrom = user.getAccount(sender);
-            ChequingAccount to = recipient.getPrimaryAccount();
-            to.setBalance(amount);
-            accFrom.setBalance(-amount);
-            Transaction extTransfer = new Transaction(accFrom, to, amount);
-            accFrom.setLastTransaction(extTransfer);
-            to.setLastTransaction(extTransfer);
-        }
-        bankManager.store();
-    }
+//    void internalTransfer(int from, int to , double amount) throws InsufficientFundsException {
+//        try {
+//            Account accFrom = user.getAccount(from);
+//            Account accTo = user.getAccount(to);
+//            accFrom.setBalance(-amount);
+//            accTo.setBalance(amount);
+//            Transaction intTransfer = new Transaction(accFrom, accTo, amount);
+//            accTo.setLastTransaction(intTransfer);
+//            accFrom.setLastTransaction(intTransfer);
+//            bankManager.store();
+//        } catch (NullPointerException n) {
+//            System.out.println("You only have one account. Please request another account.");
+//        }
+//    }
+//    void externalTransfer(int sender, User recipient,  double amount) throws InsufficientFundsException {
+//        if (recipient.getPrimaryAccount() != null) {
+//            Account accFrom = user.getAccount(sender);
+//            ChequingAccount to = recipient.getPrimaryAccount();
+//            to.setBalance(amount);
+//            accFrom.setBalance(-amount);
+//            Transaction extTransfer = new Transaction(accFrom, to, amount);
+//            accFrom.setLastTransaction(extTransfer);
+//            to.setLastTransaction(extTransfer);
+//        }
+//        bankManager.store();
+//    }
 
     void deposit() throws IOException, InsufficientFundsException {
-        File deposits = new File("phase1/src/main/java/atm/deposits.txt");
+        File deposits = new File("phase2/src/main/java/atm/deposits.txt");
         BufferedReader depositReader = new BufferedReader(new FileReader(deposits));
         ArrayList<String[]> todaysDeposits = new ArrayList<>();
 
@@ -119,11 +120,12 @@ public class ATM {
             Double amount = Double.parseDouble(item[2]);
 
             // check if user is in system
-            user = checkExistingUser(username);
+            user = checkExistingUserDeposit(username);
             if (user != null) {
                 user.getPrimaryAccount().setBalance(amount);
                 bankManager.store();
             }
+
 
 //                if (type.equalsIgnoreCase("cash")) {
 //                    int billType = amount.intValue();
@@ -163,6 +165,7 @@ public class ATM {
             e.getMessage();
         } catch (IOException e) {
             e.printStackTrace();
+
         }
 
     }
@@ -185,6 +188,7 @@ public class ATM {
     }
 
     String viewAccountsInfo() {
+//        bankManager.retrieve();
         String accInfo = "Net total: " + user.netUserBalance() + "\n";
         for (String account: user.accountInfo()) {
             accInfo += account + "\n";
@@ -268,6 +272,9 @@ public class ATM {
 
     User checkExistingUser(String username) {
        return  bankManager.checkExistingUser(username);
+    }
+    User checkExistingUserDeposit (String username) {
+        return  bankManager.checkExistingUserDeposit(username);
     }
 
 

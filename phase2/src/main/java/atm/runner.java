@@ -16,6 +16,7 @@ public class runner {
         Scanner in = new Scanner(System.in);
         Date date = new Date();
         ATM boundlessATM = new ATM();
+        String username = "";
 
         try {
             boundlessATM.deposit();
@@ -138,7 +139,7 @@ public class runner {
                                     case 1: // previous login
 
                                             System.out.println("Enter your username: ");
-                                            String username = in.nextLine();
+                                            username = in.nextLine();
 
                                             System.out.println("Enter your password: ");
                                             String password = in.nextLine();
@@ -155,8 +156,8 @@ public class runner {
 
                                 case 2: // first login
                                     System.out.println("Enter your username: ");
-                                    String username2 = in.nextLine();
-                                    loggedIn = boundlessATM.login2(username2);
+                                    username = in.nextLine();
+                                    loggedIn = boundlessATM.login2(username);
 
                                     if (!loggedIn) {
                                         System.out.println("Invalid username ");
@@ -258,7 +259,8 @@ public class runner {
                                     double amount = Double.parseDouble(in.nextLine());
 
                                     try {
-                                        boundlessATM.internalTransfer(from, to, amount);
+                                        UserExecutes transaction = new UserExecutes(new InternalTransfer(from, to, username));
+                                        transaction.executeTransaction(amount);
                                     } catch (InsufficientFundsException e) {
                                         System.out.println(e.getMessage());
                                     }
@@ -268,8 +270,8 @@ public class runner {
                                 case 4: // external transfer
                                     System.out.println("To whom do you want to transfer to?: ");
                                     String userTo = in.nextLine();
-                                    User user = boundlessATM.checkExistingUser(userTo);
-                                    if (user != null) {
+
+//                                    if (user != null) {
                                         System.out.println("How much money would you like to transfer?: ");
                                         amount = Double.parseDouble(in.nextLine());
 
@@ -278,11 +280,12 @@ public class runner {
                                         int accFrom = Integer.parseInt(in.nextLine());
 
                                         try {
-                                            boundlessATM.externalTransfer(accFrom, user, amount);
+                                            UserExecutes transaction = new UserExecutes(new ExternalTransfer(accFrom, userTo, username));
+                                            transaction.executeTransaction(amount);
                                         } catch(InsufficientFundsException e){
                                             System.out.println(e.getMessage());
                                         }
-                                    }
+//                                    }
                                     break;
 
                                 case 5: // pay bill
@@ -294,7 +297,8 @@ public class runner {
                                     amount = Double.parseDouble(in.nextLine());
 
                                     try {
-                                        boundlessATM.payBill(from, amount);
+                                        UserExecutes transaction = new UserExecutes(new PayBills(from, username));
+                                        transaction.executeTransaction(amount);
                                     }catch (InsufficientFundsException e) {
                                         System.out.println(e.getMessage());
                                     }
