@@ -104,7 +104,8 @@ public class atmInterface extends JFrame {
 
     public atmInterface() {
 
-        // ----------------------------- actions -----------------------------
+        // ----------------------------- reused actions -----------------------------
+
         logoutActionListener logout = new logoutActionListener();
 
         // ----------------------------- login page -----------------------------
