@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.regex.Pattern;
 
 public class atmInterface extends JFrame {
 
@@ -13,11 +12,11 @@ public class atmInterface extends JFrame {
 
     CardLayout cardLayout = (CardLayout)atmInterface.getLayout();
 
-    private JTextField login_usernameTextField, login_passwordTextField, newUsernameTextField;
+    private JTextField login_usernameTextField, login_passwordTextField, new_username;
     private JButton createNewAccountButton, adminLoginButton;
     private JTextArea wELCTextArea;
     private JPanel loginScreen, createNewUser, adminControls;
-    private JTextField creditScore;
+    private JTextField creditScoreTextField;
     private JTextArea newUserMessage;
     private JLabel newUsernameLabel;
     private JLabel creditScoreLabel;
@@ -72,7 +71,7 @@ public class atmInterface extends JFrame {
     private JLabel login_invalidLabel;
     private JPanel main_menu;
     private JPanel main_transfers;
-    private JPanel main_withdrawals;
+    private JPanel main_cash;
     private JPanel transfers_internal;
     private JPanel transfers_external;
     private JPanel transfers_billPayment;
@@ -81,8 +80,13 @@ public class atmInterface extends JFrame {
     private JLabel admin_20bills;
     private JLabel admin_50bills;
     private JLabel main_totalWithdrawal;
-    private JLabel main_insufficientFunds;
+    private JLabel withdrawalMessage;
     private JLabel main_passwordMessage;
+    private JLabel newUser_message;
+    private JButton depositButton;
+    private JTextField deposit_amount;
+    private JLabel depositLabel;
+    private JLabel depositMessage;
     private JLabel main_newPasswordMessage;
 
     ATM atm;
@@ -96,17 +100,8 @@ public class atmInterface extends JFrame {
     }
 
 
-    public class logoutActionListener implements ActionListener{
-        public void actionPerformed(ActionEvent e){
-            cardLayout.show(atmInterface, "loginScreen");
-        }
-    }
 
     public atmInterface() {
-
-        // ----------------------------- reused actions -----------------------------
-
-        logoutActionListener logout = new logoutActionListener();
 
         // ----------------------------- login page -----------------------------
 
@@ -136,21 +131,52 @@ public class atmInterface extends JFrame {
                     login_invalidLabel.setText("Try again!");
                 }
                 login_usernameTextField.setText("");
-                login_passwordTextField.setText("");
             }
         });
 
         // admin controls
-        admin_logoutButton.addActionListener(logout);
+        admin_logoutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
 
 
-        // create new user
-        backButton.addActionListener(logout);
+        // --- create new user ---
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(atmInterface, "loginScreen");
+                new_username.setText("");
+                creditScoreTextField.setText("");
+                login_usernameTextField.setText("");
+            }
+        });
+
+        requestAccountButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    UserRequests request = new UserRequests();
+                    request.newUser(new_username.getText());
+                } catch (UsernameTakenException u) {
+                    newUser_message.setText(u.getMessage());
+                }
+                newUser_message.setText("Your password is \"1\"");
+            }
+        });
 
 
         // ----------------------------- menu menu -----------------------------
 
-        mainMenu_logoutButton.addActionListener(logout);
+        mainMenu_logoutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(atmInterface, "loginScreen");
+                // TODO: clear fields
+            }
+        });
 
 
         changePasswordButton.addActionListener(new ActionListener() {
