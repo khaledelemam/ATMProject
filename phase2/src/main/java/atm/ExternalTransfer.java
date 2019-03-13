@@ -3,7 +3,7 @@ package atm;
 public class ExternalTransfer implements UserDo{
 
     private BankManager bankmanager = new BankManager();
-
+//    private Database Database = new Database();
     private String username;
     private User user;
     private String recipientS;
@@ -17,9 +17,9 @@ public class ExternalTransfer implements UserDo{
     }
 
     public void doTransaction(double amount) throws InsufficientFundsException {
-        bankmanager.retrieve();
-        user = bankmanager.checkExistingUser(username);
-        recipient = bankmanager.checkExistingUser(recipientS);
+//        Database.retrieve();
+        user = Database.checkExistingUser(username);
+        recipient = Database.checkExistingUser(recipientS);
 
         if (recipient != null) {
             if (recipient.getPrimaryAccount() != null) {
@@ -31,7 +31,7 @@ public class ExternalTransfer implements UserDo{
                 Transaction extTransfer = new Transaction(accFrom, to, amount);
                 accFrom.setLastTransaction(extTransfer);
                 to.setLastTransaction(extTransfer);
-                bankmanager.store();
+                Database.store();
             }
 
         }

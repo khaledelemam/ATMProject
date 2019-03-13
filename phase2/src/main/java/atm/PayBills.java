@@ -6,8 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class PayBills implements UserDo{
-
-    private BankManager bankmanager = new BankManager();
+//    Database Database = new Database();
     private int account;
     private String username;
     private User user;
@@ -19,8 +18,8 @@ public class PayBills implements UserDo{
 
 
     public void doTransaction(double amount) throws IOException, InsufficientFundsException {
-        bankmanager.retrieve();
-        user = bankmanager.checkExistingUser(username);
+//        Database.retrieve();
+        user = Database.checkExistingUser(username);
         Account acc = user.getAccount(account);
         acc.setBalance(-amount);
 
@@ -32,7 +31,7 @@ public class PayBills implements UserDo{
         Transaction bill = new Transaction(acc, amount);
         acc.setLastTransaction(bill);
 
-        bankmanager.store();
+        Database.store();
     }
 
 }

@@ -1,7 +1,7 @@
 package atm;
 
 public class InternalTransfer implements UserDo {
-
+//    private Database Database = new Database();
     private BankManager bankmanager = new BankManager();
     private String username;
     private int from;
@@ -16,8 +16,8 @@ public class InternalTransfer implements UserDo {
 
 
     public void doTransaction(double amount) throws InsufficientFundsException {
-        bankmanager.retrieve();
-        user = bankmanager.checkExistingUser(username);
+//        Database.retrieve();
+        user = Database.checkExistingUser(username);
         try {
             Account accFrom = user.getAccount(from);
             Account accTo = user.getAccount(to);
@@ -26,7 +26,7 @@ public class InternalTransfer implements UserDo {
             Transaction intTransfer = new Transaction(accFrom, accTo, amount);
             accTo.setLastTransaction(intTransfer);
             accFrom.setLastTransaction(intTransfer);
-            bankmanager.store();
+            Database.store();
         } catch (NullPointerException n) {
             System.out.println("You only have one account. Please request another account.");
         }

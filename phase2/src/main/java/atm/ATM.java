@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class ATM {
 
     private User user;
+//    private Database Database = new Database();
     private BankManager bankManager = new BankManager();
     private CashManager cashManager = new CashManager();
     private Date date = new Date();
@@ -15,14 +16,14 @@ public class ATM {
     }
 
     boolean login(String username, String password) {
-        bankManager.retrieve();
+        Database.retrieve();
 
-        ArrayList<User> users = bankManager.users;
+        ArrayList<User> users = Database.users;
         for (int i = 0; i < users.size(); i ++) {
 
             if (users.get(i).getUsername().equals(username)){
                 if (users.get(i).getPassword().equals(password)){
-                    user = bankManager.users.get(i);
+                    user = Database.users.get(i);
                     return true;
 
                 }
@@ -30,30 +31,29 @@ public class ATM {
             }
 
         }
-        System.out.println(99);
-        bankManager.store();
+       Database.store();
         return false;
 
     }
 
     boolean login2(String username){
-        bankManager.retrieve();
-        ArrayList<User> users = bankManager.users;
+        Database.retrieve();
+        ArrayList<User> users = Database.users;
 
         for (int i = 0; i < users.size(); i ++) {
             if (users.get(i).getUsername().equals(username)){
-                    user = bankManager.users.get(i);
+                    user = Database.users.get(i);
                     return true;
                 }
         }
-        bankManager.store();
+        Database.store();
         return false;
     }
 
 
     void changePassword(String newPassword) {
         user.setPassword(newPassword);
-        bankManager.store();
+        Database.store();
     }
 
     void viewAccounts() {
@@ -123,7 +123,7 @@ public class ATM {
             user = checkExistingUserDeposit(username);
             if (user != null) {
                 user.getPrimaryAccount().setBalance(amount);
-                bankManager.store();
+                Database.store();
             }
 
 
@@ -153,7 +153,7 @@ public class ATM {
         acc.setBalance(-amount);
         Transaction withdrawal = new Transaction(acc, amount);
         acc.setLastTransaction(withdrawal);
-        bankManager.store();
+        Database.store();
 
         try {
             cashManager.changeDenom(5, -cashAmounts[0]);
@@ -188,7 +188,7 @@ public class ATM {
 //    }
 
     String viewAccountsInfo() {
-//        bankManager.retrieve();
+//        Database.retrieve();
         String accInfo = "Net total: " + user.netUserBalance() + "\n";
         for (String account: user.accountInfo()) {
             accInfo += account + "\n";
@@ -212,7 +212,7 @@ public class ATM {
         else if (account == 4){
             user.requestAccount("Credit Card");
         }
-        bankManager.store();
+        Database.store();
     }
 
     boolean adminCheck(String password){
@@ -250,19 +250,19 @@ public class ATM {
     void newAccountCreation() {
         File f = new File("file");
         if (f.exists()) {
-            bankManager.retrieve();
+            Database.retrieve();
         }
         bankManager.createUser();
         System.out.println("New users created.");
-        bankManager.store();
+
 
     }
 
     void usersRequests(){
-        bankManager.retrieve();
+        Database.retrieve();
         bankManager.userRequestAccount();
         System.out.println("New accounts created");
-        bankManager.store();
+        Database.store();
     }
 
     String getUserPassword(){
@@ -271,10 +271,11 @@ public class ATM {
 
 
     User checkExistingUser(String username) {
-       return  bankManager.checkExistingUser(username);
+       return  Database.checkExistingUser(username);
     }
+
     User checkExistingUserDeposit (String username) {
-        return  bankManager.checkExistingUserDeposit(username);
+        return  Database.checkExistingUserDeposit(username);
     }
 
 
@@ -285,13 +286,13 @@ public class ATM {
 
     void reverseTransaction(String username, int account) throws InsufficientFundsException{
         bankManager.ReverseLastTransaction(username,account);
-        bankManager.store();
+        Database.store();
     }
 
     void viewAccountsManager(String name){
         User user  = checkExistingUser(name);
         user.viewAccounts();
-        bankManager.store();
+        Database.store();
 
 
     }
