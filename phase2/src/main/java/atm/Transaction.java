@@ -1,6 +1,9 @@
 package atm;
 
+import com.sun.xml.internal.bind.v2.TODO;
+
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.time.temporal.Temporal;
 
 public class Transaction implements Serializable {
@@ -8,6 +11,7 @@ public class Transaction implements Serializable {
     private Account source;
     private Account recipient;
     private double amount;
+    private DecimalFormat currencyFormat = new DecimalFormat("0.00");
     private Date date;
     private static final long serialVersionUID = 100L;
     private String username = null;
@@ -35,6 +39,10 @@ public class Transaction implements Serializable {
         this.amount = amount;
         this.date = new Date();
     }
+
+
+
+    //TODO: figure out currency format
 
     @Override
     public String toString() {

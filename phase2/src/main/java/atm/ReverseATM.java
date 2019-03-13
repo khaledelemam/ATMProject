@@ -9,8 +9,8 @@ public class ReverseATM {
         Account to = trans.getSource();
         from.setBalance(-amount);
         to.setBalance(amount);
-        Transaction add = new Transaction(from, to, amount);
-        acc.setLastTransaction(add);
+//        Transaction add = new Transaction(from, to, amount);
+        acc.setLastTransaction(null);
 
     }
 }

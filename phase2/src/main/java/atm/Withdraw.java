@@ -26,7 +26,7 @@ public class Withdraw implements UserDo {
         if (amountTotal == amount) {
 
             User user = Database.checkExistingUser(username);
-            
+
             Account acc = user.getAccount(account);
             acc.setBalance(-amount);
             Transaction withdrawal = new Transaction(acc, amount);
@@ -45,8 +45,8 @@ public class Withdraw implements UserDo {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
+
         else{
             System.out.println("Withdraw invalid. The amount you specified is not equal to the value of the chosen bills.");
         }

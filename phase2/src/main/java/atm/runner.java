@@ -17,12 +17,12 @@ public class runner {
         Date date = new Date();
         ATM boundlessATM = new ATM();
         String username = "";
-
-        try {
-            boundlessATM.deposit();
-        } catch (InsufficientFundsException e) {
-            e.getMessage();
-        }
+//
+//        try {
+//            boundlessATM.deposit();
+//        } catch (InsufficientFundsException e) {
+//            e.getMessage();
+//        }
         System.out.println(time.toString());
 
 
@@ -205,11 +205,12 @@ public class runner {
 
                             System.out.println("(1) View accounts info");
                             System.out.println("(2) Make a withdrawal");
-                            System.out.println("(3) Transfer funds between accounts");
-                            System.out.println("(4) Transfer funds to another user");
-                            System.out.println("(5) Pay a bill");
-                            System.out.println("(6) Change password");
-                            System.out.println("(7) Request new account");
+                            System.out.println("(3) Make a deposit");
+                            System.out.println("(4) Transfer funds between accounts");
+                            System.out.println("(5) Transfer funds to another user");
+                            System.out.println("(6) Pay a bill");
+                            System.out.println("(7) Change password");
+                            System.out.println("(8) Request new account");
                             System.out.println("(0) Log out");
 
                             int option3 = -1;
@@ -260,7 +261,30 @@ public class runner {
 
                                     break;
 
-                                case 3: // internal transfer
+
+
+                                case 3:
+
+                                    UserView viewAccD= new UserView();
+                                    viewAccD.viewAccounts(username);
+
+                                    // this brings up their list of accounts
+
+                                    System.out.println("Which account would you like to deposit to?: ");
+                                    int accountD = Integer.parseInt(in.nextLine());
+
+                                    System.out.println("How much would you like to deposit: ");
+                                    double amountD = Double.parseDouble(in.nextLine());
+                                    try {
+                                        UserExecutes transaction = new UserExecutes(new Deposit(accountD, username));
+                                        transaction.executeTransaction(amountD);
+                                    } catch (InsufficientFundsException e) {
+                                        System.out.println(e.getMessage());
+                                    }
+                                    break;
+
+
+                                case 4: // internal transfer
                                     UserView viewAcc2= new UserView();
                                     viewAcc2.viewAccounts(username);
 
@@ -283,7 +307,7 @@ public class runner {
 
                                     break;
 
-                                case 4: // external transfer
+                                case 5: // external transfer
                                     System.out.println("To whom do you want to transfer to?: ");
                                     String userTo = in.nextLine();
 
@@ -306,7 +330,7 @@ public class runner {
 //                                    }
                                     break;
 
-                                case 5: // pay bill
+                                case 6: // pay bill
                                     UserView viewAcc4= new UserView();
                                     viewAcc4.viewAccounts(username);
 
@@ -324,13 +348,13 @@ public class runner {
                                     }
                                     break;
 
-                                case 6: // change password
+                                case 7: // change password
                                     System.out.println("Enter new password: ");
                                     String newPassword = in.nextLine();
                                     UserExecutes change = new UserExecutes();
                                     change.changePassword(newPassword, username);
                                     break;
-                                case 7:
+                                case 8:
                                     // new account creation
                                     System.out.println("What type of account would you like to open?:");
                                     System.out.println("(1) CHEQUING\n(2) SAVINGS\n(3) LINE OF CREDIT\n(4) CREDIT CARD");
