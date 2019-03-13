@@ -91,11 +91,6 @@ public class atmInterface extends JFrame {
 
     ATM atm = new ATM();
 
-
-
-
-
-
     public atmInterface() {
 
         // ----------------------------- login page -----------------------------
