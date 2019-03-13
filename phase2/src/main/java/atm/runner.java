@@ -23,6 +23,7 @@ public class runner {
 //        } catch (InsufficientFundsException e) {
 //            e.getMessage();
 //        }
+
         System.out.println(time.toString());
 
 
@@ -52,16 +53,20 @@ public class runner {
                     while (!admin) {
                         System.out.println("Enter admin password:");
                         String password = in.nextLine();
-                        admin = boundlessATM.adminCheck(password);
+
+                        BankManager bankManager = new BankManager();
+                        admin = password.equals(bankManager.getPassword());
+
                     boolean adminLoggedIn = true;
+
                     while (adminLoggedIn) {
-                        if (boundlessATM.adminCheck(password)) {
+                        if (admin) {
 
                             System.out.println("(1) Check/Approve new users requests");
                             System.out.println("(2) Check/Approve existing users requests");
                             System.out.println("(3) Reverse users transactions");
                             System.out.println("(4) SetDate");
-                            System.out.println("(5) Change Cash Denominations");
+                            System.out.println("(5) Restock machine");
                             System.out.println("(0) Exit");
 
                             int option2 = Integer.parseInt(in.nextLine());
@@ -120,7 +125,8 @@ public class runner {
                                     break;
 
                         }
-                        } else {
+                        }
+                        else {
                             System.out.println("Invalid admin password");
                             adminLoggedIn = false;
                         }
@@ -153,7 +159,7 @@ public class runner {
                                             System.out.println("Enter your password: ");
                                             String password = in.nextLine();
 
-                                           boolean loggedIn = boundlessATM.login(username, password);
+                                           boolean loggedIn = Database.login(username, password);
 
                                             if (!loggedIn) {
                                                 System.out.println("Invalid username or password");
@@ -182,6 +188,7 @@ public class runner {
                             System.out.println("Enter your preferred username:");
                             String name = in.nextLine();
                             System.out.println("Please wait till the manager processes your request");
+                            //TODO: Handle no to users can have same account
                             try {
                                 UserRequests request = new UserRequests();
                                 request.newUser(name);

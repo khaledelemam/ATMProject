@@ -112,28 +112,30 @@ public class atmInterface extends JFrame {
             }
         });
 
-        adminLoginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (atm.adminCheck(login_passwordTextField.getText())) {
-                    cardLayout.show(atmInterface, "adminControls");
-                    login_passwordTextField.setText("");
-                }
-            }
-        });
+//
+//        adminLoginButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                if (atm.adminCheck(login_passwordTextField.getText())) {
+//                    cardLayout.show(atmInterface, "adminControls");
+//                    login_passwordTextField.setText("");
+//                }
+//            }
+//        });
 
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (atm.login(login_usernameTextField.getText(), login_passwordTextField.getText())) {
-                    cardLayout.show(atmInterface, "mainMenu");
-                } else {
-                    login_invalidLabel.setText("Try again!");
-                }
-                login_usernameTextField.setText("");
-                login_passwordTextField.setText("");
-            }
-        });
+
+//        loginButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                if (atm.login(login_usernameTextField.getText(), login_passwordTextField.getText())) {
+//                    cardLayout.show(atmInterface, "mainMenu");
+//                } else {
+//                    login_invalidLabel.setText("Try again!");
+//                }
+//                login_usernameTextField.setText("");
+//                login_passwordTextField.setText("");
+//            }
+//        });
 
         // admin controls
         admin_logoutButton.addActionListener(logout);

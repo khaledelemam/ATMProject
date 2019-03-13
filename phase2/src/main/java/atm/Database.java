@@ -19,6 +19,7 @@ public class Database {
     }
 
     static User checkExistingUser(String username){
+
         for (int i = 0; i < users.size(); i ++) {
             if (users.get(i).getUsername().equals(username)){
                 return users.get(i);
@@ -28,19 +29,21 @@ public class Database {
     }
 
 
-   static  User checkExistingUserDeposit(String username){
-        File f = new File("file");
-        if (f.exists()) {
-            retrieve();
-        }
+   static  boolean login(String username, String password){
+       retrieve();
+       for (int i = 0; i < users.size(); i ++) {
 
-        for (int i = 0; i < users.size(); i ++) {
-            if (users.get(i).getUsername().equals(username)){
-                return users.get(i);
-            }
-        }
-        store();
-        return null;
+           if (users.get(i).getUsername().equals(username)){
+               if (users.get(i).getPassword().equals(password)){
+                   return true;
+
+               }
+
+           }
+
+       }
+       store();
+       return false;
     }
 
 
