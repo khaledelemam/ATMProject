@@ -99,34 +99,34 @@ public class ATM {
     }
 
 
-    void withdrawal(int account, int[] cashAmounts) throws InsufficientFundsException {
-
-        int amount = (cashAmounts[0] * 5) +
-                (cashAmounts[1] * 10) +
-                (cashAmounts[2] * 20) +
-                (cashAmounts[3] * 50);
-
-        Account acc = user.getAccount(account);
-        acc.setBalance(-amount);
-        Transaction withdrawal = new Transaction(acc, amount);
-        acc.setLastTransaction(withdrawal);
-        Database.store();
-
-        try {
-            CashManager cashManager = new CashManager();
-            cashManager.changeDenom(5, -cashAmounts[0]);
-            cashManager.changeDenom(10, -cashAmounts[1]);
-            cashManager.changeDenom(20, -cashAmounts[2]);
-            cashManager.changeDenom(50, -cashAmounts[3]);
-            cashManager.update();
-        } catch (NegativeDenominationException e){
-            e.getMessage();
-        } catch (IOException e) {
-            e.printStackTrace();
-
-        }
-
-    }
+//    void withdrawal(int account, int[] cashAmounts) throws InsufficientFundsException {
+//
+//        int amount = (cashAmounts[0] * 5) +
+//                (cashAmounts[1] * 10) +
+//                (cashAmounts[2] * 20) +
+//                (cashAmounts[3] * 50);
+//
+//        Account acc = user.getAccount(account);
+//        acc.setBalance(-amount);
+//        Transaction withdrawal = new Transaction(acc, amount);
+//        acc.setLastTransaction(withdrawal);
+//        Database.store();
+//
+//        try {
+//            CashManager cashManager = new CashManager();
+//            cashManager.changeDenom(5, -cashAmounts[0]);
+//            cashManager.changeDenom(10, -cashAmounts[1]);
+//            cashManager.changeDenom(20, -cashAmounts[2]);
+//            cashManager.changeDenom(50, -cashAmounts[3]);
+//            cashManager.update();
+//        } catch (NegativeDenominationException e){
+//            e.getMessage();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//
+//        }
+//
+//    }
 
 
 
