@@ -1,31 +1,27 @@
 package atm;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
-public class atmInterface extends JFrame {
+public class atmInterface {
 
     private JPanel atmInterface;
 
-    CardLayout cardLayout = (CardLayout)atmInterface.getLayout();
+    CardLayout cardLayout = (CardLayout) atmInterface.getLayout();
 
     private JTextField login_usernameTextField, login_passwordTextField, new_username;
     private JButton createNewAccountButton, adminLoginButton;
     private JTextArea wELCTextArea;
     private JPanel loginScreen, createNewUser, adminControls;
     private JTextField creditScoreTextField;
-    private JTextArea newUserMessage;
     private JLabel newUsernameLabel;
-    private JLabel creditScoreLabel;
-    private JButton backButton;
+    private JButton new_backButton;
     private JButton loginButton;
     private JButton requestAccountButton;
     private JTabbedPane admin_tabs;
-    private JList newUserRequests;
-    private JList existingUserRequests;
     private JPanel Main;
     private JButton admin_setDateButton;
     private JSpinner admin_5spinner;
@@ -34,8 +30,6 @@ public class atmInterface extends JFrame {
     private JSpinner admin_50spinner;
     private JButton admin_addCashButton;
     private JButton admin_logoutButton;
-    private JButton admin_newAcceptButton;
-    private JButton admin_existingAcceptButton;
     private JPanel mainMenu;
     private JTabbedPane menu;
     private JPanel main_accounts;
@@ -68,7 +62,7 @@ public class atmInterface extends JFrame {
     private JButton main_withdrawButton;
     private JLabel login_usernameLabel;
     private JLabel login_passwordLabel;
-    private JLabel login_invalidLabel;
+    private JLabel login_message;
     private JPanel main_menu;
     private JPanel main_transfers;
     private JPanel main_cash;
@@ -87,9 +81,15 @@ public class atmInterface extends JFrame {
     private JTextField deposit_amount;
     private JLabel depositLabel;
     private JLabel depositMessage;
+    private JButton admin_newRequestButton;
+    private JButton admin_existingRequestButton;
+    private JTextField admin_transactionUser;
+    private JComboBox admin_accounts;
+    private JButton admin_checkAccountsButton;
+    private JButton reverseLastTransactionButton;
     private JLabel main_newPasswordMessage;
 
-    ATM atm = new ATM();
+    atmRunner atm = new atmRunner();
 
     public atmInterface() {
 
@@ -99,6 +99,8 @@ public class atmInterface extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(atmInterface, "createNewUser");
+                login_usernameTextField.setText("");
+                login_passwordTextField.setText("");
             }
         });
 
@@ -107,25 +109,56 @@ public class atmInterface extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (atm.adminCheck(login_passwordTextField.getText())) {
                     cardLayout.show(atmInterface, "adminControls");
+                    login_usernameTextField.setText("");
                     login_passwordTextField.setText("");
-                }
+                } else login_message.setText("Admin access denied");
             }
         });
 
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (atm.login(login_usernameTextField.getText(), login_passwordTextField.getText())) {
+                if (atm.userLogin(login_usernameTextField.getText(), login_passwordTextField.getText())) {
                     cardLayout.show(atmInterface, "mainMenu");
                 } else {
-                    login_invalidLabel.setText("Try again!");
+                    login_message.setText("Access Denied!");
                 }
                 login_usernameTextField.setText("");
+                login_passwordTextField.setText("");
             }
         });
 
-        // admin controls
+        // --- admin controls ---
+
+        admin_newRequestButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                atm.acceptNewUserRequests();
+            }
+        });
+
+        admin_existingRequestButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                atm.acceptExistingUserRequests();
+            }
+        });
+
+        admin_setDateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
         admin_logoutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(atmInterface, "loginScreen");
+            }
+        });
+
+        admin_checkAccountsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -134,7 +167,8 @@ public class atmInterface extends JFrame {
 
 
         // --- create new user ---
-        backButton.addActionListener(new ActionListener() {
+
+        new_backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(atmInterface, "loginScreen");
@@ -147,16 +181,9 @@ public class atmInterface extends JFrame {
         requestAccountButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    UserRequests request = new UserRequests();
-                    request.newUser(new_username.getText());
-                } catch (UsernameTakenException u) {
-                    newUser_message.setText(u.getMessage());
-                }
-                newUser_message.setText("Your password is \"1\"");
+                newUser_message.setText(atm.newUserRequest(new_username.getText()));
             }
         });
-
 
         // ----------------------------- menu menu -----------------------------
 
@@ -164,7 +191,6 @@ public class atmInterface extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(atmInterface, "loginScreen");
-                // TODO: clear fields
             }
         });
 
@@ -172,12 +198,8 @@ public class atmInterface extends JFrame {
         changePasswordButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String newPassword = main_passwordField.getText();
-                // TODO: should do some regex thing to make sure password is only numbers and letters
-                // ATM changed so this results in an error
-//                atm.changePassword(newPassword);
-                main_newPasswordMessage.setText("New password: " + newPassword);
-                main_passwordField.setText("");
+                atm.changePassword(main_passwordField.getText());
+                main_passwordMessage.setText("Password changed");
             }
         });
     }

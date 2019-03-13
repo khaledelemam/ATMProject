@@ -6,83 +6,82 @@ import java.util.ArrayList;
 
 public class ATM {
 
-    private User user;
+//    private User user;
 //    private BankManager bankManager = new BankManager();
 //    private CashManager cashManager = new CashManager();
-    private Date date = new Date();
+//    private Date date = new Date();
 
     public ATM(){
     }
 
-    boolean login(String username, String password) {
-        Database.retrieve();
+//    boolean login(String username, String password) {
+//        Database.retrieve();
+//
+//        ArrayList<User> users = Database.users;
+//        for (int i = 0; i < users.size(); i ++) {
+//
+//            if (users.get(i).getUsername().equals(username)){
+//                if (users.get(i).getPassword().equals(password)){
+//                    return true;
+//
+//                }
+//
+//            }
+//
+//        }
+//       Database.store();
+//        return false;
+//
+//    }
 
-        ArrayList<User> users = Database.users;
-        for (int i = 0; i < users.size(); i ++) {
-
-            if (users.get(i).getUsername().equals(username)){
-                if (users.get(i).getPassword().equals(password)){
-                    user = Database.users.get(i);
-                    return true;
-
-                }
-
-            }
-
-        }
-       Database.store();
-        return false;
-
-    }
-
-
-    boolean adminCheck(String password){
-        BankManager bankManager = new BankManager();
-        return (password.equals(bankManager.getPassword()));
-
-    }
-
+//
+//    boolean adminCheck(String password){
+//        BankManager bankManager = new BankManager();
+//        return (password.equals(bankManager.getPassword()));
+//
+//    }
 
 
-    void deposit() throws IOException, InsufficientFundsException {
-        File deposits = new File("phase2/src/main/java/atm/deposits.txt");
-        BufferedReader depositReader = new BufferedReader(new FileReader(deposits));
-        ArrayList<String[]> todaysDeposits = new ArrayList<>();
 
-        String line = depositReader.readLine();
-
-        File f = new File(Date.getFilename());
-        if (f.exists()) {
-            date.setToday();
-        }
-        while (line != null) {
-            if (line.equals(date.toString())) {
-                line = depositReader.readLine();
-
-                while (!(line.equals(""))) {
-                    String[] deposit = line.split(" ");
-                    todaysDeposits.add(deposit);
-                    line = depositReader.readLine();
-                    if (line == null) break;
-                }
-                depositReader.close();
-                break;
-            }
-            line = depositReader.readLine();
-        }
-
-        for (String[] item: todaysDeposits) {
-            String username = item[0];
-            String type = item[1];
-            double amount = Double.parseDouble(item[2]);
-
-            // check if user is in system
-            user = Database.checkExistingUserDeposit(username);
-            if (user != null) {
-                user.getPrimaryAccount().setBalance(amount);
-                Database.store();
-            }
-
+//    void deposit() throws IOException, InsufficientFundsException {
+//        File deposits = new File("phase2/src/main/java/atm/deposits.txt");
+//        BufferedReader depositReader = new BufferedReader(new FileReader(deposits));
+//        ArrayList<String[]> todaysDeposits = new ArrayList<>();
+//
+//        String line = depositReader.readLine();
+//
+//        File f = new File(Date.getFilename());
+//        if (f.exists()) {
+//            date.setToday();
+//        }
+//        while (line != null) {
+//            if (line.equals(date.toString())) {
+//                line = depositReader.readLine();
+//
+//                while (!(line.equals(""))) {
+//                    String[] deposit = line.split(" ");
+//                    todaysDeposits.add(deposit);
+//                    line = depositReader.readLine();
+//                    if (line == null) break;
+//                }
+//                depositReader.close();
+//                break;
+//            }
+//            line = depositReader.readLine();
+//        }
+//
+//        for (String[] item: todaysDeposits) {
+//            String username = item[0];
+//            String type = item[1];
+//            double amount = Double.parseDouble(item[2]);
+//
+//            // check if user is in system
+//            user = Database.checkExistingUserDeposit(username);
+//            if (user != null) {
+//                user.getPrimaryAccount().setBalance(amount);
+//                Database.store();
+//            }
+//
 
 //                if (type.equalsIgnoreCase("cash")) {
 //                    int billType = amount.intValue();
@@ -95,8 +94,8 @@ public class ATM {
 //                    }
 //                }
 //            }
-        }
-    }
+//        }
+//    }
 
 
 //    void withdrawal(int account, int[] cashAmounts) throws InsufficientFundsException {
