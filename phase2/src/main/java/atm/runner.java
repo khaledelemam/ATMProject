@@ -235,7 +235,7 @@ public class runner {
 
                                     System.out.println("How much would you like to withdraw?");
                                     int WithdrawAmount = Integer.parseInt(in.nextLine());
-                                    // assertion that amount equal number of bills * bill value
+
                                     System.out.println("Denominations available: $5, $10, $20, $50");
                                     System.out.println("How many $5 bills: ");
                                     int fives = Integer.parseInt(in.nextLine());
@@ -252,7 +252,7 @@ public class runner {
                                     int[] cashAmount = new int[]{fives, tens, twenties, fifties};
 
                                     try {
-                                        UserExecutes transaction = new UserExecutes(new Withdrawl(account, username,cashAmount));
+                                        UserExecutes transaction = new UserExecutes(new Withdraw(account, username,cashAmount));
                                         transaction.executeTransaction(WithdrawAmount);
                                     }catch (InsufficientFundsException e) {
                                         System.out.println(e.getMessage());

@@ -74,7 +74,7 @@ public class ATM {
         for (String[] item: todaysDeposits) {
             String username = item[0];
             String type = item[1];
-            Double amount = Double.parseDouble(item[2]);
+            double amount = Double.parseDouble(item[2]);
 
             // check if user is in system
             user = Database.checkExistingUserDeposit(username);
