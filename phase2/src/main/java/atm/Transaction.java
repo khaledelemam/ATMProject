@@ -10,14 +10,24 @@ public class Transaction implements Serializable {
     private double amount;
     private Date date;
     private static final long serialVersionUID = 100L;
+    private String username = null;
 
-    // for  transfers
+    // for  internal transfers
     public Transaction(Account source, Account recipient, double amount) {
         this.source = source;
         this.recipient = recipient;
         this.amount = amount;
         this.date = new Date();
     }
+    //for external transfers
+    public Transaction(Account source, Account recipient, double amount, String username) {
+        this.source = source;
+        this.recipient = recipient;
+        this.amount = amount;
+        this.date = new Date();
+        this.username = username;
+    }
+
 
     // this is used for withdrawals
     public Transaction(Account source, double amount) {
@@ -28,15 +38,22 @@ public class Transaction implements Serializable {
 
     @Override
     public String toString() {
-        if (this.recipient != null) {
-            return ("Sender: " + this.source + "\n" +
-                    "Recipient: " + this.recipient + "\n" +
-                    "Amount: " + this.amount + "\n" +
-                    "Date: " + this.date);
-        } else {
-            return ("Sender: " + this.source + "\n" +
-                    "Amount: " + this.amount + "\n" +
-                    "Date: " + this.date);
+        // external transfer
+        if (this.recipient != null && this.username!=null) {
+            return ("$"+ this.amount + " transfered " + "from " +this.source+ " to " + this.username +" on "+ this.date);
+//            return ("Sender: " + this.source + "\n" +
+//                    "Recipient: " + this.recipient + "\n" +
+//                    "Amount: " + this.amount + "\n" +
+//                    "Date: " + this.date);
+        }
+        //internal transfer
+        else if(this.recipient != null){
+            return ("$"+ this.amount + " transfered " + "from " +this.source+ " to " + this.recipient+ " on "+ this.date);
+
+        }
+        //withdraw
+        else {
+            return ("$"+ this.amount + " withdrawn" + "from " +this.source+ " on "+ this.date);
         }
     }
 

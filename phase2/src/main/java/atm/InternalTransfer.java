@@ -24,7 +24,7 @@ public class InternalTransfer implements UserDo {
             accFrom.setBalance(-amount);
             accTo.setBalance(amount);
             Transaction intTransfer = new Transaction(accFrom, accTo, amount);
-            accTo.setLastTransaction(intTransfer);
+//            accTo.setLastTransaction(intTransfer);
             accFrom.setLastTransaction(intTransfer);
             Database.store();
         } catch (NullPointerException n) {
