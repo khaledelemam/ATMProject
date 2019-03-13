@@ -30,7 +30,6 @@ public class Database {
         return null;
     }
 
-
    static boolean login(String username, String password){
        retrieve();
        for (int i = 0; i < users.size(); i ++) {
