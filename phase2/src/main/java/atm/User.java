@@ -2,6 +2,7 @@ package atm;
 
 import com.sun.xml.internal.fastinfoset.util.StringArray;
 
+import java.io.File;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class User implements Serializable {
     private HashMap<Integer,Account> accounts = new HashMap<>();
     private HashMap<Account,Integer> map = new HashMap<>();
     private String request;
-    private ChequingAccount primaryAccount;
+//    private ChequingAccount primaryAccount;
 
     // I used two Hashmaps to track the account with the corresponding number. Two are used instead of one because there is no "getKey()" in Hashmaps.
     // This implementation is working so far in accessing user accounts.
@@ -25,7 +26,7 @@ public class User implements Serializable {
 
     public User(String username) {
         this.username = username;
-        this.primaryAccount = null;
+//        this.primaryAccount = null;
 
 
 
@@ -52,8 +53,9 @@ public class User implements Serializable {
 
         if (account.equals("Chequing")){
             hold = new ChequingAccount();
-            if (primaryAccount == null)
-            primaryAccount = (ChequingAccount) hold;
+//            if (primaryAccount == null)
+//            primaryAccount = (ChequingAccount) hold;
+
         }
 
         else if (account.equals("Savings")){
@@ -93,6 +95,7 @@ public class User implements Serializable {
     }
 
     ArrayList<String> accountInfo() {
+
         ArrayList<String> accountsInfo = new ArrayList<>();
         for(int i = 1 ; i <= accounts.size(); i++) {
             Account account = accounts.get(i);
@@ -114,7 +117,7 @@ public class User implements Serializable {
 
     void requestAccount(String account){ request = account; }
 
-    ChequingAccount getPrimaryAccount() { return this.primaryAccount; }
+    Account getPrimaryAccount() { return accounts.get(1);}
 
     String netUserBalance() {
         double netTotal = 0;

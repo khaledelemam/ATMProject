@@ -170,22 +170,22 @@ public class ATM {
 
     }
 
-    void payBill(int account, double amount) throws IOException, InsufficientFundsException {
-        Account acc = user.getAccount(account);
-        acc.setBalance(-amount);
-
-        File outgoing = new File("phase1/src/main/java/atm/outgoing.txt");
-        PrintWriter billPayer = new PrintWriter(new FileWriter("phase1/src/main/java/atm/outgoing.txt",
-                true));
-        Transaction billPayment = new Transaction(acc, amount);
-        billPayer.println(user + " payed $" + amount + " on " + date);
-        billPayer.close();
-
-        Transaction bill = new Transaction(acc, amount);
-        acc.setLastTransaction(bill);
-
-        bankManager.store();
-    }
+//    void payBill(int account, double amount) throws IOException, InsufficientFundsException {
+//        Account acc = user.getAccount(account);
+//        acc.setBalance(-amount);
+//
+//        File outgoing = new File("phase2/src/main/java/atm/outgoing.txt");
+//        PrintWriter billPayer = new PrintWriter(new FileWriter("phase2/src/main/java/atm/outgoing.txt",
+//                true));
+//        Transaction billPayment = new Transaction(acc, amount);
+//        billPayer.println(user + " payed $" + amount + " on " + date);
+//        billPayer.close();
+//
+//        Transaction bill = new Transaction(acc, amount);
+//        acc.setLastTransaction(bill);
+//
+//        bankManager.store();
+//    }
 
     String viewAccountsInfo() {
 //        bankManager.retrieve();
