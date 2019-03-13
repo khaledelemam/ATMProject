@@ -26,8 +26,13 @@ public class BankManager implements Serializable {
 
 
     void createUser(){
-        File f = new File("file2");
+        File f = new File("file");
         if (f.exists()) {
+            Database.retrieve();
+        }
+
+        File f2 = new File("file2");
+        if (f2.exists()) {
             retrieveRequests();
         }
         for(int i = 0; i< requests.size();i++){
@@ -38,19 +43,21 @@ public class BankManager implements Serializable {
 
                 }
         }
+        System.out.println("New users created.");
         requests.clear();
         storeRequests();
 
 
     }
 
-    void setUserPassword(User user) {
+    private void setUserPassword(User user) {
         String password = "1";
         user.setPassword(password);
         Database.addUser(user);
     }
 
     void  userRequestAccount(){
+        Database.retrieve();
         for(int i = 0; i< Database.getUsers().size();i++){
             if (Database.getUsers().get(i).getRequest() != null){
                 if (CreditScore.getRandomDoubleBetweenRange() > 0) {
@@ -59,6 +66,8 @@ public class BankManager implements Serializable {
                 }
             }
         }
+        System.out.println("New accounts created");
+        Database.store();
     }
 
     void ReverseLastTransaction(String username, int account)throws InsufficientFundsException{
@@ -74,35 +83,10 @@ public class BankManager implements Serializable {
             else{
                 System.out.println("The last transaction is not a transfer between accounts.");
             }
+            Database.store();
         }
+
     }
-
-//    User checkExistingUser(String username){
-//        for (int i = 0; i < users.size(); i ++) {
-//            if (users.get(i).getUsername().equals(username)){
-//                return users.get(i);
-//            }
-//        }
-//
-//        return null;
-//    }
-//
-//
-//    User checkExistingUserDeposit(String username){
-//        File f = new File("file");
-//        if (f.exists()) {
-//            Database.retrieve();
-//        }
-//
-//        for (int i = 0; i < users.size(); i ++) {
-//            if (users.get(i).getUsername().equals(username)){
-//                return users.get(i);
-//            }
-//        }
-//        Database.store();
-//        return null;
-//    }
-
 
 
 
@@ -112,41 +96,6 @@ public class BankManager implements Serializable {
         System.out.println(date);
 
     }
-
-//    void store(){
-//        try{
-//            FileOutputStream fos = new FileOutputStream("file");
-//            ObjectOutputStream oos = new ObjectOutputStream(fos);
-//            oos.writeObject(users);
-//            oos.close();
-//            fos.close();
-//        }catch(IOException ioe){
-//            ioe.printStackTrace();
-//        }
-//
-//    }
-//
-//    @SuppressWarnings("unchecked")
-//
-//    void retrieve() {
-//        try {
-//            FileInputStream fis = new FileInputStream("file");
-//            ObjectInputStream ois = new ObjectInputStream(fis);
-//            users = (ArrayList) ois.readObject();
-//            ois.close();
-//            fis.close();
-//        } catch (IOException ioe) {
-//            ioe.printStackTrace();
-//        } catch (ClassNotFoundException c) {
-//            System.out.println("Class not found");
-//            c.printStackTrace();
-//        }
-////        for (User tmp : users) {
-////            System.out.println(tmp);
-////        }
-//
-//    }
-
 
 
     void storeRequests(){
@@ -180,6 +129,45 @@ public class BankManager implements Serializable {
 //        for (User tmp : users) {
 //            System.out.println(tmp);
 //        }
+
+
+
+
+
+//    void newAccountCreation() {
+//        File f = new File("file");
+//        if (f.exists()) {
+//            Database.retrieve();
+//        }
+//
+//        BankManager bankManager = new BankManager();
+//        bankManager.createUser();
+//        System.out.println("New users created.");
+//
+//
+//    }
+//
+//    void newUsersRequests(){
+//        Database.retrieve();
+//
+//        BankManager bankManager = new BankManager();
+//        bankManager.userRequestAccount();
+//        System.out.println("New accounts created");
+//        Database.store();
+//    }
+//
+//
+//    void reverseTransaction(String username, int account) throws InsufficientFundsException{
+//
+//        BankManager bankManager = new BankManager();
+//        bankManager.ReverseLastTransaction(username,account);
+//        Database.store();
+//    }
+//
+//    void date(){
+//        BankManager bankManager = new BankManager();
+//        bankManager.setDate();
+//    }
 
     }
 

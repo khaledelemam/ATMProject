@@ -126,5 +126,6 @@ public class User implements Serializable {
         }
         return currencyFormat.format(netTotal);
     }
+    
 
 }

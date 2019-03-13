@@ -68,49 +68,52 @@ public class runner {
 
                             switch (option2) {
                                 case 1: // new user requests
-                                    BankManagerExecute execute = new BankManagerExecute();
-                                    execute.newAccountCreation();
+                                    BankManager bm = new BankManager();
+                                    bm.createUser();
                                     break;
 
                                 case 2: // user requests
-                                    BankManagerExecute execute2 = new BankManagerExecute();
-                                    execute2.newUsersRequests();
+                                    BankManager bm2 = new BankManager();
+                                    bm2.userRequestAccount();
                                     break;
 
                                 case 3: // reverse transaction
                                     System.out.println("Type the username of the user you want to reverse a transaction for: ");
                                     String user = in.nextLine();
+
                                     UserView view = new UserView();
                                     view.viewAccounts(user);
+
                                     System.out.println("Which account would you like to reverse the transaction from?");
                                     int acc = Integer.parseInt(in.nextLine());
                                     try {
-                                        BankManagerExecute execute3 = new BankManagerExecute();
-                                        execute3.reverseTransaction(user, acc);
+                                        BankManager bm3 = new BankManager();
+                                        bm3.ReverseLastTransaction(username,acc);
                                     } catch (InsufficientFundsException e) {
                                         System.out.println(e.getMessage());
                                     }
                                     break;
 
                                 case 4: // set date
-                                    BankManagerExecute execute4 = new BankManagerExecute();
-                                    execute4.date();
+                                    BankManager bm4 = new BankManager();
+                                    bm4.setDate();
                                     break;
 
                                 case 5: // restock machine
-                                    System.out.println(boundlessATM.getCashManager());
+                                    CashManager cashmanager = new CashManager();
+                                    System.out.println(cashmanager);
                                     int[] bills = {5, 10, 20, 50};
                                     for (int i = 0; i < 4; i++) {
                                         System.out.println("How many $" + bills[i] + " bills would you like to add?");
                                         int amount = Integer.parseInt(in.nextLine());
-                                        while (!boundlessATM.getCashManager().checkDenom(bills[i], amount)) {
+                                        while (!cashmanager.checkDenom(bills[i], amount)) {
                                             System.out.println("Sorry, that would result in a denomination less than 0");
                                             System.out.println("Please enter a different amount");
                                             amount = Integer.parseInt(in.nextLine());
                                         }
-                                        boundlessATM.getCashManager().changeDenom(bills[i], amount);
+                                        cashmanager.changeDenom(bills[i], amount);
                                     }
-                                    boundlessATM.getCashManager().update();
+                                    cashmanager.update();
                                     break;
                                 case 0:
                                     adminLoggedIn = false;

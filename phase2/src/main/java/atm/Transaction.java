@@ -53,7 +53,7 @@ public class Transaction implements Serializable {
         }
         //withdraw
         else {
-            return ("$"+ this.amount + " withdrawn" + "from " +this.source+ " on "+ this.date);
+            return ("$"+ this.amount + " withdrawn " + "from " +this.source+ " on "+ this.date);
         }
     }
 

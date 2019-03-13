@@ -7,8 +7,8 @@ import java.util.ArrayList;
 public class ATM {
 
     private User user;
-    private BankManager bankManager = new BankManager();
-    private CashManager cashManager = new CashManager();
+//    private BankManager bankManager = new BankManager();
+//    private CashManager cashManager = new CashManager();
     private Date date = new Date();
 
     public ATM() throws IOException {
@@ -37,11 +37,9 @@ public class ATM {
 
 
     boolean adminCheck(String password){
+        BankManager bankManager = new BankManager();
+        return (password.equals(bankManager.getPassword()));
 
-        if(password.equals(bankManager.getPassword())){
-            return true;
-        }
-        else return false;
     }
 
 
@@ -115,11 +113,12 @@ public class ATM {
         Database.store();
 
         try {
+            CashManager cashManager = new CashManager();
             cashManager.changeDenom(5, -cashAmounts[0]);
             cashManager.changeDenom(10, -cashAmounts[1]);
             cashManager.changeDenom(20, -cashAmounts[2]);
             cashManager.changeDenom(50, -cashAmounts[3]);
-            getCashManager().update();
+            cashManager.update();
         } catch (NegativeDenominationException e){
             e.getMessage();
         } catch (IOException e) {
@@ -129,11 +128,6 @@ public class ATM {
 
     }
 
-
-
-    CashManager getCashManager() {
-        return cashManager;
-    }
 
 
     //    void internalTransfer(int from, int to , double amount) throws InsufficientFundsException {
