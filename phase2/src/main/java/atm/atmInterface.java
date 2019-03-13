@@ -158,7 +158,8 @@ public class atmInterface extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String newPassword = main_passwordField.getText();
                 // TODO: should do some regex thing to make sure password is only numbers and letters
-                atm.changePassword(newPassword);
+                // ATM changed so this results in an error
+//                atm.changePassword(newPassword);
                 main_newPasswordMessage.setText("New password: " + newPassword);
                 main_passwordField.setText("");
             }

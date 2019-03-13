@@ -5,13 +5,22 @@ import java.io.IOException;
 public class UserExecutes {
     private UserDo transaction;
 
-    public UserExecutes(UserDo transaction){
+    UserExecutes(UserDo transaction){
         this.transaction= transaction;
     }
 
-    public void executeTransaction(double amount) throws InsufficientFundsException, IOException {
+    UserExecutes(){}
+
+    void executeTransaction(double amount) throws InsufficientFundsException, IOException {
         transaction.doTransaction(amount);
     }
+
+    void changePassword(String newPassword, String username) {
+        User user = Database.checkExistingUser(username);
+        user.setPassword(newPassword);
+        Database.store();
+    }
+
 
 
 }

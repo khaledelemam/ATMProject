@@ -24,7 +24,6 @@ public class Database {
                 return users.get(i);
             }
         }
-
         return null;
     }
 

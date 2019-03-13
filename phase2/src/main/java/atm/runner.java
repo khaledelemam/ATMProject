@@ -68,28 +68,33 @@ public class runner {
 
                             switch (option2) {
                                 case 1: // new user requests
-                                    boundlessATM.newAccountCreation();
+                                    BankManagerExecute execute = new BankManagerExecute();
+                                    execute.newAccountCreation();
                                     break;
 
                                 case 2: // user requests
-                                    boundlessATM.usersRequests();
+                                    BankManagerExecute execute2 = new BankManagerExecute();
+                                    execute2.newUsersRequests();
                                     break;
 
                                 case 3: // reverse transaction
                                     System.out.println("Type the username of the user you want to reverse a transaction for: ");
                                     String user = in.nextLine();
-                                    boundlessATM.viewAccountsManager(user);
+                                    UserView view = new UserView();
+                                    view.viewAccounts(user);
                                     System.out.println("Which account would you like to reverse the transaction from?");
                                     int acc = Integer.parseInt(in.nextLine());
                                     try {
-                                        boundlessATM.reverseTransaction(user, acc);
+                                        BankManagerExecute execute3 = new BankManagerExecute();
+                                        execute3.reverseTransaction(user, acc);
                                     } catch (InsufficientFundsException e) {
                                         System.out.println(e.getMessage());
                                     }
                                     break;
 
                                 case 4: // set date
-                                    boundlessATM.date();
+                                    BankManagerExecute execute4 = new BankManagerExecute();
+                                    execute4.date();
                                     break;
 
                                 case 5: // restock machine
@@ -122,6 +127,7 @@ public class runner {
 
                 case 2: // user login
                     boolean stayInLoop = true;
+
                     while (stayInLoop) {
 
                         System.out.println("(1) Login");
@@ -131,12 +137,12 @@ public class runner {
                         switch (hold) {
 
                             case 1: // previous login
-                                System.out.println("Have you logged in before?\n (1) Yes \n (2) No");
-                                int log = Integer.parseInt(in.nextLine());
-                                boolean loggedIn = false;
+//                                System.out.println("Have you logged in before?\n (1) Yes \n (2) No");
+//                                int log = Integer.parseInt(in.nextLine());
+//                                boolean loggedIn = false;
 
-                                switch (log) {
-                                    case 1: // previous login
+//                                switch (log) {
+//                                    case 1: // previous login
 
                                             System.out.println("Enter your username: ");
                                             username = in.nextLine();
@@ -144,7 +150,7 @@ public class runner {
                                             System.out.println("Enter your password: ");
                                             String password = in.nextLine();
 
-                                            loggedIn = boundlessATM.login(username, password);
+                                           boolean loggedIn = boundlessATM.login(username, password);
 
                                             if (!loggedIn) {
                                                 System.out.println("Invalid username or password");
@@ -152,21 +158,21 @@ public class runner {
                                             else{
                                                 stayInLoop = false;
                                             }
-                                        break;
+//                                        break;
 
-                                case 2: // first login
-                                    System.out.println("Enter your username: ");
-                                    username = in.nextLine();
-                                    loggedIn = boundlessATM.login2(username);
-
-                                    if (!loggedIn) {
-                                        System.out.println("Invalid username ");
-                                    } else {
-                                        System.out.println("Your current password is: " + boundlessATM.getUserPassword());
-                                        stayInLoop = false;
-                                    }
-                                    break;
-                            }
+//                                case 2: // first login
+//                                    System.out.println("Enter your username: ");
+//                                    username = in.nextLine();
+//                                    loggedIn = boundlessATM.login2(username);
+//
+//                                    if (!loggedIn) {
+//                                        System.out.println("Invalid username ");
+//                                    } else {
+//                                        System.out.println("Your current password is: " + boundlessATM.getUserPassword());
+//                                        stayInLoop = false;
+//                                    }
+//                                    break;
+//                            }
                             break;
 
                         case 2: // request new user
@@ -174,7 +180,8 @@ public class runner {
                             String name = in.nextLine();
                             System.out.println("Please wait till the manager processes your request");
                             try {
-                                boundlessATM.newUser(name);
+                                UserRequests request = new UserRequests();
+                                request.newUser(name);
                             } catch (UsernameTakenException u) {
                                 System.out.println(u.getMessage());
                             }
@@ -210,11 +217,13 @@ public class runner {
                                 }
                             switch (option3) {
                                 case 1: // view accounts info
-                                    System.out.println(boundlessATM.viewAccountsInfo());
+                                    UserView viewInfo = new UserView();
+                                    System.out.println(viewInfo.viewAccountsInfo(username));
                                     break;
 
                                 case 2: // withdrawal
-                                    boundlessATM.viewAccounts();
+                                    UserView viewAcc= new UserView();
+                                    viewAcc.viewAccounts(username);
 
                                     // this brings up their list of accounts
 
@@ -247,7 +256,9 @@ public class runner {
                                     break;
 
                                 case 3: // internal transfer
-                                    boundlessATM.viewAccounts();
+                                    UserView viewAcc2= new UserView();
+                                    viewAcc2.viewAccounts(username);
+
                                     System.out.println("From: ");
                                     int from = Integer.parseInt(in.nextLine());
 
@@ -275,7 +286,9 @@ public class runner {
                                         System.out.println("How much money would you like to transfer?: ");
                                         amount = Double.parseDouble(in.nextLine());
 
-                                        boundlessATM.viewAccounts();
+                                    UserView viewAcc3= new UserView();
+                                    viewAcc3.viewAccounts(username);
+
                                         System.out.println("From which account would you like to transfer money?: ");
                                         int accFrom = Integer.parseInt(in.nextLine());
 
@@ -289,7 +302,9 @@ public class runner {
                                     break;
 
                                 case 5: // pay bill
-                                    boundlessATM.viewAccounts();
+                                    UserView viewAcc4= new UserView();
+                                    viewAcc4.viewAccounts(username);
+
                                     System.out.println("From: ");
                                     from = Integer.parseInt(in.nextLine());
 
@@ -307,14 +322,17 @@ public class runner {
                                 case 6: // change password
                                     System.out.println("Enter new password: ");
                                     String newPassword = in.nextLine();
-                                    boundlessATM.changePassword(newPassword);
+                                    UserExecutes change = new UserExecutes();
+                                    change.changePassword(newPassword, username);
                                     break;
                                 case 7:
                                     // new account creation
                                     System.out.println("What type of account would you like to open?:");
                                     System.out.println("(1) CHEQUING\n(2) SAVINGS\n(3) LINE OF CREDIT\n(4) CREDIT CARD");
                                     account = Integer.parseInt(in.nextLine());
-                                    boundlessATM.requestAccount(account);
+
+                                    UserRequests requests = new UserRequests();
+                                    requests.requestAccount(account, username);
                                     break;
 
                                 case 0: // log out
