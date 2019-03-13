@@ -6,7 +6,9 @@ import java.util.ArrayList;
 
 public class Database {
 
-   static ArrayList<User> users = new ArrayList<>();
+    //TODO: Try passing in the serializable stuff in Database constructor and storing each thing ( pass in transactions, users, accounts..)
+
+   private static ArrayList<User> users = new ArrayList<>();
 
     static ArrayList<User> getUsers(){
         return users;
@@ -47,7 +49,6 @@ public class Database {
     }
 
 
-
     static  void  store(){
         try{
             FileOutputStream fos = new FileOutputStream("file");
@@ -82,4 +83,7 @@ public class Database {
 //        }
 
     }
+
+
+
 }

@@ -2,40 +2,54 @@ package atm;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.ZonedDateTime;
-import java.time.temporal.ChronoUnit;
+import java.time.*;
+import java.util.Calendar;
 import java.util.Scanner;
-import java.time.LocalTime;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import static java.time.temporal.ChronoUnit.MINUTES;
+import static java.time.temporal.ChronoUnit.SECONDS;
+
 
 public class runner {
 
 
     public static void main(String[] args) throws IOException, NegativeDenominationException {
 
-        LocalTime time = ZonedDateTime.now().toLocalTime().truncatedTo(ChronoUnit.SECONDS);
-        Scanner in = new Scanner(System.in);
-        Date date = new Date();
-//        ATM boundlessATM = new ATM();
-        String username = "";
+        LocalTime time = ZonedDateTime.now().toLocalTime().truncatedTo(MINUTES);
+
+        LocalTime midnight = LocalTime.MAX;
+
+        long terminate = SECONDS.between(time, midnight);
+
+//        System.out.println(SECONDS.between(time, midnight));
 //
-//        try {
-//            boundlessATM.deposit();
-//        } catch (InsufficientFundsException e) {
-//            e.getMessage();
-//        }
+//        System.out.println(MINUTES.between(time, midnight));
+
+
+        Scanner in = new Scanner(System.in);
+
+        Calendar c = Calendar.getInstance();
+        System.out.println("Today is " +c.getTime());
+
+        Date date = new Date();
 
         System.out.println(time.toString());
+        String username = "";
 
+
+        Executors.newSingleThreadScheduledExecutor().schedule(() -> System.exit(0), terminate , TimeUnit.SECONDS);
 
         while (!time.toString().equals("00:00:00")) {
             boolean newUser = false;
-            time = ZonedDateTime.now().toLocalTime().truncatedTo(ChronoUnit.SECONDS);
+
+            time = ZonedDateTime.now().toLocalTime().truncatedTo(SECONDS);
 
             File f = new File(Date.getFilename());
             if (f.exists()) {
                 // .setToday() opens date file, but date file doesn't exist until BankManager sets the date initially
                 date.setToday();
-                System.out.println("Today is " + date);
+//                System.out.println("Today is " + date);
             } else {
                 System.out.println("Admin, please set the date.");
             }
