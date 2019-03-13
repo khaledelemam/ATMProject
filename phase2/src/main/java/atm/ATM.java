@@ -11,7 +11,7 @@ public class ATM {
 //    private CashManager cashManager = new CashManager();
     private Date date = new Date();
 
-    public ATM() throws IOException {
+    public ATM(){
     }
 
     boolean login(String username, String password) {

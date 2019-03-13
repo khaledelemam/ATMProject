@@ -85,15 +85,10 @@ public class atmInterface extends JFrame {
     private JLabel main_passwordMessage;
     private JLabel main_newPasswordMessage;
 
-    ATM atm;
+    ATM atm = new ATM();
 
-    {
-        try {
-            atm = new ATM();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
+
 
 
     public class logoutActionListener implements ActionListener{
