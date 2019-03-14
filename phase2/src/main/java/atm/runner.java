@@ -11,12 +11,26 @@ import static java.time.temporal.ChronoUnit.MINUTES;
 import static java.time.temporal.ChronoUnit.SECONDS;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+
 public class runner {
 
 
     public static void main(String[] args) throws IOException, NegativeDenominationException {
 
+
+//
+//        Calendar cal=Calendar.getInstance();
+//        cal.setTimeInMillis(System.currentTimeMillis());
+//
+//        SimpleDateFormat format=new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
+//        System.out.println(format.format(cal.getTime()));
+
+
         LocalTime time = ZonedDateTime.now().toLocalTime().truncatedTo(MINUTES);
+        System.out.println(time.toString());
 
         LocalTime midnight = LocalTime.MAX;
 
@@ -29,30 +43,34 @@ public class runner {
 
         Scanner in = new Scanner(System.in);
 
-        Calendar c = Calendar.getInstance();
-        System.out.println("Today is " +c.getTime());
+//        Calendar c = Calendar.getInstance();
+//        System.out.println("Today is " +c.getTime());
 
-        Date date = new Date();
+//        Date date = new Date();
 
-        System.out.println(time.toString());
-        String username = "";
+        Time date = new Time(1);
+
+        System.out.println(date);
 
 
-        Executors.newSingleThreadScheduledExecutor().schedule(() -> System.exit(0), terminate , TimeUnit.SECONDS);
+        String username;
+        User USER = null;
+
+
+        Executors.newSingleThreadScheduledExecutor().schedule(() -> System.exit(0), terminate, TimeUnit.SECONDS);
 
         while (!time.toString().equals("00:00:00")) {
             boolean newUser = false;
-
             time = ZonedDateTime.now().toLocalTime().truncatedTo(SECONDS);
 
-            File f = new File(Date.getFilename());
-            if (f.exists()) {
-                // .setToday() opens date file, but date file doesn't exist until BankManager sets the date initially
-                date.setToday();
-//                System.out.println("Today is " + date);
-            } else {
-                System.out.println("Admin, please set the date.");
-            }
+//            File f = new File(Date.getFilename());
+//            if (f.exists()) {
+//                // .setToday() opens date file, but date file doesn't exist until BankManager sets the date initially
+//                date.setToday();
+////                System.out.println("Today is " + date);
+//            } else {
+//                System.out.println("Admin, please set the date.");
+//            }
 
             System.out.println("Please type in a number to pick an option.");
             System.out.println("(1) Admin \n(2) User\n");
@@ -76,7 +94,10 @@ public class runner {
                     while (adminLoggedIn) {
                         if (admin) {
 
-                            System.out.println("(1) Check/Approve new users requests");
+                            CashManager cash = new CashManager();
+                            cash.alertManager();
+
+                            System.out.println("\n(1) Check/Approve new users requests");
                             System.out.println("(2) Check/Approve existing users requests");
                             System.out.println("(3) Reverse users transactions");
                             System.out.println("(4) SetDate");
@@ -98,24 +119,30 @@ public class runner {
 
                                 case 3: // reverse transaction
                                     System.out.println("Type the username of the user you want to reverse a transaction for: ");
-                                    String user = in.nextLine();
+                                    String user1 = in.nextLine();
 
-                                    UserView view = new UserView();
-                                    view.viewAccounts(user);
+                                    User user = Database.checkExistingUser(user1);
+
+                                    if (user!=null) user.viewAccounts();
+
 
                                     System.out.println("Which account would you like to reverse the transaction from?");
                                     int acc = Integer.parseInt(in.nextLine());
                                     try {
+
                                         BankManager bm3 = new BankManager();
-                                        bm3.ReverseLastTransaction(username,acc);
+                                        bm3.ReverseLastTransaction(user,acc);
+
                                     } catch (InsufficientFundsException e) {
                                         System.out.println(e.getMessage());
                                     }
                                     break;
 
                                 case 4: // set date
+                                    System.out.println("How many days from today do you want to set the date?");
+                                    int days = Integer.parseInt(in.nextLine());
                                     BankManager bm4 = new BankManager();
-                                    bm4.setDate();
+                                    bm4.setDate(days);
                                     break;
 
                                 case 5: // restock machine
@@ -173,9 +200,9 @@ public class runner {
                                             System.out.println("Enter your password: ");
                                             String password = in.nextLine();
 
-                                           boolean loggedIn = Database.login(username, password);
+                                           USER = Database.login(username, password);
 
-                                            if (!loggedIn) {
+                                            if (USER == null) {
                                                 System.out.println("Invalid username or password");
                                             }
                                             else{
@@ -201,8 +228,7 @@ public class runner {
                         case 2: // request new user
                             System.out.println("Enter your preferred username:");
                             String name = in.nextLine();
-                            System.out.println("Please wait till the manager processes your request");
-                            //TODO: Handle no to users can have same account
+
                             try {
                                 UserRequests request = new UserRequests();
                                 request.newUser(name);
@@ -220,7 +246,7 @@ public class runner {
                     }
 
                     boolean run = true;
-                    while (run && !newUser && !time.toString().equals("12:00:00")) {
+                    while (run && !newUser) {
 
                             System.out.println("\nWelcome!\nPlease pick an option:");
 
@@ -242,13 +268,12 @@ public class runner {
                                 }
                             switch (option3) {
                                 case 1: // view accounts info
-                                    UserView viewInfo = new UserView();
-                                    System.out.println(viewInfo.viewAccountsInfo(username));
+
+                                    System.out.println(USER.viewAccountsInfo());
                                     break;
 
-                                case 2: // withdrawal
-                                    UserView viewAcc= new UserView();
-                                    viewAcc.viewAccounts(username);
+                                case 2: // withdraw
+                                   USER.viewAccounts();
 
                                     // this brings up their list of accounts
 
@@ -274,7 +299,7 @@ public class runner {
                                     int[] cashAmount = new int[]{fives, tens, twenties, fifties};
 
                                     try {
-                                        UserExecutes transaction = new UserExecutes(new Withdraw(account, username,cashAmount));
+                                        UserExecutes transaction = new UserExecutes(new Withdraw(account, USER ,cashAmount));
                                         transaction.executeTransaction(WithdrawAmount);
                                     }catch (InsufficientFundsException e) {
                                         System.out.println(e.getMessage());
@@ -284,11 +309,9 @@ public class runner {
 
 
 
-                                case 3:
+                                case 3: //deposit
 
-                                    UserView viewAccD= new UserView();
-                                    viewAccD.viewAccounts(username);
-
+                                    USER.viewAccounts();
                                     // this brings up their list of accounts
 
                                     System.out.println("Which account would you like to deposit to?: ");
@@ -297,7 +320,7 @@ public class runner {
                                     System.out.println("How much would you like to deposit: ");
                                     double amountD = Double.parseDouble(in.nextLine());
                                     try {
-                                        UserExecutes transaction = new UserExecutes(new Deposit(accountD, username));
+                                        UserExecutes transaction = new UserExecutes(new Deposit(accountD, USER));
                                         transaction.executeTransaction(amountD);
                                     } catch (InsufficientFundsException e) {
                                         System.out.println(e.getMessage());
@@ -306,8 +329,7 @@ public class runner {
 
 
                                 case 4: // internal transfer
-                                    UserView viewAcc2= new UserView();
-                                    viewAcc2.viewAccounts(username);
+                                    USER.viewAccounts();
 
                                     System.out.println("From: ");
                                     int from = Integer.parseInt(in.nextLine());
@@ -320,7 +342,7 @@ public class runner {
                                     double amount = Double.parseDouble(in.nextLine());
 
                                     try {
-                                        UserExecutes transaction = new UserExecutes(new InternalTransfer(from, to, username));
+                                        UserExecutes transaction = new UserExecutes(new InternalTransfer(from, to, USER));
                                         transaction.executeTransaction(amount);
                                     } catch (InsufficientFundsException e) {
                                         System.out.println(e.getMessage());
@@ -333,17 +355,16 @@ public class runner {
                                     String userTo = in.nextLine();
 
 //                                    if (user != null) {
-                                        System.out.println("How much money would you like to transfer?: ");
-                                        amount = Double.parseDouble(in.nextLine());
+                                    System.out.println("How much money would you like to transfer?: ");
+                                    amount = Double.parseDouble(in.nextLine());
 
-                                    UserView viewAcc3= new UserView();
-                                    viewAcc3.viewAccounts(username);
+                                    USER.viewAccounts();
 
                                         System.out.println("From which account would you like to transfer money?: ");
                                         int accFrom = Integer.parseInt(in.nextLine());
 
                                         try {
-                                            UserExecutes transaction = new UserExecutes(new ExternalTransfer(accFrom, userTo, username));
+                                            UserExecutes transaction = new UserExecutes(new ExternalTransfer(accFrom, userTo, USER));
                                             transaction.executeTransaction(amount);
                                         } catch(InsufficientFundsException e){
                                             System.out.println(e.getMessage());
@@ -352,8 +373,7 @@ public class runner {
                                     break;
 
                                 case 6: // pay bill
-                                    UserView viewAcc4= new UserView();
-                                    viewAcc4.viewAccounts(username);
+                                    USER.viewAccounts();
 
                                     System.out.println("From: ");
                                     from = Integer.parseInt(in.nextLine());
@@ -362,7 +382,7 @@ public class runner {
                                     amount = Double.parseDouble(in.nextLine());
 
                                     try {
-                                        UserExecutes transaction = new UserExecutes(new PayBills(from, username));
+                                        UserExecutes transaction = new UserExecutes(new PayBills(from, USER));
                                         transaction.executeTransaction(amount);
                                     }catch (InsufficientFundsException e) {
                                         System.out.println(e.getMessage());
@@ -372,9 +392,11 @@ public class runner {
                                 case 7: // change password
                                     System.out.println("Enter new password: ");
                                     String newPassword = in.nextLine();
-                                    UserExecutes change = new UserExecutes();
-                                    change.changePassword(newPassword, username);
+                                    USER.setPassword(newPassword);
+
+                                    Database.store();
                                     break;
+
                                 case 8:
                                     // new account creation
                                     System.out.println("What type of account would you like to open?:");
@@ -382,7 +404,7 @@ public class runner {
                                     account = Integer.parseInt(in.nextLine());
 
                                     UserRequests requests = new UserRequests();
-                                    requests.requestAccount(account, username);
+                                    requests.requestAccount(account, USER);
                                     break;
 
                                 case 0: // log out
@@ -403,8 +425,8 @@ public class runner {
             }
         }
 
-        date.update();
-        System.exit(0);
+//        date.update();
+//        System.exit(0);
 
     }
 

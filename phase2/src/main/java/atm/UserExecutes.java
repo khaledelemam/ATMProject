@@ -15,12 +15,6 @@ public class UserExecutes {
         transaction.doTransaction(amount);
     }
 
-    void changePassword(String newPassword, String username) {
-        User user = Database.checkExistingUser(username);
-        user.setPassword(newPassword);
-        Database.store();
-    }
-
 
 
 }

@@ -21,7 +21,6 @@ public class Database {
     }
 
     static User checkExistingUser(String username){
-
         for (int i = 0; i < users.size(); i ++) {
             if (users.get(i).getUsername().equals(username)){
                 return users.get(i);
@@ -30,13 +29,13 @@ public class Database {
         return null;
     }
 
-   static boolean login(String username, String password){
+   static User login(String username, String password){
        retrieve();
        for (int i = 0; i < users.size(); i ++) {
 
            if (users.get(i).getUsername().equals(username)){
                if (users.get(i).getPassword().equals(password)){
-                   return true;
+                   return users.get(i);
 
                }
 
@@ -44,7 +43,7 @@ public class Database {
 
        }
        store();
-       return false;
+       return null;
     }
 
 
@@ -65,22 +64,26 @@ public class Database {
     @SuppressWarnings("unchecked")
 
    static  void retrieve() {
-        try {
-            FileInputStream fis = new FileInputStream("file");
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            users = (ArrayList) ois.readObject();
-            ois.close();
-            fis.close();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        } catch (ClassNotFoundException c) {
-            System.out.println("Class not found");
-            c.printStackTrace();
-        }
+
+        File f = new File("file");
+        if (f.exists()) {
+            try {
+                FileInputStream fis = new FileInputStream("file");
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                users = (ArrayList) ois.readObject();
+                ois.close();
+                fis.close();
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            } catch (ClassNotFoundException c) {
+                System.out.println("Class not found");
+                c.printStackTrace();
+            }
 //        for (User tmp : users) {
 //            System.out.println(tmp);
 //        }
 
+        }
     }
 
 

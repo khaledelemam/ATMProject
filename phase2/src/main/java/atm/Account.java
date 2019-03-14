@@ -12,13 +12,13 @@ public abstract class Account implements Serializable {
     double balance;
     private DecimalFormat currencyFormat = new DecimalFormat("0.00");
     private Transaction lastTransaction;
-    private Date dateOpened;
+    private Time dateOpened;
     private static final long serialVersionUID = 10L;
 
     public Account() {
         this.lastTransaction = null;
         this.balance = 0;
-        this.dateOpened = new Date();
+        this.dateOpened = new Time();
     }
     public String getBalance(){
         return currencyFormat.format(balance);
@@ -26,7 +26,7 @@ public abstract class Account implements Serializable {
 
     public abstract void setBalance(double amount) throws InsufficientFundsException;
 
-    public Date getDateOpened() {
+    public Time getDateOpened() {
         return dateOpened;
     }
 

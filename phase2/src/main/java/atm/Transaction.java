@@ -12,7 +12,7 @@ public class Transaction implements Serializable {
     private Account recipient;
     private double amount;
     private DecimalFormat currencyFormat = new DecimalFormat("0.00");
-    private Date date;
+    private Time date;
     private static final long serialVersionUID = 100L;
     private String username = null;
 
@@ -21,14 +21,14 @@ public class Transaction implements Serializable {
         this.source = source;
         this.recipient = recipient;
         this.amount = amount;
-        this.date = new Date();
+        this.date = new Time();
     }
     //for external transfers
     public Transaction(Account source, Account recipient, double amount, String username) {
         this.source = source;
         this.recipient = recipient;
         this.amount = amount;
-        this.date = new Date();
+        this.date = new Time();
         this.username = username;
     }
 
@@ -37,7 +37,7 @@ public class Transaction implements Serializable {
     public Transaction(Account source, double amount) {
         this.source = source;
         this.amount = amount;
-        this.date = new Date();
+        this.date = new Time();
     }
 
 
@@ -77,7 +77,7 @@ public class Transaction implements Serializable {
         return this.source;
     }
 
-    public Date getDate() {
+    public Time getDate() {
         return this.date;
     }
 }

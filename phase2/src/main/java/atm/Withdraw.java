@@ -6,10 +6,10 @@ public class Withdraw implements UserDo {
 
     private int[] cashAmounts;
     private int account ;
-    private  String username;
+    private User user;
 
-    public Withdraw(int account, String username, int[] cash){
-        this.username = username;
+    public Withdraw(int account, User user, int[] cash){
+        this.user = user;
         this.account = account;
         this.cashAmounts = cash;
 
@@ -25,8 +25,8 @@ public class Withdraw implements UserDo {
 
         if (amountTotal == amount) {
 
-            User user = Database.checkExistingUser(username);
-
+//            User user = Database.checkExistingUser(username);
+            //TODO: handle incorrect entries in runner eg 11
             Account acc = user.getAccount(account);
             acc.setBalance(-amount);
             Transaction withdrawal = new Transaction(acc, amount);

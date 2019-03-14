@@ -1,23 +1,23 @@
 package atm;
 
 public class InternalTransfer implements UserDo {
+
 //    private Database Database = new Database();
-    private BankManager bankmanager = new BankManager();
-    private String username;
+
     private int from;
     private User user;
     private int to;
 
-    public InternalTransfer(int from , int to, String username) {
+    public InternalTransfer(int from , int to, User user) {
         this.from = from;
         this.to = to;
-        this.username = username;
+        this.user = user;
     }
 
 
     public void doTransaction(double amount) throws InsufficientFundsException {
-//        Database.retrieve();
-        user = Database.checkExistingUser(username);
+
+//        user = Database.checkExistingUser(username);
         try {
             Account accFrom = user.getAccount(from);
             Account accTo = user.getAccount(to);

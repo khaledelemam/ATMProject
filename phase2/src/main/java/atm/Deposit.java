@@ -2,19 +2,18 @@ package atm;
 
 public class Deposit implements UserDo {
 
-    private String username;
+    private User user;
     private int account;
 
 
-    public Deposit(int account,  String username) {
+    public Deposit(int account, User user) {
         this.account = account;
-        this.username = username;
+        this.user = user;
     }
 
 
     public void doTransaction(double amount) throws InsufficientFundsException {
-//        Database.retrieve();
-        User  user = Database.checkExistingUser(username);
+//        User  user = Database.checkExistingUser(username);
         Account acc = user.getAccount(account);
         acc.setBalance(amount);
 //            Transaction intTransfer = new Transaction(accFrom, accTo, amount);

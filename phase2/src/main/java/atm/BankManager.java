@@ -70,30 +70,37 @@ public class BankManager implements Serializable {
         Database.store();
     }
 
-    void ReverseLastTransaction(String username, int account)throws InsufficientFundsException{
-        User user = Database.checkExistingUser(username);
-        if (user!= null){
+    void ReverseLastTransaction(User user, int account)throws InsufficientFundsException{
+//        User user = Database.checkExistingUser(username);
+//        if (user!= null){
             Account acc = user.getAccount(account);
             Transaction transaction = acc.getLastTransaction();
             ReverseATM rATM = new ReverseATM();
             if (transaction.getRecipient() != null) {
                 rATM.ReverseTransaction(acc, transaction);
-                System.out.println("Reversed transaction for: " + username);
+                System.out.println("Reversed transaction for: " + user.getUsername());
             }
             else{
                 System.out.println("The last transaction is not a transfer between accounts.");
             }
             Database.store();
-        }
+//        }
 
     }
 
 
 
-    void setDate(){
-        Date date = new Date();
-        date.setDate();
-        System.out.println(date);
+    void setDate(int days){
+
+        long plusOneDay = (1000 * 60 * 60 * 24);
+        long NumberOfDays = plusOneDay * days;
+
+        new Time(NumberOfDays);
+
+
+//        Date date = new Date();
+//        date.setDate();
+//        System.out.println(date);
 
     }
 
