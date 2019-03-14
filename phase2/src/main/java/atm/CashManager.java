@@ -108,6 +108,20 @@ public class CashManager {
         writer.close();
     }
 
+    void alertManager() throws IOException{
+
+        File file = new File(alertFile);
+        BufferedReader alert = new BufferedReader(new FileReader(file));
+
+        String line = alert.readLine();
+
+        while(line != null){
+            System.out.println(line);
+            line = alert.readLine();
+        }
+
+    }
+
     public String toString(){
         String s = "$5 dollar bills: " + getDenom(5) + "\n" +
                 "$10 dollar bills: " + getDenom(10) + "\n" +

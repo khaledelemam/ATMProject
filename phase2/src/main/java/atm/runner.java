@@ -94,7 +94,10 @@ public class runner {
                     while (adminLoggedIn) {
                         if (admin) {
 
-                            System.out.println("(1) Check/Approve new users requests");
+                            CashManager cash = new CashManager();
+                            cash.alertManager();
+
+                            System.out.println("\n(1) Check/Approve new users requests");
                             System.out.println("(2) Check/Approve existing users requests");
                             System.out.println("(3) Reverse users transactions");
                             System.out.println("(4) SetDate");
