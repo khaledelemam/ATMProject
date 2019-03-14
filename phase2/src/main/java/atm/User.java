@@ -30,7 +30,6 @@ public class User implements Serializable {
 
 
 
-
     }
     @Override
     public String toString() {
@@ -94,7 +93,7 @@ public class User implements Serializable {
         return null;
     }
 
-    ArrayList<String> accountInfo() {
+    private ArrayList<String> accountInfo() {
 
         ArrayList<String> accountsInfo = new ArrayList<>();
         for(int i = 1 ; i <= accounts.size(); i++) {
@@ -111,6 +110,19 @@ public class User implements Serializable {
         return accountsInfo;
     }
 
+
+    String viewAccountsInfo() {
+
+        String accInfo = "Net total: " + netUserBalance() + "\n";
+        for (String account: accountInfo()) {
+            accInfo += account + "\n";
+        }
+        return accInfo;
+    }
+
+
+
+
     String getRequest(){
         return request ;
     }
@@ -119,7 +131,7 @@ public class User implements Serializable {
 
     Account getPrimaryAccount() { return accounts.get(1);}
 
-    String netUserBalance() {
+    private String netUserBalance() {
         double netTotal = 0;
         for (int k = 1; k <= accounts.size(); k++){
             netTotal += accounts.get(k).getNetTotal();

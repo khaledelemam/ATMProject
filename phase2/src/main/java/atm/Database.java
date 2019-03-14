@@ -21,7 +21,6 @@ public class Database {
     }
 
     static User checkExistingUser(String username){
-
         for (int i = 0; i < users.size(); i ++) {
             if (users.get(i).getUsername().equals(username)){
                 return users.get(i);
@@ -30,13 +29,13 @@ public class Database {
         return null;
     }
 
-   static boolean login(String username, String password){
+   static User login(String username, String password){
        retrieve();
        for (int i = 0; i < users.size(); i ++) {
 
            if (users.get(i).getUsername().equals(username)){
                if (users.get(i).getPassword().equals(password)){
-                   return true;
+                   return users.get(i);
 
                }
 
@@ -44,7 +43,7 @@ public class Database {
 
        }
        store();
-       return false;
+       return null;
     }
 
 

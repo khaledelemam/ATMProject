@@ -1,25 +1,23 @@
 package atm;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 public class PayBills implements UserDo{
 //    Database Database = new Database();
+
     private int account;
-    private String username;
     private User user;
 
-    public PayBills(int account, String username){
+    public PayBills(int account, User user){
         this.account = account;
-        this.username = username;
+        this.user = user;
     }
 
 
     public void doTransaction(double amount) throws IOException, InsufficientFundsException {
-//        Database.retrieve();
-        user = Database.checkExistingUser(username);
+
         Account acc = user.getAccount(account);
         acc.setBalance(-amount);
 

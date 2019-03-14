@@ -10,15 +10,19 @@ public class UserRequests {
     void newUser(String username) throws UsernameTakenException{
         BankManager bankManager = new BankManager();
 
-        File f = new File("file2");
+        File f = new File("file");
         if (f.exists()) {
+            Database.retrieve();
+        }
+
+        File f2 = new File("file2");
+        if (f2.exists()) {
             bankManager.retrieveRequests();
         }
         String request = "Chequing";
 
         if (Database.checkExistingUser(username) != null){
-            UsernameTakenException u = new UsernameTakenException();
-            throw u;
+            throw new UsernameTakenException();
         }
         else {
             ArrayList<String> arr = new ArrayList<>();
@@ -27,14 +31,16 @@ public class UserRequests {
 
             bankManager.requests.add(arr);
             bankManager.storeRequests();
+            Database.store();
+            System.out.println("Please wait till the manager processes your request");
         }
     }
 
 
 
-    void requestAccount(int account, String username){
+    void requestAccount(int account, User user){
 
-        User user = Database.checkExistingUser(username);
+//        User user = Database.checkExistingUser(username);
 
         if (account == 1){
             user.requestAccount("Chequing");
