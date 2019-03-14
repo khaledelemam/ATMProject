@@ -5,6 +5,7 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class atmInterface {
 
@@ -14,7 +15,6 @@ public class atmInterface {
 
     private JTextField login_usernameTextField, login_passwordTextField, new_username;
     private JButton createNewAccountButton, adminLoginButton;
-    private JTextArea wELCTextArea;
     private JPanel loginScreen, createNewUser, adminControls;
     private JTextField creditScoreTextField;
     private JLabel newUsernameLabel;
@@ -213,5 +213,10 @@ public class atmInterface {
         frame.setVisible(true);
     }
 
+    private void createUIComponents() {
+//        JComboBox menu_accountChooser = new JComboBox();
+//        ArrayList<String> ls = new ArrayList<String>();
+//        JComboBox.setModel(new DefaultComboBoxModel(ls.toArray()));
+    }
 }
 
