@@ -90,10 +90,17 @@ public class BankManager implements Serializable {
 
 
 
-    void setDate(){
-        Date date = new Date();
-        date.setDate();
-        System.out.println(date);
+    void setDate(int days){
+
+        long plusOneDay = (1000 * 60 * 60 * 24);
+        long NumberOfDays = plusOneDay * days;
+
+        new Time(NumberOfDays);
+
+
+//        Date date = new Date();
+//        date.setDate();
+//        System.out.println(date);
 
     }
 

@@ -64,22 +64,26 @@ public class Database {
     @SuppressWarnings("unchecked")
 
    static  void retrieve() {
-        try {
-            FileInputStream fis = new FileInputStream("file");
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            users = (ArrayList) ois.readObject();
-            ois.close();
-            fis.close();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        } catch (ClassNotFoundException c) {
-            System.out.println("Class not found");
-            c.printStackTrace();
-        }
+
+        File f = new File("file");
+        if (f.exists()) {
+            try {
+                FileInputStream fis = new FileInputStream("file");
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                users = (ArrayList) ois.readObject();
+                ois.close();
+                fis.close();
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            } catch (ClassNotFoundException c) {
+                System.out.println("Class not found");
+                c.printStackTrace();
+            }
 //        for (User tmp : users) {
 //            System.out.println(tmp);
 //        }
 
+        }
     }
 
 

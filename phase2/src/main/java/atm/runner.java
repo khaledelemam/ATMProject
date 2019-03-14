@@ -11,12 +11,26 @@ import static java.time.temporal.ChronoUnit.MINUTES;
 import static java.time.temporal.ChronoUnit.SECONDS;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+
 public class runner {
 
 
     public static void main(String[] args) throws IOException, NegativeDenominationException {
 
+
+//
+//        Calendar cal=Calendar.getInstance();
+//        cal.setTimeInMillis(System.currentTimeMillis());
+//
+//        SimpleDateFormat format=new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
+//        System.out.println(format.format(cal.getTime()));
+
+
         LocalTime time = ZonedDateTime.now().toLocalTime().truncatedTo(MINUTES);
+        System.out.println(time.toString());
 
         LocalTime midnight = LocalTime.MAX;
 
@@ -29,31 +43,34 @@ public class runner {
 
         Scanner in = new Scanner(System.in);
 
-        Calendar c = Calendar.getInstance();
-        System.out.println("Today is " +c.getTime());
+//        Calendar c = Calendar.getInstance();
+//        System.out.println("Today is " +c.getTime());
 
-        Date date = new Date();
+//        Date date = new Date();
 
-        System.out.println(time.toString());
-        String username = "";
+        Time date = new Time(1);
+
+        System.out.println(date);
+
+
+        String username;
         User USER = null;
 
 
-        Executors.newSingleThreadScheduledExecutor().schedule(() -> System.exit(0), terminate , TimeUnit.SECONDS);
+        Executors.newSingleThreadScheduledExecutor().schedule(() -> System.exit(0), terminate, TimeUnit.SECONDS);
 
         while (!time.toString().equals("00:00:00")) {
             boolean newUser = false;
-
             time = ZonedDateTime.now().toLocalTime().truncatedTo(SECONDS);
 
-            File f = new File(Date.getFilename());
-            if (f.exists()) {
-                // .setToday() opens date file, but date file doesn't exist until BankManager sets the date initially
-                date.setToday();
-//                System.out.println("Today is " + date);
-            } else {
-                System.out.println("Admin, please set the date.");
-            }
+//            File f = new File(Date.getFilename());
+//            if (f.exists()) {
+//                // .setToday() opens date file, but date file doesn't exist until BankManager sets the date initially
+//                date.setToday();
+////                System.out.println("Today is " + date);
+//            } else {
+//                System.out.println("Admin, please set the date.");
+//            }
 
             System.out.println("Please type in a number to pick an option.");
             System.out.println("(1) Admin \n(2) User\n");
@@ -119,8 +136,10 @@ public class runner {
                                     break;
 
                                 case 4: // set date
+                                    System.out.println("How many days from today do you want to set the date?");
+                                    int days = Integer.parseInt(in.nextLine());
                                     BankManager bm4 = new BankManager();
-                                    bm4.setDate();
+                                    bm4.setDate(days);
                                     break;
 
                                 case 5: // restock machine
@@ -403,8 +422,8 @@ public class runner {
             }
         }
 
-        date.update();
-        System.exit(0);
+//        date.update();
+//        System.exit(0);
 
     }
 

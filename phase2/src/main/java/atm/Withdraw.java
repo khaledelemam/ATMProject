@@ -26,7 +26,7 @@ public class Withdraw implements UserDo {
         if (amountTotal == amount) {
 
 //            User user = Database.checkExistingUser(username);
-
+            //TODO: handle incorrect entries in runner eg 11
             Account acc = user.getAccount(account);
             acc.setBalance(-amount);
             Transaction withdrawal = new Transaction(acc, amount);
