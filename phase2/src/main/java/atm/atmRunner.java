@@ -21,8 +21,8 @@ public class atmRunner {
 
     public String newUserRequest(String username) {
         try {
-            UserRequests request = new UserRequests();
-            request.newUser(username);
+            BankManager bankManager = new BankManager();
+            bankManager.newUserRequest(username);
             return "Please wait until an admin approves your account. \nPassword is: 1";
         } catch (UsernameTakenException u) {
             return (u.getMessage());

@@ -24,17 +24,12 @@ public class BankManager implements Serializable {
 
 
 
-
     void createUser(){
-        File f = new File("file");
-        if (f.exists()) {
-            Database.retrieve();
-        }
 
-        File f2 = new File("file2");
-        if (f2.exists()) {
-            retrieveRequests();
-        }
+        Database.retrieve();
+
+        retrieveRequests();
+
         for(int i = 0; i< requests.size();i++){
                 if (CreditScore.getRandomDoubleBetweenRange() > 0) {
                     User user = new User(requests.get(i).get(0));
@@ -70,9 +65,8 @@ public class BankManager implements Serializable {
         Database.store();
     }
 
+
     void ReverseLastTransaction(User user, int account)throws InsufficientFundsException{
-//        User user = Database.checkExistingUser(username);
-//        if (user!= null){
             Account acc = user.getAccount(account);
             Transaction transaction = acc.getLastTransaction();
             ReverseATM rATM = new ReverseATM();
@@ -84,8 +78,33 @@ public class BankManager implements Serializable {
                 System.out.println("The last transaction is not a transfer between accounts.");
             }
             Database.store();
-//        }
 
+    }
+
+
+
+    void newUserRequest(String username) throws UsernameTakenException{
+
+        Database.retrieve();
+
+        retrieveRequests();
+
+        String request = "Chequing";
+
+        if (Database.checkExistingUser(username) != null){
+            throw new UsernameTakenException();
+        }
+        else {
+            ArrayList<String> arr = new ArrayList<>();
+            arr.add(username);
+            arr.add(request);
+
+            requests.add(arr);
+            storeRequests();
+            Database.store();
+
+            System.out.println("Please wait till the manager processes your request");
+        }
     }
 
 
@@ -96,11 +115,6 @@ public class BankManager implements Serializable {
         long NumberOfDays = plusOneDay * days;
 
         new Time(NumberOfDays);
-
-
-//        Date date = new Date();
-//        date.setDate();
-//        System.out.println(date);
 
     }
 
@@ -121,21 +135,28 @@ public class BankManager implements Serializable {
     @SuppressWarnings("unchecked")
 
     void retrieveRequests() {
-        try {
-            FileInputStream fis = new FileInputStream("file2");
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            requests = (ArrayList) ois.readObject();
-            ois.close();
-            fis.close();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        } catch (ClassNotFoundException c) {
-            System.out.println("Class not found");
-            c.printStackTrace();
+        File f = new File("file2");
+        if (f.exists()) {
+            try {
+                FileInputStream fis = new FileInputStream("file2");
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                requests = (ArrayList) ois.readObject();
+                ois.close();
+                fis.close();
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            } catch (ClassNotFoundException c) {
+                System.out.println("Class not found");
+                c.printStackTrace();
+            }
         }
 //        for (User tmp : users) {
 //            System.out.println(tmp);
 //        }
+
+
+    }
+
 
 
 
@@ -175,11 +196,6 @@ public class BankManager implements Serializable {
 //        BankManager bankManager = new BankManager();
 //        bankManager.setDate();
 //    }
-
-    }
-
-
-
 
 
 

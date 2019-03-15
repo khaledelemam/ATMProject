@@ -21,7 +21,6 @@ public class runner {
     public static void main(String[] args) throws IOException, NegativeDenominationException {
 
 
-//
 //        Calendar cal=Calendar.getInstance();
 //        cal.setTimeInMillis(System.currentTimeMillis());
 //
@@ -45,7 +44,6 @@ public class runner {
 
 //        Calendar c = Calendar.getInstance();
 //        System.out.println("Today is " +c.getTime());
-
 //        Date date = new Date();
 
         Time date = new Time(1);
@@ -92,6 +90,7 @@ public class runner {
                     boolean adminLoggedIn = true;
 
                     while (adminLoggedIn) {
+
                         if (admin) {
 
                             CashManager cash = new CashManager();
@@ -230,8 +229,8 @@ public class runner {
                             String name = in.nextLine();
 
                             try {
-                                UserRequests request = new UserRequests();
-                                request.newUser(name);
+                                BankManager bankManager = new BankManager();
+                                bankManager.newUserRequest(name);
                             } catch (UsernameTakenException u) {
                                 System.out.println(u.getMessage());
                             }
@@ -403,8 +402,7 @@ public class runner {
                                     System.out.println("(1) CHEQUING\n(2) SAVINGS\n(3) LINE OF CREDIT\n(4) CREDIT CARD");
                                     account = Integer.parseInt(in.nextLine());
 
-                                    UserRequests requests = new UserRequests();
-                                    requests.requestAccount(account, USER);
+                                   USER.requestAccount(account);
                                     break;
 
                                 case 0: // log out
