@@ -11,7 +11,7 @@ public class BankManager implements Serializable {
     private String password;
 
 
-    ArrayList<ArrayList<String>> requests  = new ArrayList<>();
+    private ArrayList<ArrayList<String>> requests  = new ArrayList<>();
 
 
     public BankManager(){
@@ -33,7 +33,7 @@ public class BankManager implements Serializable {
         for(int i = 0; i< requests.size();i++){
                 if (CreditScore.getRandomDoubleBetweenRange() > 0) {
                     User user = new User(requests.get(i).get(0));
-                    user.addAccount(requests.get(i).get(1));
+                    user.createAccount(requests.get(i).get(1));
                     setUserPassword(user);
 
                 }
@@ -54,14 +54,35 @@ public class BankManager implements Serializable {
     void  userRequestAccount(){
         Database.retrieve();
         for(int i = 0; i< Database.getUsers().size();i++){
-            if (Database.getUsers().get(i).getRequest() != null){
-                if (CreditScore.getRandomDoubleBetweenRange() > 0) {
-                    Database.getUsers().get(i).addAccount(Database.getUsers().get(i).getRequest());
+            if (CreditScore.getRandomDoubleBetweenRange() > 0) {
+
+                // for joint accounts
+                if (Database.getUsers().get(i).getRequest() != null && Database.getUsers().get(i).getJoint() != null ) {
+                    //primary user
+                    User main = Database.getUsers().get(i);
+                    String request = Database.getUsers().get(i).getRequest();
+                    main.createAccount(request);
+
+                    String joint = Database.getUsers().get(i).getJoint();
+
+                    //partner
+                    User partner =  Database.checkExistingUser(joint);
+
+                    if (partner !=null){
+                        partner.setJoint(main.getUsername());
+                        partner.addAccount(main.getJointAccount());
+                    }
+
+                    }
+
+                //for single accounts
+                else if(Database.getUsers().get(i).getRequest() != null ){
+                    Database.getUsers().get(i).createAccount(Database.getUsers().get(i).getRequest());
                 }
             }
-        }
         System.out.println("New accounts created");
         Database.store();
+    }
     }
 
 

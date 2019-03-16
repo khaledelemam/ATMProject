@@ -3,6 +3,7 @@ package atm;
 
 public class ChequingAccount extends Account {
 
+    private boolean joint = false;
 
     public ChequingAccount() {
     super();
@@ -10,7 +11,12 @@ public class ChequingAccount extends Account {
 
     @Override
     public String toString() {
-        return "Chequing Account";
+        if (joint){
+            return " Joint Chequing Account";
+        }
+        else{
+            return "Chequing Account";
+        }
     }
 
     @Override
@@ -30,6 +36,10 @@ public class ChequingAccount extends Account {
 
     public double getNetTotal(){
         return balance;
+    }
+
+    public void setJoint(){
+        joint = true;
     }
 
 }

@@ -399,10 +399,17 @@ public class runner {
                                 case 8:
                                     // new account creation
                                     System.out.println("What type of account would you like to open?:");
-                                    System.out.println("(1) CHEQUING\n(2) SAVINGS\n(3) LINE OF CREDIT\n(4) CREDIT CARD");
+                                    System.out.println("(1) Chequing\n(2) Savings\n(3) Line of Credit\n(4) Credit Card\n(5) Joint Account");
                                     account = Integer.parseInt(in.nextLine());
 
-                                   USER.requestAccount(account);
+                                    if (account == 5){
+
+                                        System.out.println("Who do you want to open the account with?");
+                                        String partner = in.nextLine();
+                                        USER.requestJointAccount(partner);
+                                    }
+
+                                    USER.requestAccount(account);
                                     break;
 
                                 case 0: // log out
