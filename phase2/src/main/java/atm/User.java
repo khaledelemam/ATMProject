@@ -139,40 +139,7 @@ public class User implements Serializable {
     }
 
 
-
-    void newUser(String username) throws UsernameTakenException{
-        BankManager bankManager = new BankManager();
-
-        File f = new File("file");
-        if (f.exists()) {
-            Database.retrieve();
-        }
-
-        File f2 = new File("file2");
-        if (f2.exists()) {
-            bankManager.retrieveRequests();
-        }
-        String request = "Chequing";
-
-        if (Database.checkExistingUser(username) != null){
-            throw new UsernameTakenException();
-        }
-        else {
-            ArrayList<String> arr = new ArrayList<>();
-            arr.add(username);
-            arr.add(request);
-
-            bankManager.requests.add(arr);
-            bankManager.storeRequests();
-            Database.store();
-            System.out.println("Please wait till the manager processes your request");
-        }
-    }
-
-
-
     void requestAccount(int account){
-
 
         if (account == 1){
             request = "Chequing";

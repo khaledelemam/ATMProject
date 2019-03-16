@@ -49,10 +49,6 @@ public class Transaction implements Serializable {
         // external transfer
         if (this.recipient != null && this.username!=null) {
             return ("$"+ this.amount + " transfered " + "from " +this.source+ " to " + this.username +" on "+ this.date);
-//            return ("Sender: " + this.source + "\n" +
-//                    "Recipient: " + this.recipient + "\n" +
-//                    "Amount: " + this.amount + "\n" +
-//                    "Date: " + this.date);
         }
         //internal transfer
         else if(this.recipient != null){
