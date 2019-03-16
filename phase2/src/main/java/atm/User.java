@@ -185,6 +185,10 @@ public class User implements Serializable {
         Database.store();
     }
 
+    /** Request BankManager for joint account
+     *
+     * @param username username of another account to join with
+     */
     void requestJointAccount(String username){
         
         if (Database.checkExistingUser(username) != null){
