@@ -72,6 +72,7 @@ public class User implements Serializable {
             int index = accounts.size();
             this.accounts.put(index + 1, hold);
             this.map.put(hold, index + 1);
+            request = null;
         }
     }
 
@@ -159,9 +160,6 @@ public class User implements Serializable {
         Database.store();
     }
 
-
-
-    void requestAccount(String account){ request = account; }
 
 
 
