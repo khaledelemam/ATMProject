@@ -1,11 +1,18 @@
 package atm;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class atmRunner {
     private User USER = null;
     private BankManager bankManager = new BankManager();
 
+
+    // ----- helper methods -----
+    public ArrayList<String> getAccounts() {
+        return  USER.getAllAccounts();
+        }
 
     // ----- login -----
 

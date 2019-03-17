@@ -51,7 +51,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="requestNewUserButton" layoutX="211.0" layoutY="76.0" mnemonicParsing="false" onAction="#acceptNewUserRequests" text="Accept new user requests" />
+                              <Button fx:id="acceptNewUserRequestsButton" layoutX="211.0" layoutY="76.0" mnemonicParsing="false" onAction="#acceptNewUserRequests" text="Accept new user requests" />
                               <Button fx:id="accountRequestsButton" layoutX="201.0" layoutY="130.0" mnemonicParsing="false" onAction="#acceptNewAccountRequests" text="Accept new account requests" />
                               <Button fx:id="adminLogoutButton" layoutX="271.0" layoutY="300.0" mnemonicParsing="false" onAction="#adminLogout" text="Logout" />
                               <Label fx:id="adminMessage" layoutX="200.0" layoutY="37.0" prefHeight="17.0" prefWidth="200.0" textAlignment="CENTER" text=""/>
@@ -132,7 +132,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <ComboBox fx:id="accounts_comboBox" layoutX="27.0" layoutY="63.0" prefHeight="27.0" prefWidth="179.0" />
+                              <ComboBox fx:id="accounts_cbox" layoutX="27.0" layoutY="63.0" prefHeight="27.0" prefWidth="179.0" />
                               <Button fx:id="accounts_showAccountsButton" layoutX="27.0" layoutY="115.0" mnemonicParsing="false" onAction="#showAccountInfo" text="Show account information" />
                               <TextArea fx:id="accounts_infoArea" layoutX="258.0" layoutY="63.0" prefHeight="270.0" prefWidth="311.0" wrapText="true" />
                            </children></AnchorPane>

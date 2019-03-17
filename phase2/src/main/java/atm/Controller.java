@@ -1,67 +1,79 @@
 package atm;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
-import java.awt.peer.LabelPeer;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+
+    // ---- login ----
     public AnchorPane loginScreen;
     public TextField login_passwordField;
-    public Button requestButton;
-    public AnchorPane newUserScreen;
-    public Button backButton;
-    public TextField new_usernameField;
     public Button loginButton;
     public Button newAccountButton;
     public Button adminButton;
     public TextField login_usernameField;
     public Label loginMessage;
-    public TextField passwordField;
+
+    // ---- new user ----
+    public AnchorPane newUserScreen;
+    public Button backButton;
+    public TextField new_usernameField;
+    public Button requestUserAccountButton;
+    public Label newUserMessage;
+
+
+    // ---- admin ----
     public AnchorPane adminScreen;
+    public Label adminMessage;
+    public Button acceptNewUserRequestsButton, accountRequestsButton;
+    public Button adminLogoutButton;
+    public Button reverseTransactionButton;
+    public ComboBox adminAccount_cbox;
+
+    // ---- user ----
     public AnchorPane userScreen;
-    public ComboBox accounts_comboBox;
+
+    // main
+    public Button changePasswordButton;
+    public TextField newPasswordField;
+    public Label newPasswordMessage;
+    public ToggleGroup accountsGroup;
+    public RadioButton chequingRadioButton, savingsRadioButton,
+            creditRadioButton, lineRadioButton;
+    public Button requestAccountButton;
+    public Button logoutButton;
+
+    // accounts
+    public ComboBox<String> accounts_cbox;
     public Button accounts_showAccountsButton;
     public TextArea accounts_infoArea;
+
+    // transfers
+    public ComboBox<String>  internalTransfer_cbox, externalTransfer_cbox;
+    public Button internalTransferButton;
+    public Button externalTransferButton;
+    public ComboBox billPay_cbox;
+    public Button payBillButton;
+
+    // withdraw/deposit
     public Button dw_depositButton;
     public TextField dw_amountField;
     public Button dw_withdrawButton;
     public Label dw_message;
-    public ComboBox internalTransfer_cbox;
-    public Button internalTransferButton;
-    public ComboBox externalTransfer_cbox;
-    public Button externalTransferButton;
-    public ComboBox billPay_cbox;
-    public Button payBillButton;
-    public RadioButton chequingRadioButton;
-    public RadioButton savingsRadioButton;
-    public RadioButton creditRadioButton;
-    public RadioButton lineRadioButton;
-    public Button requestAccountButton;
-    public ToggleGroup accountsGroup;
-    public Button logoutButton;
-    public Button changePasswordButton;
-    public TextField newPasswordField;
-    public Button requestNewAccountButton;
-    public Label newPasswordMessage;
-    public Label newUserMessage;
-    public Label adminMessage;
-    public Button requestNewUserButton;
-    public Button accountRequestsButton;
-    public Button adminLogoutButton;
-    public Button reverseTransactionButton;
-    public ComboBox adminAccount_cbox;
-    public Button requestUserAccountButton;
 
+    // initialize ATM
     atmRunner atm = new atmRunner();
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {}
 
     // ----- helpers ^___^  ------
     private void clearLoginFields() {
@@ -70,9 +82,12 @@ public class Controller implements Initializable {
         loginMessage.setText("");
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
+    private void userSessionSetUp() {
+        ObservableList<String> accounts = FXCollections.observableArrayList(atm.getAccounts());
+        accounts_cbox.setItems(accounts);
+        internalTransfer_cbox.setItems(accounts);
+        externalTransfer_cbox.setItems(accounts);
+        billPay_cbox.setItems(accounts);
     }
 
     // ----- login events ------
@@ -81,6 +96,7 @@ public class Controller implements Initializable {
             loginScreen.setVisible(false);
             userScreen.setVisible(true);
             clearLoginFields();
+            userSessionSetUp();
         } else {
             clearLoginFields();
             loginMessage.setText("Invalid username or password.");

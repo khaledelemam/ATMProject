@@ -269,8 +269,8 @@ public class ATM {
 
 
 
-    //    void viewAccounts() {
-//        user.viewAccounts();
+    //    void getAccounts() {
+//        user.getAccounts();
 //    }
 
 
@@ -298,7 +298,7 @@ public class ATM {
 
 //    void viewAccountsManager(String name){
 //        User user  = checkExistingUser(name);
-//        user.viewAccounts();
+//        user.getAccounts();
 //        Database.store();
 //
 //
