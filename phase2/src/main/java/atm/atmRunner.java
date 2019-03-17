@@ -3,15 +3,15 @@ package atm;
 import java.io.IOException;
 
 public class atmRunner {
-    User USER = null;
-    BankManager bankManager = new BankManager();
+    private User USER = null;
+    private BankManager bankManager = new BankManager();
 
 
     // ----- login -----
 
-    public boolean adminCheck(String password) {
+    public boolean adminCheck(String username, String password) {
         BankManager bankManager = new BankManager();
-        return password.equals(bankManager.getPassword());
+        return username.equals("admin") && password.equals(bankManager.getPassword());
     }
 
     public boolean userLogin(String username, String password) {
@@ -25,7 +25,7 @@ public class atmRunner {
         try {
             BankManager bankManager = new BankManager();
             bankManager.newUserRequest(username);
-            return "Please wait until an admin approves your account. \nPassword is: 1";
+            return "Please wait until an admin approves your account.";
         } catch (UsernameTakenException u) {
             return (u.getMessage());
         }

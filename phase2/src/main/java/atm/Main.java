@@ -16,13 +16,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Stage stage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("Interface.fxml"));
-        stage.setTitle("ATM");
 
+        primaryStage.setTitle("ATM");
         Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        primaryStage.setScene(scene);
+        primaryStage.show();
 
     }
 }

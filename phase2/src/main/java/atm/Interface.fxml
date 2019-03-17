@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <StackPane xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="atm.Controller">
    <children>
-      <AnchorPane fx:id="loginScreen" prefHeight="400.0" prefWidth="600.0">
+      <AnchorPane fx:id="loginScreen" prefHeight="400.0" prefWidth="600.0" visible="false">
          <children>
             <Button fx:id="loginButton" layoutX="357.0" layoutY="249.0" mnemonicParsing="false" onAction="#userLogin" text="Login" />
             <Button fx:id="newAccountButton" layoutX="445.0" layoutY="346.0" mnemonicParsing="false" onAction="#newUser" text="Create new account" />
@@ -19,43 +27,198 @@
             <Label layoutX="158.0" layoutY="167.0" text="Username:" />
             <Label layoutX="158.0" layoutY="207.0" text="Password: " />
             <TextField fx:id="login_usernameField" layoutX="242.0" layoutY="162.0" />
-            <Label fx:id="loginMessage" layoutX="158.0" layoutY="254.0" text="Invalid username or password!" visible="false" />
-            <PasswordField fx:id="passwordField" layoutX="242.0" layoutY="202.0" />
+            <Label fx:id="loginMessage" layoutX="158.0" layoutY="254.0" />
+            <TextField fx:id="login_passwordField" layoutX="242.0" layoutY="202.0" />
       
          </children>
       </AnchorPane>
 
             <AnchorPane fx:id="newUserScreen" prefHeight="400.0" prefWidth="600.0" visible="false">
          <children>
-            <Button fx:id="requestButton" layoutX="335.0" layoutY="146.0" mnemonicParsing="false" onAction="#requestAccount" text="Request Account" />
+            <Button fx:id="requestUserAccountButton" layoutX="335.0" layoutY="146.0" mnemonicParsing="false" onAction="#requestUserAccount" text="Request Account" />
             <TextField fx:id="new_usernameField" layoutX="142.0" layoutY="146.0" />
             <Label layoutX="142.0" layoutY="120.0" text="Enter a username: " />
             <Button fx:id="backButton" layoutX="142.0" layoutY="254.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
-            <Label layoutX="142.0" layoutY="202.0" text="Please wait for an admin to approve your account. " visible="false" />
+            <Label fx:id="newUserMessage" layoutX="142.0" layoutY="202.0" text="" />
          </children>
       </AnchorPane>
 
-
-      <AnchorPane fx:id="userMenuScreen" prefHeight="400.0" prefWidth="600.0" visible="false">
+      <AnchorPane fx:id="adminScreen" prefHeight="400.0" prefWidth="600.0">
          <children>
             <TabPane fx:id="adminTabs" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
                <tabs>
                   <Tab fx:id="mainTab" text="Main">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="requestNewUserButton" layoutX="211.0" layoutY="76.0" mnemonicParsing="false" onAction="#acceptNewUserRequests" text="Accept new user requests" />
+                              <Button fx:id="accountRequestsButton" layoutX="201.0" layoutY="130.0" mnemonicParsing="false" onAction="#acceptNewAccountRequests" text="Accept new account requests" />
+                              <Button fx:id="adminLogoutButton" layoutX="271.0" layoutY="300.0" mnemonicParsing="false" onAction="#adminLogout" text="Logout" />
+                              <Label fx:id="adminMessage" layoutX="200.0" layoutY="37.0" prefHeight="17.0" prefWidth="200.0" textAlignment="CENTER" text=""/>
+                           </children></AnchorPane>
                      </content>
                   </Tab>
                   <Tab fx:id="transactionTab" text="Reverse Transactions">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="reverseTransactionButton" layoutX="207.0" layoutY="273.0" mnemonicParsing="false" onAction="#reverseLastTransaction" text="Reverse Last Transaction" />
+                              <ComboBox fx:id="adminAccount_cbox" layoutX="211.0" layoutY="170.0" prefHeight="27.0" prefWidth="167.0" />
+                              <TextField layoutX="211.0" layoutY="110.0" />
+                              <Label layoutX="211.0" layoutY="66.0" text="Choose user and account:" />
+                           </children></AnchorPane>
                      </content>
                   </Tab>
                   <Tab fx:id="cashTab" text="Add Cash to ATM">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label layoutX="204.0" layoutY="75.0" text="Choose number of bills to add: " />
+                              <Label layoutX="204.0" layoutY="117.0" text="\$5: " />
+                              <Label layoutX="204.0" layoutY="167.0" text="\$10: " />
+                              <Label layoutX="205.0" layoutY="214.0" text="\$20: " />
+                              <Label layoutX="205.0" layoutY="262.0" text="\$50: " />
+                              <Button layoutX="325.0" layoutY="306.0" mnemonicParsing="false" onAction="#addBills" text="Add bills" />
+                              <TextField fx:id="admin_5field" layoutX="237.0" layoutY="112.0" prefHeight="27.0" prefWidth="49.0" />
+                              <TextField fx:id="admin_10field" layoutX="237.0" layoutY="162.0" prefHeight="27.0" prefWidth="49.0" />
+                              <TextField fx:id="admin_20field" layoutX="237.0" layoutY="209.0" prefHeight="27.0" prefWidth="49.0" />
+                              <TextField fx:id="admin_50field" layoutX="237.0" layoutY="257.0" prefHeight="27.0" prefWidth="49.0" />
+                           </children></AnchorPane>
                      </content>
                   </Tab>
                </tabs>
+            </TabPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="userScreen" prefHeight="200.0" prefWidth="200.0" visible="false">
+         <children>
+            <TabPane fx:id="userTabs" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Main">
+                     <content>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Pane prefHeight="151.0" prefWidth="600.0">
+                                 <children>
+                                    <Button fx:id="changePasswordButton" layoutX="421.0" layoutY="63.0" mnemonicParsing="false" onAction="#changePassword" text="Change Password" />
+                                    <Label layoutX="121.0" layoutY="68.0" text="New password: " />
+                                    <TextField fx:id="newPasswordField" layoutX="230.0" layoutY="63.0" />
+                                    <Label fx:id="newPasswordMessage" layoutX="421.0" layoutY="100.0" text="Passord changed!" visible="false" />
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="222.0" prefWidth="600.0">
+                                 <children>
+                                    <RadioButton fx:id="chequingRadioButton" layoutX="301.0" layoutY="32.0" mnemonicParsing="false" text="Chequing Account">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="accountsGroup" />
+                                       </toggleGroup></RadioButton>
+                                    <RadioButton fx:id="savingsRadioButton" layoutX="300.0" layoutY="58.0" mnemonicParsing="false" text="Savings Account" toggleGroup="$accountsGroup" />
+                                    <RadioButton fx:id="creditRadioButton" layoutX="300.0" layoutY="84.0" mnemonicParsing="false" text="Credit Card" toggleGroup="$accountsGroup" />
+                                    <RadioButton fx:id="lineRadioButton" layoutX="300.0" layoutY="112.0" mnemonicParsing="false" text="Line of Credit" toggleGroup="$accountsGroup" />
+                                    <Button fx:id="requestAccountButton" layoutX="301.0" layoutY="145.0" mnemonicParsing="false" onAction="#requestAccount" text="Request new account" />
+                                    <Label layoutX="118.0" layoutY="32.0" text="Choose a new account: " />
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="80.0" prefWidth="600.0">
+                                 <children>
+                                    <Button fx:id="logoutButton" layoutX="525.0" layoutY="17.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </VBox>
+                     </content>
+                </Tab>
+                <Tab text="Accounts">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ComboBox fx:id="accounts_comboBox" layoutX="27.0" layoutY="63.0" prefHeight="27.0" prefWidth="179.0" />
+                              <Button fx:id="accounts_showAccountsButton" layoutX="27.0" layoutY="115.0" mnemonicParsing="false" onAction="#showAccountInfo" text="Show account information" />
+                              <TextArea fx:id="accounts_infoArea" layoutX="258.0" layoutY="63.0" prefHeight="270.0" prefWidth="311.0" wrapText="true" />
+                           </children></AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab text="Deposit/Withdraw">
+                     <content>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Pane prefHeight="367.0" prefWidth="219.0">
+                                 <children>
+                                    <Button fx:id="dw_depositButton" layoutX="126.0" layoutY="184.0" mnemonicParsing="false" onAction="#deposit" text="Deposit" />
+                                    <TextField fx:id="dw_amountField" layoutX="25.0" layoutY="132.0" />
+                                    <Text layoutX="25.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter amount to deposit: " />
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="367.0" prefWidth="381.0">
+                                 <children>
+                                    <Button fx:id="dw_withdrawButton" layoutX="193.0" layoutY="253.0" mnemonicParsing="false" onAction="#withdraw" text="Withdraw" />
+                                    <Label fx:id="dw_message" layoutX="58.0" layoutY="280.0" text="Insufficient Funds!" visible="false" />
+                                    <Label layoutX="183.0" layoutY="70.0" text="\$5: " />
+                                    <Label layoutX="183.0" layoutY="112.0" text="\$10: " />
+                                    <Label layoutX="182.0" layoutY="156.0" text="\$20: " />
+                                    <Label layoutX="182.0" layoutY="200.0" text="\$50: " />
+                                    <TextField layoutX="231.0" layoutY="65.0" prefHeight="27.0" prefWidth="37.0" />
+                                    <TextField layoutX="231.0" layoutY="107.0" prefHeight="27.0" prefWidth="38.0" />
+                                    <TextField layoutX="231.0" layoutY="151.0" prefHeight="27.0" prefWidth="39.0" />
+                                    <TextField layoutX="231.0" layoutY="195.0" prefHeight="27.0" prefWidth="39.0" />
+                                    <Text layoutX="30.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter number of bills of each denomination to withdraw: " wrappingWidth="141.0" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </HBox>
+                     </content>
+                  </Tab>
+                  <Tab text="Transfers">
+                     <content>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Pane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Text layoutX="30.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Internal Transfer">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <ComboBox fx:id="internalTransfer_cbox" layoutX="25.0" layoutY="76.0" prefWidth="150.0" promptText="From..." />
+                                    <TextField layoutX="26.0" layoutY="157.0" prefHeight="27.0" prefWidth="151.0" />
+                                    <Text layoutX="26.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter amount: " />
+                                    <ComboBox layoutX="26.0" layoutY="222.0" prefWidth="150.0" promptText="To..." />
+                                    <Button fx:id="internalTransferButton" layoutX="36.0" layoutY="276.0" mnemonicParsing="false" onAction="#internalTransfer" text="Transfer to Account" />
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Text layoutX="27.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="External Transfer">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <ComboBox fx:id="externalTransfer_cbox" layoutX="26.0" layoutY="76.0" prefWidth="150.0" promptText="From..." />
+                                    <TextField layoutX="26.0" layoutY="157.0" prefHeight="27.0" prefWidth="151.0" />
+                                    <Text layoutX="26.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter amount: " />
+                                    <TextField layoutX="26.0" layoutY="223.0" />
+                                    <Label layoutX="26.0" layoutY="195.0" text="To: " />
+                                    <Button fx:id="externalTransferButton" layoutX="74.0" layoutY="273.0" mnemonicParsing="false" onAction="#externalTransfer" text="Transfer to User" />
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Text layoutX="43.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bill Payments" textAlignment="CENTER">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <ComboBox fx:id="billPay_cbox" layoutX="25.0" layoutY="76.0" prefWidth="150.0" promptText="From..." />
+                                    <TextField layoutX="24.0" layoutY="157.0" prefHeight="27.0" prefWidth="151.0" />
+                                    <Text layoutX="24.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter amount: " />
+                                    <Button fx:id="payBillButton" layoutX="136.0" layoutY="211.0" mnemonicParsing="false" onAction="#payBill" text="Pay" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </HBox>
+                     </content>
+                  </Tab>
+              </tabs>
             </TabPane>
          </children>
       </AnchorPane>

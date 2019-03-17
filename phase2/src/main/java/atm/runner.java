@@ -185,14 +185,7 @@ public class runner {
 
                         switch (hold) {
 
-                            case 1: // previous login
-//                                System.out.println("Have you logged in before?\n (1) Yes \n (2) No");
-//                                int log = Integer.parseInt(in.nextLine());
-//                                boolean loggedIn = false;
-
-//                                switch (log) {
-//                                    case 1: // previous login
-
+                            case 1:
                                             System.out.println("Enter your username: ");
                                             username = in.nextLine();
 
@@ -207,21 +200,6 @@ public class runner {
                                             else{
                                                 stayInLoop = false;
                                             }
-//                                        break;
-
-//                                case 2: // first login
-//                                    System.out.println("Enter your username: ");
-//                                    username = in.nextLine();
-//                                    loggedIn = boundlessATM.login2(username);
-//
-//                                    if (!loggedIn) {
-//                                        System.out.println("Invalid username ");
-//                                    } else {
-//                                        System.out.println("Your current password is: " + boundlessATM.getUserPassword());
-//                                        stayInLoop = false;
-//                                    }
-//                                    break;
-//                            }
                             break;
 
                         case 2: // request new user
