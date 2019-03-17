@@ -15,12 +15,14 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage loginStage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("loginInterface.fxml"));
-        loginStage.setTitle("ATM");
-        loginStage.setScene(new Scene(root));
-        loginStage.sizeToScene();
-        loginStage.show();
+    public void start(Stage primaryStage) throws IOException {
+        Stage stage = primaryStage;
+        Parent root = FXMLLoader.load(getClass().getResource("Interface.fxml"));
+        stage.setTitle("ATM");
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
 
     }
 }

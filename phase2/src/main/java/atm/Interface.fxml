@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+
+<StackPane xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="atm.Controller">
+   <children>
+      <AnchorPane fx:id="loginScreen" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Button fx:id="loginButton" layoutX="357.0" layoutY="249.0" mnemonicParsing="false" onAction="#userLogin" text="Login" />
+            <Button fx:id="newAccountButton" layoutX="445.0" layoutY="346.0" mnemonicParsing="false" onAction="#newUser" text="Create new account" />
+            <Button fx:id="adminButton" layoutX="14.0" layoutY="346.0" mnemonicParsing="false" onAction="#adminLogin" text="Admin Login" />
+            <Label layoutX="158.0" layoutY="167.0" text="Username:" />
+            <Label layoutX="158.0" layoutY="207.0" text="Password: " />
+            <TextField fx:id="login_usernameField" layoutX="242.0" layoutY="162.0" />
+            <Label fx:id="loginMessage" layoutX="158.0" layoutY="254.0" text="Invalid username or password!" visible="false" />
+            <PasswordField fx:id="passwordField" layoutX="242.0" layoutY="202.0" />
+      
+         </children>
+      </AnchorPane>
+
+            <AnchorPane fx:id="newUserScreen" prefHeight="400.0" prefWidth="600.0" visible="false">
+         <children>
+            <Button fx:id="requestButton" layoutX="335.0" layoutY="146.0" mnemonicParsing="false" onAction="#requestAccount" text="Request Account" />
+            <TextField fx:id="new_usernameField" layoutX="142.0" layoutY="146.0" />
+            <Label layoutX="142.0" layoutY="120.0" text="Enter a username: " />
+            <Button fx:id="backButton" layoutX="142.0" layoutY="254.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
+            <Label layoutX="142.0" layoutY="202.0" text="Please wait for an admin to approve your account. " visible="false" />
+         </children>
+      </AnchorPane>
+
+
+      <AnchorPane fx:id="userMenuScreen" prefHeight="400.0" prefWidth="600.0" visible="false">
+         <children>
+            <TabPane fx:id="adminTabs" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+               <tabs>
+                  <Tab fx:id="mainTab" text="Main">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                     </content>
+                  </Tab>
+                  <Tab fx:id="transactionTab" text="Reverse Transactions">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                     </content>
+                  </Tab>
+                  <Tab fx:id="cashTab" text="Add Cash to ATM">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+         </children>
+      </AnchorPane>
+
+   </children>
+</StackPane>

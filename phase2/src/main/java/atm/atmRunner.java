@@ -4,6 +4,8 @@ import java.io.IOException;
 
 public class atmRunner {
     User USER = null;
+    BankManager bankManager = new BankManager();
+
 
     // ----- login -----
 
@@ -32,13 +34,11 @@ public class atmRunner {
     // ----- admin -----
 
     public void acceptNewUserRequests() {
-        BankManager bm = new BankManager();
-        bm.createUser();
+        bankManager.createUser();
     }
 
     public void acceptExistingUserRequests() {
-        BankManager bm2 = new BankManager();
-        bm2.userRequestAccount();
+        bankManager.userRequestAccount();
     }
 
     // ----- main menu -----
@@ -46,5 +46,9 @@ public class atmRunner {
     public void changePassword(String newPassword) {
         USER.setPassword(newPassword);
         Database.store();
+    }
+
+    public void logout() {
+        USER = null;
     }
 }
