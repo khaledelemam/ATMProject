@@ -16,14 +16,15 @@ public class Transaction implements Serializable {
     private static final long serialVersionUID = 100L;
     private String username = null;
 
-    // for  internal transfers
+    /** Construct transaction information for internal transfers */
     public Transaction(Account source, Account recipient, double amount) {
         this.source = source;
         this.recipient = recipient;
         this.amount = amount;
         this.date = new Time();
     }
-    //for external transfers
+
+    /** Construct transaction information for external transfers */
     public Transaction(Account source, Account recipient, double amount, String username) {
         this.source = source;
         this.recipient = recipient;
@@ -33,7 +34,7 @@ public class Transaction implements Serializable {
     }
 
 
-    // this is used for withdrawals
+    /** Construct transaction information for external transfers */
     public Transaction(Account source, double amount) {
         this.source = source;
         this.amount = amount;
@@ -49,10 +50,6 @@ public class Transaction implements Serializable {
         // external transfer
         if (this.recipient != null && this.username!=null) {
             return ("$"+ this.amount + " transfered " + "from " +this.source+ " to " + this.username +" on "+ this.date);
-//            return ("Sender: " + this.source + "\n" +
-//                    "Recipient: " + this.recipient + "\n" +
-//                    "Amount: " + this.amount + "\n" +
-//                    "Date: " + this.date);
         }
         //internal transfer
         else if(this.recipient != null){

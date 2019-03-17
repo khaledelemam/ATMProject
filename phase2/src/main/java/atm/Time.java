@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class Time implements Serializable{
+public class   Time implements Serializable{
 
     Date date;
     private static final long serialVersionUID = 120L;

@@ -3,7 +3,7 @@ package atm;
 public class CreditScore {
 
 
-
+    /** Used to determine if a new user may be created by BankManager */
     public static double getRandomDoubleBetweenRange(){
         double min = 0.0;
         double max = 500.00;

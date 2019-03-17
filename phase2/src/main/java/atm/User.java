@@ -17,6 +17,8 @@ public class User implements Serializable {
     private HashMap<Integer,Account> accounts = new HashMap<>();
     private HashMap<Account,Integer> map = new HashMap<>();
     private String request;
+    private String joint;
+    private Account JointAccount;
 //    private ChequingAccount primaryAccount;
 
     // I used two Hashmaps to track the account with the corresponding number. Two are used instead of one because there is no "getKey()" in Hashmaps.
@@ -45,8 +47,16 @@ public class User implements Serializable {
 
     String getPassword() {return this.password;}
 
+    String getJoint() {return this.joint;}
 
-    void addAccount(String account){
+    Account getJointAccount(){return this.JointAccount;}
+
+    void setJoint(String username){
+        this.joint = username;
+    }
+
+
+    void createAccount(String account){
 
         Account hold = null;
 
@@ -68,12 +78,27 @@ public class User implements Serializable {
             hold = new CreditCard();
         }
 
+        else if (account.equals("Joint Account")){
+            hold = new ChequingAccount();
+            ((ChequingAccount) hold).setJoint();
+            JointAccount=hold;
+        }
+
         if (hold != null) {
-            int index = accounts.size();
-            this.accounts.put(index + 1, hold);
-            this.map.put(hold, index + 1);
+            addAccount(hold);
         }
     }
+
+    void addAccount(Account account){
+
+        int index = accounts.size();
+        this.accounts.put(index + 1, account);
+        this.map.put(account, index + 1);
+        request = null;
+
+    }
+
+
 
     void viewAccounts(){
         for(int i = 1 ; i <=accounts.size(); i++){
@@ -136,7 +161,6 @@ public class User implements Serializable {
         return request ;
     }
 
-    void requestAccount(String account){ request = account; }
 
     Account getPrimaryAccount() { return accounts.get(1);}
 
@@ -147,6 +171,50 @@ public class User implements Serializable {
         }
         return currencyFormat.format(netTotal);
     }
-    
+
+
+    void requestAccount(int account){
+
+        if (account == 1){
+            request = "Chequing";
+
+        }
+        else if (account == 2){
+          request =  "Savings";
+
+        }
+        else if (account == 3){
+         request = "Line of Credit";
+
+        }
+        else if (account == 4){
+          request = "Credit Card";
+        }
+
+        Database.store();
+    }
+
+    /** Request BankManager for joint account
+     *
+     * @param username username of another account to join with
+     */
+    void requestJointAccount(String username){
+        
+        if (Database.checkExistingUser(username) != null){
+            request = "Joint Account";
+            joint = username;
+        }
+        else {
+            System.out.println("This user does not exist.");
+
+        }
+    }
+
+
+
+
+
+
+
 
 }

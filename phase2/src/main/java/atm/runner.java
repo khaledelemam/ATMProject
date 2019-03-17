@@ -21,7 +21,6 @@ public class runner {
     public static void main(String[] args) throws IOException, NegativeDenominationException {
 
 
-//
 //        Calendar cal=Calendar.getInstance();
 //        cal.setTimeInMillis(System.currentTimeMillis());
 //
@@ -45,7 +44,6 @@ public class runner {
 
 //        Calendar c = Calendar.getInstance();
 //        System.out.println("Today is " +c.getTime());
-
 //        Date date = new Date();
 
         Time date = new Time(1);
@@ -92,6 +90,7 @@ public class runner {
                     boolean adminLoggedIn = true;
 
                     while (adminLoggedIn) {
+
                         if (admin) {
 
                             CashManager cash = new CashManager();
@@ -230,8 +229,8 @@ public class runner {
                             String name = in.nextLine();
 
                             try {
-                                UserRequests request = new UserRequests();
-                                request.newUser(name);
+                                BankManager bankManager = new BankManager();
+                                bankManager.newUserRequest(name);
                             } catch (UsernameTakenException u) {
                                 System.out.println(u.getMessage());
                             }
@@ -400,11 +399,17 @@ public class runner {
                                 case 8:
                                     // new account creation
                                     System.out.println("What type of account would you like to open?:");
-                                    System.out.println("(1) CHEQUING\n(2) SAVINGS\n(3) LINE OF CREDIT\n(4) CREDIT CARD");
+                                    System.out.println("(1) Chequing\n(2) Savings\n(3) Line of Credit\n(4) Credit Card\n(5) Joint Account");
                                     account = Integer.parseInt(in.nextLine());
 
-                                    UserRequests requests = new UserRequests();
-                                    requests.requestAccount(account, USER);
+                                    if (account == 5){
+
+                                        System.out.println("Who do you want to open the account with?");
+                                        String partner = in.nextLine();
+                                        USER.requestJointAccount(partner);
+                                    }
+
+                                    USER.requestAccount(account);
                                     break;
 
                                 case 0: // log out

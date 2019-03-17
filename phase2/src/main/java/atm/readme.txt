@@ -1,13 +1,18 @@
 ----- How to use the program -----
 
+1) run atmInterface.main()
+2) log in as A. admin or B. user
+
+Note:
 - program will close at system's midnight
-- assumed each month has 31 days
 
---- How to run as admin ---
+--- A. How to run as admin ---
 
-* must log in before running any admin tasks *
+1) only enter admin password in 'password' text field
     > password: 123
-    > set date if the date did not show in the home screen (only one time)
+    > press button: admin login
+
+(> set date if the date did not show in the home screen (only one time))
 
 (1) Approve new user requests
 (2) Approve account requests for existing users
