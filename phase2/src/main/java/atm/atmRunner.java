@@ -3,7 +3,7 @@ package atm;
 import java.io.IOException;
 
 public class atmRunner {
-    String sessionUser = "";
+    User USER = null;
 
     // ----- login -----
 
@@ -11,11 +11,11 @@ public class atmRunner {
         BankManager bankManager = new BankManager();
         return password.equals(bankManager.getPassword());
     }
-//
-//    public boolean userLogin (String username, String password) {
-//        sessionUser = username;
-//        return Database.login(username, password);
-//    }
+
+    public boolean userLogin(String username, String password) {
+        USER = Database.login(username, password);
+        return USER != null;
+    }
 
     // ----- new user -----
 
@@ -40,12 +40,11 @@ public class atmRunner {
         BankManager bm2 = new BankManager();
         bm2.userRequestAccount();
     }
-}
 
     // ----- main menu -----
 
-//    public void changePassword(String newPassword) {
-//        UserExecutes change = new UserExecutes();
-//        change.changePassword(newPassword, sessionUser);
-//    }
-//}
+    public void changePassword(String newPassword) {
+        USER.setPassword(newPassword);
+        Database.store();
+    }
+}

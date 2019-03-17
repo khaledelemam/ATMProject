@@ -115,18 +115,18 @@ public class atmInterface {
             }
         });
 
-//        loginButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                if (atm.userLogin(login_usernameTextField.getText(), login_passwordTextField.getText())) {
-//                    cardLayout.show(atmInterface, "mainMenu");
-//                } else {
-//                    login_message.setText("Access Denied!");
-//                }
-//                login_usernameTextField.setText("");
-//                login_passwordTextField.setText("");
-//            }
-//        });
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (atm.userLogin(login_usernameTextField.getText(), login_passwordTextField.getText())) {
+                    cardLayout.show(atmInterface, "mainMenu");
+                } else {
+                    login_message.setText("Access Denied!");
+                }
+                login_usernameTextField.setText("");
+                login_passwordTextField.setText("");
+            }
+        });
 
         // --- admin controls ---
 
@@ -211,12 +211,6 @@ public class atmInterface {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-    }
-
-    private void createUIComponents() {
-//        JComboBox menu_accountChooser = new JComboBox();
-//        ArrayList<String> ls = new ArrayList<String>();
-//        JComboBox.setModel(new DefaultComboBoxModel(ls.toArray()));
     }
 }
 
