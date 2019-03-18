@@ -48,6 +48,24 @@ public class atmRunner {
         bankManager.userRequestAccount();
     }
 
+    public void viewUsersAccounts(String username) {
+        User user = Database.checkExistingUser(username);
+
+        if (user != null) { user.viewAccounts(); }
+    }
+
+//    public void reverseTransaction() {
+//        int acc = Integer.parseInt(in.nextLine());
+//        try {
+//
+//            BankManager bm3 = new BankManager();
+//            bm3.ReverseLastTransaction(user,acc);
+//
+//        } catch (InsufficientFundsException e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
+
     // ----- main menu -----
 
     public void changePassword(String newPassword) {

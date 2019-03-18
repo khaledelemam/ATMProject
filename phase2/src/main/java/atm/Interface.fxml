@@ -17,7 +17,7 @@
 
 <StackPane style="-fx-background-color: #696969;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="atm.Controller">
    <children>
-      <AnchorPane fx:id="loginScreen" prefHeight="400.0" prefWidth="600.0">
+      <AnchorPane fx:id="loginScreen" prefHeight="400.0" prefWidth="600.0" visible="false">
          <children>
             <Button fx:id="loginButton" layoutX="489.0" layoutY="301.0" mnemonicParsing="false" onAction="#userLogin" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Login" textFill="#e1e1e1" />
             <Button fx:id="newAccountButton" layoutX="326.0" layoutY="301.0" mnemonicParsing="false" onAction="#newUser" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Create new account" textFill="#e1e1e1" />
@@ -41,7 +41,7 @@
          </children>
       </AnchorPane>
 
-      <AnchorPane fx:id="adminScreen" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #696969;" visible="false">
+      <AnchorPane fx:id="adminScreen" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #696969;">
          <children>
             <TabPane fx:id="adminTabs" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #696969; -fx-border-color: #696969;" tabClosingPolicy="UNAVAILABLE">
                <tabs>
@@ -57,8 +57,8 @@
                               <Label layoutX="122.0" layoutY="83.0" text="New user requests: " textFill="#e1e1e1" />
                               <Label fx:id="adminAlertMessage" layoutX="16.0" layoutY="13.0" prefHeight="17.0" prefWidth="335.0" />
                               <Button fx:id="setTimeButton" layoutX="338.0" layoutY="183.0" mnemonicParsing="false" onAction="#setTime" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Set Date" textFill="#e1e1e1" />
-                              <TextField fx:id="daysField" layoutX="235.0" layoutY="183.0" prefHeight="27.0" prefWidth="54.0" promptText="#" style="-fx-border-color: #060606;" />
-                              <Label layoutX="122.0" layoutY="189.0" text="Advance date by                    days" textFill="#e1e1e1" />
+                              <TextField fx:id="daysField" layoutX="240.0" layoutY="183.0" prefHeight="29.0" prefWidth="68.0" promptText="#days" style="-fx-border-color: #060606;" />
+                              <Label layoutX="122.0" layoutY="189.0" prefHeight="17.0" prefWidth="125.0" text="Advance date by" textFill="#e1e1e1" />
                            </children></AnchorPane>
                      </content>
                   </Tab>
