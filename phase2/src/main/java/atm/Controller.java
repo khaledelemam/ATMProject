@@ -8,7 +8,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -37,6 +36,13 @@ public class Controller implements Initializable {
     public Button adminLogoutButton;
     public Button reverseTransactionButton;
     public ComboBox adminAccount_cbox;
+    public Button addBillsButton;
+    public Label adminCashMessage;
+    public TextField admin_50field;
+    public Label admin_cashTotal;
+    public TextField admin_20field;
+    public TextField admin_5field;
+    public TextField admin_10field;
 
     // ---- user ----
     public AnchorPane userScreen;
@@ -58,17 +64,22 @@ public class Controller implements Initializable {
     public Label accounts_infoArea;
 
     // transfers
-    public ComboBox<String>  internalTransfer_cbox, externalTransfer_cbox;
+    public ComboBox<String>  externalTransfer_cbox, internalTransfer_cboxTO,
+            internalTransfer_cboxFROM,  billPay_cbox;
     public Button internalTransferButton;
     public Button externalTransferButton;
-    public ComboBox billPay_cbox;
     public Button payBillButton;
+    public Label internalTransferMessage;
+    public Label billPayMessage;
+    public Label externalTransferMessage;
 
     // withdraw/deposit
     public Button dw_depositButton;
     public TextField dw_amountField;
     public Button dw_withdrawButton;
-    public Label dw_message;
+    public Label totalDeposited;
+    public Label withdrawalMessage;
+    // end
 
     // initialize ATM
     atmRunner atm = new atmRunner();
@@ -95,7 +106,8 @@ public class Controller implements Initializable {
     private void userSessionSetUp() {
         ObservableList<String> accounts = FXCollections.observableArrayList(atm.getAccounts());
         accounts_cbox.setItems(accounts);
-        internalTransfer_cbox.setItems(accounts);
+        internalTransfer_cboxTO.setItems(accounts);
+        internalTransfer_cboxFROM.setItems(accounts);
         externalTransfer_cbox.setItems(accounts);
         billPay_cbox.setItems(accounts);
 
@@ -146,13 +158,13 @@ public class Controller implements Initializable {
     // ----- admin events -----
 
     public void acceptNewAccountRequests(ActionEvent actionEvent) {
-        atm.acceptNewUserRequests();
-        adminMessage.setText("Users Created");
+        atm.acceptNewAccountRequests();
+        adminMessage.setText("Requests accepted.");
     }
 
     public void acceptNewUserRequests(ActionEvent actionEvent) {
-        atm.acceptExistingUserRequests();
-        adminMessage.setText("Requests Accepted");
+        atm.acceptNewUserRequests();
+        adminMessage.setText("New users created.");
     }
 
     public void adminLogout(ActionEvent actionEvent) {
@@ -177,6 +189,8 @@ public class Controller implements Initializable {
         int index = (int) newAccountsGroup.getSelectedToggle().getUserData();
         atm.requestNewAccount(index, shareAccountField.getText());
         // TODO: Add feedback or something idk
+        shareAccountField.setVisible(false);
+        shareAccountField.setText("");
     }
 
     public void showShareAccount(ActionEvent actionEvent) {

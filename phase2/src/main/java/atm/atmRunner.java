@@ -44,7 +44,7 @@ public class atmRunner {
         bankManager.createUser();
     }
 
-    public void acceptExistingUserRequests() {
+    public void acceptNewAccountRequests() {
         bankManager.userRequestAccount();
     }
 
