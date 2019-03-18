@@ -91,6 +91,7 @@ public class Controller implements Initializable {
     public Label withdrawalMessage;
     public Button setTimeButton;
     public Button admin_showUserAccountsButton;
+    public TextField daysField;
     // end
 
     // initialize ATM
