@@ -118,6 +118,19 @@ public class User implements Serializable {
         return null;
     }
 
+    // for GUI pls no delete
+    String viewAccountInfo(int index) {
+        Account account = getAccount(index);
+        if (account.getLastTransaction() != null) {
+            return "Balance: $" + account.getBalance() +
+                    "\nDate opened: " + account.getDateOpened() +
+                    "\n--Last Transaction--\n" + account.getLastTransaction();
+        } else {
+            return "Balance: $" + account.getBalance() +
+                    "\nDate opened: " + account.getDateOpened();
+        }
+    }
+
     private ArrayList<String> accountInfo() {
 
         ArrayList<String> accountsInfo = new ArrayList<>();

@@ -45,16 +45,17 @@ public class Controller implements Initializable {
     public Button changePasswordButton;
     public TextField newPasswordField;
     public Label newPasswordMessage;
-    public ToggleGroup accountsGroup;
+    public ToggleGroup newAccountsGroup;
     public RadioButton chequingRadioButton, savingsRadioButton,
-            creditRadioButton, lineRadioButton;
+            creditRadioButton, lineRadioButton, jointRadioButton;
+    public TextField shareAccountField;
     public Button requestAccountButton;
     public Button logoutButton;
 
     // accounts
     public ComboBox<String> accounts_cbox;
     public Button accounts_showAccountsButton;
-    public TextArea accounts_infoArea;
+    public Label accounts_infoArea;
 
     // transfers
     public ComboBox<String>  internalTransfer_cbox, externalTransfer_cbox;
@@ -76,6 +77,15 @@ public class Controller implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {}
 
     // ----- helpers ^___^  ------
+    private void setRadioButtons() {
+        chequingRadioButton.setUserData(1);
+        savingsRadioButton.setUserData(2);
+        lineRadioButton.setUserData(3);
+        creditRadioButton.setUserData(4);
+        jointRadioButton.setUserData(5);
+        newAccountsGroup.selectToggle(chequingRadioButton);
+
+    }
     private void clearLoginFields() {
         login_usernameField.setText("");
         login_passwordField.setText("");
@@ -88,6 +98,8 @@ public class Controller implements Initializable {
         internalTransfer_cbox.setItems(accounts);
         externalTransfer_cbox.setItems(accounts);
         billPay_cbox.setItems(accounts);
+
+        setRadioButtons();
     }
 
     // ----- login events ------
@@ -162,7 +174,17 @@ public class Controller implements Initializable {
     }
 
     public void requestAccount(ActionEvent actionEvent) {
+        int index = (int) newAccountsGroup.getSelectedToggle().getUserData();
+        atm.requestNewAccount(index, shareAccountField.getText());
+        // TODO: Add feedback or something idk
+    }
 
+    public void showShareAccount(ActionEvent actionEvent) {
+        shareAccountField.setVisible(true);
+    }
+
+    public void hideShareAccount(ActionEvent actionEvent) {
+        shareAccountField.setVisible(false);
     }
 
     public void logout(ActionEvent actionEvent) {
@@ -172,6 +194,8 @@ public class Controller implements Initializable {
     }
 
     public void showAccountInfo(ActionEvent actionEvent) {
+        int index = 1 + accounts_cbox.getSelectionModel().getSelectedIndex();
+        accounts_infoArea.setText(atm.viewAccountInfo(index));
     }
 
     public void deposit(ActionEvent actionEvent) {

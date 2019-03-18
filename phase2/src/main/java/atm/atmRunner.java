@@ -58,4 +58,15 @@ public class atmRunner {
     public void logout() {
         USER = null;
     }
+
+    public void requestNewAccount(int index, String partner) {
+        if (index == 5){
+            USER.requestJointAccount(partner);
+        }
+        USER.requestAccount(index);
+    }
+
+    public String viewAccountInfo(int index) {
+        return USER.viewAccountInfo(index);
+    }
 }
