@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -18,7 +17,7 @@
 
 <StackPane style="-fx-background-color: #696969;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="atm.Controller">
    <children>
-      <AnchorPane fx:id="loginScreen" prefHeight="400.0" prefWidth="600.0" visible="false">
+      <AnchorPane fx:id="loginScreen" prefHeight="400.0" prefWidth="600.0">
          <children>
             <Button fx:id="loginButton" layoutX="489.0" layoutY="301.0" mnemonicParsing="false" onAction="#userLogin" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Login" textFill="#e1e1e1" />
             <Button fx:id="newAccountButton" layoutX="326.0" layoutY="301.0" mnemonicParsing="false" onAction="#newUser" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Create new account" textFill="#e1e1e1" />
@@ -50,12 +49,16 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #696969; -fx-border-color: #606060;">
                            <children>
-                              <Button fx:id="acceptNewUserRequestsButton" layoutX="274.0" layoutY="78.0" mnemonicParsing="false" onAction="#acceptNewUserRequests" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Approve account requests" textFill="#e1e1e1" />
+                              <Button fx:id="acceptNewUserRequestsButton" layoutX="274.0" layoutY="78.0" mnemonicParsing="false" onAction="#acceptNewUserRequests" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Approve users" textFill="#e1e1e1" />
                               <Button fx:id="accountRequestsButton" layoutX="274.0" layoutY="130.0" mnemonicParsing="false" onAction="#acceptNewAccountRequests" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Accept all requests" textFill="#e1e1e1" />
                               <Button fx:id="adminLogoutButton" layoutX="525.0" layoutY="326.0" mnemonicParsing="false" onAction="#adminLogout" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Logout" textFill="#e1e1e1" />
-                              <Label fx:id="adminMessage" layoutX="200.0" layoutY="37.0" prefHeight="17.0" prefWidth="200.0" text="" textAlignment="CENTER" />
+                              <Label fx:id="adminMessage" layoutX="274.0" layoutY="41.0" prefHeight="17.0" prefWidth="200.0" text="" textAlignment="CENTER" />
                               <Label layoutX="122.0" layoutY="135.0" text="Existing user requests:" textFill="#e1e1e1" />
                               <Label layoutX="122.0" layoutY="83.0" text="New user requests: " textFill="#e1e1e1" />
+                              <Label fx:id="adminAlertMessage" layoutX="16.0" layoutY="13.0" prefHeight="17.0" prefWidth="335.0" />
+                              <Button fx:id="setTimeButton" layoutX="338.0" layoutY="183.0" mnemonicParsing="false" onAction="#setTime" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Set Date" textFill="#e1e1e1" />
+                              <TextField fx:id="daysField" layoutX="235.0" layoutY="183.0" prefHeight="27.0" prefWidth="54.0" promptText="#" style="-fx-border-color: #060606;" />
+                              <Label layoutX="122.0" layoutY="189.0" text="Advance date by                    days" textFill="#e1e1e1" />
                            </children></AnchorPane>
                      </content>
                   </Tab>
@@ -63,13 +66,11 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #696969;">
                            <children>
-                              <Button fx:id="reverseTransactionButton" layoutX="395.0" layoutY="298.0" mnemonicParsing="false" onAction="#reverseLastTransaction" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Reverse Last Transaction" textFill="#e1e1e1">
-                                 <opaqueInsets>
-                                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                                 </opaqueInsets></Button>
-                              <ComboBox fx:id="adminAccount_cbox" layoutX="211.0" layoutY="170.0" prefHeight="27.0" prefWidth="167.0" promptText="Accounts..." style="-fx-border-color: #606060; -fx-background-color: #e1e1e1;" />
                               <TextField layoutX="211.0" layoutY="110.0" promptText="Type in a username..." style="-fx-background-color: #e1e1e1;" />
+                              <ComboBox fx:id="adminAccount_cbox" layoutX="211.0" layoutY="170.0" prefHeight="27.0" prefWidth="167.0" promptText="Accounts..." style="-fx-border-color: #606060; -fx-background-color: #a0a0a0;" />
+                              <Button fx:id="reverseTransactionButton" layoutX="395.0" layoutY="298.0" mnemonicParsing="false" onAction="#reverseLastTransaction" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Reverse Last Transaction" textFill="#e1e1e1" />
                               <Label layoutX="211.0" layoutY="66.0" text="Choose user and account:" textFill="#e1e1e1" />
+                              <Button fx:id="admin_showUserAccountsButton" layoutX="404.0" layoutY="110.0" mnemonicParsing="false" onAction="#showUserAccounts" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="OK" textFill="#e1e1e1" />
                            </children></AnchorPane>
                      </content>
                   </Tab>
@@ -96,7 +97,7 @@
             </TabPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="userScreen" prefHeight="200.0" prefWidth="200.0">
+      <AnchorPane fx:id="userScreen" prefHeight="200.0" prefWidth="200.0" visible="false">
          <children>
             <TabPane fx:id="userTabs" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
@@ -127,7 +128,7 @@
 
                                     <TextField fx:id="shareAccountField" layoutX="428.0" layoutY="130.0" prefHeight="29.0" prefWidth="151.0" promptText="Share with..." style="-fx-border-color: #606060;" visible="false" />
                                     <Button fx:id="logoutButton" layoutX="525.0" layoutY="224.0" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Logout" textFill="#e1e1e1" />
-                                    <Label layoutX="283.0" layoutY="216.0" prefHeight="17.0" prefWidth="149.0" textFill="#e1e1e1" />
+                                    <Label fx:id="requestAccountMessage" layoutX="283.0" layoutY="216.0" prefHeight="17.0" prefWidth="149.0" textFill="#e1e1e1" />
                                  </children>
                               </Pane>
                            </children>
@@ -150,15 +151,15 @@
                            <children>
                               <Pane prefHeight="367.0" prefWidth="325.0">
                                  <children>
-                                    <Button fx:id="dw_depositButton" layoutX="158.0" layoutY="210.0" mnemonicParsing="false" onAction="#deposit" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Deposit" textFill="#e1e1e1" />
-                                    <TextField fx:id="dw_amountField" layoutX="59.0" layoutY="133.0" />
+                                    <Button fx:id="depositButton" layoutX="158.0" layoutY="210.0" mnemonicParsing="false" onAction="#deposit" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Deposit" textFill="#e1e1e1" />
+                                    <TextField fx:id="depositAmountField" layoutX="59.0" layoutY="133.0" />
                                     <Label layoutX="59.0" layoutY="86.0" text="Enter amount to deposit:" textFill="#e1e1e1" />
                                     <Label fx:id="totalDeposited" layoutX="59.0" layoutY="175.0" prefHeight="17.0" prefWidth="167.0" textFill="#e1e1e1" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="367.0" prefWidth="363.0">
                                  <children>
-                                    <Button fx:id="dw_withdrawButton" layoutX="202.0" layoutY="241.0" mnemonicParsing="false" onAction="#withdraw" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Withdraw" textFill="#e1e1e1" />
+                                    <Button fx:id="withdrawButton" layoutX="202.0" layoutY="241.0" mnemonicParsing="false" onAction="#withdraw" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Withdraw" textFill="#e1e1e1" />
                                     <Label fx:id="withdrawalMessage" contentDisplay="RIGHT" layoutX="113.0" layoutY="284.0" prefHeight="55.0" prefWidth="167.0" textFill="#e1e1e1" />
                                     <Label layoutX="79.0" layoutY="137.0" text="\$5: " textFill="#e1e1e1" />
                                     <Label layoutX="75.0" layoutY="173.0" text="\$10: " textFill="#e1e1e1" />
@@ -182,10 +183,10 @@
                            <children>
                               <Pane prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <ComboBox fx:id="internalTransfer_cboxTO" layoutX="25.0" layoutY="76.0" prefWidth="150.0" promptText="From..." style="-fx-background-color: #A0A0A0;" />
+                                    <ComboBox fx:id="internalTransferFROM_cbox" layoutX="25.0" layoutY="76.0" prefWidth="150.0" promptText="From..." style="-fx-background-color: #A0A0A0;" />
                                     <TextField layoutX="26.0" layoutY="120.0" prefHeight="27.0" prefWidth="151.0" promptText="Enter amount..." style="-fx-border-color: #606060;" />
-                                    <ComboBox fx:id="internalTransfer_cboxFROM" layoutX="27.0" layoutY="164.0" prefWidth="150.0" promptText="To..." style="-fx-background-color: #A0A0A0;" />
-                                    <Button fx:id="internalTransferButton" layoutX="29.0" layoutY="220.0" mnemonicParsing="false" onAction="#internalTransfer" prefHeight="27.0" prefWidth="143.0" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Transfer to Account" textFill="#e1e1e1" />
+                                    <ComboBox fx:id="internalTransferTO_cbox" layoutX="27.0" layoutY="164.0" prefWidth="150.0" promptText="To..." style="-fx-background-color: #A0A0A0;" />
+                                    <Button fx:id="internalTransferButton" layoutX="29.0" layoutY="222.0" mnemonicParsing="false" onAction="#internalTransfer" prefHeight="27.0" prefWidth="143.0" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Transfer to Account" textFill="#e1e1e1" />
                                     <Label fx:id="internalTransferMessage" layoutX="25.0" layoutY="270.0" prefHeight="17.0" prefWidth="136.0" textFill="#e1e1e1" />
                                  </children>
                               </Pane>
@@ -194,7 +195,7 @@
                                     <ComboBox fx:id="externalTransfer_cbox" layoutX="26.0" layoutY="76.0" prefWidth="150.0" promptText="From..." style="-fx-background-color: #A0A0A0;" />
                                     <TextField layoutX="26.0" layoutY="121.0" prefHeight="27.0" prefWidth="151.0" promptText="Enter amount..." style="-fx-border-color: #606060;" />
                                     <TextField layoutX="25.0" layoutY="163.0" prefHeight="27.0" prefWidth="152.0" promptText="Enter user..." style="-fx-border-color: #606060;" />
-                                    <Button fx:id="externalTransferButton" layoutX="26.0" layoutY="221.0" mnemonicParsing="false" onAction="#externalTransfer" prefHeight="27.0" prefWidth="150.0" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Transfer to User" textFill="#e1e1e1" />
+                                    <Button fx:id="externalTransferButton" layoutX="26.0" layoutY="222.0" mnemonicParsing="false" onAction="#externalTransfer" prefHeight="27.0" prefWidth="150.0" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Transfer to User" textFill="#e1e1e1" />
                                     <Label fx:id="externalTransferMessage" layoutX="25.0" layoutY="264.0" prefHeight="17.0" prefWidth="151.0" />
                                  </children>
                               </Pane>

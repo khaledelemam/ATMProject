@@ -1,5 +1,6 @@
 package atm;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,7 +9,14 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
+import java.time.LocalTime;
+import java.time.ZonedDateTime;
 import java.util.ResourceBundle;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+import static java.time.temporal.ChronoUnit.MINUTES;
+import static java.time.temporal.ChronoUnit.SECONDS;
 
 public class Controller implements Initializable {
 
@@ -43,6 +51,7 @@ public class Controller implements Initializable {
     public TextField admin_20field;
     public TextField admin_5field;
     public TextField admin_10field;
+    public Label adminAlertMessage;
 
     // ---- user ----
     public AnchorPane userScreen;
@@ -56,6 +65,7 @@ public class Controller implements Initializable {
             creditRadioButton, lineRadioButton, jointRadioButton;
     public TextField shareAccountField;
     public Button requestAccountButton;
+    public Label requestAccountMessage;
     public Button logoutButton;
 
     // accounts
@@ -64,8 +74,8 @@ public class Controller implements Initializable {
     public Label accounts_infoArea;
 
     // transfers
-    public ComboBox<String>  externalTransfer_cbox, internalTransfer_cboxTO,
-            internalTransfer_cboxFROM,  billPay_cbox;
+    public ComboBox<String>  externalTransfer_cbox, internalTransferTO_cbox,
+            internalTransferFROM_cbox,  billPay_cbox;
     public Button internalTransferButton;
     public Button externalTransferButton;
     public Button payBillButton;
@@ -74,29 +84,38 @@ public class Controller implements Initializable {
     public Label externalTransferMessage;
 
     // withdraw/deposit
-    public Button dw_depositButton;
-    public TextField dw_amountField;
-    public Button dw_withdrawButton;
+    public Button depositButton;
+    public TextField depositAmountField;
+    public Button withdrawButton;
     public Label totalDeposited;
     public Label withdrawalMessage;
+    public Button setTimeButton;
+    public Button admin_showUserAccountsButton;
     // end
 
     // initialize ATM
     atmRunner atm = new atmRunner();
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {}
+    public void initialize(URL location, ResourceBundle resources) {
 
-    // ----- helpers ^___^  ------
-    private void setRadioButtons() {
+        // time stuff
+        LocalTime time = ZonedDateTime.now().toLocalTime().truncatedTo(MINUTES);
+        System.out.println(time.toString());
+        LocalTime midnight = LocalTime.MAX;
+        long terminate = SECONDS.between(time, midnight);
+        Time date = new Time(1);
+
+        // set radio buttons
         chequingRadioButton.setUserData(1);
         savingsRadioButton.setUserData(2);
         lineRadioButton.setUserData(3);
         creditRadioButton.setUserData(4);
         jointRadioButton.setUserData(5);
-        newAccountsGroup.selectToggle(chequingRadioButton);
-
     }
+
+    // ----- helpers ^___^  ------
+
     private void clearLoginFields() {
         login_usernameField.setText("");
         login_passwordField.setText("");
@@ -106,12 +125,10 @@ public class Controller implements Initializable {
     private void userSessionSetUp() {
         ObservableList<String> accounts = FXCollections.observableArrayList(atm.getAccounts());
         accounts_cbox.setItems(accounts);
-        internalTransfer_cboxTO.setItems(accounts);
-        internalTransfer_cboxFROM.setItems(accounts);
+        internalTransferTO_cbox.setItems(accounts);
+        internalTransferFROM_cbox.setItems(accounts);
         externalTransfer_cbox.setItems(accounts);
         billPay_cbox.setItems(accounts);
-
-        setRadioButtons();
     }
 
     // ----- login events ------
@@ -138,6 +155,7 @@ public class Controller implements Initializable {
             clearLoginFields();
             adminScreen.setVisible(true);
             loginScreen.setVisible(false);
+            // TODO: have the cash alert return a string instead of printing
         } else {
             clearLoginFields();
             loginMessage.setText("Admin access denied");
@@ -167,7 +185,14 @@ public class Controller implements Initializable {
         adminMessage.setText("New users created.");
     }
 
+    public void setTime(ActionEvent actionEvent) {
+
+
+    }
+
     public void adminLogout(ActionEvent actionEvent) {
+        adminAlertMessage.setText("");
+        adminMessage.setText("");
         loginScreen.setVisible(true);
         adminScreen.setVisible(false);
     }
@@ -188,7 +213,7 @@ public class Controller implements Initializable {
     public void requestAccount(ActionEvent actionEvent) {
         int index = (int) newAccountsGroup.getSelectedToggle().getUserData();
         atm.requestNewAccount(index, shareAccountField.getText());
-        // TODO: Add feedback or something idk
+        requestAccountMessage.setText("Account requested.");
         shareAccountField.setVisible(false);
         shareAccountField.setText("");
     }
@@ -225,6 +250,9 @@ public class Controller implements Initializable {
     }
 
     public void payBill(ActionEvent actionEvent) {
+    }
+
+    public void showUserAccounts(ActionEvent actionEvent) {
     }
 }
 
