@@ -122,6 +122,14 @@ public class CashManager {
 
     }
 
+    public void setCashFile(String file){
+        this.cashFile = file;
+    }
+
+    public void setAlertFile(String file){
+        this.alertFile = file;
+    }
+
     public String toString(){
         String s = "$5 dollar bills: " + getDenom(5) + "\n" +
                 "$10 dollar bills: " + getDenom(10) + "\n" +
