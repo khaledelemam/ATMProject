@@ -86,7 +86,7 @@ public class BankManager implements Serializable {
     }
 
 
-    void ReverseLastTransaction(User user, int account)throws InsufficientFundsException{
+    void ReverseLastTransaction(User user, int account) throws InsufficientFundsException{
             Account acc = user.getAccount(account);
             Transaction transaction = acc.getLastTransaction();
             ReverseATM rATM = new ReverseATM();

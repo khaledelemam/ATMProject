@@ -41,7 +41,7 @@
          </children>
       </AnchorPane>
 
-      <AnchorPane fx:id="adminScreen" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #696969;">
+      <AnchorPane fx:id="adminScreen" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #696969;" visible="false">
          <children>
             <TabPane fx:id="adminTabs" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #696969; -fx-border-color: #696969;" tabClosingPolicy="UNAVAILABLE">
                <tabs>
@@ -52,13 +52,13 @@
                               <Button fx:id="acceptNewUserRequestsButton" layoutX="274.0" layoutY="78.0" mnemonicParsing="false" onAction="#acceptNewUserRequests" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Approve users" textFill="#e1e1e1" />
                               <Button fx:id="accountRequestsButton" layoutX="274.0" layoutY="130.0" mnemonicParsing="false" onAction="#acceptNewAccountRequests" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Accept all requests" textFill="#e1e1e1" />
                               <Button fx:id="adminLogoutButton" layoutX="525.0" layoutY="326.0" mnemonicParsing="false" onAction="#adminLogout" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Logout" textFill="#e1e1e1" />
-                              <Label fx:id="adminMessage" layoutX="274.0" layoutY="41.0" prefHeight="17.0" prefWidth="200.0" text="" textAlignment="CENTER" />
+                              <Label fx:id="adminMessage" layoutX="215.0" layoutY="243.0" prefHeight="17.0" prefWidth="200.0" text="" textAlignment="CENTER" />
                               <Label layoutX="122.0" layoutY="135.0" text="Existing user requests:" textFill="#e1e1e1" />
                               <Label layoutX="122.0" layoutY="83.0" text="New user requests: " textFill="#e1e1e1" />
                               <Label fx:id="adminAlertMessage" layoutX="16.0" layoutY="13.0" prefHeight="17.0" prefWidth="335.0" />
                               <Button fx:id="setTimeButton" layoutX="338.0" layoutY="183.0" mnemonicParsing="false" onAction="#setTime" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Set Date" textFill="#e1e1e1" />
-                              <TextField fx:id="daysField" layoutX="240.0" layoutY="183.0" prefHeight="29.0" prefWidth="68.0" promptText="#days" style="-fx-border-color: #060606;" />
-                              <Label layoutX="122.0" layoutY="189.0" prefHeight="17.0" prefWidth="125.0" text="Advance date by" textFill="#e1e1e1" />
+                              <TextField fx:id="daysField" layoutX="247.0" layoutY="183.0" prefHeight="29.0" prefWidth="68.0" promptText="#days" style="-fx-border-color: #060606;" />
+                              <Label layoutX="122.0" layoutY="189.0" prefHeight="17.0" prefWidth="125.0" text="Advance date by:" textFill="#e1e1e1" />
                            </children></AnchorPane>
                      </content>
                   </Tab>
@@ -66,11 +66,12 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #696969;">
                            <children>
-                              <TextField layoutX="211.0" layoutY="110.0" promptText="Type in a username..." style="-fx-background-color: #e1e1e1;" />
                               <ComboBox fx:id="adminAccount_cbox" layoutX="211.0" layoutY="170.0" prefHeight="27.0" prefWidth="167.0" promptText="Accounts..." style="-fx-border-color: #606060; -fx-background-color: #a0a0a0;" />
                               <Button fx:id="reverseTransactionButton" layoutX="395.0" layoutY="298.0" mnemonicParsing="false" onAction="#reverseLastTransaction" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Reverse Last Transaction" textFill="#e1e1e1" />
                               <Label layoutX="211.0" layoutY="66.0" text="Choose user and account:" textFill="#e1e1e1" />
-                              <Button fx:id="admin_showUserAccountsButton" layoutX="404.0" layoutY="110.0" mnemonicParsing="false" onAction="#showUserAccounts" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="OK" textFill="#e1e1e1" />
+                              <Button fx:id="showUserAccountsButton" layoutX="404.0" layoutY="110.0" mnemonicParsing="false" onAction="#showUserAccounts" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="OK" textFill="#e1e1e1" />
+                              <Label fx:id="transactionMessage" layoutX="211.0" layoutY="226.0" prefHeight="17.0" prefWidth="167.0" textFill="#e1e1e1" />
+                              <ComboBox fx:id="adminUser_cbox" layoutX="211.0" layoutY="111.0" prefHeight="27.0" prefWidth="167.0" promptText="Username..." />
                            </children></AnchorPane>
                      </content>
                   </Tab>
@@ -97,7 +98,7 @@
             </TabPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="userScreen" prefHeight="200.0" prefWidth="200.0" visible="false">
+      <AnchorPane fx:id="userScreen" prefHeight="200.0" prefWidth="200.0">
          <children>
             <TabPane fx:id="userTabs" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
@@ -184,27 +185,28 @@
                               <Pane prefHeight="200.0" prefWidth="200.0">
                                  <children>
                                     <ComboBox fx:id="internalTransferFROM_cbox" layoutX="25.0" layoutY="76.0" prefWidth="150.0" promptText="From..." style="-fx-background-color: #A0A0A0;" />
-                                    <TextField layoutX="26.0" layoutY="120.0" prefHeight="27.0" prefWidth="151.0" promptText="Enter amount..." style="-fx-border-color: #606060;" />
+                                    <TextField fx:id="internalTransferAmount" layoutX="26.0" layoutY="120.0" prefHeight="27.0" prefWidth="151.0" promptText="Enter amount..." style="-fx-border-color: #606060;" />
                                     <ComboBox fx:id="internalTransferTO_cbox" layoutX="27.0" layoutY="164.0" prefWidth="150.0" promptText="To..." style="-fx-background-color: #A0A0A0;" />
                                     <Button fx:id="internalTransferButton" layoutX="29.0" layoutY="222.0" mnemonicParsing="false" onAction="#internalTransfer" prefHeight="27.0" prefWidth="143.0" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Transfer to Account" textFill="#e1e1e1" />
-                                    <Label fx:id="internalTransferMessage" layoutX="25.0" layoutY="270.0" prefHeight="17.0" prefWidth="136.0" textFill="#e1e1e1" />
+                                    <Label fx:id="internalTransferMessage" layoutX="32.0" layoutY="260.0" prefHeight="17.0" prefWidth="136.0" textFill="#e1e1e1" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="200.0" prefWidth="200.0">
                                  <children>
                                     <ComboBox fx:id="externalTransfer_cbox" layoutX="26.0" layoutY="76.0" prefWidth="150.0" promptText="From..." style="-fx-background-color: #A0A0A0;" />
-                                    <TextField layoutX="26.0" layoutY="121.0" prefHeight="27.0" prefWidth="151.0" promptText="Enter amount..." style="-fx-border-color: #606060;" />
-                                    <TextField layoutX="25.0" layoutY="163.0" prefHeight="27.0" prefWidth="152.0" promptText="Enter user..." style="-fx-border-color: #606060;" />
+                                    <TextField fx:id="externalTransferAmount" layoutX="26.0" layoutY="121.0" prefHeight="27.0" prefWidth="151.0" promptText="Enter amount..." style="-fx-border-color: #606060;" />
                                     <Button fx:id="externalTransferButton" layoutX="26.0" layoutY="222.0" mnemonicParsing="false" onAction="#externalTransfer" prefHeight="27.0" prefWidth="150.0" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Transfer to User" textFill="#e1e1e1" />
-                                    <Label fx:id="externalTransferMessage" layoutX="25.0" layoutY="264.0" prefHeight="17.0" prefWidth="151.0" />
+                                    <Label fx:id="externalTransferMessage" layoutX="26.0" layoutY="264.0" prefHeight="17.0" prefWidth="149.0" textFill="#e1e1e1" />
+                                    <ComboBox fx:id="recipientUser" layoutX="26.0" layoutY="163.0" prefWidth="150.0" promptText="Choose a user..." style="-fx-background-color: #A0a0a0;" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="200.0" prefWidth="200.0">
                                  <children>
                                     <ComboBox fx:id="billPay_cbox" layoutX="25.0" layoutY="76.0" prefWidth="150.0" promptText="From..." style="-fx-background-color: #A0A0A0;" />
-                                    <TextField layoutX="25.0" layoutY="121.0" prefHeight="27.0" prefWidth="151.0" promptText="Enter amount..." style="-fx-border-color: #606060;" />
+                                    <TextField fx:id="billPayAmount" layoutX="25.0" layoutY="121.0" prefHeight="27.0" prefWidth="151.0" promptText="Enter amount..." style="-fx-border-color: #606060;" />
                                     <Button fx:id="payBillButton" layoutX="134.0" layoutY="223.0" mnemonicParsing="false" onAction="#payBill" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Pay" textFill="#e1e1e1" />
-                                    <Label fx:id="billPayMessage" layoutX="25.0" layoutY="264.0" prefHeight="17.0" prefWidth="151.0" />
+                                    <Label fx:id="billPayMessage" layoutX="25.0" layoutY="264.0" prefHeight="17.0" prefWidth="151.0" textFill="#e1e1e1" />
+                                    <Label layoutX="25.0" layoutY="264.0" />
                                  </children>
                               </Pane>
                            </children>

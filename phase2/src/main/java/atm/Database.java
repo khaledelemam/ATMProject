@@ -8,12 +8,11 @@ public class Database {
 
     //TODO: Try passing in the serializable stuff in Database constructor and storing each thing ( pass in transactions, users, accounts..)
 
-   private static ArrayList<User> users = new ArrayList<>();
+    private static ArrayList<User> users = new ArrayList<>();
 
-    static ArrayList<User> getUsers(){
+    static ArrayList<User> getUsers() {
         return users;
     }
-
 
     static void addUser(User user){
         users.add(user);

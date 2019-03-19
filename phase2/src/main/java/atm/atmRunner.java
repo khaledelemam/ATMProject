@@ -1,8 +1,12 @@
 package atm;
 
+import com.sun.xml.internal.fastinfoset.util.StringArray;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
+
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class atmRunner {
     private User USER = null;
@@ -11,13 +15,29 @@ public class atmRunner {
 
     // ----- helper methods -----
     public ArrayList<String> getAccounts() {
-        return  USER.getAllAccounts();
-        }
+        return USER.getAccounts();
+    }
 
+    public void setUser(String username) {
+        USER = Database.checkExistingUser(username);
+    }
+
+    public void setUser(User user) {
+        USER = user;
+    }
+
+    public User getUser() {
+        return USER;
+    }
+
+    public ObservableList<User> getUsers() {
+        Database.retrieve();
+        ObservableList<User> users = FXCollections.observableArrayList(Database.getUsers());
+        return users;
+    }
     // ----- login -----
 
     public boolean adminCheck(String username, String password) {
-        BankManager bankManager = new BankManager();
         return username.equals("admin") && password.equals(bankManager.getPassword());
     }
 
@@ -30,8 +50,8 @@ public class atmRunner {
 
     public String newUserRequest(String username) {
         try {
-            BankManager bankManager = new BankManager();
-            bankManager.newUserRequest(username);
+            BankManager bmu = new BankManager();
+            bmu.newUserRequest(username);
             return "Please wait until an admin approves your account.";
         } catch (UsernameTakenException u) {
             return (u.getMessage());
@@ -41,30 +61,23 @@ public class atmRunner {
     // ----- admin -----
 
     public void acceptNewUserRequests() {
+        BankManager bmn = new BankManager();
         bankManager.createUser();
     }
 
     public void acceptNewAccountRequests() {
+        BankManager bma = new BankManager();
         bankManager.userRequestAccount();
     }
 
-    public void viewUsersAccounts(String username) {
-        User user = Database.checkExistingUser(username);
-
-        if (user != null) { user.viewAccounts(); }
+    public String reverseTransaction(int index) {
+        try {
+            bankManager.ReverseLastTransaction(USER, index);
+            return "Transaction for " + USER + " reversed";
+        } catch (InsufficientFundsException e) {
+            return "Transaction could not be reversed.";
+        }
     }
-
-//    public void reverseTransaction() {
-//        int acc = Integer.parseInt(in.nextLine());
-//        try {
-//
-//            BankManager bm3 = new BankManager();
-//            bm3.ReverseLastTransaction(user,acc);
-//
-//        } catch (InsufficientFundsException e) {
-//            System.out.println(e.getMessage());
-//        }
-//    }
 
     // ----- main menu -----
 
@@ -78,7 +91,7 @@ public class atmRunner {
     }
 
     public void requestNewAccount(int index, String partner) {
-        if (index == 5){
+        if (index == 5) {
             USER.requestJointAccount(partner);
         }
         USER.requestAccount(index);
@@ -86,5 +99,30 @@ public class atmRunner {
 
     public String viewAccountInfo(int index) {
         return USER.viewAccountInfo(index);
+    }
+
+    public String internalTransfer(int from, int to, double amount) {
+        try {
+            UserExecutes transaction = new UserExecutes(new InternalTransfer(from, to, USER));
+            transaction.executeTransaction(amount);
+            return "Transaction completed!";
+        } catch (InsufficientFundsException e) {
+            return e.getMessage();
+        } catch (IOException e) {
+            return "File error";
+        }
+    }
+
+    public String externalTransfer(User recipient, double amount, int index) {
+        try {
+            // TODO: change external transfer so it takes a user instead of string
+            UserExecutes transaction = new UserExecutes(new ExternalTransfer(index, recipient.getUsername(), USER));
+            transaction.executeTransaction(amount);
+            return "Transfer to " + recipient + "completed.";
+        } catch (InsufficientFundsException e) {
+            return e.getMessage();
+        } catch (IOException e) {
+            return "File error";
+        }
     }
 }

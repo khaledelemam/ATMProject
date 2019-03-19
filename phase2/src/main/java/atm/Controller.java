@@ -1,6 +1,5 @@
 package atm;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,12 +7,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
+import javax.xml.crypto.Data;
 import java.net.URL;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 import static java.time.temporal.ChronoUnit.MINUTES;
 import static java.time.temporal.ChronoUnit.SECONDS;
@@ -43,7 +42,6 @@ public class Controller implements Initializable {
     public Button acceptNewUserRequestsButton, accountRequestsButton;
     public Button adminLogoutButton;
     public Button reverseTransactionButton;
-    public ComboBox adminAccount_cbox;
     public Button addBillsButton;
     public Label adminCashMessage;
     public TextField admin_50field;
@@ -52,6 +50,14 @@ public class Controller implements Initializable {
     public TextField admin_5field;
     public TextField admin_10field;
     public Label adminAlertMessage;
+    public Button setTimeButton;
+    public TextField daysField;
+
+    public ComboBox<User> adminUser_cbox;
+    public ComboBox<String> adminAccount_cbox;
+    public Button showUserAccountsButton;
+    public Label transactionMessage;
+
 
     // ---- user ----
     public AnchorPane userScreen;
@@ -76,6 +82,7 @@ public class Controller implements Initializable {
     // transfers
     public ComboBox<String>  externalTransfer_cbox, internalTransferTO_cbox,
             internalTransferFROM_cbox,  billPay_cbox;
+    public ComboBox<User> recipientUser;
     public Button internalTransferButton;
     public Button externalTransferButton;
     public Button payBillButton;
@@ -89,9 +96,9 @@ public class Controller implements Initializable {
     public Button withdrawButton;
     public Label totalDeposited;
     public Label withdrawalMessage;
-    public Button setTimeButton;
-    public Button admin_showUserAccountsButton;
-    public TextField daysField;
+    public TextField externalTransferAmount;
+    public TextField internalTransferAmount;
+    public TextField billPayAmount;
     // end
 
     // initialize ATM
@@ -113,6 +120,9 @@ public class Controller implements Initializable {
         lineRadioButton.setUserData(3);
         creditRadioButton.setUserData(4);
         jointRadioButton.setUserData(5);
+
+        adminUser_cbox.setItems(atm.getUsers());
+        recipientUser.setItems(atm.getUsers());
     }
 
     // ----- helpers ^___^  ------
@@ -157,6 +167,7 @@ public class Controller implements Initializable {
             adminScreen.setVisible(true);
             loginScreen.setVisible(false);
             // TODO: have the cash alert return a string instead of printing
+            adminAlertMessage.setText("<Alert message from cashmanager goes here>");
         } else {
             clearLoginFields();
             loginMessage.setText("Admin access denied");
@@ -188,7 +199,6 @@ public class Controller implements Initializable {
 
     public void setTime(ActionEvent actionEvent) {
 
-
     }
 
     public void adminLogout(ActionEvent actionEvent) {
@@ -199,9 +209,20 @@ public class Controller implements Initializable {
     }
 
     public void addBills(ActionEvent actionEvent) {
+
+    }
+
+    public void showUserAccounts(ActionEvent actionEvent) {
+        // TODO: this doesnt work??? why
+        atm.setUser(adminUser_cbox.getSelectionModel().getSelectedItem());
+        adminAccount_cbox.setItems(FXCollections.observableArrayList(atm.getAccounts()));
     }
 
     public void reverseLastTransaction(ActionEvent actionEvent) {
+        transactionMessage.setText(atm.reverseTransaction(accounts_cbox.getSelectionModel().getSelectedIndex()));
+        atm.setUser((User) null);
+
+
     }
 
     // ----- user events -----
@@ -234,26 +255,36 @@ public class Controller implements Initializable {
     }
 
     public void showAccountInfo(ActionEvent actionEvent) {
-        int index = 1 + accounts_cbox.getSelectionModel().getSelectedIndex();
-        accounts_infoArea.setText(atm.viewAccountInfo(index));
+        accounts_infoArea.setText(atm.viewAccountInfo(accounts_cbox.getSelectionModel().getSelectedIndex()));
     }
 
     public void deposit(ActionEvent actionEvent) {
+        double amount = Double.parseDouble(depositAmountField.getText());
+
     }
 
     public void withdraw(ActionEvent actionEvent) {
+
     }
 
     public void internalTransfer(ActionEvent actionEvent) {
+        int indexTO = internalTransferFROM_cbox.getSelectionModel().getSelectedIndex();
+        int indexFROM = externalTransfer_cbox.getSelectionModel().getSelectedIndex();
+        // TODO: use regex to control user input amount format
+        double amount = Double.parseDouble(internalTransferAmount.getText());
+        atm.internalTransfer(indexFROM, indexTO, amount);
+
     }
 
     public void externalTransfer(ActionEvent actionEvent) {
+        User recipient = recipientUser.getSelectionModel().getSelectedItem();
+        Double amount = Double.parseDouble(externalTransferAmount.getText());
+        int index = externalTransfer_cbox.getSelectionModel().getSelectedIndex();
+        externalTransferMessage.setText(atm.externalTransfer(recipient, amount, index));
+
     }
 
     public void payBill(ActionEvent actionEvent) {
-    }
-
-    public void showUserAccounts(ActionEvent actionEvent) {
     }
 }
 

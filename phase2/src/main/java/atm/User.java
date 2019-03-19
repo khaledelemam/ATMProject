@@ -148,7 +148,7 @@ public class User implements Serializable {
         return accountsInfo;
     }
 
-    ArrayList<String> getAllAccounts() {
+    ArrayList<String> getAccounts() {
         ArrayList<String> allAccounts = new ArrayList<>();
         for(int i = 1; i <= accounts.size(); i++) {
             Account account = accounts.get(i);
