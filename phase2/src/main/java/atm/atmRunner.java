@@ -90,11 +90,11 @@ public class atmRunner {
         USER = null;
     }
 
-    public void requestNewAccount(int index, String partner) {
-        if (index == 5) {
+    public void requestNewAccount(int choice, String partner) {
+        if (choice == 5) {
             USER.requestJointAccount(partner);
         }
-        USER.requestAccount(index);
+        USER.requestAccount(choice);
     }
 
     public String viewAccountInfo(int index) {
@@ -103,34 +103,37 @@ public class atmRunner {
 
     public String internalTransfer(int from, int to, double amount) {
         try {
-            UserExecutes transaction = new UserExecutes(new InternalTransfer(from, to, USER));
+            InternalTransfer itransfer = new InternalTransfer(from, to, USER);
+            UserExecutes transaction = new UserExecutes(itransfer);
             transaction.executeTransaction(amount);
-            return "Transaction completed!";
+            return itransfer.toString();
         } catch (InsufficientFundsException e) {
             return e.getMessage();
         } catch (IOException e) {
-            return "File error";
+            return "Error!";
         }
     }
 
     public String externalTransfer(User recipient, double amount, int index) {
         try {
-            // TODO: change external transfer so it takes a user instead of string
-            UserExecutes transaction = new UserExecutes(new ExternalTransfer(index, recipient.getUsername(), USER));
+            // TODO: change external transfer so it takes a user instead of string when u refactor
+            ExternalTransfer etransfer = new ExternalTransfer(index, recipient.getUsername(), USER);
+            UserExecutes transaction = new UserExecutes(etransfer);
             transaction.executeTransaction(amount);
-            return "Transfer to " + recipient + "completed.";
+            return etransfer.toString();
         } catch (InsufficientFundsException e) {
             return e.getMessage();
         } catch (IOException e) {
-            return "File error";
+            return "Error!";
         }
     }
 
     public String payBill(int from, double amount) {
         try {
-            UserExecutes transaction = new UserExecutes(new PayBills(from, USER));
+            PayBills payment = new PayBills(from, USER);
+            UserExecutes transaction = new UserExecutes(payment);
             transaction.executeTransaction(amount);
-            return "Bill payed.";
+            return payment.toString();
         }catch (InsufficientFundsException e) {
             return e.getMessage();
         } catch (IOException e) {

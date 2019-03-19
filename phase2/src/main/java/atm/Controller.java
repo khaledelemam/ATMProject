@@ -177,6 +177,7 @@ public class Controller implements Initializable {
     // ----- new user events -----
     public void goBack(ActionEvent actionEvent) {
         newUserMessage.setText("");
+        new_usernameField.clear();
         newUserScreen.setVisible(false);
         loginScreen.setVisible(true);
     }
@@ -250,7 +251,9 @@ public class Controller implements Initializable {
 
     public void logout(ActionEvent actionEvent) {
         atm.logout();
+        requestAccountMessage.setText("");
         newPasswordMessage.setText("");
+        newPasswordField.clear();
         internalTransferMessage.setText("");
         billPayMessage.setText("");
         externalTransferMessage.setText("");

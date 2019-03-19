@@ -118,7 +118,6 @@ public class User implements Serializable {
         return null;
     }
 
-    // for GUI pls no delete
     String viewAccountInfo(int index) {
         Account account = getAccount(index);
         if (account.getLastTransaction() != null) {
