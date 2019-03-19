@@ -83,22 +83,14 @@ public class Controller implements Initializable {
     public ComboBox<String>  externalTransfer_cbox, internalTransferTO_cbox,
             internalTransferFROM_cbox,  billPay_cbox;
     public ComboBox<User> recipientUser;
-    public Button internalTransferButton;
-    public Button externalTransferButton;
-    public Button payBillButton;
-    public Label internalTransferMessage;
-    public Label billPayMessage;
-    public Label externalTransferMessage;
+    public Button internalTransferButton, externalTransferButton, payBillButton;
+    public Label internalTransferMessage, billPayMessage, externalTransferMessage;
+    public TextField externalTransferAmount, internalTransferAmount, billPayAmount;
 
     // withdraw/deposit
-    public Button depositButton;
+    public Button depositButton, withdrawButton;
     public TextField depositAmountField;
-    public Button withdrawButton;
-    public Label totalDeposited;
-    public Label withdrawalMessage;
-    public TextField externalTransferAmount;
-    public TextField internalTransferAmount;
-    public TextField billPayAmount;
+    public Label depositMessage, withdrawalMessage;
     // end
 
     // initialize ATM
@@ -235,8 +227,7 @@ public class Controller implements Initializable {
 
     public void requestAccount(ActionEvent actionEvent) {
         int index = (int) newAccountsGroup.getSelectedToggle().getUserData();
-        atm.requestNewAccount(index, shareAccountField.getText());
-        requestAccountMessage.setText("Account requested.");
+        requestAccountMessage.setText(atm.requestNewAccount(index, shareAccountField.getText()));
         shareAccountField.setVisible(false);
         shareAccountField.setText("");
     }

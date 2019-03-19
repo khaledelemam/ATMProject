@@ -213,15 +213,8 @@ public class User implements Serializable {
      * @param username username of another account to join with
      */
     void requestJointAccount(String username){
-        
-        if (Database.checkExistingUser(username) != null){
-            request = "Joint Account";
-            joint = username;
-        }
-        else {
-            System.out.println("This user does not exist.");
-
-        }
+        request = "Joint Account";
+        joint = username;
     }
 
 

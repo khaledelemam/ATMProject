@@ -89,11 +89,17 @@ public class atmRunner {
         USER = null;
     }
 
-    public void requestNewAccount(int choice, String partner) {
+    public String requestNewAccount(int choice, String partner) {
         if (choice == 5) {
-            USER.requestJointAccount(partner);
+            if (Database.checkExistingUser(partner) != null) {
+                USER.requestJointAccount(partner);
+                return "Account requested";
+            } else {
+                return "User does not exist.";
+            }
         }
         USER.requestAccount(choice);
+        return "Account requested";
     }
 
     public String viewAccountInfo(int index) {
