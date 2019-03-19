@@ -102,41 +102,44 @@ public class atmRunner {
 
     public String internalTransfer(int from, int to, double amount) {
         try {
-            InternalTransfer itransfer = new InternalTransfer(from, to, USER);
-            UserExecutes transaction = new UserExecutes(itransfer);
+            UserExecutes transaction = new UserExecutes(new InternalTransfer(from, to, USER));
             transaction.executeTransaction(amount);
-            return itransfer.toString();
+            return "Transaction completed.";
         } catch (InsufficientFundsException e) {
             return e.getMessage();
         } catch (IOException e) {
             return "Error!";
+        } catch (NullPointerException e) {
+            return "Please open a second account.";
         }
     }
 
     public String externalTransfer(User recipient, double amount, int index) {
         try {
             // TODO: change external transfer so it takes a user instead of string when u refactor
-            ExternalTransfer etransfer = new ExternalTransfer(index, recipient.getUsername(), USER);
-            UserExecutes transaction = new UserExecutes(etransfer);
+            UserExecutes transaction = new UserExecutes(new ExternalTransfer(index, recipient.getUsername(), USER));
             transaction.executeTransaction(amount);
-            return etransfer.toString();
+            return "Transaction completed.";
         } catch (InsufficientFundsException e) {
             return e.getMessage();
         } catch (IOException e) {
             return "Error!";
+        } catch (NullPointerException e) {
+            return "Please open a second account.";
         }
     }
 
     public String payBill(int from, double amount) {
         try {
-            PayBills payment = new PayBills(from, USER);
-            UserExecutes transaction = new UserExecutes(payment);
+            UserExecutes transaction = new UserExecutes(new PayBills(from, USER));
             transaction.executeTransaction(amount);
-            return payment.toString();
-        }catch (InsufficientFundsException e) {
+            return "Bill payment completed.";
+        } catch (InsufficientFundsException e) {
             return e.getMessage();
         } catch (IOException e) {
             return "Error!";
+        } catch (NullPointerException e) {
+            return "Please open a second account.";
         }
     }
 }
