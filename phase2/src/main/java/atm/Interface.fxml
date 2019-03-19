@@ -17,7 +17,7 @@
 
 <StackPane style="-fx-background-color: #696969;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="atm.Controller">
    <children>
-      <AnchorPane fx:id="loginScreen" prefHeight="400.0" prefWidth="600.0" visible="false">
+      <AnchorPane fx:id="loginScreen" prefHeight="400.0" prefWidth="600.0">
          <children>
             <Button fx:id="loginButton" layoutX="489.0" layoutY="301.0" mnemonicParsing="false" onAction="#userLogin" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Login" textFill="#e1e1e1" />
             <Button fx:id="newAccountButton" layoutX="326.0" layoutY="301.0" mnemonicParsing="false" onAction="#newUser" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Create new account" textFill="#e1e1e1" />
@@ -98,7 +98,7 @@
             </TabPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="userScreen" prefHeight="200.0" prefWidth="200.0">
+      <AnchorPane fx:id="userScreen" prefHeight="200.0" prefWidth="200.0" visible="false">
          <children>
             <TabPane fx:id="userTabs" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
