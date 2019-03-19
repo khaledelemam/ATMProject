@@ -9,10 +9,13 @@ public class CashManager {
 
     private final int threshold = 20;
 
-    private String cashFile = "phase2/src/main/java/atm/cash.txt";
-    private String alertFile = "phase2/src/main/java/atm/alerts.txt";
+    private Filename fn = new Filename();
+    private String cashFile;
+    private String alertFile;
 
     public CashManager() throws IOException {
+        cashFile = fn.getCashFile();
+        alertFile = fn.getAlertFile();
         cashFromFile();
     }
 
@@ -120,14 +123,6 @@ public class CashManager {
             line = alert.readLine();
         }
 
-    }
-
-    public void setCashFile(String file){
-        this.cashFile = file;
-    }
-
-    public void setAlertFile(String file){
-        this.alertFile = file;
     }
 
     public String toString(){
