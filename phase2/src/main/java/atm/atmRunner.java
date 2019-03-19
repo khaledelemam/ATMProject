@@ -32,8 +32,7 @@ public class atmRunner {
 
     public ObservableList<User> getUsers() {
         Database.retrieve();
-        ObservableList<User> users = FXCollections.observableArrayList(Database.getUsers());
-        return users;
+        return FXCollections.observableArrayList(Database.getUsers());
     }
     // ----- login -----
 
