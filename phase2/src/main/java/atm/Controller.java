@@ -250,6 +250,12 @@ public class Controller implements Initializable {
 
     public void logout(ActionEvent actionEvent) {
         atm.logout();
+        newPasswordMessage.setText("");
+        internalTransferMessage.setText("");
+        billPayMessage.setText("");
+        externalTransferMessage.setText("");
+        withdrawalMessage.setText("");
+        // depositMessage.setText("");
         userScreen.setVisible(false);
         loginScreen.setVisible(true);
     }
@@ -285,6 +291,9 @@ public class Controller implements Initializable {
     }
 
     public void payBill(ActionEvent actionEvent) {
+        int index = billPay_cbox.getSelectionModel().getSelectedIndex();
+        Double amount = Double.parseDouble(billPayAmount.getText());
+        billPayMessage.setText(atm.payBill(index, amount));
     }
 }
 

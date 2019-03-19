@@ -125,4 +125,16 @@ public class atmRunner {
             return "File error";
         }
     }
+
+    public String payBill(int from, double amount) {
+        try {
+            UserExecutes transaction = new UserExecutes(new PayBills(from, USER));
+            transaction.executeTransaction(amount);
+            return "Bill payed.";
+        }catch (InsufficientFundsException e) {
+            return e.getMessage();
+        } catch (IOException e) {
+            return "Error!";
+        }
+    }
 }

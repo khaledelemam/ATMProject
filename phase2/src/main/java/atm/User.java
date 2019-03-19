@@ -122,11 +122,13 @@ public class User implements Serializable {
     String viewAccountInfo(int index) {
         Account account = getAccount(index);
         if (account.getLastTransaction() != null) {
-            return "Balance: $" + account.getBalance() +
+            return "--------------------------\n" +account +
+                    "\n--------------------------\nBalance: $" + account.getBalance() +
                     "\nDate opened: " + account.getDateOpened() +
-                    "\n--Last Transaction--\n" + account.getLastTransaction();
+                    "\n\n---Last Transaction---\n" + account.getLastTransaction();
         } else {
-            return "Balance: $" + account.getBalance() +
+            return "--------------------------\n" + account +
+                    "\n--------------------------\nBalance: $" + account.getBalance() +
                     "\nDate opened: " + account.getDateOpened();
         }
     }
