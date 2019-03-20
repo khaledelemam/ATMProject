@@ -75,10 +75,12 @@ public class atmRunner {
             return "Transaction for " + USER + " reversed";
         } catch (InsufficientFundsException e) {
             return "Transaction could not be reversed.";
+        } catch (NullPointerException n) {
+            return n.getMessage();
         }
     }
 
-    // ----- main menu -----
+    // ----- user menu -----
 
     public void changePassword(String newPassword) {
         USER.setPassword(newPassword);
