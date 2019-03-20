@@ -101,11 +101,7 @@ public class Controller implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         // time stuff
-        LocalTime time = ZonedDateTime.now().toLocalTime().truncatedTo(MINUTES);
-        System.out.println(time.toString());
-        LocalTime midnight = LocalTime.MAX;
-        long terminate = SECONDS.between(time, midnight);
-        Time date = new Time(1);
+        atm.setTimeInitial();
 
         // set radio buttons
         chequingRadioButton.setUserData(AccountType.CHEQUING);

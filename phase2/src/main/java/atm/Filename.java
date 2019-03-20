@@ -18,7 +18,6 @@ public class Filename {
     /** Serial file used in BankManager */
     private String requestsFile = "file2";
 
-
     public String getCashFile() {
         return cashFile;
     }

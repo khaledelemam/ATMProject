@@ -14,20 +14,12 @@ public class User implements Serializable {
     private String username;
     private String password;
     private DecimalFormat currencyFormat = new DecimalFormat("0.00");
-//    private HashMap<Integer,Account> accounts = new HashMap<>();
-//    private HashMap<Account,Integer> map = new HashMap<>();
-    // TODO: see if this works lol
     private ArrayList<Account> accounts = new ArrayList<>();
 
     private AccountType request;
     private String joint;
     private Account JointAccount;
     private ChequingAccount primaryAccount;
-
-    // I used two Hashmaps to track the account with the corresponding number. Two are used instead of one because there is no "getKey()" in Hashmaps.
-    // This implementation is working so far in accessing user accounts.
-    // I did not use arrayList because I could not track the accounts as users can add different accounts in different orders
-
 
     public User(String username) {
         this.username = username;
@@ -59,38 +51,13 @@ public class User implements Serializable {
         this.primaryAccount = account;
     }
 
-    ChequingAccount getPrimaryAccount() {
-        return this.primaryAccount;
-    }
+    ArrayList<Account> getAccounts() { return accounts; }
+
+    AccountType getRequest(){ return request; }
+
+    ChequingAccount getPrimaryAccount() { return this.primaryAccount; }
 
     void createAccount(AccountType account){
-
-//        Account hold = null;
-
-//        if (account.equals("Chequing")){
-//            hold = new ChequingAccount();
-////            if (primaryAccount == null)
-////            primaryAccount = (ChequingAccount) hold;
-//
-//        }
-//
-//        else if (account.equals("Savings")){
-//            hold = new SavingsAccount();
-//        }
-//        else if (account.equals("Line of Credit")){
-//            hold = new LineOfCredit();
-//        }
-//
-//        else if (account.equals("Credit Card")){
-//            hold = new CreditCard();
-//        }
-//
-//        else if (account.equals("Joint Account")){
-//            hold = new ChequingAccount();
-//            ((ChequingAccount) hold).setJoint();
-//            JointAccount=hold;
-//        }
-        // TODO: make sure this works correctly!
         switch (account) {
             case CHEQUING:
                 ChequingAccount chequing = new ChequingAccount();
@@ -116,42 +83,13 @@ public class User implements Serializable {
                 addAccount(acct);
                 break;
         }
-
-//        if (hold != null) {
-//            addAccount(hold);
-//        }
     }
 
     void addAccount(Account account){
-
-//        int index = accounts.size();
-//        this.accounts.put(index + 1, account);
-//        this.map.put(account, index + 1);
-//        request = null;
         accounts.add(account);
         request = null;
-
     }
 
-    //    void viewAccounts(){
-//        for(int i = 1 ; i <=accounts.size(); i++){
-//            String str = Integer.toString(map.get(accounts.get(i)));
-//            System.out.println("(" +str + ")" +accounts.get(i));
-//
-//        }
-//    }
-
-//    Account getAccount(int acc){
-//        for(int i = 1 ; i <= accounts.size(); i++){
-//            if (acc == i) {
-//                return accounts.get(i);
-//            }
-//        }
-//        return null;
-//    }
-
-//    String viewAccountInfo(int index) {
-//        Account account = getAccount(index);
     String viewAccountInto(Account account) {
         String accountInfo = "--------------------------\n" + account +
                 "\n--------------------------\nBalance: $" + account.getBalance() +
@@ -162,57 +100,8 @@ public class User implements Serializable {
         return accountInfo;
     }
 
-//    private ArrayList<String> accountInfo() {
-//
-//        ArrayList<String> accountsInfo = new ArrayList<>();
-//        for(int i = 1 ; i <= accounts.size(); i++) {
-//            Account account = accounts.get(i);
-//            if (account.getLastTransaction() != null) {
-//                accountsInfo.add("\n" + account + ": $" + account.getBalance() +
-//                        "\nDate opened: " + account.getDateOpened() +
-//                        "\n--Last Transaction--\n" + account.getLastTransaction());
-//            } else {
-//                accountsInfo.add("\n" + account + ": $" + account.getBalance() +
-//                            "\nDate opened: " + account.getDateOpened());
-//            }
-//        }
-//        return accountsInfo;
-//    }
-
-//    ArrayList<String> getAccounts() {
-//        ArrayList<String> allAccounts = new ArrayList<>();
-//        for(int i = 1; i <= accounts.size(); i++) {
-//            Account account = accounts.get(i);
-//            allAccounts.add(account.toString());
-//        }
-//        return allAccounts;
-//    }
-    ArrayList<Account> getAccounts() {
-        return accounts;
-    }
-
-
-//    String viewAccountsInfo() {
-//
-//        String accInfo = "Net total: " + netUserBalance() + "\n";
-//        for (String account: accountInfo()) {
-//            accInfo += account + "\n";
-//        }
-//        return accInfo;
-//    }
-
-
-    AccountType getRequest(){
-        return request;
-    }
-
-//    Account getPrimaryAccount() { return accounts.get(1);}
-
     public String netUserBalance() {
         double netTotal = 0;
-//        for (int k = 1; k <= accounts.size(); k++){
-//            netTotal += accounts.get(k).getNetTotal();
-//        }
         for (Account account : accounts) {
             netTotal += account.getNetTotal();
         }
@@ -221,26 +110,8 @@ public class User implements Serializable {
 
 
     // TODO: can this be overloaded???????
-
     void requestAccount(AccountType account){
         request = account;
-
-//        if (account == 1){
-//            request = "Chequing";
-//
-//        }
-//        else if (account == 2){
-//          request =  "Savings";
-//
-//        }
-//        else if (account == 3){
-//         request = "Line of Credit";
-//
-//        }
-//        else if (account == 4){
-//          request = "Credit Card";
-//        }
-
         Database.store();
     }
 

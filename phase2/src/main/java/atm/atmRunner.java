@@ -6,26 +6,29 @@ import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 
 import java.io.IOException;
+import java.time.LocalTime;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
+
+import static java.time.temporal.ChronoUnit.MINUTES;
+import static java.time.temporal.ChronoUnit.SECONDS;
 
 public class atmRunner {
     private User USER = null;
     private BankManager bankManager = new BankManager();
+    private Time date;
 
 
     // ----- helper methods -----
     public ObservableList<Account> getAccounts() {
         return FXCollections.observableArrayList(USER.getAccounts());
     }
-
     public void setUser(String username) {
         USER = Database.checkExistingUser(username);
     }
-
     public void setUser(User user) {
         USER = user;
     }
-
     public User getUser() {
         return USER;
     }
@@ -33,6 +36,14 @@ public class atmRunner {
     public ObservableList<User> getUsers() {
         Database.retrieve();
         return FXCollections.observableArrayList(Database.getUsers());
+    }
+
+    public void setTimeInitial() {
+        LocalTime time = ZonedDateTime.now().toLocalTime().truncatedTo(MINUTES);
+        System.out.println(time.toString());
+        LocalTime midnight = LocalTime.MAX;
+        long terminate = SECONDS.between(time, midnight);
+        date = new Time(1);
     }
     // ----- login -----
 
@@ -130,7 +141,6 @@ public class atmRunner {
 
     public String externalTransfer(User recipient, double amount, Account source) {
         try {
-            // TODO: change external transfer so it takes a user instead of string when u refactor
             UserExecutes transaction = new UserExecutes(new ExternalTransfer(source, recipient));
             transaction.executeTransaction(amount);
             return "Transaction completed.";
@@ -145,7 +155,7 @@ public class atmRunner {
 
     public String payBill(Account source, double amount) {
         try {
-            UserExecutes transaction = new UserExecutes(new PayBills(source, USER));
+            UserExecutes transaction = new UserExecutes(new PayBills(source, USER, date));
             transaction.executeTransaction(amount);
             return "Bill payment completed.";
         } catch (InsufficientFundsException e) {

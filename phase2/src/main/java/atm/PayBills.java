@@ -9,10 +9,12 @@ public class PayBills implements UserDo{
 
     private Account source;
     private User user;
+    private Time date;
 
-    public PayBills(Account account, User user){
+    public PayBills(Account account, User user, Time date){
         this.source = account;
         this.user = user;
+        this.date = date;
     }
 
     public void doTransaction(double amount) throws IOException, InsufficientFundsException {
@@ -22,7 +24,7 @@ public class PayBills implements UserDo{
         PrintWriter billPayer = new PrintWriter(new FileWriter("phase2/src/main/java/atm/outgoing.txt",
                 true));
         // TODO: date object not in this clasS?
-        billPayer.println(user + " payed $" + amount + " on " + "date");
+        billPayer.println(user + " payed $" + amount + " on " + date);
         billPayer.close();
 
         Transaction bill = new Transaction(source, amount);

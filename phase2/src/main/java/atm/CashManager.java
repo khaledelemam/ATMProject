@@ -6,7 +6,6 @@ public class CashManager {
 
     // index 0,1,2,3 represents 5,10,20,50 dollar bills
     private int[] denominations;
-
     private final int threshold = 20;
 
     private Filename fn = new Filename();
