@@ -87,17 +87,21 @@ public class BankManager implements Serializable {
 
 
     void ReverseLastTransaction(User user, int account) throws InsufficientFundsException{
+        try {
             Account acc = user.getAccount(account);
             Transaction transaction = acc.getLastTransaction();
             ReverseATM rATM = new ReverseATM();
             if (transaction.getRecipient() != null) {
                 rATM.ReverseTransaction(acc, transaction);
                 System.out.println("Reversed transaction for: " + user.getUsername());
-            }
-            else{
+            } else {
                 System.out.println("The last transaction is not a transfer between accounts.");
             }
             Database.store();
+        } catch (NullPointerException e) {
+            NullPointerException n = new NullPointerException("No transaction.");
+            throw n;
+        }
 
     }
 
@@ -141,7 +145,8 @@ public class BankManager implements Serializable {
 
     void storeRequests(){
         try{
-            FileOutputStream fos= new FileOutputStream("file2");
+            Filename file = new Filename();
+            FileOutputStream fos= new FileOutputStream(file.getRequestsFile());
             ObjectOutputStream oos= new ObjectOutputStream(fos);
             oos.writeObject(requests);
             oos.close();
@@ -155,10 +160,11 @@ public class BankManager implements Serializable {
     @SuppressWarnings("unchecked")
 
     void retrieveRequests() {
-        File f = new File("file2");
+        Filename file = new Filename();
+        File f = new File(file.getRequestsFile());
         if (f.exists()) {
             try {
-                FileInputStream fis = new FileInputStream("file2");
+                FileInputStream fis = new FileInputStream(file.getRequestsFile());
                 ObjectInputStream ois = new ObjectInputStream(fis);
                 requests = (ArrayList) ois.readObject();
                 ois.close();
