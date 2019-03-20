@@ -166,7 +166,6 @@ public class Controller implements Initializable {
             // TODO: have the cash alert return a string instead of printing
             //adminAlertMessage.setText("<Alert message from cashmanager goes here>");
             CashManager cm = new CashManager();
-            cm.update();
             adminAlertMessage.setText(cm.showAlerts());
 
             // TODO: have this updated when their tab is looked at instead!
