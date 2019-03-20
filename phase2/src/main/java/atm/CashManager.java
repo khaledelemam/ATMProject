@@ -1,6 +1,7 @@
 package atm;
 
 import java.io.*;
+import java.util.Scanner;
 
 public class CashManager {
 
@@ -123,6 +124,25 @@ public class CashManager {
             line = alert.readLine();
         }
 
+    }
+
+    // Returns the alerts or a string that says "No Alerts"
+    public String showAlerts() throws IOException {
+        File file = new File(alertFile);
+        Scanner input = new Scanner(file);
+
+        String s = "";
+
+        if (!input.hasNext()){
+            return "No Alerts";
+        }
+
+        while (input.hasNext()){
+            s += input.nextLine() + "\n";
+        }
+
+
+        return s;
     }
 
     public String toString(){
