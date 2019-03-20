@@ -70,7 +70,6 @@ public class BankManager implements Serializable {
                 User user = new User(request.getUsername());
                 user.createAccount(AccountType.CHEQUING);
                 setUserPassword(user);
-                user.setPrimaryAccount((ChequingAccount) user.getAccounts().get(0));
             }
         }
         requests.clear();

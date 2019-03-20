@@ -272,6 +272,7 @@ public class Controller implements Initializable {
     public void deposit(ActionEvent actionEvent) {
         // TODO: use regex to control user input amount format
         depositMessage.setText(atm.deposit(Double.parseDouble(depositAmountField.getText())));
+        depositAmountField.setText("");
     }
 
     public void withdraw(ActionEvent actionEvent) {
@@ -283,7 +284,8 @@ public class Controller implements Initializable {
         Account recipient = internalTransferFROM_cbox.getSelectionModel().getSelectedItem();
         Account sender = externalTransfer_cbox.getSelectionModel().getSelectedItem();
         double amount = Double.parseDouble(internalTransferAmount.getText());
-        atm.internalTransfer(sender, recipient, amount);
+        internalTransferAmount.setText(atm.internalTransfer(sender, recipient, amount));
+        internalTransferAmount.setText("");
 
     }
 
@@ -293,6 +295,7 @@ public class Controller implements Initializable {
         Double amount = Double.parseDouble(externalTransferAmount.getText());
         Account sender = externalTransfer_cbox.getSelectionModel().getSelectedItem();
         externalTransferMessage.setText(atm.externalTransfer(recipient, amount, sender));
+        externalTransferAmount.setText("");
 
     }
 

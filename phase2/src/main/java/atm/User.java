@@ -59,6 +59,9 @@ public class User implements Serializable {
         this.primaryAccount = account;
     }
 
+    ChequingAccount getPrimaryAccount() {
+        return this.primaryAccount;
+    }
 
     void createAccount(AccountType account){
 
@@ -90,7 +93,11 @@ public class User implements Serializable {
         // TODO: make sure this works correctly!
         switch (account) {
             case CHEQUING:
-                addAccount(new ChequingAccount());
+                ChequingAccount chequing = new ChequingAccount();
+                addAccount(chequing);
+                if (primaryAccount == null) {
+                    primaryAccount = chequing;
+                }
                 break;
             case SAVINGS:
                 addAccount(new SavingsAccount());
@@ -200,9 +207,6 @@ public class User implements Serializable {
     }
 
 //    Account getPrimaryAccount() { return accounts.get(1);}
-    Account getPrimaryAccount() {
-        return primaryAccount;
-    }
 
     public String netUserBalance() {
         double netTotal = 0;
