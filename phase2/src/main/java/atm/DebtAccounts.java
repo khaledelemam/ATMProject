@@ -17,7 +17,6 @@ public class DebtAccounts extends Account {
             InsufficientFundsException e = new InsufficientFundsException("You have reached your debt limit.");
             throw e;
         }
-
     }
 
     @Override

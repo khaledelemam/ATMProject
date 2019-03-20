@@ -62,6 +62,7 @@ public class Controller implements Initializable {
 
     // ---- user ----
     public AnchorPane userScreen;
+    public Tab accountTab;
 
     // main
     public Button changePasswordButton;
