@@ -6,9 +6,8 @@ public class UserExecutes {
     private UserDo transaction;
 
     UserExecutes(UserDo transaction){
-        this.transaction= transaction;
+        this.transaction = transaction;
     }
-
 
     void executeTransaction(double amount) throws InsufficientFundsException, IOException {
         transaction.doTransaction(amount);

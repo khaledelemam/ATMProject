@@ -15,20 +15,15 @@ public class InternalTransfer implements UserDo {
     }
 
 
-    public void doTransaction(double amount) throws InsufficientFundsException {
+    public void doTransaction(double amount) throws InsufficientFundsException, NullPointerException {
 
-//        user = Database.checkExistingUser(username);
-        try {
-            Account accFrom = user.getAccount(from);
-            Account accTo = user.getAccount(to);
-            accFrom.setBalance(-amount);
-            accTo.setBalance(amount);
-            Transaction intTransfer = new Transaction(accFrom, accTo, amount);
-//            accTo.setLastTransaction(intTransfer);
-            accFrom.setLastTransaction(intTransfer);
-            Database.store();
-        } catch (NullPointerException n) {
-            System.out.println("You only have one account. Please request another account.");
-        }
+        Account accFrom = user.getAccount(from);
+        Account accTo = user.getAccount(to);
+        accFrom.setBalance(-amount);
+        accTo.setBalance(amount);
+        Transaction intTransfer = new Transaction(accFrom, accTo, amount);
+//           accTo.setLastTransaction(intTransfer);
+        accFrom.setLastTransaction(intTransfer);
+        Database.store();
     }
 }

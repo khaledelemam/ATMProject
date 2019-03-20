@@ -17,7 +17,7 @@
 
 <StackPane style="-fx-background-color: #696969;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="atm.Controller">
    <children>
-      <AnchorPane fx:id="loginScreen" prefHeight="400.0" prefWidth="600.0" visible="false">
+      <AnchorPane fx:id="loginScreen" prefHeight="400.0" prefWidth="600.0">
          <children>
             <Button fx:id="loginButton" layoutX="489.0" layoutY="301.0" mnemonicParsing="false" onAction="#userLogin" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Login" textFill="#e1e1e1" />
             <Button fx:id="newAccountButton" layoutX="326.0" layoutY="301.0" mnemonicParsing="false" onAction="#newUser" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Create new account" textFill="#e1e1e1" />
@@ -98,7 +98,7 @@
             </TabPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="userScreen" prefHeight="200.0" prefWidth="200.0">
+      <AnchorPane fx:id="userScreen" prefHeight="200.0" prefWidth="200.0" visible="false">
          <children>
             <TabPane fx:id="userTabs" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
@@ -143,6 +143,7 @@
                               <ComboBox fx:id="accounts_cbox" layoutX="27.0" layoutY="63.0" prefHeight="27.0" prefWidth="182.0" promptText="Choose an account..." style="-fx-background-color: #A0A0A0;" />
                               <Button fx:id="accounts_showAccountsButton" layoutX="27.0" layoutY="115.0" mnemonicParsing="false" onAction="#showAccountInfo" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Show account information" textFill="#e1e1e1" />
                               <Label fx:id="accounts_infoArea" alignment="TOP_LEFT" layoutX="292.0" layoutY="63.0" prefHeight="235.0" prefWidth="226.0" textFill="#e1e1e1" wrapText="true" />
+                              <Label fx:id="netBalance" layoutX="27.0" layoutY="172.0" prefHeight="17.0" prefWidth="181.0" textFill="#e1e1e1" />
                            </children></AnchorPane>
                   </content>
                 </Tab>

@@ -110,8 +110,8 @@ public class User implements Serializable {
 
     Account getAccount(int acc){
 
-        for(int i = 1 ; i <=accounts.size(); i++){
-            if (acc== i) {
+        for(int i = 1 ; i <= accounts.size(); i++){
+            if (acc == i) {
                 return accounts.get(i);
             }
         }
@@ -178,7 +178,7 @@ public class User implements Serializable {
 
     Account getPrimaryAccount() { return accounts.get(1);}
 
-    private String netUserBalance() {
+    public String netUserBalance() {
         double netTotal = 0;
         for (int k = 1; k <= accounts.size(); k++){
             netTotal += accounts.get(k).getNetTotal();
@@ -213,15 +213,8 @@ public class User implements Serializable {
      * @param username username of another account to join with
      */
     void requestJointAccount(String username){
-        
-        if (Database.checkExistingUser(username) != null){
-            request = "Joint Account";
-            joint = username;
-        }
-        else {
-            System.out.println("This user does not exist.");
-
-        }
+        request = "Joint Account";
+        joint = username;
     }
 
 
