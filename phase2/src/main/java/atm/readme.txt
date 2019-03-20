@@ -8,9 +8,10 @@ Note:
 
 --- A. How to run as admin ---
 
-1) only enter admin password in 'password' text field
-    > password: 123
-    > press button: admin login
+1) log in:
+    > defalt username: admin
+    > default password: 123
+    > press button 'admin login'
 
 (> set date if the date did not show in the home screen (only one time))
 
