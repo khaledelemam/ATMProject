@@ -106,6 +106,10 @@ public class atmRunner {
         return USER.viewAccountInfo(index);
     }
 
+    public String getNetBalance() {
+        return USER.netUserBalance();
+    }
+
     public String internalTransfer(int from, int to, double amount) {
         try {
             UserExecutes transaction = new UserExecutes(new InternalTransfer(from, to, USER));

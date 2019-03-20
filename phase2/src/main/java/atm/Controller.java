@@ -78,6 +78,7 @@ public class Controller implements Initializable {
     public ComboBox<String> accounts_cbox;
     public Button accounts_showAccountsButton;
     public Label accounts_infoArea;
+    public Label netBalance;
 
     // transfers
     public ComboBox<String>  externalTransfer_cbox, internalTransferTO_cbox,
@@ -132,6 +133,8 @@ public class Controller implements Initializable {
         internalTransferFROM_cbox.setItems(accounts);
         externalTransfer_cbox.setItems(accounts);
         billPay_cbox.setItems(accounts);
+        netBalance.setText("Net balance: $" + atm.getNetBalance());
+
     }
 
     // ----- login events ------
@@ -249,7 +252,7 @@ public class Controller implements Initializable {
         billPayMessage.setText("");
         externalTransferMessage.setText("");
         withdrawalMessage.setText("");
-        // depositMessage.setText("");
+        depositMessage.setText("");
         userScreen.setVisible(false);
         loginScreen.setVisible(true);
     }
@@ -260,7 +263,7 @@ public class Controller implements Initializable {
 
     public void deposit(ActionEvent actionEvent) {
         double amount = Double.parseDouble(depositAmountField.getText());
-
+        // TODO: FINISH THIS
     }
 
     public void withdraw(ActionEvent actionEvent) {
