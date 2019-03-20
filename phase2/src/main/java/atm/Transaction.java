@@ -48,17 +48,17 @@ public class Transaction implements Serializable {
         String strAmount = currencyFormat.format(this.amount);
         // external transfer
         if (this.recipient != null && this.username!=null) {
-            return ("$"+ strAmount + " transferred " + "from " +
+            return ("$"+ strAmount + " transferred from " +
                     this.source + " to " + this.username +" on "+ this.date);
         }
         //internal transfer
         else if(this.recipient != null){
-            return ("$"+ strAmount + " transferred " + "from " + this.source+ " to " + this.recipient+ " on "+ this.date);
+            return ("$"+ strAmount + " transferred from " + this.source+ " to " + this.recipient+ " on "+ this.date);
 
         }
         //withdraw
         else {
-            return ("$"+ strAmount + " withdrawn " + "from " +this.source+ " on "+ this.date);
+            return ("$"+ strAmount + " withdrawn  from " +this.source+ " on "+ this.date);
         }
     }
 

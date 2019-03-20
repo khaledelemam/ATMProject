@@ -14,8 +14,8 @@ public class atmRunner {
 
 
     // ----- helper methods -----
-    public ArrayList<String> getAccounts() {
-        return USER.getAccounts();
+    public ObservableList<Account> getAccounts() {
+        return FXCollections.observableArrayList(USER.getAccounts());
     }
 
     public void setUser(String username) {
@@ -66,12 +66,12 @@ public class atmRunner {
 
     public void acceptNewAccountRequests() {
         BankManager bma = new BankManager();
-        bankManager.userRequestAccount();
+        bankManager.newAccountRequest();
     }
 
-    public String reverseTransaction(int index) {
+    public String reverseTransaction(Account account) {
         try {
-            bankManager.ReverseLastTransaction(USER, index);
+            bankManager.ReverseLastTransaction(account);
             return "Transaction for " + USER + " reversed";
         } catch (InsufficientFundsException e) {
             return "Transaction could not be reversed.";
@@ -91,10 +91,11 @@ public class atmRunner {
         USER = null;
     }
 
-    public String requestNewAccount(int choice, String partner) {
-        if (choice == 5) {
+    public String requestNewAccount(AccountType choice, String partner) {
+        if (choice == AccountType.JOINT) {
             if (Database.checkExistingUser(partner) != null) {
-                USER.requestJointAccount(partner);
+                // TODO: ??
+                USER.requestJointAccount(partner, choice);
                 return "Account requested";
             } else {
                 return "User does not exist.";
@@ -104,17 +105,18 @@ public class atmRunner {
         return "Account requested";
     }
 
-    public String viewAccountInfo(int index) {
-        return USER.viewAccountInfo(index);
+    public String viewAccountInfo(Account account) {
+        return USER.viewAccountInto(account);
+//        return USER.viewAccountInfo(index);
     }
 
     public String getNetBalance() {
         return USER.netUserBalance();
     }
 
-    public String internalTransfer(int from, int to, double amount) {
+    public String internalTransfer(Account source, Account destimation, double amount) {
         try {
-            UserExecutes transaction = new UserExecutes(new InternalTransfer(from, to, USER));
+            UserExecutes transaction = new UserExecutes(new InternalTransfer(source, destimation));
             transaction.executeTransaction(amount);
             return "Transaction completed.";
         } catch (InsufficientFundsException e) {
@@ -126,10 +128,10 @@ public class atmRunner {
         }
     }
 
-    public String externalTransfer(User recipient, double amount, int index) {
+    public String externalTransfer(User recipient, double amount, Account source) {
         try {
             // TODO: change external transfer so it takes a user instead of string when u refactor
-            UserExecutes transaction = new UserExecutes(new ExternalTransfer(index, recipient.getUsername(), USER));
+            UserExecutes transaction = new UserExecutes(new ExternalTransfer(source, recipient));
             transaction.executeTransaction(amount);
             return "Transaction completed.";
         } catch (InsufficientFundsException e) {
@@ -141,17 +143,29 @@ public class atmRunner {
         }
     }
 
-    public String payBill(int from, double amount) {
+    public String payBill(Account source, double amount) {
         try {
-            UserExecutes transaction = new UserExecutes(new PayBills(from, USER));
+            UserExecutes transaction = new UserExecutes(new PayBills(source, USER));
             transaction.executeTransaction(amount);
             return "Bill payment completed.";
         } catch (InsufficientFundsException e) {
             return e.getMessage();
         } catch (IOException e) {
             return "Error!";
-        } catch (NullPointerException e) {
-            return "Please open a second account.";
         }
     }
+
+    public String deposit(double amount) {
+        UserExecutes transaction = new UserExecutes(new Deposit(USER.getPrimaryAccount()));
+        try {
+            transaction.executeTransaction(amount);
+            return "Deposit completed.";
+        } catch (InsufficientFundsException e) {
+            return e.getMessage();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Error!";
+        }
+    }
+
 }

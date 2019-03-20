@@ -20,9 +20,12 @@ public class Database {
     }
 
     static User checkExistingUser(String username){
-        for (int i = 0; i < users.size(); i ++) {
-            if (users.get(i).getUsername().equals(username)){
-                return users.get(i);
+//        for (int i = 0; i < users.size(); i ++) {
+//            if (users.get(i).getUsername().equals(username)){
+//                return users.get(i);
+        for (User user:users) {
+            if (user.getUsername().equals(username)) {
+                return user;
             }
         }
         return null;
@@ -30,16 +33,23 @@ public class Database {
 
    static User login(String username, String password){
        retrieve();
-       for (int i = 0; i < users.size(); i ++) {
-
-           if (users.get(i).getUsername().equals(username)){
-               if (users.get(i).getPassword().equals(password)){
-                   return users.get(i);
-
+//       for (int i = 0; i < users.size(); i ++) {
+//
+//           if (users.get(i).getUsername().equals(username)){
+//               if (users.get(i).getPassword().equals(password)){
+//                   return users.get(i);
+//
+//               }
+//
+//           }
+//
+//       }
+       for (User user : users) {
+           if (user.getUsername().equals(username)) {
+               if (user.getPassword().equals(password)) {
+                   return user;
                }
-
            }
-
        }
        store();
        return null;
@@ -78,6 +88,7 @@ public class Database {
                 System.out.println("Class not found");
                 c.printStackTrace();
             }
+
 //        for (User tmp : users) {
 //            System.out.println(tmp);
 //        }

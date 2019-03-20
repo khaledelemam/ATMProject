@@ -1,2 +1,4 @@
 amanda payed $3.44 on date
 amanda payed $34.33 on date
+amanda payed $2.11 on date
+amanda payed $2.0 on date

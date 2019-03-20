@@ -20,6 +20,7 @@ public abstract class Account implements Serializable {
         this.balance = 0;
         this.dateOpened = new Time();
     }
+
     public String getBalance(){
         return currencyFormat.format(balance);
     }

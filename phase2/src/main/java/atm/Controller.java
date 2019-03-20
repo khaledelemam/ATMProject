@@ -54,7 +54,7 @@ public class Controller implements Initializable {
     public TextField daysField;
 
     public ComboBox<User> adminUser_cbox;
-    public ComboBox<String> adminAccount_cbox;
+    public ComboBox<Account> adminAccount_cbox;
     public Button showUserAccountsButton;
     public Label transactionMessage;
 
@@ -75,13 +75,13 @@ public class Controller implements Initializable {
     public Button logoutButton;
 
     // accounts
-    public ComboBox<String> accounts_cbox;
+    public ComboBox<Account> accounts_cbox;
     public Button accounts_showAccountsButton;
     public Label accounts_infoArea;
     public Label netBalance;
 
     // transfers
-    public ComboBox<String>  externalTransfer_cbox, internalTransferTO_cbox,
+    public ComboBox<Account>  externalTransfer_cbox, internalTransferTO_cbox,
             internalTransferFROM_cbox,  billPay_cbox;
     public ComboBox<User> recipientUser;
     public Button internalTransferButton, externalTransferButton, payBillButton;
@@ -108,14 +108,11 @@ public class Controller implements Initializable {
         Time date = new Time(1);
 
         // set radio buttons
-        chequingRadioButton.setUserData(1);
-        savingsRadioButton.setUserData(2);
-        lineRadioButton.setUserData(3);
-        creditRadioButton.setUserData(4);
-        jointRadioButton.setUserData(5);
-
-        adminUser_cbox.setItems(atm.getUsers());
-        recipientUser.setItems(atm.getUsers());
+        chequingRadioButton.setUserData(AccountType.CHEQUING);
+        savingsRadioButton.setUserData(AccountType.SAVINGS);
+        lineRadioButton.setUserData(AccountType.LINEOFCREDIT);
+        creditRadioButton.setUserData(AccountType.CREDIT);
+        jointRadioButton.setUserData(AccountType.JOINT);
     }
 
     // ----- helpers ^___^  ------
@@ -127,18 +124,21 @@ public class Controller implements Initializable {
     }
 
     private void userSessionSetUp() {
-        ObservableList<String> accounts = FXCollections.observableArrayList(atm.getAccounts());
-        accounts_cbox.setItems(accounts);
-        internalTransferTO_cbox.setItems(accounts);
-        internalTransferFROM_cbox.setItems(accounts);
-        externalTransfer_cbox.setItems(accounts);
-        billPay_cbox.setItems(accounts);
-        netBalance.setText("Net balance: $" + atm.getNetBalance());
+        accounts_cbox.setItems(atm.getAccounts());
+        internalTransferTO_cbox.setItems(atm.getAccounts());
+        internalTransferFROM_cbox.setItems(atm.getAccounts());
+        externalTransfer_cbox.setItems(atm.getAccounts());
+        billPay_cbox.setItems(atm.getAccounts());
 
+        // TODO: have these be updated when their tab is clicked on instead!
+        netBalance.setText("Net balance: $" + atm.getNetBalance());
+        // TODO: should this be a text field instead actually?
+        recipientUser.setItems(atm.getUsers());
     }
 
     // ----- login events ------
     public void userLogin(ActionEvent actionEvent) {
+        // TODO: use regex to control user input amount format
         if (atm.userLogin(login_usernameField.getText(), login_passwordField.getText())) {
             loginScreen.setVisible(false);
             userScreen.setVisible(true);
@@ -157,12 +157,16 @@ public class Controller implements Initializable {
     }
 
     public void adminLogin(ActionEvent actionEvent) {
+        // TODO: use regex to control user input amount format
         if (atm.adminCheck(login_usernameField.getText(), login_passwordField.getText())) {
             clearLoginFields();
             adminScreen.setVisible(true);
             loginScreen.setVisible(false);
             // TODO: have the cash alert return a string instead of printing
             adminAlertMessage.setText("<Alert message from cashmanager goes here>");
+
+            // TODO: have this updated when their tab is looked at instead!
+            adminUser_cbox.setItems(atm.getUsers());
         } else {
             clearLoginFields();
             loginMessage.setText("Admin access denied");
@@ -178,6 +182,7 @@ public class Controller implements Initializable {
     }
 
     public void requestUserAccount (ActionEvent actionEvent) {
+        // TODO: use regex to control user input amount format
         newUserMessage.setText(atm.newUserRequest(new_usernameField.getText()));
     }
 
@@ -209,28 +214,27 @@ public class Controller implements Initializable {
     }
 
     public void showUserAccounts(ActionEvent actionEvent) {
-        // TODO: this doesnt work??? why
         atm.setUser(adminUser_cbox.getSelectionModel().getSelectedItem());
         adminAccount_cbox.setItems(FXCollections.observableArrayList(atm.getAccounts()));
     }
 
     public void reverseLastTransaction(ActionEvent actionEvent) {
-        transactionMessage.setText(atm.reverseTransaction(accounts_cbox.getSelectionModel().getSelectedIndex()));
+        transactionMessage.setText(atm.reverseTransaction(accounts_cbox.getSelectionModel().getSelectedItem()));
         atm.setUser((User) null);
-
-
     }
 
     // ----- user events -----
 
     public void changePassword(ActionEvent actionEvent) {
+        // TODO: use regex to control user input amount format
         atm.changePassword(newPasswordField.getText());
         newPasswordMessage.setText("Password changed");
     }
 
     public void requestAccount(ActionEvent actionEvent) {
-        int index = (int) newAccountsGroup.getSelectedToggle().getUserData();
-        requestAccountMessage.setText(atm.requestNewAccount(index, shareAccountField.getText()));
+        // TODO: better way to do this?
+        AccountType account = (AccountType) newAccountsGroup.getSelectedToggle().getUserData();
+        requestAccountMessage.setText(atm.requestNewAccount(account, shareAccountField.getText()));
         shareAccountField.setVisible(false);
         shareAccountField.setText("");
     }
@@ -258,12 +262,12 @@ public class Controller implements Initializable {
     }
 
     public void showAccountInfo(ActionEvent actionEvent) {
-        accounts_infoArea.setText(atm.viewAccountInfo(accounts_cbox.getSelectionModel().getSelectedIndex()));
+        accounts_infoArea.setText(atm.viewAccountInfo(accounts_cbox.getSelectionModel().getSelectedItem()));
     }
 
     public void deposit(ActionEvent actionEvent) {
-        double amount = Double.parseDouble(depositAmountField.getText());
-        // TODO: FINISH THIS
+        // TODO: use regex to control user input amount format
+        depositMessage.setText(atm.deposit(Double.parseDouble(depositAmountField.getText())));
     }
 
     public void withdraw(ActionEvent actionEvent) {
@@ -271,28 +275,27 @@ public class Controller implements Initializable {
     }
 
     public void internalTransfer(ActionEvent actionEvent) {
-        int indexTO = internalTransferFROM_cbox.getSelectionModel().getSelectedIndex();
-        int indexFROM = externalTransfer_cbox.getSelectionModel().getSelectedIndex();
         // TODO: use regex to control user input amount format
+        Account recipient = internalTransferFROM_cbox.getSelectionModel().getSelectedItem();
+        Account sender = externalTransfer_cbox.getSelectionModel().getSelectedItem();
         double amount = Double.parseDouble(internalTransferAmount.getText());
-        atm.internalTransfer(indexFROM, indexTO, amount);
+        atm.internalTransfer(sender, recipient, amount);
 
     }
 
     public void externalTransfer(ActionEvent actionEvent) {
+        // TODO: use regex to control user input amount format
         User recipient = recipientUser.getSelectionModel().getSelectedItem();
         Double amount = Double.parseDouble(externalTransferAmount.getText());
-        int index = externalTransfer_cbox.getSelectionModel().getSelectedIndex();
-        externalTransferMessage.setText(atm.externalTransfer(recipient, amount, index));
+        Account sender = externalTransfer_cbox.getSelectionModel().getSelectedItem();
+        externalTransferMessage.setText(atm.externalTransfer(recipient, amount, sender));
 
     }
 
     public void payBill(ActionEvent actionEvent) {
-        int index = billPay_cbox.getSelectionModel().getSelectedIndex();
+        // TODO: use regex to control user input amount format
+        Account sender = billPay_cbox.getSelectionModel().getSelectedItem();
         Double amount = Double.parseDouble(billPayAmount.getText());
-        billPayMessage.setText(atm.payBill(index, amount));
+        billPayMessage.setText(atm.payBill(sender, amount));
     }
 }
-
-// move these!
-

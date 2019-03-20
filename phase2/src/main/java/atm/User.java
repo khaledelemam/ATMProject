@@ -14,12 +14,15 @@ public class User implements Serializable {
     private String username;
     private String password;
     private DecimalFormat currencyFormat = new DecimalFormat("0.00");
-    private HashMap<Integer,Account> accounts = new HashMap<>();
-    private HashMap<Account,Integer> map = new HashMap<>();
-    private String request;
+//    private HashMap<Integer,Account> accounts = new HashMap<>();
+//    private HashMap<Account,Integer> map = new HashMap<>();
+    // TODO: see if this works lol
+    private ArrayList<Account> accounts = new ArrayList<>();
+
+    private AccountType request;
     private String joint;
     private Account JointAccount;
-//    private ChequingAccount primaryAccount;
+    private ChequingAccount primaryAccount;
 
     // I used two Hashmaps to track the account with the corresponding number. Two are used instead of one because there is no "getKey()" in Hashmaps.
     // This implementation is working so far in accessing user accounts.
@@ -28,16 +31,13 @@ public class User implements Serializable {
 
     public User(String username) {
         this.username = username;
-//        this.primaryAccount = null;
-
-
-
+        this.primaryAccount = null;
     }
+
     @Override
     public String toString() {
         return this.username;
     }
-
 
     void setPassword (String password){
         this.password = password;
@@ -49,172 +49,200 @@ public class User implements Serializable {
 
     String getJoint() {return this.joint;}
 
-    Account getJointAccount(){return this.JointAccount;}
+    Account getJointAccount() { return this.JointAccount; }
 
     void setJoint(String username){
         this.joint = username;
     }
 
+    void setPrimaryAccount(ChequingAccount account) {
+        this.primaryAccount = account;
+    }
 
-    void createAccount(String account){
 
-        Account hold = null;
+    void createAccount(AccountType account){
 
-        if (account.equals("Chequing")){
-            hold = new ChequingAccount();
-//            if (primaryAccount == null)
-//            primaryAccount = (ChequingAccount) hold;
+//        Account hold = null;
 
+//        if (account.equals("Chequing")){
+//            hold = new ChequingAccount();
+////            if (primaryAccount == null)
+////            primaryAccount = (ChequingAccount) hold;
+//
+//        }
+//
+//        else if (account.equals("Savings")){
+//            hold = new SavingsAccount();
+//        }
+//        else if (account.equals("Line of Credit")){
+//            hold = new LineOfCredit();
+//        }
+//
+//        else if (account.equals("Credit Card")){
+//            hold = new CreditCard();
+//        }
+//
+//        else if (account.equals("Joint Account")){
+//            hold = new ChequingAccount();
+//            ((ChequingAccount) hold).setJoint();
+//            JointAccount=hold;
+//        }
+        // TODO: make sure this works correctly!
+        switch (account) {
+            case CHEQUING:
+                addAccount(new ChequingAccount());
+                break;
+            case SAVINGS:
+                addAccount(new SavingsAccount());
+                break;
+            case LINEOFCREDIT:
+                addAccount(new LineOfCredit());
+                break;
+            case CREDIT:
+                addAccount(new CreditCard());
+                break;
+            case JOINT:
+                // TODO: ??????
+                Account acct = new ChequingAccount();
+                ((ChequingAccount) acct).setJoint();
+                JointAccount = acct;
+                addAccount(acct);
+                break;
         }
 
-        else if (account.equals("Savings")){
-            hold = new SavingsAccount();
-        }
-        else if (account.equals("Line of Credit")){
-            hold = new LineOfCredit();
-        }
-
-        else if (account.equals("Credit Card")){
-            hold = new CreditCard();
-        }
-
-        else if (account.equals("Joint Account")){
-            hold = new ChequingAccount();
-            ((ChequingAccount) hold).setJoint();
-            JointAccount=hold;
-        }
-
-        if (hold != null) {
-            addAccount(hold);
-        }
+//        if (hold != null) {
+//            addAccount(hold);
+//        }
     }
 
     void addAccount(Account account){
 
-        int index = accounts.size();
-        this.accounts.put(index + 1, account);
-        this.map.put(account, index + 1);
+//        int index = accounts.size();
+//        this.accounts.put(index + 1, account);
+//        this.map.put(account, index + 1);
+//        request = null;
+        accounts.add(account);
         request = null;
 
     }
 
+    //    void viewAccounts(){
+//        for(int i = 1 ; i <=accounts.size(); i++){
+//            String str = Integer.toString(map.get(accounts.get(i)));
+//            System.out.println("(" +str + ")" +accounts.get(i));
+//
+//        }
+//    }
 
+//    Account getAccount(int acc){
+//        for(int i = 1 ; i <= accounts.size(); i++){
+//            if (acc == i) {
+//                return accounts.get(i);
+//            }
+//        }
+//        return null;
+//    }
 
-    void viewAccounts(){
-        for(int i = 1 ; i <=accounts.size(); i++){
-            String str = Integer.toString(map.get(accounts.get(i)));
-            System.out.println("(" +str + ")" +accounts.get(i));
-
-        }
-    }
-
-    Account getAccount(int acc){
-
-        for(int i = 1 ; i <= accounts.size(); i++){
-            if (acc == i) {
-                return accounts.get(i);
-            }
-        }
-        return null;
-    }
-
-    String viewAccountInfo(int index) {
-        Account account = getAccount(index);
+//    String viewAccountInfo(int index) {
+//        Account account = getAccount(index);
+    String viewAccountInto(Account account) {
+        String accountInfo = "--------------------------\n" + account +
+                "\n--------------------------\nBalance: $" + account.getBalance() +
+                "\nDate opened: " + account.getDateOpened();
         if (account.getLastTransaction() != null) {
-            return "--------------------------\n" +account +
-                    "\n--------------------------\nBalance: $" + account.getBalance() +
-                    "\nDate opened: " + account.getDateOpened() +
-                    "\n\n---Last Transaction---\n" + account.getLastTransaction();
-        } else {
-            return "--------------------------\n" + account +
-                    "\n--------------------------\nBalance: $" + account.getBalance() +
-                    "\nDate opened: " + account.getDateOpened();
+            accountInfo += "\n ------ Last Transaction ------ \n" + account.getLastTransaction();
         }
+        return accountInfo;
     }
 
-    private ArrayList<String> accountInfo() {
+//    private ArrayList<String> accountInfo() {
+//
+//        ArrayList<String> accountsInfo = new ArrayList<>();
+//        for(int i = 1 ; i <= accounts.size(); i++) {
+//            Account account = accounts.get(i);
+//            if (account.getLastTransaction() != null) {
+//                accountsInfo.add("\n" + account + ": $" + account.getBalance() +
+//                        "\nDate opened: " + account.getDateOpened() +
+//                        "\n--Last Transaction--\n" + account.getLastTransaction());
+//            } else {
+//                accountsInfo.add("\n" + account + ": $" + account.getBalance() +
+//                            "\nDate opened: " + account.getDateOpened());
+//            }
+//        }
+//        return accountsInfo;
+//    }
 
-        ArrayList<String> accountsInfo = new ArrayList<>();
-        for(int i = 1 ; i <= accounts.size(); i++) {
-            Account account = accounts.get(i);
-            if (account.getLastTransaction() != null) {
-                accountsInfo.add("\n" + account + ": $" + account.getBalance() +
-                        "\nDate opened: " + account.getDateOpened() +
-                        "\n--Last Transaction--\n" + account.getLastTransaction());
-            } else {
-                accountsInfo.add("\n" + account + ": $" + account.getBalance() +
-                            "\nDate opened: " + account.getDateOpened());
-            }
-        }
-        return accountsInfo;
-    }
-
-    ArrayList<String> getAccounts() {
-        ArrayList<String> allAccounts = new ArrayList<>();
-        for(int i = 1; i <= accounts.size(); i++) {
-            Account account = accounts.get(i);
-            allAccounts.add(account.toString());
-        }
-        return allAccounts;
-    }
-
-
-    String viewAccountsInfo() {
-
-        String accInfo = "Net total: " + netUserBalance() + "\n";
-        for (String account: accountInfo()) {
-            accInfo += account + "\n";
-        }
-        return accInfo;
+//    ArrayList<String> getAccounts() {
+//        ArrayList<String> allAccounts = new ArrayList<>();
+//        for(int i = 1; i <= accounts.size(); i++) {
+//            Account account = accounts.get(i);
+//            allAccounts.add(account.toString());
+//        }
+//        return allAccounts;
+//    }
+    ArrayList<Account> getAccounts() {
+        return accounts;
     }
 
 
+//    String viewAccountsInfo() {
+//
+//        String accInfo = "Net total: " + netUserBalance() + "\n";
+//        for (String account: accountInfo()) {
+//            accInfo += account + "\n";
+//        }
+//        return accInfo;
+//    }
 
 
-    String getRequest(){
-        return request ;
+    AccountType getRequest(){
+        return request;
     }
 
-
-    Account getPrimaryAccount() { return accounts.get(1);}
+//    Account getPrimaryAccount() { return accounts.get(1);}
+    Account getPrimaryAccount() {
+        return primaryAccount;
+    }
 
     public String netUserBalance() {
         double netTotal = 0;
-        for (int k = 1; k <= accounts.size(); k++){
-            netTotal += accounts.get(k).getNetTotal();
+//        for (int k = 1; k <= accounts.size(); k++){
+//            netTotal += accounts.get(k).getNetTotal();
+//        }
+        for (Account account : accounts) {
+            netTotal += account.getNetTotal();
         }
         return currencyFormat.format(netTotal);
     }
 
 
-    void requestAccount(int account){
+    // TODO: can this be overloaded???????
 
-        if (account == 1){
-            request = "Chequing";
+    void requestAccount(AccountType account){
+        request = account;
 
-        }
-        else if (account == 2){
-          request =  "Savings";
-
-        }
-        else if (account == 3){
-         request = "Line of Credit";
-
-        }
-        else if (account == 4){
-          request = "Credit Card";
-        }
+//        if (account == 1){
+//            request = "Chequing";
+//
+//        }
+//        else if (account == 2){
+//          request =  "Savings";
+//
+//        }
+//        else if (account == 3){
+//         request = "Line of Credit";
+//
+//        }
+//        else if (account == 4){
+//          request = "Credit Card";
+//        }
 
         Database.store();
     }
 
-    /** Request BankManager for joint account
-     *
-     * @param username username of another account to join with
-     */
-    void requestJointAccount(String username){
-        request = "Joint Account";
-        joint = username;
+    void requestJointAccount(String partner, AccountType account){
+        request = account;
+        joint = partner;
     }
 
 

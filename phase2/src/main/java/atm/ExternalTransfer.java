@@ -2,37 +2,25 @@ package atm;
 
 public class ExternalTransfer implements UserDo{
 
+    private User recipient;
+    private Account source;
 
-//    private Database Database = new Database();
-
-    private User user;
-    private String recipientS;
-    private int account;
-
-    public ExternalTransfer(int from , String recipient, User user) {
-        this.user = user;
-        this.recipientS = recipient;
-        this.account = from;
+    public ExternalTransfer(Account source, User recipient) {
+        this.recipient = recipient;
+        this.source = source;
     }
 
     public void doTransaction(double amount) throws InsufficientFundsException {
-//        Database.retrieve();
-//        user = Database.checkExistingUser(username);
+        if (recipient.getPrimaryAccount() != null) {
+            Account destination = recipient.getPrimaryAccount();
+            source.setBalance(-amount);
+            destination.setBalance(amount);
 
-        User recipient = Database.checkExistingUser(recipientS);
-        if (recipient != null) {
-            if (recipient.getPrimaryAccount() != null) {
-                Account accFrom = user.getAccount(account);
-                Account to = recipient.getPrimaryAccount();
-                accFrom.setBalance(-amount);
-                to.setBalance(amount);
-
-                Transaction extTransfer = new Transaction(accFrom, to, amount, recipient.getUsername());
-                accFrom.setLastTransaction(extTransfer);
-//                to.setLastTransaction(extTransfer);
-                Database.store();
+            Transaction extTransfer = new Transaction(source, destination, amount, recipient.getUsername());
+            source.setLastTransaction(extTransfer);
+            destination.setLastTransaction(extTransfer);
+            Database.store();
             }
-
         }
     }
-}
+

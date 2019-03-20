@@ -4,26 +4,20 @@ public class InternalTransfer implements UserDo {
 
 //    private Database Database = new Database();
 
-    private int from;
-    private User user;
-    private int to;
+    private Account source;
+    private Account destination;
 
-    public InternalTransfer(int from , int to, User user) {
-        this.from = from;
-        this.to = to;
-        this.user = user;
+    public InternalTransfer(Account source , Account destination) {
+        this.source = source;
+        this.destination = destination;
     }
 
-
     public void doTransaction(double amount) throws InsufficientFundsException, NullPointerException {
-
-        Account accFrom = user.getAccount(from);
-        Account accTo = user.getAccount(to);
-        accFrom.setBalance(-amount);
-        accTo.setBalance(amount);
-        Transaction intTransfer = new Transaction(accFrom, accTo, amount);
-//           accTo.setLastTransaction(intTransfer);
-        accFrom.setLastTransaction(intTransfer);
+        source.setBalance(-amount);
+        destination.setBalance(amount);
+        Transaction intTransfer = new Transaction(source, destination, amount);
+        destination.setLastTransaction(intTransfer);
+        source.setLastTransaction(intTransfer);
         Database.store();
     }
 }
