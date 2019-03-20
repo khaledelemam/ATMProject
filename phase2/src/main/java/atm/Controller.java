@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
 import javax.xml.crypto.Data;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
@@ -152,14 +153,16 @@ public class Controller implements Initializable {
         newUserScreen.setVisible(true);
     }
 
-    public void adminLogin(ActionEvent actionEvent) {
+    public void adminLogin(ActionEvent actionEvent) throws IOException {
         // TODO: use regex to control user input amount format
         if (atm.adminCheck(login_usernameField.getText(), login_passwordField.getText())) {
             clearLoginFields();
             adminScreen.setVisible(true);
             loginScreen.setVisible(false);
             // TODO: have the cash alert return a string instead of printing
-            adminAlertMessage.setText("<Alert message from cashmanager goes here>");
+            //adminAlertMessage.setText("<Alert message from cashmanager goes here>");
+            CashManager cm = new CashManager();
+            adminAlertMessage.setText(cm.showAlerts());
 
             // TODO: have this updated when their tab is looked at instead!
             adminUser_cbox.setItems(atm.getUsers());
