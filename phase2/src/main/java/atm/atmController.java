@@ -128,7 +128,6 @@ public class atmController {
 
     public String viewAccountInfo(Account account) {
         return USER.viewAccountInto(account);
-//        return USER.viewAccountInfo(index);
     }
 
     public String getNetBalance() {

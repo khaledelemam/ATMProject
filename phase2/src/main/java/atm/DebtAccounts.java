@@ -11,8 +11,8 @@ public class DebtAccounts extends Account {
     }
     @Override
     public void setBalance(double amount) throws InsufficientFundsException {
-        if (this.balance - amount >= -maxDebt) {
-            this.balance -= amount;
+        if (this.balance + amount >= maxDebt) {
+            this.balance += amount;
         } else {
             InsufficientFundsException e = new InsufficientFundsException("You have reached your debt limit.");
             throw e;

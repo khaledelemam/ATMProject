@@ -2,9 +2,14 @@ package atm;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.IOException;
 import java.net.URL;
@@ -128,6 +133,8 @@ public class atmView implements Initializable {
         recipientUser.setItems(atm.getUsers());
     }
 
+
+
     // ----- login events ------
     public void userLogin(ActionEvent actionEvent) {
         // TODO: use regex to control user input amount format
@@ -144,8 +151,21 @@ public class atmView implements Initializable {
 
     public void newUser(ActionEvent actionEvent) {
         clearLoginFields();
-        loginScreen.setVisible(false);
-        newUserScreen.setVisible(true);
+//        loginScreen.setVisible(false);
+//        newUserScreen.setVisible(true);
+        Window window = newAccountButton.getScene().getWindow();
+        if (window instanceof Stage) {
+            Parent root = null;
+            try {
+                root = FXMLLoader.load(getClass().getResource("interfaceNewUser.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) window;
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
     public void adminLogin(ActionEvent actionEvent) throws IOException {
@@ -272,12 +292,10 @@ public class atmView implements Initializable {
 
     public void internalTransfer(ActionEvent actionEvent) {
         // TODO: use regex to control user input amount format
-        Account recipient = internalTransferFROM_cbox.getSelectionModel().getSelectedItem();
-        Account sender = externalTransfer_cbox.getSelectionModel().getSelectedItem();
+        Account sender = internalTransferFROM_cbox.getSelectionModel().getSelectedItem();
+        Account recipient = externalTransfer_cbox.getSelectionModel().getSelectedItem();
         double amount = Double.parseDouble(internalTransferAmount.getText());
-        internalTransferAmount.setText(atm.internalTransfer(sender, recipient, amount));
-        internalTransferAmount.setText("");
-
+        internalTransferMessage.setText(atm.internalTransfer(sender, recipient, amount));
     }
 
     public void externalTransfer(ActionEvent actionEvent) {
