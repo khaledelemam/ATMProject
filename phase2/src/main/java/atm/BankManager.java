@@ -29,6 +29,7 @@ public class BankManager implements Serializable {
         String password = "1";
         user.setPassword(password);
         Database.addUser(user);
+
     }
 
     void createUser() {
