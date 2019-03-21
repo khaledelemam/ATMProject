@@ -2,9 +2,14 @@ package atm;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.IOException;
 import java.net.URL;
@@ -146,8 +151,21 @@ public class atmView implements Initializable {
 
     public void newUser(ActionEvent actionEvent) {
         clearLoginFields();
-        loginScreen.setVisible(false);
-        newUserScreen.setVisible(true);
+//        loginScreen.setVisible(false);
+//        newUserScreen.setVisible(true);
+        Window window = newAccountButton.getScene().getWindow();
+        if (window instanceof Stage) {
+            Parent root = null;
+            try {
+                root = FXMLLoader.load(getClass().getResource("interfaceNewUser.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) window;
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
     public void adminLogin(ActionEvent actionEvent) throws IOException {
