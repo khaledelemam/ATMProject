@@ -12,7 +12,7 @@ public class ChequingAccount extends Account {
     @Override
     public String toString() {
         if (joint){
-            return " Joint Chequing Account";
+            return "Joint Chequing Account";
         }
         else{
             return "Chequing Account";

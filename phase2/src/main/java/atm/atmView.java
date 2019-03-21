@@ -128,6 +128,8 @@ public class atmView implements Initializable {
         recipientUser.setItems(atm.getUsers());
     }
 
+
+
     // ----- login events ------
     public void userLogin(ActionEvent actionEvent) {
         // TODO: use regex to control user input amount format
