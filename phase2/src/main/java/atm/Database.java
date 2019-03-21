@@ -46,8 +46,6 @@ public class Database {
         try{
             FileOutputStream fos = new FileOutputStream("file");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-//            oos.reset();
-//            oos.writeObject(users);
             oos.writeUnshared(users);
             oos.close();
             fos.close();
@@ -65,7 +63,6 @@ public class Database {
                 FileInputStream fis = new FileInputStream("file");
                 ObjectInputStream ois = new ObjectInputStream(fis);
                 users = (ArrayList) ois.readObject();
-                System.out.println(users.get(0).getPassword());
                 ois.close();
                 fis.close();
             } catch (IOException ioe) {
