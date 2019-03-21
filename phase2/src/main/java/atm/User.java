@@ -117,6 +117,7 @@ public class User implements Serializable {
     void requestJointAccount(String partner, AccountType account){
         accountRequest = account;
         joint = partner;
+        Database.store();
     }
 
 
