@@ -4,3 +4,4 @@ amanda payed $2.11 on date
 amanda payed $2.0 on date
 amanda payed $22.22 on 2019-03-28
 amanda payed $22.22 on 2019-03-28
+garfield payed $1.0 on 2019-04-17

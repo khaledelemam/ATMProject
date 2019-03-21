@@ -20,9 +20,6 @@ public class Database {
     }
 
     static User checkExistingUser(String username){
-//        for (int i = 0; i < users.size(); i ++) {
-//            if (users.get(i).getUsername().equals(username)){
-//                return users.get(i);
         for (User user:users) {
             if (user.getUsername().equals(username)) {
                 return user;
@@ -49,8 +46,9 @@ public class Database {
         try{
             FileOutputStream fos = new FileOutputStream("file");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            users.size();
-            oos.writeObject(users);
+//            oos.reset();
+//            oos.writeObject(users);
+            oos.writeUnshared(users);
             oos.close();
             fos.close();
         }catch(IOException ioe){
@@ -67,6 +65,7 @@ public class Database {
                 FileInputStream fis = new FileInputStream("file");
                 ObjectInputStream ois = new ObjectInputStream(fis);
                 users = (ArrayList) ois.readObject();
+                System.out.println(users.get(0).getPassword());
                 ois.close();
                 fis.close();
             } catch (IOException ioe) {

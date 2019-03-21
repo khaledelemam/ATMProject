@@ -1,24 +1,16 @@
 package atm;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalTime;
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import static java.time.temporal.ChronoUnit.MINUTES;
-import static java.time.temporal.ChronoUnit.SECONDS;
-
-public class Controller implements Initializable {
+public class atmView implements Initializable {
 
     // ---- login ----
     public AnchorPane loginScreen;
@@ -94,10 +86,11 @@ public class Controller implements Initializable {
     public Button depositButton, withdrawButton;
     public TextField depositAmountField;
     public Label depositMessage, withdrawalMessage;
+    public RadioButton lotteryAccount;
     // end
 
     // initialize ATM
-    atmRunner atm = new atmRunner();
+    atmController atm = new atmController();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -111,6 +104,7 @@ public class Controller implements Initializable {
         lineRadioButton.setUserData(AccountType.LINEOFCREDIT);
         creditRadioButton.setUserData(AccountType.CREDIT);
         jointRadioButton.setUserData(AccountType.JOINT);
+        lotteryAccount.setUserData(AccountType.LOTTERY);
     }
 
     // ----- helpers ^___^  ------
@@ -198,8 +192,9 @@ public class Controller implements Initializable {
         adminMessage.setText("New users created.");
     }
 
-    public void setTime(ActionEvent actionEvent) {
-
+    public void advanceTime(ActionEvent actionEvent) {
+        atm.advanceDate(Integer.parseInt(daysField.getText()));
+        daysField.setText("");
     }
 
     public void adminLogout(ActionEvent actionEvent) {

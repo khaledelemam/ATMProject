@@ -21,9 +21,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane style="-fx-background-color: #696969;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="atm.Controller">
+<StackPane style="-fx-background-color: #696969;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="atm.atmView">
    <children>
-      <AnchorPane fx:id="loginScreen" prefHeight="400.0" prefWidth="600.0">
+      <AnchorPane fx:id="loginScreen" prefHeight="400.0" prefWidth="600.0" visible="false">
          <children>
             <Button fx:id="loginButton" layoutX="488.0" layoutY="325.0" mnemonicParsing="false" onAction="#userLogin" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Login" textFill="#e1e1e1" />
             <Button fx:id="newAccountButton" layoutX="325.0" layoutY="325.0" mnemonicParsing="false" onAction="#newUser" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Create new account" textFill="#e1e1e1" />
@@ -84,7 +84,7 @@
                               <Label layoutX="260.0" layoutY="170.0" text="Existing user requests:" textFill="#e1e1e1" />
                               <Label layoutX="260.0" layoutY="118.0" text="New user requests: " textFill="#e1e1e1" />
                               <Label fx:id="adminAlertMessage" layoutX="14.0" layoutY="14.0" prefHeight="338.0" prefWidth="226.0" textFill="#e1e1e1" wrapText="true" />
-                              <Button fx:id="setTimeButton" layoutX="476.0" layoutY="218.0" mnemonicParsing="false" onAction="#setTime" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Set Date" textFill="#e1e1e1" />
+                              <Button fx:id="setTimeButton" layoutX="476.0" layoutY="218.0" mnemonicParsing="false" onAction="#advanceTime" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Set Date" textFill="#e1e1e1" />
                               <TextField fx:id="daysField" layoutX="385.0" layoutY="218.0" prefHeight="29.0" prefWidth="68.0" promptText="#days" style="-fx-border-color: #060606;" />
                               <Label layoutX="260.0" layoutY="224.0" prefHeight="17.0" prefWidth="125.0" text="Advance date by:" textFill="#e1e1e1" />
                            </children></AnchorPane>
@@ -126,7 +126,7 @@
             </TabPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="userScreen" prefHeight="200.0" prefWidth="200.0" visible="false">
+      <AnchorPane fx:id="userScreen" prefHeight="200.0" prefWidth="200.0">
          <children>
             <TabPane fx:id="userTabs" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
@@ -152,12 +152,13 @@
                                     <RadioButton id="3" fx:id="lineRadioButton" layoutX="282.0" layoutY="70.0" mnemonicParsing="false" onAction="#hideShareAccount" style="-fx-border-color: #606060;" text="Line of Credit" textFill="#e1e1e1" toggleGroup="$newAccountsGroup" />
                                      <RadioButton id="4" fx:id="creditRadioButton" layoutX="282.0" layoutY="100.0" mnemonicParsing="false" onAction="#hideShareAccount" style="-fx-border-color: #606060;" text="Credit Card" textFill="#e1e1e1" toggleGroup="$newAccountsGroup" />
                                      <RadioButton id="5" fx:id="jointRadioButton" layoutX="282.0" layoutY="130.0" mnemonicParsing="false" onAction="#showShareAccount" style="-fx-border-color: #606060;" text="Joint Account" textFill="#e1e1e1" toggleGroup="$newAccountsGroup" />
-                                    <Button fx:id="requestAccountButton" layoutX="282.0" layoutY="180.0" mnemonicParsing="false" onAction="#requestAccount" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Request new account" textFill="#e1e1e1" />
+                                    <Button fx:id="requestAccountButton" layoutX="282.0" layoutY="210.0" mnemonicParsing="false" onAction="#requestAccount" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Request new account" textFill="#e1e1e1" />
                                     <Label layoutX="122.0" layoutY="10.0" text="Choose a new account: " textFill="#e1e1e1" />
 
                                     <TextField fx:id="shareAccountField" layoutX="428.0" layoutY="130.0" prefHeight="29.0" prefWidth="151.0" promptText="Share with..." style="-fx-border-color: #606060;" visible="false" />
                                     <Button fx:id="logoutButton" layoutX="516.0" layoutY="210.0" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Logout" textFill="#e1e1e1" />
-                                    <Label fx:id="requestAccountMessage" layoutX="283.0" layoutY="216.0" prefHeight="17.0" prefWidth="149.0" textFill="#e1e1e1" />
+                                    <Label fx:id="requestAccountMessage" layoutX="121.0" layoutY="32.0" prefHeight="17.0" prefWidth="149.0" textFill="#e1e1e1" />
+                                    <RadioButton fx:id="lotteryAccount" layoutX="281.0" layoutY="159.0" mnemonicParsing="false" text="Lottery Account" toggleGroup="$newAccountsGroup" onAction="#hideShareAccount" textFill="#e1e1e1"  />
                                  </children>
                               </Pane>
                            </children>
@@ -217,7 +218,7 @@
                                     <TextField fx:id="internalTransferAmount" layoutX="26.0" layoutY="120.0" prefHeight="27.0" prefWidth="151.0" promptText="Enter amount..." style="-fx-border-color: #606060;" />
                                     <ComboBox fx:id="internalTransferTO_cbox" layoutX="27.0" layoutY="164.0" prefWidth="150.0" promptText="To..." style="-fx-background-color: #A0A0A0;" />
                                     <Button fx:id="internalTransferButton" layoutX="29.0" layoutY="222.0" mnemonicParsing="false" onAction="#internalTransfer" prefHeight="27.0" prefWidth="143.0" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Transfer to Account" textFill="#e1e1e1" />
-                                    <Label fx:id="internalTransferMessage" layoutX="32.0" layoutY="260.0" prefHeight="17.0" prefWidth="136.0" textFill="#e1e1e1" />
+                                    <Label fx:id="internalTransferMessage" layoutX="32.0" layoutY="260.0" prefHeight="71.0" prefWidth="136.0" textFill="#e1e1e1" wrapText="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="200.0" prefWidth="200.0">
@@ -225,7 +226,7 @@
                                     <ComboBox fx:id="externalTransfer_cbox" layoutX="26.0" layoutY="76.0" prefWidth="150.0" promptText="From..." style="-fx-background-color: #A0A0A0;" />
                                     <TextField fx:id="externalTransferAmount" layoutX="26.0" layoutY="121.0" prefHeight="27.0" prefWidth="151.0" promptText="Enter amount..." style="-fx-border-color: #606060;" />
                                     <Button fx:id="externalTransferButton" layoutX="26.0" layoutY="222.0" mnemonicParsing="false" onAction="#externalTransfer" prefHeight="27.0" prefWidth="150.0" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Transfer to User" textFill="#e1e1e1" />
-                                    <Label fx:id="externalTransferMessage" layoutX="26.0" layoutY="264.0" prefHeight="17.0" prefWidth="149.0" textFill="#e1e1e1" />
+                                    <Label fx:id="externalTransferMessage" layoutX="26.0" layoutY="264.0" prefHeight="72.0" prefWidth="149.0" textFill="#e1e1e1" wrapText="true" />
                                     <ComboBox fx:id="recipientUser" layoutX="26.0" layoutY="163.0" prefWidth="150.0" promptText="Choose a user..." style="-fx-background-color: #A0a0a0;" />
                                  </children>
                               </Pane>
@@ -234,8 +235,7 @@
                                     <ComboBox fx:id="billPay_cbox" layoutX="25.0" layoutY="76.0" prefWidth="150.0" promptText="From..." style="-fx-background-color: #A0A0A0;" />
                                     <TextField fx:id="billPayAmount" layoutX="25.0" layoutY="121.0" prefHeight="27.0" prefWidth="151.0" promptText="Enter amount..." style="-fx-border-color: #606060;" />
                                     <Button fx:id="payBillButton" layoutX="134.0" layoutY="223.0" mnemonicParsing="false" onAction="#payBill" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Pay" textFill="#e1e1e1" />
-                                    <Label fx:id="billPayMessage" layoutX="25.0" layoutY="264.0" prefHeight="17.0" prefWidth="151.0" textFill="#e1e1e1" />
-                                    <Label layoutX="25.0" layoutY="264.0" />
+                                    <Label fx:id="billPayMessage" layoutX="25.0" layoutY="264.0" prefHeight="81.0" prefWidth="151.0" textFill="#e1e1e1" />
                                  </children>
                               </Pane>
                            </children>

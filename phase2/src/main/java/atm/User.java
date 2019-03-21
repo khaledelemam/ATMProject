@@ -1,22 +1,18 @@
 package atm;
 
-import com.sun.xml.internal.fastinfoset.util.StringArray;
-
-import java.io.File;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class User implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 42L;
     private String username;
     private String password;
     private DecimalFormat currencyFormat = new DecimalFormat("0.00");
     private ArrayList<Account> accounts = new ArrayList<>();
 
-    private AccountType request;
+    private AccountType accountRequest;
     private String joint;
     private Account JointAccount;
     private ChequingAccount primaryAccount;
@@ -33,6 +29,7 @@ public class User implements Serializable {
 
     void setPassword (String password){
         this.password = password;
+
     }
 
     String getUsername() {return this.username;}
@@ -47,18 +44,16 @@ public class User implements Serializable {
         this.joint = username;
     }
 
-    void setPrimaryAccount(ChequingAccount account) {
-        this.primaryAccount = account;
-    }
-
     ArrayList<Account> getAccounts() { return accounts; }
 
-    AccountType getRequest(){ return request; }
+    AccountType getAccountRequest(){ return accountRequest; }
 
     ChequingAccount getPrimaryAccount() { return this.primaryAccount; }
 
-    void createAccount(AccountType account){
-        switch (account) {
+    void createAccount(AccountType accountType){
+        System.out.println(accountType);
+
+        switch (accountType) {
             case CHEQUING:
                 ChequingAccount chequing = new ChequingAccount();
                 addAccount(chequing);
@@ -82,12 +77,16 @@ public class User implements Serializable {
                 JointAccount = acct;
                 addAccount(acct);
                 break;
+            case LOTTERY:
+                // addAccount(new LotteryAccount());
+                break;
         }
+        Database.store();
     }
 
     void addAccount(Account account){
         accounts.add(account);
-        request = null;
+        accountRequest = null;
     }
 
     String viewAccountInto(Account account) {
@@ -111,12 +110,12 @@ public class User implements Serializable {
 
     // TODO: can this be overloaded???????
     void requestAccount(AccountType account){
-        request = account;
+        accountRequest = account;
         Database.store();
     }
 
     void requestJointAccount(String partner, AccountType account){
-        request = account;
+        accountRequest = account;
         joint = partner;
     }
 

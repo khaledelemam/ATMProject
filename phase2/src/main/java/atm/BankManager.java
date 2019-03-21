@@ -9,7 +9,7 @@ import java.util.HashMap;
 public class BankManager implements Serializable {
 
     private String password;
-    private ArrayList<Request> requests = new ArrayList<>();
+    private ArrayList<String> newUserRequests = new ArrayList<>();
 
     public BankManager(){
         this.password = "123";
@@ -35,14 +35,14 @@ public class BankManager implements Serializable {
         Database.retrieve();
         retrieveRequests();
 
-        for (Request request : requests) {
+        for (String username : newUserRequests) {
             if (CreditScore.getRandomDoubleBetweenRange() > 0) {
-                User user = new User(request.getUsername());
+                User user = new User(username);
                 user.createAccount(AccountType.CHEQUING);
                 setUserPassword(user);
             }
         }
-        requests.clear();
+        newUserRequests.clear();
         storeRequests();
     }
 
@@ -50,13 +50,17 @@ public class BankManager implements Serializable {
         Database.retrieve();
 
         for(User user : Database.getUsers()){
+            System.out.println(user.getClass());
+            System.out.println(user);
             if (CreditScore.getRandomDoubleBetweenRange() > 0) {
                 // for joint accounts
-                if (user.getRequest() != null && user.getJoint() != null ) {
+                System.out.println(234);
+                System.out.println(user.getAccountRequest());
+                if (user.getAccountRequest() != null && user.getJoint() != null ) {
 
                     // TODO: i am a bit confused about how joint accts work here
                     //primary user
-                    AccountType request = user.getRequest();
+                    AccountType request = user.getAccountRequest();
                     user.createAccount(request);
 
                     String joint = user.getJoint();
@@ -67,8 +71,9 @@ public class BankManager implements Serializable {
                     partner.addAccount(user.getJointAccount());
 
                 } //for single accounts
-                else if (user.getRequest() != null ){
-                    user.createAccount(user.getRequest());
+                else if (user.getAccountRequest() != null ){
+                    System.out.println(user.getAccountRequest());
+                    user.createAccount(user.getAccountRequest());
                 }
             }
             Database.store();
@@ -97,8 +102,7 @@ public class BankManager implements Serializable {
         if (Database.checkExistingUser(username) != null) {
             throw new UsernameTakenException();
         } else {
-            Request request = new Request(username, AccountType.CHEQUING);
-            requests.add(request);
+            newUserRequests.add(username);
             storeRequests();
             Database.store();
         }
@@ -109,7 +113,7 @@ public class BankManager implements Serializable {
             Filename file = new Filename();
             FileOutputStream fos= new FileOutputStream(file.getRequestsFile());
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(requests);
+            oos.writeObject(newUserRequests);
             oos.close();
             fos.close();
         }catch(IOException ioe){
@@ -126,7 +130,7 @@ public class BankManager implements Serializable {
             try {
                 FileInputStream fis = new FileInputStream(file.getRequestsFile());
                 ObjectInputStream ois = new ObjectInputStream(fis);
-                requests = (ArrayList<Request>) ois.readObject();
+                newUserRequests = (ArrayList<String>) ois.readObject();
                 ois.close();
                 fis.close();
             } catch (IOException ioe) {

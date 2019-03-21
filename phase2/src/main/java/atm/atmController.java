@@ -1,6 +1,7 @@
 package atm;
 
 import com.sun.xml.internal.fastinfoset.util.StringArray;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
@@ -9,11 +10,13 @@ import java.io.IOException;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import static java.time.temporal.ChronoUnit.MINUTES;
 import static java.time.temporal.ChronoUnit.SECONDS;
 
-public class atmRunner {
+public class atmController {
     private User USER = null;
     private BankManager bankManager = new BankManager();
     private Time date;
@@ -34,9 +37,9 @@ public class atmRunner {
     }
 
     public ObservableList<User> getUsers() {
-        Database.retrieve();
         return FXCollections.observableArrayList(Database.getUsers());
     }
+
 
     public void setTimeInitial() {
         LocalTime time = ZonedDateTime.now().toLocalTime().truncatedTo(MINUTES);
@@ -44,6 +47,8 @@ public class atmRunner {
         LocalTime midnight = LocalTime.MAX;
         long terminate = SECONDS.between(time, midnight);
         date = new Time(1);
+        Executors.newSingleThreadScheduledExecutor().schedule(Platform::exit, terminate, TimeUnit.SECONDS);
+        Executors.newSingleThreadScheduledExecutor().schedule(() -> System.exit(0), terminate, TimeUnit.SECONDS);
     }
     // ----- login -----
 
@@ -72,12 +77,17 @@ public class atmRunner {
 
     public void acceptNewUserRequests() {
         BankManager bmn = new BankManager();
-        bankManager.createUser();
+        bmn.createUser();
     }
 
     public void acceptNewAccountRequests() {
         BankManager bma = new BankManager();
-        bankManager.newAccountRequest();
+        System.out.println(1);
+        bma.newAccountRequest();
+    }
+
+    public void advanceDate(int days) {
+        bankManager.setDate(days);
     }
 
     public String reverseTransaction(Account account) {

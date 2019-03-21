@@ -2,8 +2,6 @@ package atm;
 
 public class InternalTransfer implements UserDo {
 
-//    private Database Database = new Database();
-
     private Account source;
     private Account destination;
 
