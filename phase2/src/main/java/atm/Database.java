@@ -10,9 +10,16 @@ public class Database {
 
     static private ArrayList<User> users = new ArrayList<>();
 
+
     ArrayList<User> getUsers() {
         return users;
     }
+
+    ArrayList<User> getUsersReverse() {
+        retrieve();
+        return users;
+    }
+
 
     void addUser(User user){
         users.add(user);
@@ -33,11 +40,12 @@ public class Database {
        for (User user : users) {
            if (user.getUsername().equals(username)) {
                if (user.getPassword().equals(password)) {
+//                   store();
                    return user;
                }
            }
        }
-       store();
+//       store();
        return null;
     }
 
@@ -46,7 +54,7 @@ public class Database {
         try{
             FileOutputStream fos = new FileOutputStream("Users");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeUnshared(users);
+            oos.writeObject(users);
             oos.close();
             fos.close();
         }catch(IOException ioe){
@@ -65,6 +73,9 @@ public class Database {
                 users = (ArrayList) ois.readObject();
                 ois.close();
                 fis.close();
+                //
+                store();
+                //
             } catch (IOException ioe) {
                 ioe.printStackTrace();
             } catch (ClassNotFoundException c) {

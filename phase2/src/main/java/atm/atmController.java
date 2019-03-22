@@ -44,6 +44,14 @@ public class atmController {
     }
 
 
+    public ObservableList<User> getUsersReverse() {
+        Database Database = new Database();
+        return FXCollections.observableArrayList(Database.getUsersReverse());
+    }
+
+
+
+
     public void setTimeInitial() {
         LocalTime time = ZonedDateTime.now().toLocalTime().truncatedTo(MINUTES);
         System.out.println(time.toString());
@@ -129,6 +137,7 @@ public class atmController {
         Database Database = new Database();
         USER.setPassword(newPassword);
         Database.store();
+
     }
 
     public void logout() {
@@ -136,19 +145,22 @@ public class atmController {
     }
 
     public String requestNewAccount(AccountType choice, String partner) {
+        Database Database = new Database();
         if (choice == AccountType.JOINT) {
-            Database Database = new Database();
-            Database.store();
+
+
 
             if (Database.checkExistingUser(partner) != null) {
                 // TODO: ??
                 USER.requestJointAccount(partner, choice);
+                Database.store();
                 return "Account requested";
             } else {
                 return "User does not exist.";
             }
         }
         USER.requestAccount(choice);
+        Database.store();
         return "Account requested";
     }
 

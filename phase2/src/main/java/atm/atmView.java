@@ -102,7 +102,6 @@ public class atmView implements Initializable {
 
         // time stuff
         atm.setTimeInitial();
-
         // set radio buttons
         chequingRadioButton.setUserData(AccountType.CHEQUING);
         savingsRadioButton.setUserData(AccountType.SAVINGS);
@@ -180,7 +179,7 @@ public class atmView implements Initializable {
             adminAlertMessage.setText(cm.showAlerts());
 
             // TODO: have this updated when their tab is looked at instead!
-            adminUser_cbox.setItems(atm.getUsers());
+            adminUser_cbox.setItems(atm.getUsersReverse());
         } else {
             clearLoginFields();
             loginMessage.setText("Admin access denied");
@@ -199,6 +198,10 @@ public class atmView implements Initializable {
         // TODO: use regex to control user input amount format
         newUserMessage.setText(atm.newUserRequest(new_usernameField.getText()));
     }
+
+
+
+
 
     // ----- admin events -----
 
@@ -229,6 +232,8 @@ public class atmView implements Initializable {
     }
 
     public void showUserAccounts(ActionEvent actionEvent) {
+//       reverse transactions does not show users until a user logs in first
+
         atm.setUser(adminUser_cbox.getSelectionModel().getSelectedItem());
         adminAccount_cbox.setItems(FXCollections.observableArrayList(atm.getAccounts()));
     }
@@ -237,6 +242,12 @@ public class atmView implements Initializable {
         transactionMessage.setText(atm.reverseTransaction(accounts_cbox.getSelectionModel().getSelectedItem()));
         atm.setUser((User) null);
     }
+
+
+
+
+
+
 
     // ----- user events -----
 
