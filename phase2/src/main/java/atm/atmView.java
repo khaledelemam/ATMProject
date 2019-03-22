@@ -289,6 +289,7 @@ public class atmView implements Initializable {
 
     public void showAccountInfo(ActionEvent actionEvent) {
         accounts_infoArea.setText(atm.viewAccountInfo(accounts_cbox.getSelectionModel().getSelectedItem()));
+        netBalance.setText("Net balance: $" + atm.getNetBalance());
     }
 
     public void deposit(ActionEvent actionEvent) {
