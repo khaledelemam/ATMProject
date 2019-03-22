@@ -53,6 +53,7 @@ public class BankManager implements Serializable {
 
     void  newAccountRequest(){
         Database Database = new Database();
+
         Database.retrieve();
 
         for(User user : Database.getUsers()){
@@ -62,6 +63,7 @@ public class BankManager implements Serializable {
                 // for joint accounts
                 System.out.println(234);
                 System.out.println(user.getAccountRequest());
+
                 if (user.getAccountRequest() != null && user.getJoint() != null ) {
 
                     // TODO: i am a bit confused about how joint accts work here

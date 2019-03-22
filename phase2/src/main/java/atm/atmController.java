@@ -24,6 +24,7 @@ public class atmController {
 
     // ----- helper methods -----
     public ObservableList<Account> getAccounts() {
+
         return FXCollections.observableArrayList(USER.getAccounts());
     }
     public void setUser(String username) {
@@ -39,7 +40,6 @@ public class atmController {
     }
 
     public ObservableList<User> getUsers() {
-
         Database Database = new Database();
         return FXCollections.observableArrayList(Database.getUsers());
     }
