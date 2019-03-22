@@ -8,14 +8,14 @@ public class Filename {
 
     /** Filename used in Main */
     private String fxmlFile = "Interface.fxml";
-
-    /** Filename used in Time */
-    private String timeFile = "time";
-
-    /** Serial file used in Database */
+//
+//    /** Filename used in Time */
+//    private String timeFile = "time";
+//
+//    /** Serial file used in Database */
 //    private String databaseFile = "Users";
-
-    /** Serial file used in BankManager */
+//
+//    /** Serial file used in BankManager */
 //    private String requestsFile = "newUsersRequest";
 
     public String getCashFile() {
@@ -30,9 +30,9 @@ public class Filename {
         return fxmlFile;
     }
 
-    public String getTimeFile() {
-        return timeFile;
-    }
+//    public String getTimeFile() {
+//        return timeFile;
+//    }
 
 //    public String getDatabaseFile() {
 //        return databaseFile;

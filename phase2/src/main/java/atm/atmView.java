@@ -293,8 +293,8 @@ public class atmView implements Initializable {
     public void internalTransfer(ActionEvent actionEvent) {
         // TODO: use regex to control user input amount format
         Account sender = internalTransferFROM_cbox.getSelectionModel().getSelectedItem();
-        Account recipient = externalTransfer_cbox.getSelectionModel().getSelectedItem();
         double amount = Double.parseDouble(internalTransferAmount.getText());
+        Account recipient = internalTransferTO_cbox.getSelectionModel().getSelectedItem();
         internalTransferMessage.setText(atm.internalTransfer(sender, recipient, amount));
     }
 
