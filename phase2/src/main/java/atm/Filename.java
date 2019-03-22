@@ -13,10 +13,10 @@ public class Filename {
     private String timeFile = "time";
 
     /** Serial file used in Database */
-    private String databaseFile = "file";
+//    private String databaseFile = "Users";
 
     /** Serial file used in BankManager */
-    private String requestsFile = "file2";
+//    private String requestsFile = "newUsersRequest";
 
     public String getCashFile() {
         return cashFile;
@@ -34,11 +34,11 @@ public class Filename {
         return timeFile;
     }
 
-    public String getDatabaseFile() {
-        return databaseFile;
-    }
+//    public String getDatabaseFile() {
+//        return databaseFile;
+//    }
 
-    public String getRequestsFile() {
-        return requestsFile;
-    }
+//    public String getRequestsFile() {
+//        return requestsFile;
+//    }
 }

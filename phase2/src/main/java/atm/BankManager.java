@@ -9,7 +9,7 @@ import java.util.HashMap;
 public class BankManager implements Serializable {
 
     private String password;
-    private ArrayList<String> newUserRequests = new ArrayList<>();
+    private ArrayList<String> newUsersRequests = new ArrayList<>();
 
     public BankManager(){
         this.password = "123";
@@ -40,14 +40,14 @@ public class BankManager implements Serializable {
         Database.retrieve();
         retrieveRequests();
 
-        for (String username : newUserRequests) {
+        for (String username : newUsersRequests) {
             if (CreditScore.getRandomDoubleBetweenRange() > 0) {
                 User user = new User(username);
                 user.createAccount(AccountType.CHEQUING);
                 setUserPassword(user);
             }
         }
-        newUserRequests.clear();
+        newUsersRequests.clear();
         storeRequests();
     }
 
@@ -114,7 +114,7 @@ public class BankManager implements Serializable {
         if (Database.checkExistingUser(username) != null) {
             throw new UsernameTakenException();
         } else {
-            newUserRequests.add(username);
+            newUsersRequests.add(username);
             storeRequests();
             Database.store();
         }
@@ -122,10 +122,9 @@ public class BankManager implements Serializable {
 
     void storeRequests(){
         try{
-            Filename file = new Filename();
-            FileOutputStream fos= new FileOutputStream(file.getRequestsFile());
+            FileOutputStream fos= new FileOutputStream("newUsersRequests");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(newUserRequests);
+            oos.writeObject(newUsersRequests);
             oos.close();
             fos.close();
         }catch(IOException ioe){
@@ -136,13 +135,12 @@ public class BankManager implements Serializable {
     @SuppressWarnings("unchecked")
 
     void retrieveRequests() {
-        Filename file = new Filename();
-        File f = new File(file.getRequestsFile());
+        File f = new File("newUsersRequests");
         if (f.exists()) {
             try {
-                FileInputStream fis = new FileInputStream(file.getRequestsFile());
+                FileInputStream fis = new FileInputStream("newUsersRequests");
                 ObjectInputStream ois = new ObjectInputStream(fis);
-                newUserRequests = (ArrayList<String>) ois.readObject();
+                newUsersRequests = (ArrayList<String>) ois.readObject();
                 ois.close();
                 fis.close();
             } catch (IOException ioe) {

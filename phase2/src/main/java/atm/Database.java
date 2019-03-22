@@ -44,7 +44,7 @@ public class Database {
 
       void  store(){
         try{
-            FileOutputStream fos = new FileOutputStream("file");
+            FileOutputStream fos = new FileOutputStream("Users");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeUnshared(users);
             oos.close();
@@ -57,10 +57,10 @@ public class Database {
     @SuppressWarnings("unchecked")
 
     void retrieve() {
-        File f = new File("file");
+        File f = new File("Users");
         if (f.exists()) {
             try {
-                FileInputStream fis = new FileInputStream("file");
+                FileInputStream fis = new FileInputStream("Users");
                 ObjectInputStream ois = new ObjectInputStream(fis);
                 users = (ArrayList) ois.readObject();
                 ois.close();
