@@ -46,8 +46,6 @@ public class Database {
         try{
             FileOutputStream fos = new FileOutputStream("file");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-//            oos.reset();
-//            oos.writeObject(users);
             oos.writeUnshared(users);
             oos.close();
             fos.close();
