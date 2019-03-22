@@ -20,10 +20,9 @@ public class SavingsAccount extends Account {
         }
     }
 
-    public void addInterest() {
-        double hold  = this.balance * 0.1;
+    public void addInterest(int i) {
+        double hold  = this.balance * 0.001 * i;
         this.balance = hold + this.balance;
-
     }
 
     @Override

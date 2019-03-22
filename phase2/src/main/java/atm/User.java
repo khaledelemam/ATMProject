@@ -78,7 +78,7 @@ public class User implements Serializable {
                 addAccount(acct);
                 break;
             case LOTTERY:
-                // addAccount(new LotteryAccount());
+                addAccount(new LotteryAccount());
                 break;
         }
 

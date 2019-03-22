@@ -51,6 +51,9 @@ public class atmController {
         LocalTime midnight = LocalTime.MAX;
         long terminate = SECONDS.between(time, midnight);
         date = new Time(1);
+        if (date.date.getDay() == 1){
+            bankManager.applyInterest(1);
+        }
         Executors.newSingleThreadScheduledExecutor().schedule(Platform::exit, terminate, TimeUnit.SECONDS);
         Executors.newSingleThreadScheduledExecutor().schedule(() -> System.exit(0), terminate, TimeUnit.SECONDS);
     }
@@ -92,7 +95,7 @@ public class atmController {
     }
 
     public void advanceDate(int days) {
-        bankManager.setDate(days);
+        bankManager.setDate(days, date);
     }
 
     public String reverseTransaction(Account account) {
