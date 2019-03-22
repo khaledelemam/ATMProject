@@ -31,6 +31,8 @@
 //            acc.setBalance(-amount);
 //            Transaction withdrawal = new Transaction(acc, amount);
 //            acc.setLastTransaction(withdrawal);
+//
+//            Database Database = new Database();
 //            Database.store();
 //
 //            try {

@@ -12,6 +12,8 @@ public class Deposit implements UserDo {
 
     public void doTransaction(double amount) throws InsufficientFundsException {
         account.setBalance(amount);
+
+        Database Database = new Database();
         Database.store();
 
     }

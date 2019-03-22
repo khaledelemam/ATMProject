@@ -81,6 +81,9 @@ public class User implements Serializable {
                 // addAccount(new LotteryAccount());
                 break;
         }
+
+
+        Database Database = new Database();
         Database.store();
     }
 
@@ -111,12 +114,16 @@ public class User implements Serializable {
     // TODO: can this be overloaded???????
     void requestAccount(AccountType account){
         accountRequest = account;
+
+        Database Database = new Database();
         Database.store();
     }
 
     void requestJointAccount(String partner, AccountType account){
         accountRequest = account;
         joint = partner;
+
+        Database Database = new Database();
         Database.store();
     }
 

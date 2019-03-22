@@ -27,6 +27,8 @@ public class atmController {
         return FXCollections.observableArrayList(USER.getAccounts());
     }
     public void setUser(String username) {
+
+        Database Database = new Database();
         USER = Database.checkExistingUser(username);
     }
     public void setUser(User user) {
@@ -37,6 +39,8 @@ public class atmController {
     }
 
     public ObservableList<User> getUsers() {
+
+        Database Database = new Database();
         return FXCollections.observableArrayList(Database.getUsers());
     }
 
@@ -57,6 +61,7 @@ public class atmController {
     }
 
     public boolean userLogin(String username, String password) {
+        Database Database = new Database();
         USER = Database.login(username, password);
         return USER != null;
     }
@@ -104,6 +109,7 @@ public class atmController {
     // ----- user menu -----
 
     public void changePassword(String newPassword) {
+        Database Database = new Database();
         USER.setPassword(newPassword);
         Database.store();
     }
@@ -114,6 +120,9 @@ public class atmController {
 
     public String requestNewAccount(AccountType choice, String partner) {
         if (choice == AccountType.JOINT) {
+            Database Database = new Database();
+            Database.store();
+
             if (Database.checkExistingUser(partner) != null) {
                 // TODO: ??
                 USER.requestJointAccount(partner, choice);

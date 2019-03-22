@@ -31,6 +31,7 @@ public class PayBills implements UserDo{
         // TODO: ?
 //        source.setLastTransaction(bill);
 
+        Database Database = new Database();
         Database.store();
     }
 

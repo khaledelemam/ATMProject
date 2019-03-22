@@ -28,11 +28,15 @@ public class BankManager implements Serializable {
     private void setUserPassword(User user) {
         String password = "1";
         user.setPassword(password);
+
+        Database Database = new Database();
         Database.addUser(user);
 
     }
 
     void createUser() {
+        Database Database = new Database();
+
         Database.retrieve();
         retrieveRequests();
 
@@ -48,6 +52,7 @@ public class BankManager implements Serializable {
     }
 
     void  newAccountRequest(){
+        Database Database = new Database();
         Database.retrieve();
 
         for(User user : Database.getUsers()){
@@ -88,7 +93,10 @@ public class BankManager implements Serializable {
             if (transaction.getRecipient() != null) {
                 rATM.ReverseTransaction(account, transaction);
             }
+
+            Database Database = new Database();
             Database.store();
+
         } catch (NullPointerException e) {
             NullPointerException n = new NullPointerException("No transactions available.");
             throw n;
@@ -97,7 +105,10 @@ public class BankManager implements Serializable {
     }
 
     void newUserRequest(String username) throws UsernameTakenException {
+
+        Database Database = new Database();
         Database.retrieve();
+
         retrieveRequests();
 
         if (Database.checkExistingUser(username) != null) {

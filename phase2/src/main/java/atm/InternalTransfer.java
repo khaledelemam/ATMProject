@@ -16,6 +16,8 @@ public class InternalTransfer implements UserDo {
         Transaction intTransfer = new Transaction(source, destination, amount);
         destination.setLastTransaction(intTransfer);
         source.setLastTransaction(intTransfer);
+
+        Database Database = new Database();
         Database.store();
     }
 }
