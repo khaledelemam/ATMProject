@@ -15,6 +15,7 @@ public class Transaction implements Serializable {
     private Time date;
     private static final long serialVersionUID = 100L;
     private String username = null;
+    private String deposit;
 
     /** Construct transaction information for internal transfers */
     public Transaction(Account source, Account recipient, double amount) {
@@ -34,12 +35,22 @@ public class Transaction implements Serializable {
     }
 
 
-    /** Construct transaction information for external transfers */
+    /** Construct transaction information for withdraw */
     public Transaction(Account source, double amount) {
         this.source = source;
         this.amount = amount;
         this.date = new Time();
     }
+
+    /** Construct transaction information for deposit */
+    public Transaction(Account source, double amount, String deposit) {
+        this.source = source;
+        this.amount = amount;
+        this.date = new Time();
+        this.deposit=deposit;
+    }
+
+
 
 
 
@@ -56,6 +67,12 @@ public class Transaction implements Serializable {
             return ("$"+ strAmount + " transferred from " + this.source+ " to " + this.recipient+ " on "+ this.date);
 
         }
+
+        //deposit
+        else if (this.deposit!=null){
+            return ("$"+ strAmount + " deposited to " +this.source+ " on "+ this.date);
+        }
+
         //withdraw
         else {
             return ("$"+ strAmount + " withdrawn  from " +this.source+ " on "+ this.date);
