@@ -18,7 +18,6 @@ import static java.time.temporal.ChronoUnit.SECONDS;
 
 public class atmController {
     private User USER = null;
-    private BankManager bankManager = new BankManager();
     private Time date;
 
 
@@ -51,15 +50,23 @@ public class atmController {
         LocalTime midnight = LocalTime.MAX;
         long terminate = SECONDS.between(time, midnight);
         date = new Time(1);
+
+        SavingsAccount savings = new SavingsAccount();
+
         if (date.date.getDay() == 1){
-            bankManager.applyInterest(1);
+//            bankManager.applyInterest(1);
+            savings.applyInterest(1);
         }
         Executors.newSingleThreadScheduledExecutor().schedule(Platform::exit, terminate, TimeUnit.SECONDS);
         Executors.newSingleThreadScheduledExecutor().schedule(() -> System.exit(0), terminate, TimeUnit.SECONDS);
     }
+
+
+
     // ----- login -----
 
     public boolean adminCheck(String username, String password) {
+        BankManager bankManager = new BankManager();
         return username.equals("admin") && password.equals(bankManager.getPassword());
     }
 
@@ -81,6 +88,8 @@ public class atmController {
         }
     }
 
+
+
     // ----- admin -----
 
     public void acceptNewUserRequests() {
@@ -95,11 +104,13 @@ public class atmController {
     }
 
     public void advanceDate(int days) {
+        BankManager bankManager = new BankManager();
         bankManager.setDate(days, date);
     }
 
     public String reverseTransaction(Account account) {
         try {
+            BankManager bankManager = new BankManager();
             bankManager.ReverseLastTransaction(account);
             return "Transaction for " + USER + " reversed";
         } catch (InsufficientFundsException e) {
@@ -108,6 +119,9 @@ public class atmController {
             return n.getMessage();
         }
     }
+
+
+
 
     // ----- user menu -----
 
