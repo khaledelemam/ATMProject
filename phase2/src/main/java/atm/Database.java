@@ -2,20 +2,21 @@ package atm;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Database {
 
     //TODO: Try passing in the serializable stuff in Database constructor and storing each thing ( pass in transactions, users, accounts..)
 
-    static private ArrayList<User> users = new ArrayList<>();
+    static private List<User> users = new ArrayList<>();
 
 
-    ArrayList<User> getUsers() {
+    List<User> getUsers() {
         return users;
     }
 
-    ArrayList<User> getUsersReverse() {
+    List<User> getUsersReverse() {
         retrieve();
         return users;
     }
@@ -70,7 +71,7 @@ public class Database {
             try {
                 FileInputStream fis = new FileInputStream("Users");
                 ObjectInputStream ois = new ObjectInputStream(fis);
-                users = (ArrayList) ois.readObject();
+                users = (List) ois.readObject();
                 ois.close();
                 fis.close();
                 //

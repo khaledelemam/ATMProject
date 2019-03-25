@@ -17,6 +17,11 @@ public class Transaction implements Serializable {
     private String username = null;
     private String deposit;
 
+
+    //TODO: add enum/String to specify accounts
+
+
+
     /** Construct transaction information for internal transfers */
     public Transaction(Account source, Account recipient, double amount) {
         this.source = source;

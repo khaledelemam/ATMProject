@@ -3,15 +3,18 @@ package atm;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.io.*;
+import java.util.List;
 
 public class BankManager implements Serializable {
 
     private String password;
-    private ArrayList<String> newUsersRequests = new ArrayList<>();
+    private List<String> newUsersRequests = new ArrayList<>();
 
     public BankManager(){
         this.password = "123";
     }
+
+
 
     String getPassword(){
         return this.password;
@@ -63,6 +66,7 @@ public class BankManager implements Serializable {
         for(User user : Database.getUsers()){
             System.out.println(user.getClass());
             System.out.println(user);
+
             if (CreditScore.getRandomDoubleBetweenRange() > 0) {
                 // for joint accounts
                 System.out.println(234);
@@ -126,7 +130,7 @@ public class BankManager implements Serializable {
         }
     }
 
-    void storeRequests(){
+    private void storeRequests(){
         try{
             FileOutputStream fos= new FileOutputStream("newUsersRequests");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -140,13 +144,13 @@ public class BankManager implements Serializable {
 
     @SuppressWarnings("unchecked")
 
-    void retrieveRequests() {
+    private void retrieveRequests() {
         File f = new File("newUsersRequests");
         if (f.exists()) {
             try {
                 FileInputStream fis = new FileInputStream("newUsersRequests");
                 ObjectInputStream ois = new ObjectInputStream(fis);
-                newUsersRequests = (ArrayList<String>) ois.readObject();
+                newUsersRequests = (List<String>) ois.readObject();
                 ois.close();
                 fis.close();
             } catch (IOException ioe) {
