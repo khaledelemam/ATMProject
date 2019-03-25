@@ -128,7 +128,9 @@ public class User implements Serializable {
         Database.store();
     }
 
-
+    public boolean isEmployee(){
+        return false;
+    }
 
 
 
