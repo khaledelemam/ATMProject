@@ -2,9 +2,8 @@ package atm;
 
 import java.io.Serializable;
 import java.text.DecimalFormat;
-
-
-// Make sure to keep everything abstract because instance variables are not overridden!
+import java.util.ArrayList;
+import java.util.List;
 
 
 public abstract class Account implements Serializable {
@@ -14,6 +13,7 @@ public abstract class Account implements Serializable {
     private Transaction lastTransaction;
     private Time dateOpened;
     private static final long serialVersionUID = 10L;
+    private List<Transaction> transactions = new ArrayList<>();
 
     public Account() {
         this.lastTransaction = null;
@@ -38,6 +38,11 @@ public abstract class Account implements Serializable {
     public void setLastTransaction(Transaction newTransaction){
         lastTransaction = newTransaction;
     }
+
+    public void addTransaction(Transaction newTransaction){
+        transactions.add(newTransaction);
+    }
+
 
     public abstract  double getNetTotal();
 

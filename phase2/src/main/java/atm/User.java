@@ -3,6 +3,7 @@ package atm;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 public class User implements Serializable {
 
@@ -10,7 +11,7 @@ public class User implements Serializable {
     private String username;
     private String password;
     private DecimalFormat currencyFormat = new DecimalFormat("0.00");
-    private ArrayList<Account> accounts = new ArrayList<>();
+    private List<Account> accounts = new ArrayList<>();
 
     private AccountType accountRequest;
     private String joint;
@@ -44,7 +45,7 @@ public class User implements Serializable {
         this.joint = username;
     }
 
-    ArrayList<Account> getAccounts() { return accounts; }
+    List<Account> getAccounts() { return accounts; }
 
     AccountType getAccountRequest(){ return accountRequest; }
 
