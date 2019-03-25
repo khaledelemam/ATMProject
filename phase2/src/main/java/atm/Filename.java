@@ -5,6 +5,7 @@ public class Filename {
     /** Filenames used in CashManager */
     private String cashFile = "phase2/src/main/java/atm/cash.txt";
     private String alertFile = "phase2/src/main/java/atm/alerts.txt";
+    private String billFile = "phase2/src/main/java/atm/BillTypes.txt";
 
     /** Filename used in Main */
     private String fxmlFile = "Interface.fxml";
@@ -24,6 +25,10 @@ public class Filename {
 
     public String getAlertFile() {
         return alertFile;
+    }
+
+    public String getBillFile(){
+        return billFile;
     }
 
     public String getFxmlFile() {
