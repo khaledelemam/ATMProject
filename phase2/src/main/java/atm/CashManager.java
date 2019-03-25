@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class CashManager {
 
     // index 0,1,2,3 represents 5,10,20,50 dollar bills
-    private int[] denominations;
+    private int[] denominations = new int[4];
     private final int threshold = 20;
 
     private Filename fn = new Filename();
@@ -80,9 +80,9 @@ public class CashManager {
         File file = new File(cashFile);
         BufferedReader cashReader = new BufferedReader(new FileReader(file));
 
-        int[] denominations = new int[4];
+        int[] denominations = new int[this.denominations.length];
 
-        for (int i = 0; i <4; i++){
+        for (int i = 0; i < denominations.length; i++){
             denominations[i] = Integer.parseInt(cashReader.readLine());
         }
         this.denominations = denominations;
@@ -92,7 +92,7 @@ public class CashManager {
     private void writeToFile() throws IOException {
         File file = new File(cashFile);
         PrintWriter writer = new PrintWriter(new FileWriter(file));
-        for (int i = 0; i< 4; i++){
+        for (int i = 0; i< denominations.length; i++){
             writer.println(denominations[i]);
         }
         writer.close();
@@ -103,7 +103,7 @@ public class CashManager {
     void update() throws IOException {
         File file = new File(alertFile);
         PrintWriter writer = new PrintWriter(new FileWriter(file));
-        for (int i = 0; i< 4; i++){
+        for (int i = 0; i< denominations.length; i++){
             if(denominations[i] < threshold){
                 writer.println(denominations[i] + " " + getBill(i) + " left, please restock");
             }

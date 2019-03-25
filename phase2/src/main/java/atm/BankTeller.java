@@ -1,5 +1,11 @@
 package atm;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+
 public class BankTeller extends User{
 
     /*A BankTeller is a User that has more 'authority' than a regular User
@@ -12,11 +18,14 @@ public class BankTeller extends User{
     +
     */
 
+    ArrayList<String> newUsersRequests = new ArrayList<>();
+
     public BankTeller(String username) {
         super(username);
     }
 
-    public void createUser(String username){
-
+    @Override
+    public boolean isEmployee() {
+        return true;
     }
 }
