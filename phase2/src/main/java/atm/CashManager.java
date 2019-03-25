@@ -6,7 +6,8 @@ import java.util.Scanner;
 public class CashManager {
 
     // index 0,1,2,3 represents 5,10,20,50 dollar bills
-    private int[] denominations = new int[4];
+    private int[] denominations;
+    private int[] billTypes;
     private final int threshold = 20;
 
     private Filename fn = new Filename();
@@ -80,12 +81,21 @@ public class CashManager {
         File file = new File(cashFile);
         BufferedReader cashReader = new BufferedReader(new FileReader(file));
 
-        int[] denominations = new int[this.denominations.length];
+        int listLength = Integer.parseInt(cashReader.readLine());
+
+        int[] denominations = new int[listLength];
+        int[] billType = new int[listLength];
 
         for (int i = 0; i < denominations.length; i++){
-            denominations[i] = Integer.parseInt(cashReader.readLine());
+            //splits line into 2
+            String s = cashReader.readLine();
+            String[] splitted = s.split(" ");
+
+            billType[i] = Integer.parseInt(splitted[0]);
+            denominations[i] = Integer.parseInt(splitted[1]);
         }
         this.denominations = denominations;
+        this.billTypes = billType;
     }
 
     //writes current denominations to file
@@ -93,11 +103,11 @@ public class CashManager {
         File file = new File(cashFile);
         PrintWriter writer = new PrintWriter(new FileWriter(file));
         for (int i = 0; i< denominations.length; i++){
+            writer.print(billTypes[i] + " ");
             writer.println(denominations[i]);
         }
         writer.close();
     }
-
 
     // sends an alert when a denomination falls below the threshold
     void update() throws IOException {
@@ -139,7 +149,6 @@ public class CashManager {
         while (input.hasNext()){
             s += input.nextLine() + "\n";
         }
-
 
         return s;
     }
