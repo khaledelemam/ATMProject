@@ -47,12 +47,16 @@ public class atmView implements Initializable {
     public TextField admin_20field;
     public TextField admin_5field;
     public TextField admin_10field;
+
+    public TextField addBillsAmountField;
+
     public Label adminAlertMessage;
     public Button setTimeButton;
     public TextField daysField;
 
     public ComboBox<User> adminUser_cbox;
     public ComboBox<Account> adminAccount_cbox;
+    public ComboBox<String> addBills_cbox;
     public Button showUserAccountsButton;
     public Label transactionMessage;
 
@@ -100,7 +104,7 @@ public class atmView implements Initializable {
     atmController atm = new atmController();
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources){
 
         // time stuff
         atm.setTimeInitial();
@@ -129,6 +133,7 @@ public class atmView implements Initializable {
         billPay_cbox.setItems(atm.getAccounts());
         // withdraw needs IOException
         withdraw_cbox.setItems(atm.getWithdrawValues());
+
 
 
         // TODO: have these be updated when their tab is clicked on instead!
@@ -185,6 +190,8 @@ public class atmView implements Initializable {
 
             // TODO: have this updated when their tab is looked at instead!
             adminUser_cbox.setItems(atm.getUsersReverse());
+
+            addBills_cbox.setItems(atm.getBills());
         } else {
             clearLoginFields();
             loginMessage.setText("Admin access denied");
@@ -232,7 +239,16 @@ public class atmView implements Initializable {
         adminScreen.setVisible(false);
     }
 
-    public void addBills(ActionEvent actionEvent) {
+    public void addBills(ActionEvent actionEvent) throws IOException{
+        CashManager cm = new CashManager();
+        int amount = Integer.parseInt(addBillsAmountField.getText());
+        int bill = Integer.parseInt(addBills_cbox.getSelectionModel().getSelectedItem());
+        adminCashMessage.setText(atm.addBills(amount,bill));
+        adminAlertMessage.setText(cm.showAlerts());
+
+        adminCashMessage.setText("");
+        addBillsAmountField.setText("");
+
 
 
     }
@@ -291,6 +307,9 @@ public class atmView implements Initializable {
         depositMessage.setText("");
 
         withdraw_cbox.setValue(null);
+        addBills_cbox.setItems(null);
+
+
 
         userScreen.setVisible(false);
         loginScreen.setVisible(true);
@@ -311,7 +330,9 @@ public class atmView implements Initializable {
 
     public void withdraw(ActionEvent actionEvent) {
         withdrawMessage.setText(atm.withdraw((Double.valueOf(withdraw_cbox.getSelectionModel().getSelectedItem()))));
-//        withdrawAmountField.setText("");
+
+        withdrawAmountField.setText("");
+        withdrawMessage.setText("");
 
     }
 

@@ -131,7 +131,17 @@ public class BankManager implements Serializable {
     }
 
 
-    void ReStockATM(){
+    void ReStockATM(int amount, int bill) throws IOException{
+        CashManager cashManager = new CashManager();
+        for (int i = 0; i < cashManager.getDenominations().length; i++){
+            if (cashManager.getDenominations()[i] == bill){
+                cashManager.getBillNumber()[i]  += amount;
+            }
+        }
+        cashManager.writeToFile();
+        cashManager.update();
+
+
 
     }
 

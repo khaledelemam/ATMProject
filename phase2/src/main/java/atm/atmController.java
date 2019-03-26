@@ -33,6 +33,15 @@ public class atmController {
         return FXCollections.observableArrayList(cm.getWithdrawAmounts());
     }
 
+    public ObservableList<String> getBills() throws IOException {
+        CashManager cm = new CashManager();
+
+        return FXCollections.observableArrayList(cm.getDenomList());
+    }
+
+
+
+
 
     public void setUser(String username) {
 
@@ -135,6 +144,17 @@ public class atmController {
         } catch (NullPointerException n) {
             return n.getMessage();
         }
+    }
+
+    public String addBills(int amount, int bill){
+        try {
+            BankManager bankManager = new BankManager();
+            bankManager.ReStockATM(amount, bill);
+            return "Bill re-stocked";
+        }catch (IOException e){
+            return "Error!";
+        }
+
     }
 
 
