@@ -92,7 +92,6 @@ public class CashManager {
         for (int i = 0; i < denominations.length; i++){
             //splits line into 2
             String s = cashReader.readLine();
-            System.out.println(s);
             String[] splitted = s.split(" ");
 
             denomString[i] = splitted[0];
