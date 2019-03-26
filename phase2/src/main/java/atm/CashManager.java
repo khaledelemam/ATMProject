@@ -13,6 +13,7 @@ public class CashManager {
     private int[] billNumber;
 
     private List<String> withdrawAmounts = new ArrayList<>();
+    private List<String> bills = new ArrayList<>();
 
     private String cashFile;
     private String alertFile;
@@ -22,6 +23,7 @@ public class CashManager {
         cashFile = fn.getCashFile();
         alertFile = fn.getAlertFile();
         cashFromFile();
+        update();
 
         if (withdrawAmounts.size() == 0){
             withdrawAmounts.add("5");
@@ -33,9 +35,10 @@ public class CashManager {
 
         }
     }
-    private int[] getDenominations(){
+    int[] getDenominations(){
         return denominations;
     }
+    int[] getBillNumber() {return billNumber;}
 
     List<String> getWithdrawAmounts(){
         return withdrawAmounts;
@@ -106,7 +109,7 @@ public class CashManager {
     }
 
     //writes current denominations to file
-    private void writeToFile() throws IOException {
+    void writeToFile() throws IOException {
         File file = new File(cashFile);
         PrintWriter writer = new PrintWriter(new FileWriter(file));
         for (int i = 0; i< denominations.length; i++){
@@ -128,6 +131,8 @@ public class CashManager {
                 writer.println(billNumber[i] + " " + getBill(i) + " left, please restock");
             }
         }
+
+
         writer.close();
     }
 
@@ -171,14 +176,30 @@ public class CashManager {
 
     }
 
-//    public String toString(){
-//        String s = "$5 dollar bills: " + getDenom(5) + "\n" +
-//                "$10 dollar bills: " + getDenom(10) + "\n" +
-//                "$20 dollar bills: " + getDenom(20) + "\n" +
-//                "$50 dollar bills: " + getDenom(50) + "\n";
+    public List<String> getDenomList(){
+
+        for (int i = 0 ; i < getDenominations().length; i++) {
+            int num = getDenominations()[i];
+            bills.add(Integer.toString(num));
+        }
+        return bills;
+
+    }
+
+
 //
-//        return s;
+//    public String toString(){
+//
+//        StringBuilder sb = new StringBuilder();
+//        for (int i = 0 ; i < getDenominations().length; i++) {
+//            int num = getDenominations()[i];
+//            sb.append(num);
+//            sb.append("\n");
+//        }
+//        return sb.toString();
+//
 //    }
+
 
 
 
