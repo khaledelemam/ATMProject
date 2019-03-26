@@ -10,7 +10,10 @@ public class CashManager {
 
     // index 0,1,2,3 represents 5,10,20,50 dollar bills
     private int[] denominations;
+    // the number of each denomination
     private int[] billNumber;
+
+    private String[] denomString;
 
     private List<String> withdrawAmounts = new ArrayList<>();
     private List<String> bills = new ArrayList<>();
@@ -67,15 +70,7 @@ public class CashManager {
 
 // this method is for the alert part in admin
     private String getBill(int index){
-        if (index == 0){
-            return "five-dollar bill(s)";
-        }else if(index == 1){
-            return "ten-dollar bill(s)";
-        }else if(index == 2){
-            return "twenty-dollar bill(s)";
-        }else{
-            return "fifty-dollar bill(s)";
-        }
+        return denomString[index] + "-dollar bills";
     }
 
 
@@ -91,21 +86,25 @@ public class CashManager {
         String[] stringArray = data.split("\n");
         System.out.println("Number of lines in the file are :"+stringArray.length);
 
+        int listLength = Integer.parseInt(cashReader.readLine());
 
-        int[] denominations = new int[stringArray.length];
-        int[] billType = new int[stringArray.length];
+        int[] denominations = new int[listLength];
+        int[] billNum = new int[listLength];
+        String[] denomString = new String[listLength];
 
         for (int i = 0; i < denominations.length; i++){
             //splits line into 2
             String s = cashReader.readLine();
             String[] splitted = s.split(" ");
 
-            denominations[i] = Integer.parseInt(splitted[0]);
-            billType[i] = Integer.parseInt(splitted[1]);
+            denomString[i] = splitted[0];
+            denominations[i] = Integer.parseInt(splitted[1]);
+            billNum[i] = Integer.parseInt(splitted[2]);
 
         }
+        this.denomString = denomString;
         this.denominations = denominations;
-        this.billNumber = billType;
+        this.billNumber = billNum;
     }
 
     //writes current denominations to file
@@ -113,6 +112,7 @@ public class CashManager {
         File file = new File(cashFile);
         PrintWriter writer = new PrintWriter(new FileWriter(file));
         for (int i = 0; i< denominations.length; i++){
+            writer.print(denomString[i] + " ");
             writer.print(denominations[i] + " ");
             writer.println(billNumber[i]);
         }
@@ -126,7 +126,7 @@ public class CashManager {
 
         File file = new File(alertFile);
         PrintWriter writer = new PrintWriter(new FileWriter(file));
-        for (int i = 0; i< denominations.length; i++){
+        for (int i = 0; i< billNumber.length; i++){
             if(billNumber[i] < threshold){
                 writer.println(billNumber[i] + " " + getBill(i) + " left, please restock");
             }
