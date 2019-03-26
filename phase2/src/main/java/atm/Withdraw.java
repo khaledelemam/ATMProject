@@ -28,9 +28,7 @@ public class Withdraw implements UserDo {
             Database.store();
 
         }
-        catch (NegativeDenominationException e) {
-            e.getMessage();
-        } catch (IOException e) {
+        catch (IOException e) {
             e.printStackTrace();
         }
 

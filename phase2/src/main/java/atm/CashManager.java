@@ -46,13 +46,13 @@ public class CashManager {
     }
 
 
-    private void changeDenomination(int index, int amount) throws NegativeDenominationException, IOException{
+    private void changeDenomination(int index, int amount) throws WithdrawException, IOException{
         if (checkDenominationAmount(index)){
             billNumber[billNumber.length-1 - index] -= amount;
             writeToFile();
         }
         else {
-             throw new NegativeDenominationException();
+             throw new WithdrawException();
 
         }
     }
@@ -152,29 +152,23 @@ public class CashManager {
     }
 
 
-    void subtractDenominations(double amount, int index) throws WithdrawException, IOException, NegativeDenominationException {
+    void subtractDenominations(double amount, int index) throws WithdrawException, IOException {
 
         int DecreaseBy = 1;
 
-        if (checkDenominationAmount(index)) {
-
-            if (amount == 0 || getDenominations().length == index) {
-                assert true;
-            }
-            // if the greatestBill is not greater than the amount you're withdrawing
-            // and if there is at least one denomination of the greatestBill
-            else if (amount - getLargestDenomination(index) >= 0) {
-                amount -= getLargestDenomination(index);
-                changeDenomination(index, DecreaseBy);
-                subtractDenominations(amount, index);
-            } else {
-                subtractDenominations(amount, index + 1);
-            }
+        if (amount == 0 || getDenominations().length == index) {
+            assert true;
         }
-        else{
-            throw new WithdrawException();
-
+        // if the greatestBill is not greater than the amount you're withdrawing
+        // and if there is at least one denomination of the greatestBill
+        else if (amount - getLargestDenomination(index) >= 0 && checkDenominationAmount(index)) {
+            amount -= getLargestDenomination(index);
+            changeDenomination(index, DecreaseBy);
+            subtractDenominations(amount, index);
+        } else {
+            subtractDenominations(amount, index + 1);
         }
+
     }
 
 //    public String toString(){
