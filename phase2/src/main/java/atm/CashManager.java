@@ -29,12 +29,9 @@ public class CashManager {
         update();
 
         if (withdrawAmounts.size() == 0){
-            withdrawAmounts.add("5");
-            withdrawAmounts.add("10");
-            withdrawAmounts.add("20");
-            withdrawAmounts.add("50");
-            withdrawAmounts.add("100");
-            withdrawAmounts.add("200");
+            for (int i =0; i<denominations.length; i++){
+                withdrawAmounts.add(Integer.toString(denominations[i]));
+            }
 
         }
     }
