@@ -9,7 +9,7 @@ public class UserExecutes {
         this.transaction = transaction;
     }
 
-    void executeTransaction(double amount) throws InsufficientFundsException, IOException {
+    void executeTransaction(double amount) throws InsufficientFundsException, IOException , WithdrawException{
         transaction.doTransaction(amount);
     }
 

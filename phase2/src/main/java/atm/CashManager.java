@@ -1,69 +1,68 @@
 package atm;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
 
 public class CashManager {
 
     // index 0,1,2,3 represents 5,10,20,50 dollar bills
     private int[] denominations;
-    private int[] billTypes;
-    private final int threshold = 20;
+    private int[] billNumber;
 
-    private Filename fn = new Filename();
+    private List<String> withdrawAmounts = new ArrayList<>();
+
     private String cashFile;
     private String alertFile;
 
     public CashManager() throws IOException {
+        Filename fn = new Filename();
         cashFile = fn.getCashFile();
         alertFile = fn.getAlertFile();
         cashFromFile();
+
+        if (withdrawAmounts.size() == 0){
+            withdrawAmounts.add("5");
+            withdrawAmounts.add("10");
+            withdrawAmounts.add("20");
+            withdrawAmounts.add("50");
+            withdrawAmounts.add("100");
+            withdrawAmounts.add("200");
+
+        }
+    }
+    private int[] getDenominations(){
+        return denominations;
     }
 
-    public int[] getDenominations(){
-        return this.denominations;
+    List<String> getWithdrawAmounts(){
+        return withdrawAmounts;
     }
 
-    //returns a single denomination
-    int getDenom(int bill){
-        return denominations[getIndex(bill)];
+    private int getLargestDenomination(int index){
+        return denominations[denominations.length-1-index];
     }
 
-    //bill must be 5, 10, 20, or 50
-    void changeDenom(int bill, int amount) throws NegativeDenominationException, IOException {
-        if (checkDenom(bill, amount)){
-            denominations[getIndex(bill)] += amount;
+
+    private void changeDenomination(int index, int amount) throws NegativeDenominationException, IOException{
+        if (checkDenominationAmount(index)){
+            billNumber[billNumber.length-1 - index] -= amount;
             writeToFile();
         }
         else {
-            NegativeDenominationException e = new NegativeDenominationException();
-            throw e;
+             throw new NegativeDenominationException();
+
         }
     }
 
-    boolean checkDenom(int bill, int amount){
-        if (denominations[getIndex(bill)] + amount < 0){
-            return false;
-        }
-        else{
-            return true;
-        }
+    private boolean checkDenominationAmount(int index){
+
+        return (billNumber[billNumber.length-1-index] > 0);
     }
 
-    private int getIndex(int bill){
-        if (bill == 5){
-            return 0;
-        }else if (bill == 10){
-            return 1;
-        }else if (bill == 20){
-            return 2;
-        }else if (bill == 50){
-            return 3;
-        }else
-            //returns an impossible index
-            return -99;
-    }
-
+// this method is for the alert part in admin
     private String getBill(int index){
         if (index == 0){
             return "five-dollar bill(s)";
@@ -76,26 +75,34 @@ public class CashManager {
         }
     }
 
+
     //sets denominations as the values from text file
     private void cashFromFile() throws IOException {
         File file = new File(cashFile);
         BufferedReader cashReader = new BufferedReader(new FileReader(file));
 
-        int listLength = Integer.parseInt(cashReader.readLine());
+        FileInputStream fis = new FileInputStream(file);
+        byte[] byteArray = new byte[(int)file.length()];
+        fis.read(byteArray);
+        String data = new String(byteArray);
+        String[] stringArray = data.split("\n");
+        System.out.println("Number of lines in the file are :"+stringArray.length);
 
-        int[] denominations = new int[listLength];
-        int[] billType = new int[listLength];
+
+        int[] denominations = new int[stringArray.length];
+        int[] billType = new int[stringArray.length];
 
         for (int i = 0; i < denominations.length; i++){
             //splits line into 2
             String s = cashReader.readLine();
             String[] splitted = s.split(" ");
 
-            billType[i] = Integer.parseInt(splitted[0]);
-            denominations[i] = Integer.parseInt(splitted[1]);
+            denominations[i] = Integer.parseInt(splitted[0]);
+            billType[i] = Integer.parseInt(splitted[1]);
+
         }
         this.denominations = denominations;
-        this.billTypes = billType;
+        this.billNumber = billType;
     }
 
     //writes current denominations to file
@@ -103,63 +110,148 @@ public class CashManager {
         File file = new File(cashFile);
         PrintWriter writer = new PrintWriter(new FileWriter(file));
         for (int i = 0; i< denominations.length; i++){
-            writer.print(billTypes[i] + " ");
-            writer.println(denominations[i]);
+            writer.print(denominations[i] + " ");
+            writer.println(billNumber[i]);
         }
         writer.close();
     }
 
     // sends an alert when a denomination falls below the threshold
     void update() throws IOException {
+
+        final int threshold = 20;
+
         File file = new File(alertFile);
         PrintWriter writer = new PrintWriter(new FileWriter(file));
         for (int i = 0; i< denominations.length; i++){
-            if(denominations[i] < threshold){
-                writer.println(denominations[i] + " " + getBill(i) + " left, please restock");
+            if(billNumber[i] < threshold){
+                writer.println(billNumber[i] + " " + getBill(i) + " left, please restock");
             }
         }
         writer.close();
     }
 
-    void alertManager() throws IOException{
-
-        File file = new File(alertFile);
-        BufferedReader alert = new BufferedReader(new FileReader(file));
-
-        String line = alert.readLine();
-
-        while(line != null){
-            System.out.println(line);
-            line = alert.readLine();
-        }
-
-    }
-
     // Returns the alerts or a string that says "No Alerts"
-    public String showAlerts() throws IOException {
+     String showAlerts() throws IOException {
         File file = new File(alertFile);
         Scanner input = new Scanner(file);
 
-        String s = "";
+        StringBuilder sb = new StringBuilder();
 
         if (!input.hasNext()){
             return "No Alerts";
         }
 
         while (input.hasNext()){
-            s += input.nextLine() + "\n";
+            sb.append(input.nextLine());
+            sb.append("\n");
         }
 
-        return s;
+        return sb.toString();
+
     }
 
-    public String toString(){
-        String s = "$5 dollar bills: " + getDenom(5) + "\n" +
-                "$10 dollar bills: " + getDenom(10) + "\n" +
-                "$20 dollar bills: " + getDenom(20) + "\n" +
-                "$50 dollar bills: " + getDenom(50) + "\n";
 
-        return s;
+    void subtractDenominations(double amount, int index) throws WithdrawException, IOException, NegativeDenominationException {
+
+        int DecreaseBy = 1;
+
+        if (checkDenominationAmount(index)) {
+
+            if (amount == 0 || getDenominations().length == index) {
+                assert true;
+            }
+            // if the greatestBill is not greater than the amount you're withdrawing
+            // and if there is at least one denomination of the greatestBill
+            else if (amount - getLargestDenomination(index) >= 0) {
+                amount -= getLargestDenomination(index);
+                changeDenomination(index, DecreaseBy);
+                subtractDenominations(amount, index);
+            } else {
+                subtractDenominations(amount, index + 1);
+            }
+        }
+        else{
+            throw new WithdrawException();
+
+        }
     }
+
+//    public String toString(){
+//        String s = "$5 dollar bills: " + getDenom(5) + "\n" +
+//                "$10 dollar bills: " + getDenom(10) + "\n" +
+//                "$20 dollar bills: " + getDenom(20) + "\n" +
+//                "$50 dollar bills: " + getDenom(50) + "\n";
+//
+//        return s;
+//    }
+
+
+
+//    public int[] getDenominations(){
+//        return this.denominations;
+//    }
+
+    //returns a single denomination
+//    int getDenom(int bill){
+//        return denominations[getIndex(bill)];
+//    }
+
+
+//    //bill must be 5, 10, 20, or 50
+//    void changeDenomOld(int bill, int amount) throws NegativeDenominationException, IOException {
+//        if (checkDenom(bill, amount)){
+//            denominations[getIndex(bill)] += amount;
+//            writeToFile();
+//        }
+//        else {
+//            NegativeDenominationException e = new NegativeDenominationException();
+//            throw e;
+//        }
+//    }
+
+
+//
+//    boolean checkDenomOld(int bill, int amount){
+//        if (denominations[getIndex(bill)] + amount < 0){
+//            return false;
+//        }
+//        else{
+//            return true;
+//        }
+//    }
+
+//    private int getIndex(int bill){
+//        if (bill == 5){
+//            return 0;
+//        }else if (bill == 10){
+//            return 1;
+//        }else if (bill == 20){
+//            return 2;
+//        }else if (bill == 50){
+//            return 3;
+//        }else
+//            //returns an impossible index
+//            return -99;
+//    }
+//
+//    private String getBill(int index){
+//        if (index == 0){
+//            return "five-dollar bill(s)";
+//        }else if(index == 1){
+//            return "ten-dollar bill(s)";
+//        }else if(index == 2){
+//            return "twenty-dollar bill(s)";
+//        }else{
+//            return "fifty-dollar bill(s)";
+//        }
+//    }
+
+
+
+
+
+
+
 
 }

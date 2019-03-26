@@ -10,7 +10,7 @@ public class ExternalTransfer implements UserDo{
         this.source = source;
     }
 
-    public void doTransaction(double amount) throws InsufficientFundsException {
+    public void doTransaction(double amount) throws InsufficientFundsException{
         if (recipient.getPrimaryAccount() != null) {
             Account destination = recipient.getPrimaryAccount();
             source.setBalance(-amount);

@@ -130,6 +130,11 @@ public class BankManager implements Serializable {
         }
     }
 
+
+    void ReStockATM(){
+
+    }
+
     private void storeRequests(){
         try{
             FileOutputStream fos= new FileOutputStream("newUsersRequests");

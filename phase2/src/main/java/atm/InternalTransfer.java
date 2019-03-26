@@ -10,7 +10,7 @@ public class InternalTransfer implements UserDo {
         this.destination = destination;
     }
 
-    public void doTransaction(double amount) throws InsufficientFundsException, NullPointerException {
+    public void doTransaction(double amount) throws InsufficientFundsException, NullPointerException{
         source.setBalance(-amount);
         destination.setBalance(amount);
         Transaction intTransfer = new Transaction(source, destination, amount);

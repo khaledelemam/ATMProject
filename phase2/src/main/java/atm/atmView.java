@@ -86,11 +86,13 @@ public class atmView implements Initializable {
     public Button internalTransferButton, externalTransferButton, payBillButton;
     public Label internalTransferMessage, billPayMessage, externalTransferMessage;
     public TextField externalTransferAmount, internalTransferAmount, billPayAmount;
+    public ComboBox<String> withdraw_cbox;
 
     // withdraw/deposit
     public Button depositButton, withdrawButton;
     public TextField depositAmountField;
-    public Label depositMessage, withdrawalMessage;
+    public TextField withdrawAmountField;
+    public Label depositMessage, withdrawMessage;
     public RadioButton lotteryAccount;
     // end
 
@@ -119,12 +121,15 @@ public class atmView implements Initializable {
         loginMessage.setText("");
     }
 
-    private void userSessionSetUp() {
+    private void userSessionSetUp() throws IOException{
         accounts_cbox.setItems(atm.getAccounts());
         internalTransferTO_cbox.setItems(atm.getAccounts());
         internalTransferFROM_cbox.setItems(atm.getAccounts());
         externalTransfer_cbox.setItems(atm.getAccounts());
         billPay_cbox.setItems(atm.getAccounts());
+        // withdraw needs IOException
+        withdraw_cbox.setItems(atm.getWithdrawValues());
+
 
         // TODO: have these be updated when their tab is clicked on instead!
         netBalance.setText("Net balance: $" + atm.getNetBalance());
@@ -135,7 +140,7 @@ public class atmView implements Initializable {
 
 
     // ----- login events ------
-    public void userLogin(ActionEvent actionEvent) {
+    public void userLogin(ActionEvent actionEvent) throws IOException{
         // TODO: use regex to control user input amount format
         if (atm.userLogin(login_usernameField.getText(), login_passwordField.getText())) {
             loginScreen.setVisible(false);
@@ -229,6 +234,7 @@ public class atmView implements Initializable {
 
     public void addBills(ActionEvent actionEvent) {
 
+
     }
 
     public void showUserAccounts(ActionEvent actionEvent) {
@@ -281,10 +287,14 @@ public class atmView implements Initializable {
         internalTransferMessage.setText("");
         billPayMessage.setText("");
         externalTransferMessage.setText("");
-        withdrawalMessage.setText("");
+        withdrawMessage.setText("");
         depositMessage.setText("");
+
+        withdraw_cbox.setValue(null);
+
         userScreen.setVisible(false);
         loginScreen.setVisible(true);
+
     }
 
     public void showAccountInfo(ActionEvent actionEvent) {
@@ -298,7 +308,10 @@ public class atmView implements Initializable {
         depositAmountField.setText("");
     }
 
+
     public void withdraw(ActionEvent actionEvent) {
+        withdrawMessage.setText(atm.withdraw((Double.valueOf(withdraw_cbox.getSelectionModel().getSelectedItem()))));
+//        withdrawAmountField.setText("");
 
     }
 

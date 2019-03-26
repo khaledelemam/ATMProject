@@ -26,6 +26,14 @@ public class atmController {
 
         return FXCollections.observableArrayList(USER.getAccounts());
     }
+
+    public ObservableList<String> getWithdrawValues() throws IOException {
+        CashManager cm = new CashManager();
+
+        return FXCollections.observableArrayList(cm.getWithdrawAmounts());
+    }
+
+
     public void setUser(String username) {
 
         Database Database = new Database();
@@ -34,6 +42,7 @@ public class atmController {
     public void setUser(User user) {
         USER = user;
     }
+
     public User getUser() {
         return USER;
     }
@@ -177,7 +186,7 @@ public class atmController {
             UserExecutes transaction = new UserExecutes(new InternalTransfer(source, destimation));
             transaction.executeTransaction(amount);
             return "Transaction completed.";
-        } catch (InsufficientFundsException e) {
+        } catch (InsufficientFundsException | WithdrawException e) {
             return e.getMessage();
         } catch (IOException e) {
             return "Error!";
@@ -191,7 +200,7 @@ public class atmController {
             UserExecutes transaction = new UserExecutes(new ExternalTransfer(source, recipient));
             transaction.executeTransaction(amount);
             return "Transaction completed.";
-        } catch (InsufficientFundsException e) {
+        } catch (InsufficientFundsException | WithdrawException e) {
             return e.getMessage();
         } catch (IOException e) {
             return "Error!";
@@ -205,7 +214,7 @@ public class atmController {
             UserExecutes transaction = new UserExecutes(new PayBills(source, USER, date));
             transaction.executeTransaction(amount);
             return "Bill payment completed.";
-        } catch (InsufficientFundsException e) {
+        } catch (InsufficientFundsException | WithdrawException e) {
             return e.getMessage();
         } catch (IOException e) {
             return "Error!";
@@ -218,12 +227,31 @@ public class atmController {
         try {
             transaction.executeTransaction(amount);
             return "Deposit completed.";
-        } catch (InsufficientFundsException e) {
+        } catch (InsufficientFundsException | WithdrawException e) {
             return e.getMessage();
         } catch (IOException e) {
             e.printStackTrace();
             return "Error!";
         }
     }
+
+    public String withdraw(double amount) {
+        UserExecutes transaction = new UserExecutes(new Withdraw(USER.getPrimaryAccount()));
+        System.out.println(USER.getPrimaryAccount());
+        try {
+            transaction.executeTransaction(amount);
+            return "Withdraw completed.";
+        } catch (InsufficientFundsException | WithdrawException e) {
+            return e.getMessage();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Error!";
+        }
+    }
+
+
+
+
+
 
 }
