@@ -86,7 +86,7 @@ public class CashManager {
         String[] stringArray = data.split("\n");
         System.out.println("Number of lines in the file are :"+stringArray.length);
 
-        int listLength = Integer.parseInt(cashReader.readLine());
+        int listLength = stringArray.length;
 
         int[] denominations = new int[listLength];
         int[] billNum = new int[listLength];
