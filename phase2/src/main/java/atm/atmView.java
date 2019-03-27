@@ -189,6 +189,7 @@ public class atmView implements Initializable {
             adminAlertMessage.setText(cm.showAlerts());
 
             // TODO: have this updated when their tab is looked at instead!
+
             adminUser_cbox.setItems(atm.getUsersReverse());
 
             addBills_cbox.setItems(atm.getBills());
@@ -261,9 +262,14 @@ public class atmView implements Initializable {
     }
 
     public void reverseLastTransaction(ActionEvent actionEvent) {
-        transactionMessage.setText(atm.reverseTransaction(accounts_cbox.getSelectionModel().getSelectedItem()));
-        atm.setUser((User) null);
+
+        transactionMessage.setText(atm.reverseTransaction(adminAccount_cbox.getSelectionModel().getSelectedItem()));
+        atm.setUser(null);
+
+        transactionMessage.setText("");
+
     }
+
 
 
 

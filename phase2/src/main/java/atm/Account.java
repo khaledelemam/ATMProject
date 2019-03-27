@@ -13,7 +13,7 @@ public abstract class Account implements Serializable {
     private Transaction lastTransaction;
     private Time dateOpened;
     private static final long serialVersionUID = 10L;
-    private List<Transaction> transactions = new ArrayList<>();
+    private List<Transaction> transfers= new ArrayList<>();
 
     public Account() {
         this.lastTransaction = null;
@@ -40,11 +40,13 @@ public abstract class Account implements Serializable {
     }
 
     public void addTransaction(Transaction newTransaction){
-        transactions.add(newTransaction);
+        transfers.add(newTransaction);
     }
 
 
     public abstract  double getNetTotal();
+
+    public List<Transaction> getTransfers(){return this.transfers;}
 
 
 

@@ -109,17 +109,8 @@
                            <children>
                               <ComboBox fx:id="addBills_cbox" layoutX="204.0" layoutY="75.0" prefHeight="27.0" prefWidth="182.0" promptText="Choose a bill.." style="-fx-background-color: #e1e1e1;" />
                               <Label layoutX="204.0" layoutY="150.0" text="Type the number of bills to add: " textFill="#e1e1e1" />
-                              <!--<Label layoutX="204.0" layoutY="117.0" text="\$5: " textFill="#e1e1e1" />-->
-                              <!--<Label layoutX="204.0" layoutY="167.0" text="\$10: " textFill="#e1e1e1" />-->
-                              <!--<Label layoutX="205.0" layoutY="214.0" text="\$20: " textFill="#e1e1e1" />-->
-                              <!--<Label layoutX="205.0" layoutY="262.0" text="\$50: " textFill="#e1e1e1" />-->
                               <TextField fx:id="addBillsAmountField" layoutX="204.0" layoutY="200.0" />
                               <Button fx:id="addBillsButton" layoutX="325.0" layoutY="306.0" mnemonicParsing="false" onAction="#addBills" style="-fx-border-color: #606060; -fx-background-color: #505050;" text="Add bills" textFill="#e1e1e1" />
-                              <!--<TextField fx:id="admin_5field" layoutX="237.0" layoutY="112.0" prefHeight="27.0" prefWidth="49.0" style="-fx-border-color: #606060;" />-->
-                              <!--<TextField fx:id="admin_10field" layoutX="237.0" layoutY="162.0" prefHeight="27.0" prefWidth="49.0" style="-fx-border-color: #606060;" />-->
-                              <!--<TextField fx:id="admin_20field" layoutX="237.0" layoutY="209.0" prefHeight="27.0" prefWidth="49.0" style="-fx-border-color: #606060;" />-->
-                              <!--<TextField fx:id="admin_50field" layoutX="237.0" layoutY="257.0" prefHeight="27.0" prefWidth="49.0" style="-fx-border-color: #606060;" />-->
-                              <!--<Label fx:id="admin_cashTotal" layoutX="205.0" layoutY="312.0" prefHeight="17.0" prefWidth="95.0" text="Total: " textFill="#e1e1e1" />-->
                               <Label fx:id="adminCashMessage" layoutX="203.0" layoutY="46.0" prefHeight="17.0" prefWidth="195.0" textFill="#e1e1e1" />
                            </children></AnchorPane>
                      </content>

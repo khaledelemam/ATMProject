@@ -15,7 +15,7 @@ public class Transaction implements Serializable {
     private Time date;
     private static final long serialVersionUID = 100L;
     private String username = null;
-    private String deposit;
+    private TransactionType transactionType;
 
 
     //TODO: add enum/String to specify accounts
@@ -28,6 +28,7 @@ public class Transaction implements Serializable {
         this.recipient = recipient;
         this.amount = amount;
         this.date = new Time();
+        this.transactionType = TransactionType.InternalTransfer;
     }
 
     /** Construct transaction information for external transfers */
@@ -37,67 +38,58 @@ public class Transaction implements Serializable {
         this.amount = amount;
         this.date = new Time();
         this.username = username;
+        this.transactionType = TransactionType.ExternalTransfer;
     }
 
 
-    /** Construct transaction information for withdraw */
-    public Transaction(Account source, double amount) {
+    /** Construct transaction information for withdraw , deposit, pay bills*/
+    public Transaction(Account source, double amount, TransactionType type) {
         this.source = source;
         this.amount = amount;
         this.date = new Time();
+        this.transactionType = type;
     }
-
-    /** Construct transaction information for deposit */
-    public Transaction(Account source, double amount, String deposit) {
-        this.source = source;
-        this.amount = amount;
-        this.date = new Time();
-        this.deposit=deposit;
-    }
-
-
-
 
 
     @Override
     public String toString() {
         String strAmount = currencyFormat.format(this.amount);
-        // external transfer
-        if (this.recipient != null && this.username!=null) {
-            return ("$"+ strAmount + " transferred from " +
+        switch(transactionType){
+
+            case ExternalTransfer:
+                return ("$"+ strAmount + " transferred from " +
                     this.source + " to " + this.username +" on "+ this.date);
-        }
-        //internal transfer
-        else if(this.recipient != null){
-            return ("$"+ strAmount + " transferred from " + this.source+ " to " + this.recipient+ " on "+ this.date);
+            case InternalTransfer:
+                return ("$"+ strAmount + " transferred from " + this.source+ " to " + this.recipient+ " on "+ this.date);
+            case Withdraw:
+                return ("$"+ strAmount + " withdrawn  from " +this.source+ " on "+ this.date);
+            case Deposit:
+                return ("$"+ strAmount + " deposited to " +this.source+ " on "+ this.date);
+            case PayBill:
+                return ("$"+ strAmount + " paid by " +this.source+ " on "+ this.date);
 
         }
-
-        //deposit
-        else if (this.deposit!=null){
-            return ("$"+ strAmount + " deposited to " +this.source+ " on "+ this.date);
-        }
-
-        //withdraw
-        else {
-            return ("$"+ strAmount + " withdrawn  from " +this.source+ " on "+ this.date);
-        }
+        return null;
     }
 
     public double getAmount() {
         return this.amount;
     }
 
-    public Account getRecipient() {
+    Account getRecipient() {
         return this.recipient;
     }
 
-    public Account getSource() {
+    Account getSource() {
         return this.source;
     }
 
     public Time getDate() {
         return this.date;
+    }
+
+    public TransactionType getTransactionType() {
+        return this.transactionType;
     }
 }
 

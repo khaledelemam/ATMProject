@@ -42,12 +42,13 @@ public class atmController {
 
 
 
+//
+//    public void setUser(String username) {
+//
+//        Database Database = new Database();
+//        USER = Database.checkExistingUser(username);
+//    }
 
-    public void setUser(String username) {
-
-        Database Database = new Database();
-        USER = Database.checkExistingUser(username);
-    }
     public void setUser(User user) {
         USER = user;
     }

@@ -14,6 +14,8 @@ public class InternalTransfer implements UserDo {
         source.setBalance(-amount);
         destination.setBalance(amount);
         Transaction intTransfer = new Transaction(source, destination, amount);
+        destination.getTransfers().add(intTransfer);
+        source.getTransfers().add(intTransfer);
         destination.setLastTransaction(intTransfer);
         source.setLastTransaction(intTransfer);
 

@@ -21,7 +21,7 @@ public class Withdraw implements UserDo {
             cm.update();
 
             account.setBalance(-amount);
-            Transaction withdrawal = new Transaction(account, amount);
+            Transaction withdrawal = new Transaction(account, amount, TransactionType.Withdraw);
             account.setLastTransaction(withdrawal);
 
             Database Database = new Database();
