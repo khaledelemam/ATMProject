@@ -19,6 +19,7 @@ Note:
 (2) Approve account requests for existing users
 (3) Reverse transactions
 *Bank manager reverses transactions between accounts.*
+bank manager reverses all transfer transactions.
 (4) Set the date
 (5) Restock denominations
 
