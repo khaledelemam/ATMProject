@@ -13,6 +13,7 @@ public class Deposit implements UserDo {
     public void doTransaction(double amount) throws InsufficientFundsException {
         account.setBalance(amount);
         Transaction deposit = new Transaction(account, amount, TransactionType.Deposit);
+        account.getAllTransactions().add(deposit);
         account.setLastTransaction(deposit);
 
         Database Database = new Database();

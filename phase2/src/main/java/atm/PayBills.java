@@ -28,7 +28,7 @@ public class PayBills implements UserDo{
         billPayer.close();
 
         Transaction bill = new Transaction(source, amount, TransactionType.PayBill);
-
+        source.getAllTransactions().add(bill);
         // TODO: ?
 //        source.setLastTransaction(bill);
 

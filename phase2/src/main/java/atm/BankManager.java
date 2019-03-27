@@ -108,11 +108,17 @@ public class BankManager implements Serializable {
                 case Deposit:
                 case PayBill:
                 case Withdraw:
-                    if (account.getTransfers().size()> 1) {
-                        Transaction transaction2 = account.getTransfers().get(account.getTransfers().size() - 1);
-                        rATM.ReverseTransaction(transaction2);
-                        break;
+                    if (account.getAllTransactions().size()> 0) {
+                        for (int i = account.getAllTransactions().size()-1; i >0 ; i--) {
+                            Transaction t = account.getAllTransactions().get(i);
+                            if (t.getTransactionType() == TransactionType.InternalTransfer || t.getTransactionType() == TransactionType.ExternalTransfer) {
+                                Transaction transaction2 = account.getAllTransactions().get(account.getAllTransactions().size() - 1);
+                                rATM.ReverseTransaction(transaction2);
+                                break;
+                            }
+                        }
                     }
+                    break;
             }
             Database Database = new Database();
             Database.store();

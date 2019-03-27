@@ -13,27 +13,33 @@ public class ReverseATM {
             to.setBalance(amount);
 //        Transaction add = new Transaction(from, to, amount);
 
-            List<Transaction> fromTrans = from.getTransfers();
-            List<Transaction> toTrans = to.getTransfers();
-            if (from.getTransfers().size()> 1){
-                    fromTrans.remove(fromTrans.size()-1);}
-            if (to.getTransfers().size()> 1){
-                    toTrans.remove(toTrans.size() - 1);}
-            changeLastTransaction(to);
-            changeLastTransaction(from);
-    }
-    private void changeLastTransaction(Account acc){
-            switch (acc.getLastTransaction().getTransactionType()){
-                    case Withdraw:
-                    case Deposit:
-                    case PayBill:
-                            break;
-                    case InternalTransfer:
-                    case ExternalTransfer:
-                            List <Transaction> transfers = acc.getTransfers();
-                            if (acc.getTransfers().size()> 1){
-                                    acc.setLastTransaction(transfers.get(transfers.size() -1));}
+            List<Transaction> fromTrans = from.getAllTransactions();
+            List<Transaction> toTrans = to.getAllTransactions();
+//            if (from.getTransfers().size()> 0){
+//                    fromTrans.remove(fromTrans.size()-1);}
+//
+//            if (to.getTransfers().size()> 0){
+//                    toTrans.remove(toTrans.size() - 1);}
+            int indexFromTrans = fromTrans.lastIndexOf(trans);
+            int indexToTrans = toTrans.lastIndexOf(trans);
+            if (fromTrans.size() > 0) {
+                fromTrans.remove(indexFromTrans);
             }
+            if (toTrans.size() > 0) {
+                toTrans.remove(indexToTrans);
+            }
+        if (toTrans.size() > 0) {
+            to.setLastTransaction(toTrans.get(to.getAllTransactions().size() - 1));
+        }
+        else{
+                to.setLastTransaction(null);
+        }
+        if (fromTrans.size() > 0) {
+            from.setLastTransaction(fromTrans.get(from.getAllTransactions().size() - 1));
+        }
+        else{
+                from.setLastTransaction(null);
+        }
     }
 }
 

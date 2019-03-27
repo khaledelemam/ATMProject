@@ -17,8 +17,7 @@ public class ExternalTransfer implements UserDo{
             destination.setBalance(amount);
 
             Transaction extTransfer = new Transaction(source, destination, amount, recipient.getUsername());
-            destination.getTransfers().add(extTransfer);
-            source.getTransfers().add(extTransfer);
+            source.getAllTransactions().add(extTransfer);
             source.setLastTransaction(extTransfer);;
             destination.setLastTransaction(extTransfer);
 
