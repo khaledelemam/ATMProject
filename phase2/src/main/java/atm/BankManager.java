@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.*;
 import java.util.List;
 
-public class BankManager implements Serializable {
+public class BankManager implements Serializable, BankWorker {
 
     private String password;
     private List<String> newUsersRequests = new ArrayList<>();
@@ -16,7 +16,7 @@ public class BankManager implements Serializable {
 
 
 
-    String getPassword(){
+    public String getPassword(){
         return this.password;
     }
 
@@ -96,7 +96,7 @@ public class BankManager implements Serializable {
         }
     }
 
-    void ReverseLastTransaction(Account account) throws InsufficientFundsException{
+    public void ReverseLastTransaction(Account account) throws InsufficientFundsException{
         ReverseATM rATM = new ReverseATM();
         try {
             switch(account.getLastTransaction().getTransactionType()) {
