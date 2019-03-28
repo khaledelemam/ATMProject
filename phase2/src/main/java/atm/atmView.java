@@ -1,9 +1,11 @@
 package atm;
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -27,38 +29,33 @@ public class atmView implements Initializable {
     public Label loginMessage;
 
     // ---- new user ----
-    public AnchorPane newUserScreen;
-    public Button backButton;
-    public TextField new_usernameField;
-    public Button requestUserAccountButton;
-    public Label newUserMessage;
+//    public AnchorPane newUserScreen;
+//    public Button backButton;
+//    public TextField new_usernameField;
+//    public Button requestUserAccountButton;
+//    public Label newUserMessage;
 
 
     // ---- admin ----
-    public AnchorPane adminScreen;
-    public Label adminMessage;
-    public Button acceptNewUserRequestsButton, accountRequestsButton;
-    public Button adminLogoutButton;
-    public Button reverseTransactionButton;
-    public Button addBillsButton;
-    public Label adminCashMessage;
-    public TextField admin_50field;
-    public Label admin_cashTotal;
-    public TextField admin_20field;
-    public TextField admin_5field;
-    public TextField admin_10field;
-
-    public TextField addBillsAmountField;
-
-    public Label adminAlertMessage;
-    public Button setTimeButton;
-    public TextField daysField;
-
-    public ComboBox<User> adminUser_cbox;
-    public ComboBox<Account> adminAccount_cbox;
-    public ComboBox<String> addBills_cbox;
-    public Button showUserAccountsButton;
-    public Label transactionMessage;
+//    public AnchorPane adminScreen;
+//    public Label adminMessage;
+//    public Button acceptNewUserRequestsButton, accountRequestsButton;
+//    public Button adminLogoutButton;
+//    public Button reverseTransactionButton;
+//    public Button addBillsButton;
+//    public Label adminCashMessage;
+//
+//    public TextField addBillsAmountField;
+//
+//    public Label adminAlertMessage;
+//    public Button setTimeButton;
+//    public TextField daysField;
+//
+//    public ComboBox<User> adminUser_cbox;
+//    public ComboBox<Account> adminAccount_cbox;
+//    public ComboBox<String> addBills_cbox;
+//    public Button showUserAccountsButton;
+//    public Label transactionMessage;
 
 
     // ---- user ----
@@ -158,117 +155,151 @@ public class atmView implements Initializable {
         }
     }
 
-    public void newUser(ActionEvent actionEvent) {
+    public void newUser(ActionEvent actionEvent) throws IOException {
         clearLoginFields();
 //        loginScreen.setVisible(false);
 //        newUserScreen.setVisible(true);
-        Window window = newAccountButton.getScene().getWindow();
-        if (window instanceof Stage) {
-            Parent root = null;
-            try {
-                root = FXMLLoader.load(getClass().getResource("interfaceNewUser.fxml"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) window;
-            stage.setScene(scene);
-            stage.show();
-        }
+
+
+        Parent newUserScreen = FXMLLoader.load(getClass().getResource("interfaceNewUser.fxml"));
+        Scene scene = new Scene(newUserScreen);
+        Stage window = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
+
+
+
+//        Window window = newAccountButton.getScene().getWindow();
+//        if (window instanceof Stage) {
+//            Parent root = FXMLLoader.load(getClass().getResource("interfaceNewUser.fxml"));
+//            Scene scene = new Scene(root);
+//            Stage stage = (Stage) window;
+//            stage.setScene(scene);
+//            stage.show();
+//        }
     }
+
 
     public void adminLogin(ActionEvent actionEvent) throws IOException {
         // TODO: use regex to control user input amount format
         if (atm.adminCheck(login_usernameField.getText(), login_passwordField.getText())) {
             clearLoginFields();
-            adminScreen.setVisible(true);
-            loginScreen.setVisible(false);
-            // TODO: have the cash alert return a string instead of printing
-            //adminAlertMessage.setText("<Alert message from cashmanager goes here>");
-            CashManager cm = new CashManager();
-            adminAlertMessage.setText(cm.showAlerts());
+//            adminScreen.setVisible(true);
+//            loginScreen.setVisible(false);
 
-            // TODO: have this updated when their tab is looked at instead!
 
-            adminUser_cbox.setItems(atm.getUsersReverse());
+            Parent adminScreen = FXMLLoader.load(getClass().getResource("InterfaceAdmin.fxml"));
+            Scene scene = new Scene(adminScreen);
+            Stage window = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
+            window.setScene(scene);
+            window.show();
 
-            addBills_cbox.setItems(atm.getBills());
+//
+//            //adminAlertMessage.setText("<Alert message from cashmanager goes here>");
+//            CashManager cm = new CashManager();
+//            adminAlertMessage.setText(cm.showAlerts());
+//
+//            adminUser_cbox.setItems(atm.getUsersReverse());
+//
+//            addBills_cbox.setItems(atm.getBills());
         } else {
             clearLoginFields();
             loginMessage.setText("Admin access denied");
-    }
-    }
-
-    // ----- new user events -----
-    public void goBack(ActionEvent actionEvent) {
-        newUserMessage.setText("");
-        new_usernameField.clear();
-        newUserScreen.setVisible(false);
-        loginScreen.setVisible(true);
+        }
     }
 
-    public void requestUserAccount (ActionEvent actionEvent) {
-        // TODO: use regex to control user input amount format
-        newUserMessage.setText(atm.newUserRequest(new_usernameField.getText()));
-    }
+//    public void adminLogin(ActionEvent actionEvent) throws IOException {
+//        // TODO: use regex to control user input amount format
+//        if (atm.adminCheck(login_usernameField.getText(), login_passwordField.getText())) {
+//            clearLoginFields();
+//            adminScreen.setVisible(true);
+//            loginScreen.setVisible(false);
+//            // TODO: have the cash alert return a string instead of printing
+//            //adminAlertMessage.setText("<Alert message from cashmanager goes here>");
+//            CashManager cm = new CashManager();
+//            adminAlertMessage.setText(cm.showAlerts());
+//
+//            // TODO: have this updated when their tab is looked at instead!
+//
+//            adminUser_cbox.setItems(atm.getUsersReverse());
+//
+//            addBills_cbox.setItems(atm.getBills());
+//        } else {
+//            clearLoginFields();
+//            loginMessage.setText("Admin access denied");
+//    }
+//    }
 
-
-
-
-
-    // ----- admin events -----
-
-    public void acceptNewAccountRequests(ActionEvent actionEvent) {
-        atm.acceptNewAccountRequests();
-        adminMessage.setText("Requests accepted.");
-    }
-
-    public void acceptNewUserRequests(ActionEvent actionEvent) {
-        atm.acceptNewUserRequests();
-        adminMessage.setText("New users created.");
-    }
-
-    public void advanceTime(ActionEvent actionEvent) {
-        atm.advanceDate(Integer.parseInt(daysField.getText()));
-        daysField.setText("");
-    }
-
-    public void adminLogout(ActionEvent actionEvent) {
-        adminAlertMessage.setText("");
-        adminMessage.setText("");
-        loginScreen.setVisible(true);
-        adminScreen.setVisible(false);
-    }
-
-    public void addBills(ActionEvent actionEvent) throws IOException{
-        CashManager cm = new CashManager();
-        int amount = Integer.parseInt(addBillsAmountField.getText());
-        int bill = Integer.parseInt(addBills_cbox.getSelectionModel().getSelectedItem());
-        adminCashMessage.setText(atm.addBills(amount,bill));
-        adminAlertMessage.setText(cm.showAlerts());
-
-        adminCashMessage.setText("");
-        addBillsAmountField.setText("");
-
-
-
-    }
-
-    public void showUserAccounts(ActionEvent actionEvent) {
-//       reverse transactions does not show users until a user logs in first
-
-        atm.setUser(adminUser_cbox.getSelectionModel().getSelectedItem());
-        adminAccount_cbox.setItems(FXCollections.observableArrayList(atm.getAccounts()));
-    }
-
-    public void reverseLastTransaction(ActionEvent actionEvent) {
-
-        transactionMessage.setText(atm.reverseTransaction(adminAccount_cbox.getSelectionModel().getSelectedItem()));
-        atm.setUser(null);
-
-        transactionMessage.setText("");
-
-    }
+//    // ----- new user events -----
+//    public void goBack(ActionEvent actionEvent) {
+//        newUserMessage.setText("");
+//        new_usernameField.clear();
+//        newUserScreen.setVisible(false);
+//        loginScreen.setVisible(true);
+//    }
+//
+//    public void requestUserAccount (ActionEvent actionEvent) {
+//        // TODO: use regex to control user input amount format
+//        newUserMessage.setText(atm.newUserRequest(new_usernameField.getText()));
+//    }
+//
+//
+//
+//
+//
+//    // ----- admin events -----
+//
+//    public void acceptNewAccountRequests(ActionEvent actionEvent) {
+//        atm.acceptNewAccountRequests();
+//        adminMessage.setText("Requests accepted.");
+//    }
+//
+//    public void acceptNewUserRequests(ActionEvent actionEvent) {
+//        atm.acceptNewUserRequests();
+//        adminMessage.setText("New users created.");
+//    }
+//
+//    public void advanceTime(ActionEvent actionEvent) {
+//        atm.advanceDate(Integer.parseInt(daysField.getText()));
+//        daysField.setText("");
+//    }
+//
+//    public void adminLogout(ActionEvent actionEvent) {
+//        adminAlertMessage.setText("");
+//        adminMessage.setText("");
+//        loginScreen.setVisible(true);
+//        adminScreen.setVisible(false);
+//    }
+//
+//    public void addBills(ActionEvent actionEvent) throws IOException{
+//        CashManager cm = new CashManager();
+//        int amount = Integer.parseInt(addBillsAmountField.getText());
+//        int bill = Integer.parseInt(addBills_cbox.getSelectionModel().getSelectedItem());
+//        adminCashMessage.setText(atm.addBills(amount,bill));
+//        adminAlertMessage.setText(cm.showAlerts());
+//
+//        adminCashMessage.setText("");
+//        addBillsAmountField.setText("");
+//
+//
+//
+//    }
+//
+//    public void showUserAccounts(ActionEvent actionEvent) {
+////       reverse transactions does not show users until a user logs in first
+//
+//        atm.setUser(adminUser_cbox.getSelectionModel().getSelectedItem());
+//        adminAccount_cbox.setItems(FXCollections.observableArrayList(atm.getAccounts()));
+//    }
+//
+//    public void reverseLastTransaction(ActionEvent actionEvent) {
+//
+//        transactionMessage.setText(atm.reverseTransaction(adminAccount_cbox.getSelectionModel().getSelectedItem()));
+//        atm.setUser(null);
+//
+//        transactionMessage.setText("");
+//
+//    }
 
 
 
@@ -313,7 +344,7 @@ public class atmView implements Initializable {
         depositMessage.setText("");
 
         withdraw_cbox.setValue(null);
-        addBills_cbox.setItems(null);
+//        addBills_cbox.setItems(null);
 
 
 

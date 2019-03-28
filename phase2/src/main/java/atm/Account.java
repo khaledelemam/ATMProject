@@ -15,6 +15,7 @@ public abstract class Account implements Serializable {
     private static final long serialVersionUID = 10L;
 //    private List<Transaction> transfers= new ArrayList<>();
     private List<Transaction> allTransactions = new ArrayList<>();
+
     public Account() {
         this.lastTransaction = null;
         this.balance = 0;

@@ -20,6 +20,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
+
         launch(args);
     }
 
@@ -27,8 +28,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws IOException {
         Filename f = new Filename();
         Parent root = FXMLLoader.load(getClass().getResource(f.getFxmlFile()));
-        primaryStage.setTitle("ATM");
         Scene scene = new Scene(root);
+
+        primaryStage.setTitle("ATM");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

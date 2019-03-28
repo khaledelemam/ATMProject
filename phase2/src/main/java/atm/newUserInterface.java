@@ -2,6 +2,7 @@ package atm;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -25,23 +26,25 @@ public class newUserInterface {
     atmController atm = new atmController();
 
     // ----- new user events -----
-    public void goBack(ActionEvent actionEvent) {
+    public void goBack(ActionEvent actionEvent)  throws IOException{
         newUserMessage.setText("");
         new_usernameField.clear();
 
-        Window window = backButton.getScene().getWindow();
-        if (window instanceof Stage) {
-            Parent root = null;
-            try {
-                root = FXMLLoader.load(getClass().getResource("Interface.fxml"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) window;
-            stage.setScene(scene);
-            stage.show();
-        }
+//        Window window = backButton.getScene().getWindow();
+//        if (window instanceof Stage) {
+//            Parent root = FXMLLoader.load(getClass().getResource("Interface.fxml"));
+//            Scene scene = new Scene(root);
+//            Stage stage = (Stage) window;
+//            stage.setScene(scene);
+//            stage.show();
+//        }
+
+        Parent newUserScreen = FXMLLoader.load(getClass().getResource("Interface.fxml"));
+        Scene scene = new Scene(newUserScreen);
+        Stage window = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
+
     }
 
     public void requestUserAccount (ActionEvent actionEvent) {
