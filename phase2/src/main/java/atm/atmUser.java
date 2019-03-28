@@ -29,7 +29,6 @@ public class atmUser {
     }
 
 
-
     public ObservableList<Account> getAccounts() {
         return FXCollections.observableArrayList(USER.getAccounts());
     }
@@ -49,7 +48,6 @@ public class atmUser {
     }
 
 
-
     void changePassword(String newPassword) {
         Database Database = new Database();
         USER.setPassword(newPassword);
@@ -61,10 +59,7 @@ public class atmUser {
         Database Database = new Database();
         if (choice == AccountType.JOINT) {
 
-
-
             if (Database.checkExistingUser(partner) != null) {
-                // TODO: ??
                 USER.requestJointAccount(partner, choice);
                 Database.store();
                 return "Account requested";
@@ -78,9 +73,9 @@ public class atmUser {
     }
 
 
-    String internalTransfer(Account source, Account destimation, double amount) {
+    String internalTransfer(Account source, Account destination, double amount) {
         try {
-            UserExecutes transaction = new UserExecutes(new InternalTransfer(source, destimation));
+            UserExecutes transaction = new UserExecutes(new InternalTransfer(source, destination));
             transaction.executeTransaction(amount);
             return "Transaction completed.";
         } catch (InsufficientFundsException | WithdrawException e) {
@@ -118,7 +113,8 @@ public class atmUser {
         }
     }
 
-    public String deposit(double amount) {
+
+    String deposit(double amount) {
         UserExecutes transaction = new UserExecutes(new Deposit(USER.getPrimaryAccount()));
         System.out.println(USER.getPrimaryAccount());
         try {
@@ -132,7 +128,7 @@ public class atmUser {
         }
     }
 
-    public String withdraw(double amount) {
+    String withdraw(double amount) {
         UserExecutes transaction = new UserExecutes(new Withdraw(USER.getPrimaryAccount()));
         System.out.println(USER.getPrimaryAccount());
         try {

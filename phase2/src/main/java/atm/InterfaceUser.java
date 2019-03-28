@@ -24,7 +24,7 @@ public class InterfaceUser {
     public Label newPasswordMessage;
     public ToggleGroup newAccountsGroup;
     public RadioButton chequingRadioButton, savingsRadioButton,
-            creditRadioButton, lineRadioButton, jointRadioButton;
+            creditRadioButton, lineRadioButton, jointRadioButton, lotteryAccount;;
     public TextField shareAccountField;
     public Button requestAccountButton;
     public Label requestAccountMessage;
@@ -48,15 +48,8 @@ public class InterfaceUser {
     // withdraw/deposit
     public Button depositButton, withdrawButton;
     public TextField depositAmountField;
-    public TextField withdrawAmountField;
     public Label depositMessage, withdrawMessage;
-    public RadioButton lotteryAccount;
     // end
-
-    ObservableList<Account> accounts;
-    ObservableList<User> users;
-
-
 
     atmUser atm;
 
@@ -65,10 +58,10 @@ public class InterfaceUser {
 
         atm = new atmUser(username);
 
-        ObservableList<String>   withdrawValues = atm.getWithdrawValues();
+        ObservableList<String>  withdrawValues = atm.getWithdrawValues();
         String NetBalance = atm.getNetBalance();
-        accounts = atm.getAccounts();
-        users = atm.getUsers();
+        ObservableList<User> users = atm.getUsers();
+        ObservableList<Account> accounts = atm.getAccounts();
 
 
         accounts_cbox.setItems(accounts);
@@ -112,28 +105,6 @@ public class InterfaceUser {
         shareAccountField.setVisible(false);
     }
 
-    public void logout(ActionEvent actionEvent) throws IOException{
-
-//        atm.logout();
-        requestAccountMessage.setText("");
-        newPasswordMessage.setText("");
-        newPasswordField.clear();
-        internalTransferMessage.setText("");
-        billPayMessage.setText("");
-        externalTransferMessage.setText("");
-        withdrawMessage.setText("");
-        depositMessage.setText("");
-        withdraw_cbox.setValue(null);
-
-        Parent mainScreen = FXMLLoader.load(getClass().getResource("InterfaceLogin.fxml"));
-        Scene scene = new Scene(mainScreen);
-        Stage window = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        window.show();
-
-    }
-
-
     public void showAccountInfo(ActionEvent actionEvent) {
         accounts_infoArea.setText(atm.viewAccountInfo(accounts_cbox.getSelectionModel().getSelectedItem()));
         netBalance.setText("Net balance: $" + atm.getNetBalance());
@@ -148,10 +119,6 @@ public class InterfaceUser {
 
     public void withdraw(ActionEvent actionEvent) {
         withdrawMessage.setText(atm.withdraw((Double.valueOf(withdraw_cbox.getSelectionModel().getSelectedItem()))));
-
-        withdrawAmountField.setText("");
-        withdrawMessage.setText("");
-
     }
 
     public void internalTransfer(ActionEvent actionEvent) {
@@ -160,6 +127,7 @@ public class InterfaceUser {
         double amount = Double.parseDouble(internalTransferAmount.getText());
         Account recipient = internalTransferTO_cbox.getSelectionModel().getSelectedItem();
         internalTransferMessage.setText(atm.internalTransfer(sender, recipient, amount));
+        internalTransferAmount.setText("");
     }
 
     public void externalTransfer(ActionEvent actionEvent) {
@@ -175,9 +143,21 @@ public class InterfaceUser {
     public void payBill(ActionEvent actionEvent) {
         // TODO: use regex to control user input amount format
         Account sender = billPay_cbox.getSelectionModel().getSelectedItem();
-        Double amount = Double.parseDouble(billPayAmount.getText());
+        double amount = Double.parseDouble(billPayAmount.getText());
         billPayMessage.setText(atm.payBill(sender, amount));
     }
+
+
+    public void logout(ActionEvent actionEvent) throws IOException{
+
+        Parent mainScreen = FXMLLoader.load(getClass().getResource("InterfaceLogin.fxml"));
+        Scene scene = new Scene(mainScreen);
+        Stage window = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
+
+    }
+
 
 
 

@@ -89,7 +89,6 @@ public class InterfaceAdmin implements Initializable{
         adminCashMessage.setText(atm.addBills(amount,bill));
         adminAlertMessage.setText(cm.showAlerts());
 
-        adminCashMessage.setText("");
         addBillsAmountField.setText("");
 
 
@@ -105,7 +104,6 @@ public class InterfaceAdmin implements Initializable{
 
         transactionMessage.setText(atm.reverseTransaction(adminAccount_cbox.getSelectionModel().getSelectedItem()));
         atm.setUser(null);
-        transactionMessage.setText("");
 
     }
 

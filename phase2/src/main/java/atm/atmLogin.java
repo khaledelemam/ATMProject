@@ -18,7 +18,7 @@ import static java.time.temporal.ChronoUnit.SECONDS;
 
 public class atmLogin {
 
-    public void setTimeInitial() {
+    void setTimeInitial() {
 
         Time date;
 
@@ -41,12 +41,12 @@ public class atmLogin {
 
     // ----- login -----
 
-    public boolean adminCheck(String username, String password) {
+    boolean adminCheck(String username, String password) {
         BankManager bankManager = new BankManager();
         return username.equals("admin") && password.equals(bankManager.getPassword());
     }
 
-    public boolean userLogin(String username, String password) {
+    boolean userLogin(String username, String password) {
 
         Database Database = new Database();
         User USER = Database.login(username, password);
@@ -55,7 +55,7 @@ public class atmLogin {
 
     // ----- new user -----
 
-    public String newUserRequest(String username) {
+    String newUserRequest(String username) {
         try {
             BankManager bmu = new BankManager();
             bmu.newUserRequest(username);

@@ -18,7 +18,7 @@ public class atmAdmin {
     }
 
 
-    public ObservableList<String> getBills() throws IOException {
+    ObservableList<String> getBills() throws IOException {
         CashManager cm = new CashManager();
 
         return FXCollections.observableArrayList(cm.getDenomList());
@@ -30,30 +30,29 @@ public class atmAdmin {
     }
 
 
-    public ObservableList<User> getUsersReverse() {
+    ObservableList<User> getUsersReverse() {
         Database Database = new Database();
         return FXCollections.observableArrayList(Database.getUsersReverse());
     }
 
 
 
-    public void acceptNewUserRequests() {
+    void acceptNewUserRequests() {
         BankManager bmn = new BankManager();
         bmn.createUser();
     }
 
-    public void acceptNewAccountRequests() {
+    void acceptNewAccountRequests() {
         BankManager bma = new BankManager();
-        System.out.println(1);
         bma.newAccountRequest();
     }
 
-    public void advanceDate(int days) {
+    void advanceDate(int days) {
         BankManager bankManager = new BankManager();
         bankManager.setDate(days, date);
     }
 
-    public String reverseTransaction(Account account) {
+    String reverseTransaction(Account account) {
         try {
             BankManager bankManager = new BankManager();
             bankManager.ReverseLastTransaction(account);
@@ -65,7 +64,7 @@ public class atmAdmin {
         }
     }
 
-    public String addBills(int amount, int bill){
+    String addBills(int amount, int bill){
         try {
             BankManager bankManager = new BankManager();
             bankManager.ReStockATM(amount, bill);
