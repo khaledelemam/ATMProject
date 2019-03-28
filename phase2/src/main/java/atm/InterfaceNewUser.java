@@ -10,11 +10,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.IOException;
 
-public class newUserInterface {
+public class InterfaceNewUser {
 
 
     public AnchorPane newUserScreen;
@@ -23,23 +22,14 @@ public class newUserInterface {
     public Button backButton;
     public Label newUserMessage;
 
-    atmController atm = new atmController();
+    atmLogin atm = new atmLogin();
 
     // ----- new user events -----
     public void goBack(ActionEvent actionEvent)  throws IOException{
         newUserMessage.setText("");
         new_usernameField.clear();
 
-//        Window window = backButton.getScene().getWindow();
-//        if (window instanceof Stage) {
-//            Parent root = FXMLLoader.load(getClass().getResource("Interface.fxml"));
-//            Scene scene = new Scene(root);
-//            Stage stage = (Stage) window;
-//            stage.setScene(scene);
-//            stage.show();
-//        }
-
-        Parent newUserScreen = FXMLLoader.load(getClass().getResource("Interface.fxml"));
+        Parent newUserScreen = FXMLLoader.load(getClass().getResource("InterfaceLogin.fxml"));
         Scene scene = new Scene(newUserScreen);
         Stage window = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
         window.setScene(scene);

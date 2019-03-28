@@ -7,7 +7,7 @@ public class Filename {
     private String alertFile = "phase2/src/main/java/atm/alerts.txt";
 
     /** Filename used in Main */
-    private String fxmlFile = "Interface.fxml";
+    private String fxmlFile = "InterfaceLogin.fxml";
 //
 //    /** Filename used in Time */
 //    private String timeFile = "time";

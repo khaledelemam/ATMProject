@@ -1,8 +1,16 @@
 package atm;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class InterfaceUser {
 
@@ -45,7 +53,42 @@ public class InterfaceUser {
     public RadioButton lotteryAccount;
     // end
 
-    atmController atm = new atmController();
+    ObservableList<Account> accounts;
+    ObservableList<User> users;
+
+
+
+    atmUser atm;
+
+
+    public void setUpUser(String username) throws IOException{
+
+        atm = new atmUser(username);
+
+        ObservableList<String>   withdrawValues = atm.getWithdrawValues();
+        String NetBalance = atm.getNetBalance();
+        accounts = atm.getAccounts();
+        users = atm.getUsers();
+
+
+        accounts_cbox.setItems(accounts);
+        internalTransferTO_cbox.setItems(accounts);
+        internalTransferFROM_cbox.setItems(accounts);
+        externalTransfer_cbox.setItems(accounts);
+        billPay_cbox.setItems(accounts);
+        withdraw_cbox.setItems(withdrawValues);
+        netBalance.setText("Net balance: $" + NetBalance);
+        recipientUser.setItems(users);
+
+        chequingRadioButton.setUserData(AccountType.CHEQUING);
+        savingsRadioButton.setUserData(AccountType.SAVINGS);
+        lineRadioButton.setUserData(AccountType.LINEOFCREDIT);
+        creditRadioButton.setUserData(AccountType.CREDIT);
+        jointRadioButton.setUserData(AccountType.JOINT);
+        lotteryAccount.setUserData(AccountType.LOTTERY);
+
+
+    }
 
     public void changePassword(ActionEvent actionEvent) {
         // TODO: use regex to control user input amount format
@@ -69,8 +112,9 @@ public class InterfaceUser {
         shareAccountField.setVisible(false);
     }
 
-    public void logout(ActionEvent actionEvent) {
-        atm.logout();
+    public void logout(ActionEvent actionEvent) throws IOException{
+
+//        atm.logout();
         requestAccountMessage.setText("");
         newPasswordMessage.setText("");
         newPasswordField.clear();
@@ -79,16 +123,16 @@ public class InterfaceUser {
         externalTransferMessage.setText("");
         withdrawMessage.setText("");
         depositMessage.setText("");
-
         withdraw_cbox.setValue(null);
-//        addBills_cbox.setItems(null);
 
-
-
-//        userScreen.setVisible(false);
-//        loginScreen.setVisible(true);
+        Parent mainScreen = FXMLLoader.load(getClass().getResource("InterfaceLogin.fxml"));
+        Scene scene = new Scene(mainScreen);
+        Stage window = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
 
     }
+
 
     public void showAccountInfo(ActionEvent actionEvent) {
         accounts_infoArea.setText(atm.viewAccountInfo(accounts_cbox.getSelectionModel().getSelectedItem()));
@@ -121,7 +165,7 @@ public class InterfaceUser {
     public void externalTransfer(ActionEvent actionEvent) {
         // TODO: use regex to control user input amount format
         User recipient = recipientUser.getSelectionModel().getSelectedItem();
-        Double amount = Double.parseDouble(externalTransferAmount.getText());
+        double amount = Double.parseDouble(externalTransferAmount.getText());
         Account sender = externalTransfer_cbox.getSelectionModel().getSelectedItem();
         externalTransferMessage.setText(atm.externalTransfer(recipient, amount, sender));
         externalTransferAmount.setText("");

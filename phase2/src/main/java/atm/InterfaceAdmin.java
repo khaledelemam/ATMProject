@@ -16,7 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -47,7 +46,8 @@ public class InterfaceAdmin implements Initializable{
     private String alerts;
     private  ObservableList<String> bills;
 
-    atmController atm = new atmController();
+
+    atmAdmin atm = new atmAdmin();
 
 
     public InterfaceAdmin () throws IOException{
@@ -81,17 +81,6 @@ public class InterfaceAdmin implements Initializable{
         daysField.setText("");
     }
 
-    public void adminLogout(ActionEvent actionEvent) throws IOException {
-
-        Parent mainScreen = FXMLLoader.load(getClass().getResource("Interface.fxml"));
-        Scene scene = new Scene(mainScreen);
-        Stage window = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        window.show();
-
-
-    }
-
     public void addBills(ActionEvent actionEvent) throws IOException {
 
         CashManager cm = new CashManager();
@@ -107,7 +96,6 @@ public class InterfaceAdmin implements Initializable{
     }
 
     public void showUserAccounts(ActionEvent actionEvent) {
-//       reverse transactions does not show users until a user logs in first
 
         atm.setUser(adminUser_cbox.getSelectionModel().getSelectedItem());
         adminAccount_cbox.setItems(FXCollections.observableArrayList(atm.getAccounts()));
@@ -118,6 +106,17 @@ public class InterfaceAdmin implements Initializable{
         transactionMessage.setText(atm.reverseTransaction(adminAccount_cbox.getSelectionModel().getSelectedItem()));
         atm.setUser(null);
         transactionMessage.setText("");
+
+    }
+
+    public void adminLogout(ActionEvent actionEvent) throws IOException {
+
+        Parent mainScreen = FXMLLoader.load(getClass().getResource("InterfaceLogin.fxml"));
+        Scene scene = new Scene(mainScreen);
+        Stage window = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
+
 
     }
 

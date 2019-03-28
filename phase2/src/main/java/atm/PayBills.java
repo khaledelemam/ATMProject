@@ -9,12 +9,10 @@ public class PayBills implements UserDo{
 
     private Account source;
     private User user;
-    private Time date;
 
-    public PayBills(Account account, User user, Time date){
+    public PayBills(Account account, User user){
         this.source = account;
         this.user = user;
-        this.date = date;
     }
 
     public void doTransaction(double amount) throws IOException, InsufficientFundsException {
@@ -23,14 +21,15 @@ public class PayBills implements UserDo{
         // TODO: this should call the file constant!
         PrintWriter billPayer = new PrintWriter(new FileWriter("phase2/src/main/java/atm/outgoing.txt",
                 true));
-        // TODO: date object not in this clasS?
-        billPayer.println(user + " payed $" + amount + " on " + date);
-        billPayer.close();
 
         Transaction bill = new Transaction(source, amount, TransactionType.PayBill);
+
+        source.setLastTransaction(bill);
+
         source.getAllTransactions().add(bill);
-        // TODO: ?
-//        source.setLastTransaction(bill);
+
+        billPayer.println(user + " payed $" + amount + " on " + bill.getDate());
+        billPayer.close();
 
         Database Database = new Database();
         Database.store();

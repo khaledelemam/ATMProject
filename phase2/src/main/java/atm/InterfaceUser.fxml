@@ -6,10 +6,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="atm.InterfaceUser" prefHeight="400.0" prefWidth="600.0">
-    <AnchorPane fx:id="userScreen" prefHeight="200.0" prefWidth="200.0" visible="false">
+<AnchorPane fx:id="userScreen" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="atm.InterfaceUser" prefHeight="400.0" prefWidth="600.0">
         <children>
-            <TabPane fx:id="userTabs" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" >
+            <TabPane fx:id="userTabs" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" style="-fx-background-color: #696969; -fx-border-color: #606060;" >
                 <tabs>
                     <Tab text="Main">
                         <content>
@@ -119,8 +118,5 @@
                 </tabs>
             </TabPane>
         </children>
-    </AnchorPane>
-
-
 
 </AnchorPane>
