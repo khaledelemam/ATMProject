@@ -8,10 +8,7 @@ import java.io.IOException;
 public class atmAdmin {
 
     private User USER = null;
-    private Time date;
 
-
-    // ----- helper methods -----
     public ObservableList<Account> getAccounts() {
 
         return FXCollections.observableArrayList(USER.getAccounts());
@@ -32,7 +29,8 @@ public class atmAdmin {
 
     ObservableList<User> getUsersReverse() {
         Database Database = new Database();
-        return FXCollections.observableArrayList(Database.getUsersReverse());
+        Database.retrieve();
+        return FXCollections.observableArrayList(Database.getUsers());
     }
 
 
@@ -49,7 +47,7 @@ public class atmAdmin {
 
     void advanceDate(int days) {
         BankManager bankManager = new BankManager();
-        bankManager.setDate(days, date);
+        bankManager.setDate(days, new Time());
     }
 
     String reverseTransaction(Account account) {
@@ -74,8 +72,6 @@ public class atmAdmin {
         }
 
     }
-
-
 
 
 }

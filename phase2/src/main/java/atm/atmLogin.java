@@ -18,27 +18,6 @@ import static java.time.temporal.ChronoUnit.SECONDS;
 
 public class atmLogin {
 
-    void setTimeInitial() {
-
-        Time date;
-
-        LocalTime time = ZonedDateTime.now().toLocalTime().truncatedTo(MINUTES);
-        System.out.println(time.toString());
-        LocalTime midnight = LocalTime.MAX;
-        long terminate = SECONDS.between(time, midnight);
-        date = new Time(1);
-
-        SavingsAccount savings = new SavingsAccount();
-
-        if (date.date.getDay() == 1){
-            savings.applyInterest(1);
-        }
-        Executors.newSingleThreadScheduledExecutor().schedule(Platform::exit, terminate, TimeUnit.SECONDS);
-        Executors.newSingleThreadScheduledExecutor().schedule(() -> System.exit(0), terminate, TimeUnit.SECONDS);
-    }
-
-
-
     // ----- login -----
 
     boolean adminCheck(String username, String password) {

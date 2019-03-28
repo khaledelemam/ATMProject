@@ -64,17 +64,11 @@ public class BankManager implements Serializable, BankWorker {
         Database.retrieve();
 
         for(User user : Database.getUsers()){
-            System.out.println(user.getClass());
-            System.out.println(user);
-
             if (CreditScore.getRandomDoubleBetweenRange() > 0) {
                 // for joint accounts
-                System.out.println(234);
-                System.out.println(user.getAccountRequest());
 
                 if (user.getAccountRequest() != null && user.getJoint() != null ) {
 
-                    // TODO: i am a bit confused about how joint accts work here
                     //primary user
                     AccountType request = user.getAccountRequest();
                     user.createAccount(request);
@@ -124,8 +118,7 @@ public class BankManager implements Serializable, BankWorker {
             Database.store();
 
         } catch (NullPointerException e) {
-            NullPointerException n = new NullPointerException("No transactions available.");
-            throw n;
+            throw new NullPointerException("No transactions available.");
         }
 
     }

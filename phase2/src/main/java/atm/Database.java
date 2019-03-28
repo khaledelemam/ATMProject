@@ -16,12 +16,6 @@ public class Database {
         return users;
     }
 
-    List<User> getUsersReverse() {
-        retrieve();
-        return users;
-    }
-
-
     void addUser(User user){
         users.add(user);
         store();
@@ -41,12 +35,10 @@ public class Database {
        for (User user : users) {
            if (user.getUsername().equals(username)) {
                if (user.getPassword().equals(password)) {
-//                   store();
                    return user;
                }
            }
        }
-//       store();
        return null;
     }
 
