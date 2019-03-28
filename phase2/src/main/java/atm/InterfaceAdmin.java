@@ -45,6 +45,7 @@ public class InterfaceAdmin implements Initializable{
 
     private String alerts;
     private  ObservableList<String> bills;
+    private ObservableList<User> users;
 
 
     atmAdmin atm = new atmAdmin();
@@ -54,13 +55,14 @@ public class InterfaceAdmin implements Initializable{
         CashManager cm = new CashManager();
         alerts = cm.showAlerts();
         bills = atm.getBills();
+        users = atm.getUsers();
 
     }
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        adminUser_cbox.setItems(atm.getUsersReverse());
+        adminUser_cbox.setItems(users);
         adminAlertMessage.setText(alerts);
         addBills_cbox.setItems(bills);
 

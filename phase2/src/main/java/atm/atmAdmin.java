@@ -10,14 +10,12 @@ public class atmAdmin {
     private User USER = null;
 
     public ObservableList<Account> getAccounts() {
-
         return FXCollections.observableArrayList(USER.getAccounts());
     }
 
 
     ObservableList<String> getBills() throws IOException {
         CashManager cm = new CashManager();
-
         return FXCollections.observableArrayList(cm.getDenomList());
     }
 
@@ -27,12 +25,11 @@ public class atmAdmin {
     }
 
 
-    ObservableList<User> getUsersReverse() {
+    ObservableList<User> getUsers() {
         Database Database = new Database();
         Database.retrieve();
         return FXCollections.observableArrayList(Database.getUsers());
     }
-
 
 
     void acceptNewUserRequests() {

@@ -10,16 +10,9 @@ public class BankManager implements Serializable, BankWorker {
     private String password;
     private List<String> newUsersRequests = new ArrayList<>();
 
-    public BankManager(){
-        this.password = "123";
-    }
+    public BankManager(){ this.password = "123"; }
 
-
-
-    public String getPassword(){
-        return this.password;
-    }
-
+    public String getPassword(){ return this.password; }
 
 
     void setDate(int days, Time oldDate){
@@ -127,10 +120,9 @@ public class BankManager implements Serializable, BankWorker {
 
         Database Database = new Database();
         Database.retrieve();
-
         retrieveRequests();
 
-        if (Database.checkExistingUser(username) != null) {
+        if ((Database.checkExistingUser(username) != null) || (checkUserRequests(username))) {
             throw new UsernameTakenException();
         } else {
             newUsersRequests.add(username);
@@ -138,6 +130,17 @@ public class BankManager implements Serializable, BankWorker {
             Database.store();
         }
     }
+
+
+    private boolean checkUserRequests(String username){
+        for (String user: newUsersRequests) {
+            if (user.equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 
     void ReStockATM(int amount, int bill) throws IOException{
@@ -149,8 +152,6 @@ public class BankManager implements Serializable, BankWorker {
         }
         cashManager.writeToFile();
         cashManager.update();
-
-
 
     }
 
