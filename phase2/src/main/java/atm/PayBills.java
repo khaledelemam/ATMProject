@@ -18,8 +18,8 @@ public class PayBills implements UserDo{
     public void doTransaction(double amount) throws IOException, InsufficientFundsException {
         source.setBalance(-amount);
 
-        // TODO: this should call the file constant!
-        PrintWriter billPayer = new PrintWriter(new FileWriter("phase2/src/main/java/atm/outgoing.txt",
+        Filename outgoingFileName = new Filename();
+        PrintWriter billPayer = new PrintWriter(new FileWriter(outgoingFileName.getOutgoingFile(),
                 true));
 
         Transaction bill = new Transaction(source, amount, TransactionType.PayBill);
