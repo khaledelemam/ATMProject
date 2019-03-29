@@ -1,11 +1,11 @@
 ChequingAccount
 --
-- joint: boolean
+- maxDebt: double
 --
-+ ChequingAccount()
-+ toString(): String
++ DebtAccounts()
 + setBalance(amount: double): void
-+ setJoint(): void
++ toString(): String
++ getNetTotal: double
 
 
 ***extends Account

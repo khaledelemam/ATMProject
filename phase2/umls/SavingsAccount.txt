@@ -1,15 +1,12 @@
 SavingsAccount
 --
-- balance: double
-- currencyFormat: DecimalFormat
-# lastTransaction: Transaction
 --
 + SavingsAccount()
-+ getBalance(): String
 + setBalance(amount: double): void
-+ addInterest(): void
++ addInterest(i: int): void
+# applyInterest(numApplications: int): void
+# numInterestApplications(days: int, oldDate: Time): void
 + toString(): String
-+ getDoubleBalance(): double
-+ setLastTransaction(newTransaction: Transaction): void
-+ getNetTotal(): double
-+ getLastTransaction(): Transaction
+
+
+***extends Account

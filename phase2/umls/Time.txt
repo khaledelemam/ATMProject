@@ -1,0 +1,12 @@
+Time
+--
+- date: Date
+- filename: String
+--
++ Time()
++ Time(one: int)
++ Time(FutureTime: int)
+- SetTime(time: long): void
+- retrieve()
+- store()
++ toString(): String

@@ -1,13 +1,21 @@
 /Account/
 --
-- dateOpened: Date
-_- serialVersionUID_
+# balance double
+- curencyFormat: DecimalFormat
+- lastTransaction: Transaction
+- allTransactions: List<Transaction>
+- dateOpened: Time
+_- serialVersionUID: long_
 --
 + Account()
-/+ getBalance(): String/
++ getBalance(): String
++ getDateOpened(): Time
++ getLastTransaction(): Transaction
++ setLastTransaction(newTransaction: Transaction): void
++ getAllTransactions(): List<Transaction>
++ getNetTotal(): double
 /+ setBalance(amount: double): void/
-+ getDateOpened(): Date
-/+ getLastTransaction(): Transaction/
-/+ setLastTransaction(newTransaction: Transaction): void/
-/+ getNetTotal(): double/
-/+ getDoubleBalance(): double/
+
+
+
+***implements serializable
