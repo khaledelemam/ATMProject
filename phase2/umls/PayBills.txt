@@ -1,0 +1,10 @@
+PayBills
+--
+- source: Account
+- user: User
+--
++ PayBills(account: Account, user: User)
++ doTransaction(amount: double): void
+
+
+***implements UserDo

@@ -1,0 +1,10 @@
+InternalTransfer
+--
+- source: Account
+- account: Account
+--
++ InternalTransfer(account: Account, source: Account)
++ doTransaction(amount: double): void
+
+
+***implements UserDo

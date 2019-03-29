@@ -1,0 +1,9 @@
+Deposit
+--
+- account: Account
+--
++ Deposit(account: Account)
++ doTransaction(amount: double): void
+
+
+***implements UserDo

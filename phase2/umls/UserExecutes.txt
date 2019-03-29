@@ -1,0 +1,6 @@
+UserExecutes
+--
+- transaction: UserDo
+--
+# UserExecutes(transaction: UserDo)
+# executeTransaction(amount: double): void

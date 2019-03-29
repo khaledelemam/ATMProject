@@ -1,0 +1,10 @@
+TransactionType
+--
+ExternalTransfer
+InternalTransfer
+Withdraw
+Deposit
+PayBill
+
+
+*** enum
