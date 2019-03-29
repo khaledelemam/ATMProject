@@ -1,0 +1,13 @@
+atmAdmin
+--
+- USER: User
+--
+# acceptNewAccountRequests(): void
+# acceptNewUserRequests(): void
+# advanceDate(days: int): void
+# addBills(amount: int, bill: int): String
+# getBills(): ObservableList<String>
++ getAccounts(): ObservableList<Account>
++ setUser(user: User): void
+# getUser(user: User): ObservableList<User>
+# reverseTransaction(account: Account): String

@@ -1,0 +1,12 @@
+AccountType
+--
+CHEQUING
+SAVINGS
+LINEOFCREDIT
+CREDIT
+JOINT
+LOTTERY
+
+
+***implements Serializable 
+***enum

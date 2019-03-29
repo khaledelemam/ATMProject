@@ -1,0 +1,10 @@
+Database
+--
+_- users: List<User>_
+--
+# getUsers(): List<User>
+# addUser(user: User): void
+# checkExistingUser(username: String): User
+# login(username: String, password: String): User
+# store(): void
+# retrieve(): void

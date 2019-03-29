@@ -1,0 +1,16 @@
+InterfaceAdmin
+--
+# atm: atmAdmin
+--
++ InterfaceAdmin()
++ initialize(location: URL, resources: ResourceBundle): void
++ acceptNewAccountRequests(actionEvent: ActionEvent): void
++ acceptNewUserRequests(actionEvent: ActionEvent): void
++ advanceTime(actionEvent: ActionEvent): void
++ addBills(actionEvent: ActionEvent): void
++ showUserAccounts(actionEvent: ActionEvent): void
++ reverseLastTransaction(actionEvent: ActionEvent): void
++ adminLogout(actionEvent: ActionEvent): void
+
+
+***implements Initializable

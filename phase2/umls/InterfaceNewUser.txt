@@ -1,0 +1,7 @@
+InterfaceNewUser
+--
+# atm: atmLogin()
+--
++ goBack(actionEvent: ActionEvent): void
++ requestUserAccount(actionEvent: ActionEvent): void
+- clearLoginFields(): void

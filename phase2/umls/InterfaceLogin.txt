@@ -1,0 +1,8 @@
+InterfaceLogin
+--
+# atm: atmLogin()
+--
++ userLogin(actionEvent: ActionEvent): void
++ adminLogin(actionEvent: ActionEvent): void
++ newUser(actionEvent: ActionEvent): void
+- clearLoginFields(): void
