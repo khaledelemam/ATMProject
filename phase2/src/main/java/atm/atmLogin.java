@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 import static java.time.temporal.ChronoUnit.MINUTES;
 import static java.time.temporal.ChronoUnit.SECONDS;
 
+/** Controller class for login data for users and creating new login for new users. */
 public class atmLogin {
 
     // ----- login -----

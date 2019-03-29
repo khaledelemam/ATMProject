@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/** View class for admin functionality in UI.*/
 public class InterfaceAdmin implements Initializable{
 
 

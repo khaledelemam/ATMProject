@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-
+/** View class for logging into UI. */
 public class InterfaceLogin{
 
     // ---- login ----

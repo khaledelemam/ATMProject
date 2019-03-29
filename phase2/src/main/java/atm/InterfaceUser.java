@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/** View class for functionality of users in UI. */
 public class InterfaceUser {
 
     // ---- user ----

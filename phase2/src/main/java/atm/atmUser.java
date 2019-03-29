@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 
 import java.io.IOException;
 
+/** Controller class for user data and functionality. */
 public class atmUser {
 
     private User USER = null;

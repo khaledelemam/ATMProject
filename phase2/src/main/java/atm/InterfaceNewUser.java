@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/** View class for creating new user in UI. */
 public class InterfaceNewUser {
 
 

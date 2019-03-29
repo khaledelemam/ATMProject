@@ -27,7 +27,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         Filename f = new Filename();
-        Parent root = FXMLLoader.load(getClass().getResource("InterfaceLogin.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource(f.getFxmlFile()));
         Scene scene = new Scene(root);
 
 
