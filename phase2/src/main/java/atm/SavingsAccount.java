@@ -3,6 +3,7 @@ package atm;
 
 import java.util.Calendar;
 
+/** Asset account that adds interest to account balance. */
 public class SavingsAccount extends Account {
 
     public SavingsAccount() {
@@ -53,16 +54,9 @@ public class SavingsAccount extends Account {
         }
     }
 
-
-
     @Override
     public String toString() {
         return "Savings Account";
-    }
-
-    @Override
-    public double getNetTotal() {
-        return this.balance;
     }
 
 }

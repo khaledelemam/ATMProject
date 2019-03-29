@@ -34,10 +34,6 @@ public class ChequingAccount extends Account {
         }
     }
 
-    public double getNetTotal(){
-        return balance;
-    }
-
     public void setJoint(){
         joint = true;
     }

@@ -22,6 +22,7 @@ public abstract class Account implements Serializable {
         this.dateOpened = new Time();
     }
 
+    /** Return account balance value to display. */
     public String getBalance(){
         return currencyFormat.format(balance);
     }
@@ -45,7 +46,10 @@ public abstract class Account implements Serializable {
 //    }
 
 
-    public abstract  double getNetTotal();
+    /** Return positive or negative (debt accounts) balance to calculate net total. */
+    public double getNetTotal(){
+        return balance;
+    }
 //
 //    public List<Transaction> getTransfers(){return this.transfers;}
 

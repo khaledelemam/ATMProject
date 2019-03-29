@@ -1,8 +1,8 @@
 package atm;
 
+/** Savings account that applies random interest on balance. */
 public class LotteryAccount extends SavingsAccount {
 
-    //apply random interest on balance
     public LotteryAccount(){
         super();
     }
