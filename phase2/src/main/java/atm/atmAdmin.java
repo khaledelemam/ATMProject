@@ -40,9 +40,7 @@ public class atmAdmin {
     }
 
 
-    void acceptNewUserRequests() {
-        bankManager.createUser();
-    }
+    void acceptNewUserRequests() { bankManager.createUser(); }
 
     void acceptNewAccountRequests() {
         bankManager.newAccountRequest();

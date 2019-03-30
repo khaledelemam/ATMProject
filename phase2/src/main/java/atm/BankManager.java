@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.*;
 import java.util.List;
 
-public class BankManager implements Serializable, BankWorker {
+public class BankManager extends  People implements Serializable, BankWorker {
 
     private String password;
     private List<List<Object>> newUsersRequests = new ArrayList<>();

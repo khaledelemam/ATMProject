@@ -5,7 +5,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User implements Serializable {
+public class User extends People implements Serializable {
 
     private static final long serialVersionUID = 42L;
     private String username;

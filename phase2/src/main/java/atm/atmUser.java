@@ -39,6 +39,7 @@ public class atmUser {
                 otherUsers.add(user);
             }
         }
+
         return FXCollections.observableArrayList(otherUsers);
     }
 

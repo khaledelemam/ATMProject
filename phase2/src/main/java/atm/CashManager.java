@@ -92,11 +92,11 @@ public class CashManager {
         for (int i = 0; i < denominations.length; i++){
             //splits line into 2
             String s = cashReader.readLine();
-            String[] splitted = s.split(" ");
+            String[] split = s.split(" ");
 
-            denomString[i] = splitted[0];
-            denominations[i] = Integer.parseInt(splitted[1]);
-            billNum[i] = Integer.parseInt(splitted[2]);
+            denomString[i] = split[0];
+            denominations[i] = Integer.parseInt(split[1]);
+            billNum[i] = Integer.parseInt(split[2]);
 
         }
         this.denomString = denomString;
@@ -162,7 +162,7 @@ public class CashManager {
         }
         // if the greatestBill is not greater than the amount you're withdrawing
         // and if there is at least one denomination of the greatestBill
-        else if (amount - getLargestDenomination(index) >= 0 && checkDenominationAmount(index)) {
+        else if (amount - getLargestDenomination(index) >= 0) {
             amount -= getLargestDenomination(index);
             changeDenomination(index, DecreaseBy);
             subtractDenominations(amount, index);
