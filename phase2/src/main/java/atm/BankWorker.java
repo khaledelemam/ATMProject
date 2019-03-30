@@ -4,9 +4,8 @@ import java.io.IOException;
 
 interface BankWorker {
 
-    String getPassword();
+    void ReverseLastTransfer(Account account) throws  InsufficientFundsException;
 
-    void ReverseLastTransaction(Account account) throws  InsufficientFundsException;
 
 
 }

@@ -10,12 +10,16 @@ public class BankManager implements Serializable, BankWorker {
     private String password;
     private List<String> newUsersRequests = new ArrayList<>();
 
-    public BankManager(){ this.password = "123"; }
+    public BankManager() {
+        this.password = "123";
+    }
 
-    public String getPassword(){ return this.password; }
+    public String getPassword() {
+        return this.password;
+    }
 
 
-    void setDate(int days, Time oldDate){
+    void setDate(int days, Time oldDate) {
         long plusOneDay = (1000 * 60 * 60 * 24);
         long NumberOfDays = plusOneDay * days;
 
@@ -51,16 +55,16 @@ public class BankManager implements Serializable, BankWorker {
         storeRequests();
     }
 
-    void  newAccountRequest(){
+    void newAccountRequest() {
         Database Database = new Database();
 
         Database.retrieve();
 
-        for(User user : Database.getUsers()){
+        for (User user : Database.getUsers()) {
             if (CreditScore.getRandomDoubleBetweenRange() > 0) {
                 // for joint accounts
 
-                if (user.getAccountRequest() != null && user.getJoint() != null ) {
+                if (user.getAccountRequest() != null && user.getJoint() != null) {
 
                     //primary user
                     AccountType request = user.getAccountRequest();
@@ -74,7 +78,7 @@ public class BankManager implements Serializable, BankWorker {
                     partner.addAccount(user.getJointAccount());
 
                 } //for single accounts
-                else if (user.getAccountRequest() != null ){
+                else if (user.getAccountRequest() != null) {
                     System.out.println(user.getAccountRequest());
                     user.createAccount(user.getAccountRequest());
                 }
@@ -83,24 +87,23 @@ public class BankManager implements Serializable, BankWorker {
         }
     }
 
-    public void ReverseLastTransaction(Account account) throws InsufficientFundsException{
-        ReverseATM rATM = new ReverseATM();
+    public void ReverseLastTransfer(Account account) throws InsufficientFundsException {
         try {
-            switch(account.getLastTransaction().getTransactionType()) {
+            switch (account.getLastTransaction().getTransactionType()) {
                 case InternalTransfer:
                 case ExternalTransfer:
                     Transaction transaction = account.getLastTransaction();
-                    rATM.ReverseTransaction(transaction);
+                    ReverseTransferHelper(transaction);
                     break;
                 case Deposit:
                 case PayBill:
                 case Withdraw:
-                    if (account.getAllTransactions().size()> 0) {
-                        for (int i = account.getAllTransactions().size()-1; i >0 ; i--) {
+                    if (account.getAllTransactions().size() > 0) {
+                        for (int i = account.getAllTransactions().size() - 1; i > 0; i--) {
                             Transaction t = account.getAllTransactions().get(i);
                             if (t.getTransactionType() == TransactionType.InternalTransfer || t.getTransactionType() == TransactionType.ExternalTransfer) {
                                 Transaction transaction2 = account.getAllTransactions().get(account.getAllTransactions().size() - 1);
-                                rATM.ReverseTransaction(transaction2);
+                                ReverseTransferHelper(transaction2);
                                 break;
                             }
                         }
@@ -115,6 +118,39 @@ public class BankManager implements Serializable, BankWorker {
         }
 
     }
+
+
+    private void ReverseTransferHelper(Transaction trans) throws InsufficientFundsException {
+        double amount = trans.getAmount();
+        Account from = trans.getRecipient();
+        Account to = trans.getSource();
+        from.setBalance(-amount);
+        to.setBalance(amount);
+
+        List<Transaction> fromTrans = from.getAllTransactions();
+        List<Transaction> toTrans = to.getAllTransactions();
+
+        int indexFromTrans = fromTrans.lastIndexOf(trans);
+        int indexToTrans = toTrans.lastIndexOf(trans);
+
+        if (fromTrans.size() > 0) {
+            fromTrans.remove(indexFromTrans);
+        }
+        if (toTrans.size() > 0) {
+            toTrans.remove(indexToTrans);
+        }
+        if (toTrans.size() > 0) {
+            to.setLastTransaction(toTrans.get(to.getAllTransactions().size() - 1));
+        } else {
+            to.setLastTransaction(null);
+        }
+        if (fromTrans.size() > 0) {
+            from.setLastTransaction(fromTrans.get(from.getAllTransactions().size() - 1));
+        } else {
+            from.setLastTransaction(null);
+        }
+    }
+
 
     void newUserRequest(String username) throws UsernameTakenException {
 
@@ -140,7 +176,6 @@ public class BankManager implements Serializable, BankWorker {
         }
         return false;
     }
-
 
 
     void ReStockATM(int amount, int bill) throws IOException{

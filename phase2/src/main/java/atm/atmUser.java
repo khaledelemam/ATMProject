@@ -8,21 +8,14 @@ import java.io.IOException;
 /** Controller class for user data and functionality. */
 public class atmUser {
 
-    private User USER = null;
+    private User USER;
 
 
-    atmUser(String username){
+    public atmUser(String username){
 
-        UserSetting(username);
-    }
-
-
-    private void UserSetting(String username){
         Database Database = new Database();
         USER = Database.checkExistingUser(username);
     }
-
-
 
     ObservableList<String> getWithdrawValues() throws IOException {
         CashManager cm = new CashManager();

@@ -24,7 +24,7 @@ public class InterfaceLogin{
     public Label loginMessage;
 
     // initialize ATM
-    atmLogin atm = new atmLogin();
+    atmLogin atm = new atmLogin(new BankManager());
 
 
     // ----- login events ------

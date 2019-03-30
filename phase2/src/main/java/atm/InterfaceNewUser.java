@@ -23,7 +23,7 @@ public class InterfaceNewUser {
     public Button backButton;
     public Label newUserMessage;
 
-    atmLogin atm = new atmLogin();
+    atmLogin atm = new atmLogin(new BankManager());
 
     // ----- new user events -----
     public void goBack(ActionEvent actionEvent)  throws IOException{
