@@ -27,7 +27,7 @@
                             </children></AnchorPane>
                     </content>
                 </Tab>
-                <Tab fx:id="transactionTab" text="Reverse Transactions">
+                <Tab fx:id="transactionTab" text="Reverse Transfers">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #696969;">
                             <children>

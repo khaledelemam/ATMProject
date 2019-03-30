@@ -27,6 +27,10 @@ public class atmLogin {
     public atmLogin(BankManager bankManager){
          this.bankManager = bankManager;
 
+         Database Database = new Database();
+         Database.retrieve();
+
+
     }
 
     boolean adminCheck(String username, String password) {
@@ -36,14 +40,12 @@ public class atmLogin {
 
     boolean bankTellerCheck(String username, String password){
         Database database = new Database();
+        User User = database.login(username,password);
+        return  User instanceof BankIntern;
 
-        User isUser = database.checkExistingUser(username);
-        if (isUser instanceof BankIntern && isUser.getPassword().equals(password)){
-            return true;
-        }
-        return false;
+
+
     }
-
     boolean userLogin(String username, String password) {
 
         Database Database = new Database();

@@ -49,7 +49,7 @@
                         <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                 <children>
-                                    <ComboBox fx:id="accounts_cbox" layoutX="27.0" layoutY="63.0" prefHeight="27.0" prefWidth="182.0" promptText="Choose an account..." style="-fx-background-color: #A0A0A0;" />
+                                    <ComboBox fx:id="accounts_cbox" layoutX="27.0" layoutY="63.0" prefHeight="27.0" prefWidth="182.0" promptText="Choose an account..." style="-fx-background-color: #e1e1e1;" />
                                     <Button fx:id="accounts_showAccountsButton" layoutX="27.0" layoutY="115.0" mnemonicParsing="false" onAction="#showAccountInfo" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Show account information" textFill="#e1e1e1" />
                                     <Label fx:id="accounts_infoArea" alignment="TOP_LEFT" layoutX="292.0" layoutY="63.0" prefHeight="235.0" prefWidth="226.0" textFill="#e1e1e1" wrapText="true" />
                                     <Label fx:id="netBalance" layoutX="27.0" layoutY="172.0" prefHeight="17.0" prefWidth="181.0" textFill="#e1e1e1" />

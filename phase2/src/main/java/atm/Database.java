@@ -5,11 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Database {
-
+public class Database{
     //TODO: Try passing in the serializable stuff in Database constructor and storing each thing ( pass in transactions, users, accounts..)
 
     static private List<User> users = new ArrayList<>();
+
+
+    public Database(){
+    }
 
 
     List<User> getUsers() {
@@ -22,7 +25,6 @@ public class Database {
     }
 
     User checkExistingUser(String username){
-        retrieve();
         for (User user:users) {
             if (user.getUsername().equals(username)) {
                 return user;
@@ -32,7 +34,6 @@ public class Database {
     }
 
     User login(String username, String password){
-       retrieve();
        for (User user : users) {
            if (user.getUsername().equals(username)) {
                if (user.getPassword().equals(password)) {
@@ -57,7 +58,7 @@ public class Database {
 
     @SuppressWarnings("unchecked")
 
-    void retrieve() {
+ void retrieve() {
         File f = new File("Users");
         if (f.exists()) {
             try {
@@ -68,6 +69,7 @@ public class Database {
                 fis.close();
                 //
                 store();
+
                 //
             } catch (IOException ioe) {
                 ioe.printStackTrace();

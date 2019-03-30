@@ -9,6 +9,7 @@ public class BankManager extends  People implements Serializable, BankWorker {
 
     private String password;
     private List<List<Object>> newUsersRequests = new ArrayList<>();
+    private Database Database = new Database();
 
     public BankManager() {
         this.password = "123";
@@ -32,16 +33,11 @@ public class BankManager extends  People implements Serializable, BankWorker {
     private void setUserPassword(User user) {
         String password = "1";
         user.setPassword(password);
-
-        Database Database = new Database();
         Database.addUser(user);
 
     }
 
     void createUser() {
-        Database Database = new Database();
-
-        Database.retrieve();
         retrieveRequests();
 
         for (List<Object> users: newUsersRequests) {
@@ -67,10 +63,6 @@ public class BankManager extends  People implements Serializable, BankWorker {
     }
 
     void newAccountRequest() {
-        Database Database = new Database();
-
-        Database.retrieve();
-
         for (User user : Database.getUsers()) {
             if (CreditScore.getRandomDoubleBetweenRange() > 0) {
                 // for joint accounts
@@ -121,7 +113,6 @@ public class BankManager extends  People implements Serializable, BankWorker {
                     }
                     break;
             }
-            Database Database = new Database();
             Database.store();
 
         } catch (NullPointerException e) {
@@ -164,9 +155,6 @@ public class BankManager extends  People implements Serializable, BankWorker {
 
 
     void newUserRequest(String username, UserType type) throws UsernameTakenException {
-
-        Database Database = new Database();
-        Database.retrieve();
         retrieveRequests();
 
         if ((Database.checkExistingUser(username) != null) || (checkUserRequests(username))) {

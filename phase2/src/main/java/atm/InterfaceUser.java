@@ -114,7 +114,13 @@ public class InterfaceUser {
     }
 
     public void showAccountInfo(ActionEvent actionEvent) {
-        accounts_infoArea.setText(atm.viewAccountInfo(accounts_cbox.getSelectionModel().getSelectedItem()));
+        if (accounts_cbox.getSelectionModel().getSelectedItem() != null){
+                accounts_infoArea.setText(atm.viewAccountInfo(accounts_cbox.getSelectionModel().getSelectedItem()));
+        }
+        else{
+            accounts_infoArea.setText("Please choose an account.");
+        }
+
         netBalance.setText("Net balance: $" + atm.getNetBalance());
     }
 
@@ -127,7 +133,6 @@ public class InterfaceUser {
             depositMessage.setText("Please enter an amount.");
         }
         }
-
 
 
 

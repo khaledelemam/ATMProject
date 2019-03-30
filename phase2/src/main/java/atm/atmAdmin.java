@@ -11,12 +11,12 @@ public class atmAdmin {
 
     private User USER;
     private BankManager bankManager;
+    Database Database = new Database();
 
     public atmAdmin(BankManager bankManager){
         this.bankManager = bankManager;
 
     }
-
 
     public void setUser(User user) {
         USER = user;
@@ -34,11 +34,8 @@ public class atmAdmin {
 
 
     ObservableList<User> getUsers() {
-        Database Database = new Database();
-        Database.retrieve();
         return FXCollections.observableArrayList(Database.getUsers());
     }
-
 
     void acceptNewUserRequests() { bankManager.createUser(); }
 
@@ -53,9 +50,9 @@ public class atmAdmin {
     String reverseTransaction(Account account) {
         try {
             bankManager.ReverseLastTransfer(account);
-            return "Transaction for " + USER + " reversed";
+            return "Transfer for " + USER + " reversed";
         } catch (InsufficientFundsException e) {
-            return "Transaction could not be reversed.";
+            return "Transfer could not be reversed.";
         } catch (NullPointerException n) {
             return n.getMessage();
         }
