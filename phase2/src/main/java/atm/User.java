@@ -124,7 +124,8 @@ public class User extends People implements Serializable {
         Database.store();
     }
 
-    void requestJointAccount(String partner, AccountType account){
+    // Overloading for joint accounts
+    void requestAccount(String partner, AccountType account){
         accountRequest = account;
         joint = partner;
 

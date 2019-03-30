@@ -64,7 +64,7 @@ public class atmUser {
         if (choice == AccountType.JOINT) {
 
             if (Database.checkExistingUser(partner) != null) {
-                USER.requestJointAccount(partner, choice);
+                USER.requestAccount(partner, choice);
                 Database.store();
                 return "Account requested";
             } else {
