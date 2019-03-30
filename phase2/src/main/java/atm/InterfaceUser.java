@@ -141,8 +141,16 @@ public class InterfaceUser {
         if (inputAmount.matches("^\\d+\\.?\\d{0,2}")) {
             double amount = Double.parseDouble(inputAmount);
             Account recipient = internalTransferTO_cbox.getSelectionModel().getSelectedItem();
-            internalTransferMessage.setText(atm.internalTransfer(sender, recipient, amount));
-            internalTransferAmount.setText("");
+            if (recipient == sender){
+                internalTransferMessage.setText("Can't transfer to the same account.");
+            }
+            else if (sender instanceof CreditCard){
+                internalTransferMessage.setText("Can't transfer out of a credit card account.");
+            }
+            else {
+                internalTransferMessage.setText(atm.internalTransfer(sender, recipient, amount));
+                internalTransferAmount.setText("");
+            }
         } else {
             internalTransferMessage.setText("Please enter an amount.");
         }
@@ -155,8 +163,13 @@ public class InterfaceUser {
         if (inputAmount.matches("^\\d+\\.?\\d{0,2}")) {
             double amount = Double.parseDouble(inputAmount);
             Account sender = externalTransfer_cbox.getSelectionModel().getSelectedItem();
-            externalTransferMessage.setText(atm.externalTransfer(recipient, amount, sender));
-            externalTransferAmount.setText("");
+            if (sender instanceof CreditCard){
+                externalTransferMessage.setText("Can't transfer out of a credit card account.");
+            }
+            else {
+                externalTransferMessage.setText(atm.externalTransfer(recipient, amount, sender));
+                externalTransferAmount.setText("");
+            }
         } else {
             externalTransferMessage.setText("Please enter an amount.");
         }
