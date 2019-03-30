@@ -42,7 +42,8 @@ public class InterfaceLogin{
             window.setScene(scene);
             window.show();
 
-        } else {
+        }
+        else {
             clearLoginFields();
             loginMessage.setText("Invalid username or password.");
         }
@@ -55,11 +56,14 @@ public class InterfaceLogin{
         if (atm.adminCheck(login_usernameField.getText(), login_passwordField.getText())) {
             Parent adminScreen = FXMLLoader.load(getClass().getResource("InterfaceAdmin.fxml"));
             Scene scene = new Scene(adminScreen);
-            Stage window = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
+            Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             window.setScene(scene);
             window.show();
-
-        } else {
+        }
+        else if (atm.bankTellerCheck(login_usernameField.getText(), login_passwordField.getText())){
+            // do bankTeller interface stuff
+        }
+        else {
             clearLoginFields();
             loginMessage.setText("Admin access denied");
         }

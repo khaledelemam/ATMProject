@@ -24,8 +24,17 @@ public class atmLogin {
     boolean adminCheck(String username, String password) {
         BankManager bankManager = new BankManager();
         return username.equals("admin") && password.equals(bankManager.getPassword());
+
     }
 
+    boolean bankTellerCheck(String username, String password){
+        Database database = new Database();
+        User isUser = database.checkExistingUser(username);
+        if (isUser instanceof BankTeller && isUser.getPassword() == password){
+            return true;
+        }
+        return false;
+    }
     boolean userLogin(String username, String password) {
 
         Database Database = new Database();
