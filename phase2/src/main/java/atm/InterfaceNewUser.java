@@ -54,7 +54,12 @@ public class InterfaceNewUser implements Initializable {
 
     public void requestUserAccount (ActionEvent actionEvent) {
         // TODO: use regex to control user input amount format
-        newUserMessage.setText(atm.newUserRequest(new_usernameField.getText(), UserType_cbox.getSelectionModel().getSelectedItem()));
+        if (UserType_cbox.getSelectionModel().getSelectedItem() != null) {
+            newUserMessage.setText(atm.newUserRequest(new_usernameField.getText(), UserType_cbox.getSelectionModel().getSelectedItem()));
+        }
+        else{
+            newUserMessage.setText("Please pick a user type.");
+        }
     }
 
 }
