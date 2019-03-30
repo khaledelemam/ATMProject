@@ -4,6 +4,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /** Controller class for user data and functionality. */
 public class atmUser {
@@ -30,7 +32,14 @@ public class atmUser {
 
     public ObservableList<User> getUsers() {
         Database Database = new Database();
-        return FXCollections.observableArrayList(Database.getUsers());
+        List<User> allUsers = Database.getUsers();
+        List<User> otherUsers = new ArrayList<>();
+        for (User user: allUsers){
+            if (!user.getUsername().equals(USER.getUsername())){
+                otherUsers.add(user);
+            }
+        }
+        return FXCollections.observableArrayList(otherUsers);
     }
 
     String viewAccountInfo(Account account) {
