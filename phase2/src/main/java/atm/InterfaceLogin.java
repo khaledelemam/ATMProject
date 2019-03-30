@@ -62,6 +62,12 @@ public class InterfaceLogin{
         }
         else if (atm.bankTellerCheck(login_usernameField.getText(), login_passwordField.getText())){
             // do bankTeller interface stuff
+            Parent internScreen = FXMLLoader.load(getClass().getResource("InterfaceBankIntern.fxml"));
+            Scene scene = new Scene(internScreen);
+            Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            window.setScene(scene);
+            window.show();
+
         }
         else {
             clearLoginFields();

@@ -8,7 +8,7 @@ import java.util.List;
 public class BankManager implements Serializable, BankWorker {
 
     private String password;
-    private List<String> newUsersRequests = new ArrayList<>();
+    private List<List<Object>> newUsersRequests = new ArrayList<>();
 
     public BankManager() {
         this.password = "123";
@@ -44,11 +44,22 @@ public class BankManager implements Serializable, BankWorker {
         Database.retrieve();
         retrieveRequests();
 
-        for (String username : newUsersRequests) {
+        for (List<Object> users: newUsersRequests) {
             if (CreditScore.getRandomDoubleBetweenRange() > 0) {
-                User user = new User(username);
-                user.createAccount(AccountType.CHEQUING);
-                setUserPassword(user);
+                String username = (String) users.get(0);
+                UserType userType = (UserType) users.get(1);
+                switch (userType){
+                    case NormalUser:
+                        User user = new User(username);
+                        user.createAccount(AccountType.CHEQUING);
+                        setUserPassword(user);
+                        break;
+                    case BankIntern:
+                        BankIntern bankIntern= new BankIntern(username);
+                        bankIntern.createAccount(AccountType.CHEQUING);
+                        setUserPassword(bankIntern);
+                        break;
+                }
             }
         }
         newUsersRequests.clear();
@@ -152,7 +163,7 @@ public class BankManager implements Serializable, BankWorker {
     }
 
 
-    void newUserRequest(String username) throws UsernameTakenException {
+    void newUserRequest(String username, UserType type) throws UsernameTakenException {
 
         Database Database = new Database();
         Database.retrieve();
@@ -161,7 +172,11 @@ public class BankManager implements Serializable, BankWorker {
         if ((Database.checkExistingUser(username) != null) || (checkUserRequests(username))) {
             throw new UsernameTakenException();
         } else {
-            newUsersRequests.add(username);
+            List<Object> userTypes = new ArrayList<>();
+            userTypes.add(username);
+            userTypes.add(type);
+
+            newUsersRequests.add(userTypes);
             storeRequests();
             Database.store();
         }
@@ -169,16 +184,18 @@ public class BankManager implements Serializable, BankWorker {
 
 
     private boolean checkUserRequests(String username){
-        for (String user: newUsersRequests) {
+
+        for(List users: newUsersRequests){
+            String user = (String)users.get(0);
+            System.out.println(user);
             if (user.equals(username)) {
-                return true;
+                    return true;
             }
         }
         return false;
+
     }
-
-
-    void ReStockATM(int amount, int bill) throws IOException{
+    public void ReStockATM(int amount, int bill) throws IOException{
         CashManager cashManager = new CashManager();
         for (int i = 0; i < cashManager.getDenominations().length; i++){
             if (cashManager.getDenominations()[i] == bill){
@@ -210,7 +227,7 @@ public class BankManager implements Serializable, BankWorker {
             try {
                 FileInputStream fis = new FileInputStream("newUsersRequests");
                 ObjectInputStream ois = new ObjectInputStream(fis);
-                newUsersRequests = (List<String>) ois.readObject();
+                newUsersRequests = (List<List<Object>>) ois.readObject();
                 ois.close();
                 fis.close();
             } catch (IOException ioe) {

@@ -4,8 +4,6 @@ import java.io.IOException;
 
 interface BankWorker {
 
-    void ReverseLastTransfer(Account account) throws  InsufficientFundsException;
-
-
+    void ReStockATM(int amount, int bill) throws IOException;
 
 }

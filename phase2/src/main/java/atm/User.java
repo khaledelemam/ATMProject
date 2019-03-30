@@ -23,6 +23,10 @@ public class User implements Serializable {
         this.primaryAccount = null;
     }
 
+    // important for bank teller
+    public User(){
+    }
+
     @Override
     public String toString() {
         return this.username;

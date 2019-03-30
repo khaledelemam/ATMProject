@@ -36,12 +36,14 @@ public class atmLogin {
 
     boolean bankTellerCheck(String username, String password){
         Database database = new Database();
+
         User isUser = database.checkExistingUser(username);
-        if (isUser instanceof BankTeller && isUser.getPassword() == password){
+        if (isUser instanceof BankIntern && isUser.getPassword().equals(password)){
             return true;
         }
         return false;
     }
+
     boolean userLogin(String username, String password) {
 
         Database Database = new Database();
@@ -51,9 +53,9 @@ public class atmLogin {
 
     // ----- new user -----
 
-    String newUserRequest(String username) {
+    String newUserRequest(String username, UserType type) {
         try {
-            bankManager.newUserRequest(username);
+            bankManager.newUserRequest(username, type);
             return "Please wait until an admin approves your account.";
         } catch (UsernameTakenException u) {
             return (u.getMessage());

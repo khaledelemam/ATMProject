@@ -22,6 +22,7 @@ public class Database {
     }
 
     User checkExistingUser(String username){
+        retrieve();
         for (User user:users) {
             if (user.getUsername().equals(username)) {
                 return user;
@@ -41,7 +42,6 @@ public class Database {
        }
        return null;
     }
-
 
       void  store(){
         try{
