@@ -1,6 +1,5 @@
 package atm;
 
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -49,8 +48,7 @@ public class InterfaceAdmin implements Initializable{
     private ObservableList<User> users;
 
 
-    atmAdmin atm = new atmAdmin();
-
+    atmAdmin atm = new atmAdmin(new BankManager());
 
     public InterfaceAdmin () throws IOException{
         CashManager cm = new CashManager();
@@ -98,7 +96,6 @@ public class InterfaceAdmin implements Initializable{
     }
 
     public void showUserAccounts(ActionEvent actionEvent) {
-
         atm.setUser(adminUser_cbox.getSelectionModel().getSelectedItem());
         adminAccount_cbox.setItems(FXCollections.observableArrayList(atm.getAccounts()));
     }

@@ -19,10 +19,17 @@ import static java.time.temporal.ChronoUnit.SECONDS;
 /** Controller class for login data for users and creating new login for new users. */
 public class atmLogin {
 
+
+    private BankManager bankManager;
+
     // ----- login -----
 
+    public atmLogin(BankManager bankManager){
+         this.bankManager = bankManager;
+
+    }
+
     boolean adminCheck(String username, String password) {
-        BankManager bankManager = new BankManager();
         return username.equals("admin") && password.equals(bankManager.getPassword());
     }
 
@@ -37,8 +44,7 @@ public class atmLogin {
 
     String newUserRequest(String username) {
         try {
-            BankManager bmu = new BankManager();
-            bmu.newUserRequest(username);
+            bankManager.newUserRequest(username);
             return "Please wait until an admin approves your account.";
         } catch (UsernameTakenException u) {
             return (u.getMessage());

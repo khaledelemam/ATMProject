@@ -1,5 +1,6 @@
 package atm;
 
+import com.sun.xml.internal.rngom.digested.DAnnotation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -8,7 +9,18 @@ import java.io.IOException;
 /** Controller class for admin data and functionality. */
 public class atmAdmin {
 
-    private User USER = null;
+    private User USER;
+    private BankManager bankManager;
+
+    public atmAdmin(BankManager bankManager){
+        this.bankManager = bankManager;
+
+    }
+
+
+    public void setUser(User user) {
+        USER = user;
+    }
 
     public ObservableList<Account> getAccounts() {
         return FXCollections.observableArrayList(USER.getAccounts());
@@ -21,11 +33,6 @@ public class atmAdmin {
     }
 
 
-    public void setUser(User user) {
-        USER = user;
-    }
-
-
     ObservableList<User> getUsers() {
         Database Database = new Database();
         Database.retrieve();
@@ -34,24 +41,20 @@ public class atmAdmin {
 
 
     void acceptNewUserRequests() {
-        BankManager bmn = new BankManager();
-        bmn.createUser();
+        bankManager.createUser();
     }
 
     void acceptNewAccountRequests() {
-        BankManager bma = new BankManager();
-        bma.newAccountRequest();
+        bankManager.newAccountRequest();
     }
 
     void advanceDate(int days) {
-        BankManager bankManager = new BankManager();
         bankManager.setDate(days, new Time());
     }
 
     String reverseTransaction(Account account) {
         try {
-            BankManager bankManager = new BankManager();
-            bankManager.ReverseLastTransaction(account);
+            bankManager.ReverseLastTransfer(account);
             return "Transaction for " + USER + " reversed";
         } catch (InsufficientFundsException e) {
             return "Transaction could not be reversed.";
@@ -62,7 +65,6 @@ public class atmAdmin {
 
     String addBills(int amount, int bill){
         try {
-            BankManager bankManager = new BankManager();
             bankManager.ReStockATM(amount, bill);
             return "Bill re-stocked";
         }catch (IOException e){
