@@ -62,17 +62,14 @@ public class atmUser {
      String requestNewAccount(AccountType choice, String partner) {
         Database Database = new Database();
         if (choice == AccountType.JOINT) {
-
             if (Database.checkExistingUser(partner) != null) {
                 USER.requestAccount(partner, choice);
-                Database.store();
                 return "Account requested";
             } else {
                 return "User does not exist.";
             }
         }
         USER.requestAccount(choice);
-        Database.store();
         return "Account requested";
     }
 
