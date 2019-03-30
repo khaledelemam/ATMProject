@@ -1,0 +1,4 @@
+ReverseATM
+--
+--
++ ReverseTransaction(trans: Transaction): void

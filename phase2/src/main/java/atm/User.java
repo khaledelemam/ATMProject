@@ -15,7 +15,7 @@ public class User implements Serializable {
 
     private AccountType accountRequest;
     private String joint;
-    private Account JointAccount;
+    private Account jointAccount;
     private ChequingAccount primaryAccount;
 
     public User(String username) {
@@ -39,7 +39,7 @@ public class User implements Serializable {
 
     String getJoint() {return this.joint;}
 
-    Account getJointAccount() { return this.JointAccount; }
+    Account getJointAccount() { return this.jointAccount; }
 
     void setJoint(String username){
         this.joint = username;
@@ -75,7 +75,7 @@ public class User implements Serializable {
                 // TODO: ??????
                 Account acct = new ChequingAccount();
                 ((ChequingAccount) acct).setJoint();
-                JointAccount = acct;
+                jointAccount = acct;
                 addAccount(acct);
                 break;
             case LOTTERY:
@@ -93,7 +93,7 @@ public class User implements Serializable {
         accountRequest = null;
     }
 
-    String viewAccountInto(Account account) {
+    String viewAccountInfo(Account account) {
         String accountInfo = "--------------------------\n" + account +
                 "\n--------------------------\nBalance: $" + account.getBalance() +
                 "\nDate opened: " + account.getDateOpened();

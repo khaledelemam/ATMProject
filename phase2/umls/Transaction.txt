@@ -1,0 +1,23 @@
+Transaction
+--
+- source: Account
+- recipient: Account
+- amount: double
+- currencyFormat: DecimalFormat
+- username: String
+- date: Time
+- transactionType: TransactionType
+_- serialVersionUID: long_
+--
++ Transaction(source: Account, recipient: Account, amount: double)
++ Transaction(source: Account, recipient: Account, amount: double, username: String)
++ Transaction(source: Account, amount: double, type: TransactionType)
++ toString(): String
++ getAmount(): double
++ getRecipient(): Account
++ getSource(): Account
++ getDate(): date
++ getTransactionType(): TransactionType
+
+
+***implements serializable

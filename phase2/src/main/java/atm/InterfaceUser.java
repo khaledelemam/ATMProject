@@ -85,9 +85,16 @@ public class InterfaceUser {
     }
 
     public void changePassword(ActionEvent actionEvent) {
-        // TODO: use regex to control user input amount format
-        atm.changePassword(newPasswordField.getText());
-        newPasswordMessage.setText("Password changed");
+        String newPassword = newPasswordField.getText();
+            if (newPassword.matches("\\w+")) {
+                atm.changePassword(newPassword);
+                newPasswordMessage.setText("Password changed");
+            } else {
+                newPasswordMessage.setText("Must be letter or digit.");
+            }
+
+
+
     }
 
     public void requestAccount(ActionEvent actionEvent) {
@@ -112,10 +119,16 @@ public class InterfaceUser {
     }
 
     public void deposit(ActionEvent actionEvent) {
-        // TODO: use regex to control user input amount format
-        depositMessage.setText(atm.deposit(Double.parseDouble(depositAmountField.getText())));
-        depositAmountField.setText("");
-    }
+        String amount = depositAmountField.getText();
+        if (amount.matches("^\\d+\\.?\\d{0,2}")) {
+            depositMessage.setText(atm.deposit(Double.parseDouble(amount)));
+            depositAmountField.setText("");
+        } else {
+            depositMessage.setText("Please enter an amount.");
+        }
+        }
+
+
 
 
     public void withdraw(ActionEvent actionEvent) {
@@ -123,29 +136,42 @@ public class InterfaceUser {
     }
 
     public void internalTransfer(ActionEvent actionEvent) {
-        // TODO: use regex to control user input amount format
         Account sender = internalTransferFROM_cbox.getSelectionModel().getSelectedItem();
-        double amount = Double.parseDouble(internalTransferAmount.getText());
-        Account recipient = internalTransferTO_cbox.getSelectionModel().getSelectedItem();
-        internalTransferMessage.setText(atm.internalTransfer(sender, recipient, amount));
-        internalTransferAmount.setText("");
+        String inputAmount = internalTransferAmount.getText();
+        if (inputAmount.matches("^\\d+\\.?\\d{0,2}")) {
+            double amount = Double.parseDouble(inputAmount);
+            Account recipient = internalTransferTO_cbox.getSelectionModel().getSelectedItem();
+            internalTransferMessage.setText(atm.internalTransfer(sender, recipient, amount));
+            internalTransferAmount.setText("");
+        } else {
+            internalTransferMessage.setText("Please enter an amount.");
+        }
     }
 
+
     public void externalTransfer(ActionEvent actionEvent) {
-        // TODO: use regex to control user input amount format
         User recipient = recipientUser.getSelectionModel().getSelectedItem();
-        double amount = Double.parseDouble(externalTransferAmount.getText());
-        Account sender = externalTransfer_cbox.getSelectionModel().getSelectedItem();
-        externalTransferMessage.setText(atm.externalTransfer(recipient, amount, sender));
-        externalTransferAmount.setText("");
+        String inputAmount = externalTransferAmount.getText();
+        if (inputAmount.matches("^\\d+\\.?\\d{0,2}")) {
+            double amount = Double.parseDouble(inputAmount);
+            Account sender = externalTransfer_cbox.getSelectionModel().getSelectedItem();
+            externalTransferMessage.setText(atm.externalTransfer(recipient, amount, sender));
+            externalTransferAmount.setText("");
+        } else {
+            externalTransferMessage.setText("Please enter an amount.");
+        }
 
     }
 
     public void payBill(ActionEvent actionEvent) {
-        // TODO: use regex to control user input amount format
         Account sender = billPay_cbox.getSelectionModel().getSelectedItem();
-        double amount = Double.parseDouble(billPayAmount.getText());
-        billPayMessage.setText(atm.payBill(sender, amount));
+        String inputAmount = billPayAmount.getText();
+        if (inputAmount.matches("^\\d+\\.?\\d{0,2}")) {
+            double amount = Double.parseDouble(inputAmount);
+            billPayMessage.setText(atm.payBill(sender, amount));
+        } else {
+            billPayMessage.setText("Please enter an amount.");
+        }
     }
 
 

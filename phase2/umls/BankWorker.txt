@@ -1,0 +1,7 @@
+BankWorker
+--
+getPassword(): String
+ReverseLastTransaction(account: Account): void
+
+
+***is an interface

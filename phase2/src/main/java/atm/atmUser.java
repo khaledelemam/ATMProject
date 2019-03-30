@@ -34,7 +34,7 @@ public class atmUser {
     }
 
     String viewAccountInfo(Account account) {
-        return USER.viewAccountInto(account);
+        return USER.viewAccountInfo(account);
     }
 
     String getNetBalance() {

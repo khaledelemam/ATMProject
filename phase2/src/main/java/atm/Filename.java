@@ -8,6 +8,9 @@ public class Filename {
 
     /** Filename used in Main */
     private String fxmlFile = "InterfaceLogin.fxml";
+
+    /** File path for outgoing file used in PayBills */
+    private String outgoingFile = "phase2/src/main/java/atm/outgoing.txt";
 //
 //    /** Filename used in Time */
 //    private String timeFile = "time";
@@ -30,7 +33,11 @@ public class Filename {
         return fxmlFile;
     }
 
-//    public String getTimeFile() {
+    public String getOutgoingFile() {
+        return outgoingFile;
+    }
+
+    //    public String getTimeFile() {
 //        return timeFile;
 //    }
 

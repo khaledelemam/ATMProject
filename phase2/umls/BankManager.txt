@@ -1,0 +1,19 @@
+BankManager
+--
+- password: String
++ newUserRequests: List<String>
+--
++ BankManager()
++ getPassword(): String
+# newUserRequest(username: String): void
+- checkUserRequests(username: String): boolean
+# createUser(): void
+- setUserPassword(user: User): void
+# newAccountRequest(): void
+- storeRequests(): void
+- retrieveRequests(): void
++ ReverseLastTransaction(account: Account): void
+# setDate(days: int, oldDate: Time): void
+# ReStockATM(amount: int, bill: int): void
+
+***implements serializable, BankWorker

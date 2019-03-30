@@ -1,0 +1,12 @@
+BankTeller
+--
+- password: String
+--
++ BankTeller(username: String)
++ isEmployee(): boolean
++ getPassword(): String
++ ReverseLastTransaction(account: Account): void
+
+
+
+***implements BankWorker, extends user

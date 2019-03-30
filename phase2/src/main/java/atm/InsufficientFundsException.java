@@ -5,7 +5,7 @@ public class InsufficientFundsException extends Exception{
         super("You have insufficient funds.");
     }
 
-    /** Used for DebtAccounts */
+    /** Used for DebtAccounts reaching max debt */
     public InsufficientFundsException(String message){
         super(message);
     }
