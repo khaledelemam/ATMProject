@@ -34,7 +34,7 @@ public class atmLogin {
     }
 
     boolean adminCheck(String username, String password) {
-        return username.equals("admin") && password.equals(bankManager.getPassword());
+        return username.equals(bankManager.getUsername()) && password.equals(bankManager.getPassword());
 
     }
 

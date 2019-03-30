@@ -8,11 +8,8 @@ import java.util.List;
 public class User extends People implements Serializable {
 
     private static final long serialVersionUID = 42L;
-    private String username;
-    private String password;
     private DecimalFormat currencyFormat = new DecimalFormat("0.00");
     private List<Account> accounts = new ArrayList<>();
-
     private AccountType accountRequest;
     private String joint;
     private Account jointAccount;
@@ -32,14 +29,7 @@ public class User extends People implements Serializable {
         return this.username;
     }
 
-    void setPassword (String password){
-        this.password = password;
-
-    }
-
-    String getUsername() {return this.username;}
-
-    String getPassword() {return this.password;}
+    void setPassword (String password){ this.password = password;}
 
     String getJoint() {return this.joint;}
 

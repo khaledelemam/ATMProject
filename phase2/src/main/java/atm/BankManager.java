@@ -7,16 +7,12 @@ import java.util.List;
 
 public class BankManager extends  People implements Serializable, BankWorker {
 
-    private String password;
     private List<List<Object>> newUsersRequests = new ArrayList<>();
     private Database Database = new Database();
 
     public BankManager() {
+        this.username = "admin";
         this.password = "123";
-    }
-
-    public String getPassword() {
-        return this.password;
     }
 
 

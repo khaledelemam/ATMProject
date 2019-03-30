@@ -13,7 +13,6 @@ public abstract class Account implements Serializable {
     private Transaction lastTransaction;
     private Time dateOpened;
     private static final long serialVersionUID = 10L;
-//    private List<Transaction> transfers= new ArrayList<>();
     private List<Transaction> allTransactions = new ArrayList<>();
 
     public Account() {
@@ -41,17 +40,11 @@ public abstract class Account implements Serializable {
         lastTransaction = newTransaction;
     }
 
-//    public void addTransaction(Transaction newTransaction){
-//        transfers.add(newTransaction);
-//    }
-
 
     /** Return positive or negative (debt accounts) balance to calculate net total. */
     public double getNetTotal(){
         return balance;
     }
-//
-//    public List<Transaction> getTransfers(){return this.transfers;}
 
     public List<Transaction> getAllTransactions(){return this.allTransactions;}
 
