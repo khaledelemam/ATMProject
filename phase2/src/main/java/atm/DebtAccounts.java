@@ -3,7 +3,7 @@ package atm;
 /**
  * Accounts that accumulate debt. Positive net total means user owes money.
  */
-public class DebtAccounts extends Account {
+public abstract class DebtAccounts extends Account {
     private double maxDebt = 500.;
 
     public DebtAccounts() {
