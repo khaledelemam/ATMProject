@@ -6,9 +6,10 @@ import java.util.List;
 
 
 public class Database{
-    //TODO: Try passing in the serializable stuff in Database constructor and storing each thing ( pass in transactions, users, accounts..)
 
     private static List<User> users = new ArrayList<>();
+
+    private Filename file = new Filename();
 
 
     List<User> getUsers() {
@@ -36,41 +37,23 @@ public class Database{
                    return user;
                }
            }
+
        }
        return null;
     }
 
-      void  store(){
-        try{
-            FileOutputStream fos = new FileOutputStream("Users");
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(users);
-            oos.close();
-            fos.close();
-        }catch(IOException ioe){
-            ioe.printStackTrace();
-        }
+    void  store(){
+          Serialize ser = new Serialize(file.getUsersFile(), users);
+          ser.store();
     }
 
     @SuppressWarnings("unchecked")
 
  void retrieve() {
-        File f = new File("Users");
-        if (f.exists()) {
-            try {
-                FileInputStream fis = new FileInputStream("Users");
-                ObjectInputStream ois = new ObjectInputStream(fis);
-                users = (List) ois.readObject();
-                ois.close();
-                fis.close();
+        Serialize ser = new Serialize(file.getUsersFile(), users);
+        Object retrieve = ser.retrieve();
+        if (retrieve != null) users = (List<User>) retrieve;
 
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-            } catch (ClassNotFoundException c) {
-                System.out.println("Class not found");
-                c.printStackTrace();
-            }
-        }
     }
 
 

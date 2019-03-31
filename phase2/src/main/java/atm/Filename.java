@@ -1,25 +1,33 @@
 package atm;
 
-public class Filename {
+import java.io.Serializable;
+
+public class Filename implements Serializable {
+
+    private static final long serialVersionUID = 200L;
 
     /** Filenames used in CashManager */
     private String cashFile = "phase2/src/main/java/atm/cash.txt";
     private String alertFile = "phase2/src/main/java/atm/alerts.txt";
 
-    /** Filename used in Main */
-    private String fxmlFile = "InterfaceLogin.fxml";
-
     /** File path for outgoing file used in PayBills */
     private String outgoingFile = "phase2/src/main/java/atm/outgoing.txt";
-//
-//    /** Filename used in Time */
-//    private String timeFile = "time";
-//
-//    /** Serial file used in Database */
-//    private String databaseFile = "Users";
-//
-//    /** Serial file used in BankManager */
-//    private String requestsFile = "newUsersRequest";
+
+    /** FXML files */
+    private String loginFile = "InterfaceLogin.fxml";
+    private  String adminFile = "InterfaceAdmin.fxml";
+    private String bankInternFile = "InterfaceBankIntern.fxml";
+    private String newUserFile = "InterfaceNewUser.fxml";
+    private String userFile = "InterfaceUser.fxml";
+
+    /** Filename used in Time */
+    private String timeFile = "time";
+
+    /** Serial file used in Database */
+    private String usersFile = "Users";
+
+    /** Serial file used in BankManager */
+    private String requestsFile = "newUsersRequest";
 
     public String getCashFile() {
         return cashFile;
@@ -29,23 +37,26 @@ public class Filename {
         return alertFile;
     }
 
-    public String getFxmlFile() {
-        return fxmlFile;
+    public String getLoginFile() {
+        return loginFile;
     }
 
     public String getOutgoingFile() {
         return outgoingFile;
     }
 
-    //    public String getTimeFile() {
-//        return timeFile;
-//    }
+    public String getTimeFile() {return timeFile;}
 
-//    public String getDatabaseFile() {
-//        return databaseFile;
-//    }
+    public String getUsersFile() {return usersFile;}
 
-//    public String getRequestsFile() {
-//        return requestsFile;
-//    }
+    public String getRequestsFile() {return requestsFile;}
+
+    public String getAdminFile(){return adminFile;}
+
+    public String getBankInternFile(){return bankInternFile;}
+
+    public String getNewUserFile(){return newUserFile;}
+
+    public String getUserFile(){return userFile;}
+
 }

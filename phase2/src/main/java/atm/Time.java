@@ -9,50 +9,30 @@ public class   Time implements Serializable{
     Date date;
     private static final long serialVersionUID = 120L;
 
-    private static final String filename = "time";
+    private Filename filename = new Filename();
 
 
 
     public Time(int one) {
 
-        File f = new File(filename);
-        if (f.exists()) {
-            try {
-                FileInputStream fis = new FileInputStream(filename);
-                ObjectInputStream ois = new ObjectInputStream(fis);
+        Serialize ser = new Serialize(filename.getTimeFile(), date);
+        Object retrieve = ser.retrieve();
+        if (retrieve !=null){
+            date = (Date) retrieve;
+            long plusOneDay = (1000 * 60 * 60 * 24);
+            date.setTime(date.getTime() + plusOneDay);
+            store();
 
-                date = (Date) ois.readObject();
-
-                long plusOneDay = (1000 * 60 * 60 * 24);
-                date.setTime(date.getTime() + plusOneDay);
-
-                ois.close();
-                fis.close();
-
-                store();
-
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-
-            } catch (ClassNotFoundException c) {
-                System.out.println("Class not found");
-                c.printStackTrace();
-            }
-
-
-        } else {
+        }
+        else{
             date = new Date();
             store();
+
         }
     }
 
 
-    public Time(){
-        retrieve();
-
-    }
-
-
+    public Time(){ retrieve(); }
 
     public Time(long FutureTime){
 
@@ -80,36 +60,14 @@ public class   Time implements Serializable{
 
 
     private void store() {
-        try {
-            FileOutputStream fos = new FileOutputStream(filename);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(date);
-            oos.close();
-            fos.close();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
+        Serialize ser = new Serialize(filename.getTimeFile(), date);
+        ser.store();
     }
 
     private void retrieve(){
-
-        try {
-            FileInputStream fis = new FileInputStream(filename);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-
-            date = (Date) ois.readObject();
-
-            ois.close();
-            fis.close();
-
-
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-
-        } catch (ClassNotFoundException c) {
-            System.out.println("Class not found");
-            c.printStackTrace();
-        }
+        Serialize ser = new Serialize(filename.getTimeFile(), date);
+        Object retrieve = ser.retrieve();
+        if (retrieve !=null) date = (Date) retrieve;
 
 
     }

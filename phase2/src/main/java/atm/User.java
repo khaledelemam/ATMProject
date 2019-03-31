@@ -24,8 +24,7 @@ public class User extends People implements Serializable {
     }
 
     // important for bank teller
-    public User(){
-    }
+    public User(){}
 
     @Override
     public String toString() {

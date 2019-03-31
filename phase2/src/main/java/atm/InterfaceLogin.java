@@ -25,14 +25,15 @@ public class InterfaceLogin{
 
     // initialize ATM
     atmLogin atm = new atmLogin(new BankManager());
+    Filename f = new Filename();
+
 
 
     // ----- login events ------
     public void userLogin(ActionEvent actionEvent) throws IOException{
         // TODO: use regex to control user input amount format
         if (atm.userLogin(login_usernameField.getText(), login_passwordField.getText())) {
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfaceUser.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(f.getUserFile()));
             Parent UserScreen = loader.load();
             InterfaceUser controller = loader.getController();
             controller.setUpUser(login_usernameField.getText());
@@ -54,7 +55,8 @@ public class InterfaceLogin{
     public void adminLogin(ActionEvent actionEvent) throws IOException {
         // TODO: use regex to control user input amount format
         if (atm.adminCheck(login_usernameField.getText(), login_passwordField.getText())) {
-            Parent adminScreen = FXMLLoader.load(getClass().getResource("InterfaceAdmin.fxml"));
+
+            Parent adminScreen = FXMLLoader.load(getClass().getResource(f.getAdminFile()));
             Scene scene = new Scene(adminScreen);
             Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             window.setScene(scene);
@@ -62,7 +64,8 @@ public class InterfaceLogin{
         }
         else if (atm.bankTellerCheck(login_usernameField.getText(), login_passwordField.getText())){
             // do bankTeller interface stuff
-            Parent internScreen = FXMLLoader.load(getClass().getResource("InterfaceBankIntern.fxml"));
+            Filename f = new Filename();
+            Parent internScreen = FXMLLoader.load(getClass().getResource(f.getBankInternFile()));
             Scene scene = new Scene(internScreen);
             Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             window.setScene(scene);
@@ -77,7 +80,7 @@ public class InterfaceLogin{
 
     public void newUser(ActionEvent actionEvent) throws IOException {
 
-        Parent newUserScreen = FXMLLoader.load(getClass().getResource("InterfaceNewUser.fxml"));
+        Parent newUserScreen = FXMLLoader.load(getClass().getResource(f.getNewUserFile()));
         Scene scene = new Scene(newUserScreen);
         Stage window = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
         window.setScene(scene);
