@@ -11,6 +11,6 @@ InterfaceAdmin
 + showUserAccounts(actionEvent: ActionEvent): void
 + reverseLastTransaction(actionEvent: ActionEvent): void
 + adminLogout(actionEvent: ActionEvent): void
-
+- checkInput(fieldInput: String): int
 
 ***implements Initializable

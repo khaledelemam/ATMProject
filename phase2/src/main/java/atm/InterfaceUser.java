@@ -25,7 +25,7 @@ public class InterfaceUser {
     public Label newPasswordMessage;
     public ToggleGroup newAccountsGroup;
     public RadioButton chequingRadioButton, savingsRadioButton,
-            creditRadioButton, lineRadioButton, jointRadioButton, lotteryAccount;;
+            creditRadioButton, lineRadioButton, jointRadioButton, lotteryAccount;
     public TextField shareAccountField;
     public Button requestAccountButton;
     public Label requestAccountMessage;
@@ -39,8 +39,8 @@ public class InterfaceUser {
     public Label netBalance;
 
     // transfers
-    public ComboBox<Account>  externalTransfer_cbox, internalTransferTO_cbox,
-            internalTransferFROM_cbox,  billPay_cbox;
+    public ComboBox<Account> externalTransfer_cbox, internalTransferTO_cbox,
+            internalTransferFROM_cbox, billPay_cbox;
     public ComboBox<User> recipientUser;
     public Button internalTransferButton, externalTransferButton, payBillButton;
     public Label internalTransferMessage, billPayMessage, externalTransferMessage;
@@ -56,11 +56,11 @@ public class InterfaceUser {
     atmUser atm;
 
 
-    public void setUpUser(String username) throws IOException{
+    public void setUpUser(String username) throws IOException {
 
         atm = new atmUser(username);
 
-        ObservableList<String>  withdrawValues = atm.getWithdrawValues();
+        ObservableList<String> withdrawValues = atm.getWithdrawValues();
         String NetBalance = atm.getNetBalance();
         ObservableList<User> users = atm.getUsers();
         ObservableList<Account> accounts = atm.getAccounts();
@@ -89,15 +89,12 @@ public class InterfaceUser {
 
     public void changePassword(ActionEvent actionEvent) {
         String newPassword = newPasswordField.getText();
-            if (newPassword.matches("\\w+")) {
-                atm.changePassword(newPassword);
-                newPasswordMessage.setText("Password changed");
-            } else {
-                newPasswordMessage.setText("Must be letter or digit.");
-            }
-
-
-
+        if (newPassword.matches("\\w+")) {
+            atm.changePassword(newPassword);
+            newPasswordMessage.setText("Password changed");
+        } else {
+            newPasswordMessage.setText("Enter letters or numbers");
+        }
     }
 
     public void requestAccount(ActionEvent actionEvent) {
@@ -113,10 +110,9 @@ public class InterfaceUser {
     }
 
     public void showAccountInfo(ActionEvent actionEvent) {
-        if (accounts_cbox.getSelectionModel().getSelectedItem() != null){
-                accounts_infoArea.setText(atm.viewAccountInfo(accounts_cbox.getSelectionModel().getSelectedItem()));
-        }
-        else{
+        if (accounts_cbox.getSelectionModel().getSelectedItem() != null) {
+            accounts_infoArea.setText(atm.viewAccountInfo(accounts_cbox.getSelectionModel().getSelectedItem()));
+        } else {
             accounts_infoArea.setText("Please choose an account.");
         }
 
@@ -124,77 +120,67 @@ public class InterfaceUser {
     }
 
     public void deposit(ActionEvent actionEvent) {
-        String amount = depositAmountField.getText();
-        if (amount.matches("^\\d+\\.?\\d{0,2}")) {
-            depositMessage.setText(atm.deposit(Double.parseDouble(amount)));
+        try {
+            double amount = checkInput(depositAmountField.getText());
+            depositMessage.setText(atm.deposit(amount));
             depositAmountField.setText("");
-//            netBalance.setText("Net balance: $" + atm.getNetBalance());
-        } else {
-            depositMessage.setText("Please enter an amount.");
+        } catch (InvalidInputException e) {
+            depositAmountField.setText(e.getMessage());
         }
-        }
+    }
 
 
 
     public void withdraw(ActionEvent actionEvent) {
-        withdrawMessage.setText(atm.withdraw((Double.valueOf(withdraw_cbox.getSelectionModel().getSelectedItem()))));
-//        netBalance.setText("Net balance: $" + atm.getNetBalance());
+        withdrawMessage.setText(atm.withdraw(Double.valueOf((withdraw_cbox.getSelectionModel().getSelectedItem()))));
     }
 
     public void internalTransfer(ActionEvent actionEvent) {
         Account sender = internalTransferFROM_cbox.getSelectionModel().getSelectedItem();
-        String inputAmount = internalTransferAmount.getText();
-        if (inputAmount.matches("^\\d+\\.?\\d{0,2}")) {
-            double amount = Double.parseDouble(inputAmount);
+
+        try {
+            double amount = checkInput(internalTransferAmount.getText());
+
             Account recipient = internalTransferTO_cbox.getSelectionModel().getSelectedItem();
-            if (recipient == sender){
+            if (recipient == sender) {
                 internalTransferMessage.setText("Can't transfer to the same account.");
-            }
-            else if (sender instanceof CreditCard){
+            } else if (sender instanceof CreditCard) {
                 internalTransferMessage.setText("Can't transfer out of a credit card account.");
-            }
-            else {
+            } else {
                 internalTransferMessage.setText(atm.internalTransfer(sender, recipient, amount));
                 internalTransferAmount.setText("");
-//                netBalance.setText("Net balance: $" + atm.getNetBalance());
             }
-        } else {
-            internalTransferMessage.setText("Please enter an amount.");
+        } catch (InvalidInputException e) {
+            internalTransferMessage.setText(e.getMessage());
         }
     }
 
 
     public void externalTransfer(ActionEvent actionEvent) {
         User recipient = recipientUser.getSelectionModel().getSelectedItem();
-        String inputAmount = externalTransferAmount.getText();
-        if (inputAmount.matches("^\\d+\\.?\\d{0,2}")) {
-            double amount = Double.parseDouble(inputAmount);
-            Account sender = externalTransfer_cbox.getSelectionModel().getSelectedItem();
-            if (sender instanceof CreditCard){
+        Account sender = externalTransfer_cbox.getSelectionModel().getSelectedItem();
+        try {
+            double amount = checkInput(externalTransferAmount.getText());
+
+            if (sender instanceof CreditCard) {
                 externalTransferMessage.setText("Can't transfer out of a credit card account.");
-            }
-            else {
+            } else {
                 externalTransferMessage.setText(atm.externalTransfer(recipient, amount, sender));
                 externalTransferAmount.setText("");
-//                netBalance.setText("Net balance: $" + atm.getNetBalance());
-
             }
-        }
-        else {
-            externalTransferMessage.setText("Please enter an amount.");
+        } catch (InvalidInputException e) {
+            externalTransferMessage.setText(e.getMessage());
         }
 
     }
 
     public void payBill(ActionEvent actionEvent) {
-        Account sender = billPay_cbox.getSelectionModel().getSelectedItem();
-        String inputAmount = billPayAmount.getText();
-        if (inputAmount.matches("^\\d+\\.?\\d{0,2}")) {
-            double amount = Double.parseDouble(inputAmount);
+        try {
+            Account sender = billPay_cbox.getSelectionModel().getSelectedItem();
+            double amount = checkInput(billPayAmount.getText());
             billPayMessage.setText(atm.payBill(sender, amount));
-//            netBalance.setText("Net balance: $" + atm.getNetBalance());
-        } else {
-            billPayMessage.setText("Please enter an amount.");
+        } catch (InvalidInputException e) {
+            billPayMessage.setText(e.getMessage());
         }
     }
 
@@ -210,7 +196,14 @@ public class InterfaceUser {
     }
 
 
-
+    /** Helper method to check if amount input is in correct decimal format. */
+    private double checkInput(String fieldInput) throws InvalidInputException {
+        if (fieldInput.matches("^\\d+\\.?\\d{0,2}")) {
+            return Double.parseDouble(fieldInput);
+        } else {
+            throw new InvalidInputException("Please enter an amount.");
+        }
+    }
 
 
 }
