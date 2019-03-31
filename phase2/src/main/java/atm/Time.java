@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class   Time implements Serializable{
 
-    Date date;
+    public Date date;
     private static final long serialVersionUID = 120L;
 
     private Filename filename = new Filename();

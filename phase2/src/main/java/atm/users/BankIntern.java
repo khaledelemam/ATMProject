@@ -1,0 +1,29 @@
+package atm.users;
+
+import atm.BankWork;
+import atm.CashManager;
+import atm.users.User;
+
+import java.io.*;
+
+public class BankIntern extends User implements BankWork {
+    private static final long serialVersionUID = 69L;
+
+    public BankIntern(String username) {
+        super(username);
+    }
+
+    public BankIntern(){
+    }
+
+    @Override
+    public boolean isEmployee() {
+        return true;
+    }
+
+    public void ReStockATM(int amount, int bill) throws IOException{
+        CashManager cashManager = new CashManager();
+        cashManager.ReStockATM(amount, bill);
+    }
+
+}

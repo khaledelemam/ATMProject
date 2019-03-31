@@ -1,6 +1,7 @@
 package atm;
 
-import java.io.*;
+import atm.users.User;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,16 +13,16 @@ public class Database{
     private Filename file = new Filename();
 
 
-    List<User> getUsers() {
+   public  List<User> getUsers() {
         return users;
     }
 
-    void addUser(User user){
+    public void addUser(User user){
         users.add(user);
         store();
     }
 
-    User checkExistingUser(String username){
+    public User checkExistingUser(String username){
         for (User user:users) {
             if (user.getUsername().equals(username)) {
                 return user;
@@ -30,7 +31,7 @@ public class Database{
         return null;
     }
 
-    User login(String username, String password){
+    public User login(String username, String password){
        for (User user : users) {
            if (user.getUsername().equals(username)) {
                if (user.getPassword().equals(password)) {
@@ -42,14 +43,14 @@ public class Database{
        return null;
     }
 
-    void  store(){
+    public void  store(){
           Serialize ser = new Serialize(file.getUsersFile(), users);
           ser.store();
     }
 
     @SuppressWarnings("unchecked")
 
- void retrieve() {
+   public  void retrieve() {
         Serialize ser = new Serialize(file.getUsersFile(), users);
         Object retrieve = ser.retrieve();
         if (retrieve != null) users = (List<User>) retrieve;

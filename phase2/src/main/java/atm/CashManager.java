@@ -1,5 +1,7 @@
 package atm;
 
+import atm.transactions.WithdrawException;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +45,7 @@ public class CashManager {
 
     private int[] getBillNumber() {return billNumber;}
 
-    List<String> getWithdrawAmounts(){
+    public List<String> getWithdrawAmounts(){
         return withdrawAmounts;
     }
 
@@ -122,7 +124,7 @@ public class CashManager {
     }
 
     // sends an alert when a denomination falls below the threshold
-    void update() throws IOException {
+    public void update() throws IOException {
 
         final int threshold = 20;
 
@@ -137,7 +139,7 @@ public class CashManager {
     }
 
     // Returns the alerts or a string that says "No Alerts"
-     String showAlerts() throws IOException {
+     public String showAlerts() throws IOException {
         File file = new File(alertFile);
         Scanner input = new Scanner(file);
         StringBuilder sb = new StringBuilder();
@@ -155,7 +157,7 @@ public class CashManager {
 
     }
 
-    void subtractDenominations(double amount, int index) throws WithdrawException, IOException {
+    public void subtractDenominations(double amount, int index) throws WithdrawException, IOException {
 
         int DecreaseBy = 1;
 
@@ -174,7 +176,7 @@ public class CashManager {
 
     }
 
-    List<String> getBillsList(){
+   public  List<String> getBillsList(){
 
         for (int i = 0 ; i < getDenominations().length; i++) {
             int num = getDenominations()[i];

@@ -1,0 +1,5 @@
+five 5 50
+ten 10 64
+twenty 20 59
+fifty 50 59
+hundred 100 59

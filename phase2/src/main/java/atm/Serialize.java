@@ -14,7 +14,7 @@ public class Serialize {
     }
 
 
-    void  store(){
+    public void  store(){
         try{
             FileOutputStream fos = new FileOutputStream(file);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -27,7 +27,7 @@ public class Serialize {
     }
 
 
-    Object retrieve() {
+    public Object retrieve() {
         File f = new File(file);
         if (f.exists()) {
             try {
