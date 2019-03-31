@@ -120,13 +120,16 @@ public class InterfaceUser {
     }
 
     public void deposit(ActionEvent actionEvent) {
-        try {
-            double amount = checkInput(depositAmountField.getText());
+        if (checkInput(depositAmountField.getText())){
+
+            double amount = Double.parseDouble(depositAmountField.getText());
             depositMessage.setText(atm.deposit(amount));
-            depositAmountField.setText("");
-        } catch (InvalidInputException e) {
-            depositAmountField.setText(e.getMessage());
         }
+        else{
+            depositMessage.setText("Please enter a number.");
+        }
+        depositAmountField.setText("");
+
     }
 
 
@@ -136,52 +139,57 @@ public class InterfaceUser {
     }
 
     public void internalTransfer(ActionEvent actionEvent) {
+
         Account sender = internalTransferFROM_cbox.getSelectionModel().getSelectedItem();
+        Account recipient = internalTransferTO_cbox.getSelectionModel().getSelectedItem();
 
-        try {
-            double amount = checkInput(internalTransferAmount.getText());
+        if (checkInput(internalTransferAmount.getText())){
 
-            Account recipient = internalTransferTO_cbox.getSelectionModel().getSelectedItem();
+            double amount = Double.parseDouble(internalTransferAmount.getText());
             if (recipient == sender) {
                 internalTransferMessage.setText("Can't transfer to the same account.");
             } else if (sender instanceof CreditCard) {
                 internalTransferMessage.setText("Can't transfer out of a credit card account.");
             } else {
                 internalTransferMessage.setText(atm.internalTransfer(sender, recipient, amount));
-                internalTransferAmount.setText("");
             }
-        } catch (InvalidInputException e) {
-            internalTransferMessage.setText(e.getMessage());
+        } else{
+            internalTransferMessage.setText("Please enter a number.");
         }
+        internalTransferAmount.setText("");
     }
 
 
     public void externalTransfer(ActionEvent actionEvent) {
         User recipient = recipientUser.getSelectionModel().getSelectedItem();
         Account sender = externalTransfer_cbox.getSelectionModel().getSelectedItem();
-        try {
-            double amount = checkInput(externalTransferAmount.getText());
 
+        if(checkInput(externalTransferAmount.getText())){
+            double amount = Double.parseDouble(externalTransferAmount.getText());
             if (sender instanceof CreditCard) {
                 externalTransferMessage.setText("Can't transfer out of a credit card account.");
             } else {
                 externalTransferMessage.setText(atm.externalTransfer(recipient, amount, sender));
-                externalTransferAmount.setText("");
             }
-        } catch (InvalidInputException e) {
-            externalTransferMessage.setText(e.getMessage());
         }
+        else{
+            externalTransferMessage.setText("Please enter a number.");
+        }
+        externalTransferAmount.setText("");
 
     }
 
     public void payBill(ActionEvent actionEvent) {
-        try {
+        if(checkInput(billPayAmount.getText())){
             Account sender = billPay_cbox.getSelectionModel().getSelectedItem();
-            double amount = checkInput(billPayAmount.getText());
+            double amount = Double.parseDouble(billPayAmount.getText());
             billPayMessage.setText(atm.payBill(sender, amount));
-        } catch (InvalidInputException e) {
-            billPayMessage.setText(e.getMessage());
         }
+        else{
+            billPayMessage.setText("Please enter a number.");
+        }
+        billPayAmount.setText("");
+
     }
 
 
@@ -197,12 +205,8 @@ public class InterfaceUser {
 
 
     /** Helper method to check if amount input is in correct decimal format. */
-    private double checkInput(String fieldInput) throws InvalidInputException {
-        if (fieldInput.matches("^\\d+\\.?\\d{0,2}")) {
-            return Double.parseDouble(fieldInput);
-        } else {
-            throw new InvalidInputException("Please enter an amount.");
-        }
+    private boolean checkInput(String fieldInput) {
+        return fieldInput.matches("^\\d+\\.?\\d{0,2}");
     }
 
 

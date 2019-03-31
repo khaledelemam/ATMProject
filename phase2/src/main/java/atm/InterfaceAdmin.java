@@ -80,27 +80,30 @@ public class InterfaceAdmin implements Initializable{
     }
 
     public void advanceTime(ActionEvent actionEvent) {
-        try {
-            int days = checkInput(daysField.getText());
+        if (checkInput(daysField.getText())){
+            int days = Integer.parseInt(daysField.getText());
             atm.advanceDate(days);
-            daysField.setText("");
             Time time = new Time();
             date.setText(time.toString());
             adminMessage.setText("New date set.");
-        } catch (InvalidInputException e) {
-            adminMessage.setText(e.getMessage());
         }
+        else {
+            adminMessage.setText("Please enter a number.");
+        }
+        daysField.setText("");
     }
 
     public void addBills(ActionEvent actionEvent) throws IOException {
         CashManager cm = new CashManager();
-        try {
-            int amount = checkInput(addBillsAmountField.getText());
+        if(checkInput(addBillsAmountField.getText())){
+
+            int amount = Integer.parseInt(addBillsAmountField.getText());
             int bill = Integer.parseInt(addBills_cbox.getSelectionModel().getSelectedItem());
             adminCashMessage.setText(atm.addBills(amount, bill));
             adminAlertMessage.setText(cm.showAlerts());
-        } catch (InvalidInputException e) {
-            adminCashMessage.setText(e.getMessage());
+        }
+        else {
+            adminCashMessage.setText("Please enter a number.");
         }
         addBillsAmountField.setText("");
     }
@@ -126,12 +129,8 @@ public class InterfaceAdmin implements Initializable{
     }
 
     /** Helper method to check if text input is in correct integer format. */
-    private int checkInput(String fieldInput) throws InvalidInputException {
-        if (fieldInput.matches("^\\d+")) {
-            return Integer.parseInt(fieldInput);
-        } else {
-            throw new InvalidInputException("Enter a number.");
-        }
+    private boolean checkInput(String fieldInput) {
+        return fieldInput.matches("^\\d+");
     }
 
 
