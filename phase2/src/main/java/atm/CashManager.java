@@ -12,7 +12,7 @@ public class CashManager {
     private int[] denominations;
     // the number of each denomination
     private int[] billNumber;
-    private String[] denomString;
+    private String[] denominationString;
 
     private List<String> withdrawAmounts = new ArrayList<>();
     private List<String> bills = new ArrayList<>();
@@ -37,10 +37,11 @@ public class CashManager {
 
         }
     }
-    int[] getDenominations(){
+    private int[] getDenominations(){
         return denominations;
     }
-    int[] getBillNumber() {return billNumber;}
+
+    private int[] getBillNumber() {return billNumber;}
 
     List<String> getWithdrawAmounts(){
         return withdrawAmounts;
@@ -50,25 +51,26 @@ public class CashManager {
         return denominations[denominations.length-1-index];
     }
 
-    private void changeDenomination(int index, int amount) throws WithdrawException, IOException{
-        if (checkDenominationAmount(index)){
-            billNumber[billNumber.length-1 - index] -= amount;
-            writeToFile();
-        }
-        else {
-             throw new WithdrawException();
-
-        }
+    // this method is for the alert part in admin
+    private String getBill(int index){
+        return denominationString[index] + "-dollar bills";
     }
+
 
     private boolean checkDenominationAmount(int index){
         return (billNumber[billNumber.length-1-index] > 0);
     }
 
-// this method is for the alert part in admin
-    private String getBill(int index){
-        return denomString[index] + "-dollar bills";
+    private void changeDenomination(int index, int amount) throws WithdrawException, IOException {
+        if (checkDenominationAmount(index)) {
+            billNumber[billNumber.length - 1 - index] -= amount;
+            writeToFile();
+        } else {
+            throw new WithdrawException();
+
+        }
     }
+
 
 
     //sets denominations as the values from text file
@@ -76,21 +78,13 @@ public class CashManager {
         File file = new File(cashFile);
         BufferedReader cashReader = new BufferedReader(new FileReader(file));
 
-        FileInputStream fis = new FileInputStream(file);
-        byte[] byteArray = new byte[(int)file.length()];
-        fis.read(byteArray);
-        String data = new String(byteArray);
-        String[] stringArray = data.split("\n");
-        System.out.println("Number of lines in the file are :"+stringArray.length);
-
-//        int listLength = Integer.parseInt(cashReader.readLine());
-
-        int[] denominations = new int[stringArray.length];
-        int[] billNum = new int[stringArray.length];
-        String[] denomString = new String[stringArray.length];
+        int lines = FileLines();
+        int[] denominations = new int[lines];
+        int[] billNum = new int[lines];
+        String[] denomString = new String[lines];
 
         for (int i = 0; i < denominations.length; i++){
-            //splits line into 2
+            //splits line into 3
             String s = cashReader.readLine();
             String[] split = s.split(" ");
 
@@ -99,17 +93,28 @@ public class CashManager {
             billNum[i] = Integer.parseInt(split[2]);
 
         }
-        this.denomString = denomString;
+        this.denominationString = denomString;
         this.denominations = denominations;
         this.billNumber = billNum;
     }
 
+
+    private int FileLines() throws IOException{
+        File file = new File(cashFile);
+        FileInputStream fis = new FileInputStream(file);
+        byte[] byteArray = new byte[(int)file.length()];
+        fis.read(byteArray);
+        String data = new String(byteArray);
+        String[] stringArray = data.split("\n");
+        return stringArray.length;
+    }
+
     //writes current denominations to file
-    void writeToFile() throws IOException {
+   private void writeToFile() throws IOException {
         File file = new File(cashFile);
         PrintWriter writer = new PrintWriter(new FileWriter(file));
         for (int i = 0; i< denominations.length; i++){
-            writer.print(denomString[i] + " ");
+            writer.print(denominationString[i] + " ");
             writer.print(denominations[i] + " ");
             writer.println(billNumber[i]);
         }
@@ -128,8 +133,6 @@ public class CashManager {
                 writer.println(billNumber[i] + " " + getBill(i) + " left, please restock");
             }
         }
-
-
         writer.close();
     }
 
@@ -137,7 +140,6 @@ public class CashManager {
      String showAlerts() throws IOException {
         File file = new File(alertFile);
         Scanner input = new Scanner(file);
-
         StringBuilder sb = new StringBuilder();
 
         if (!input.hasNext()){
@@ -172,7 +174,7 @@ public class CashManager {
 
     }
 
-    List<String> getDenomList(){
+    List<String> getBillsList(){
 
         for (int i = 0 ; i < getDenominations().length; i++) {
             int num = getDenominations()[i];
@@ -182,19 +184,16 @@ public class CashManager {
 
     }
 
+    public void ReStockATM(int amount, int bill) throws IOException{
+        for (int i = 0; i < getDenominations().length; i++){
+            if (getDenominations()[i] == bill){
+                getBillNumber()[i]  += amount;
+            }
+        }
+        writeToFile();
+        update();
 
-//
-//    public String toString(){
-//
-//        StringBuilder sb = new StringBuilder();
-//        for (int i = 0 ; i < getDenominations().length; i++) {
-//            int num = getDenominations()[i];
-//            sb.append(num);
-//            sb.append("\n");
-//        }
-//        return sb.toString();
-//
-//    }
+    }
 
 
 

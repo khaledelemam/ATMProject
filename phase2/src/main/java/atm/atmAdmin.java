@@ -29,7 +29,7 @@ public class atmAdmin {
 
     ObservableList<String> getBills() throws IOException {
         CashManager cm = new CashManager();
-        return FXCollections.observableArrayList(cm.getDenomList());
+        return FXCollections.observableArrayList(cm.getBillsList());
     }
 
 

@@ -170,7 +170,6 @@ public class BankManager extends People implements Serializable, BankWork {
 
 
     private boolean checkUserRequests(String username){
-
         for(List users: newUsersRequests){
             String user = (String)users.get(0);
             System.out.println(user);
@@ -183,14 +182,7 @@ public class BankManager extends People implements Serializable, BankWork {
     }
     public void ReStockATM(int amount, int bill) throws IOException{
         CashManager cashManager = new CashManager();
-        for (int i = 0; i < cashManager.getDenominations().length; i++){
-            if (cashManager.getDenominations()[i] == bill){
-                cashManager.getBillNumber()[i]  += amount;
-            }
-        }
-        cashManager.writeToFile();
-        cashManager.update();
-
+        cashManager.ReStockATM(amount, bill);
     }
 
     private void storeRequests(){

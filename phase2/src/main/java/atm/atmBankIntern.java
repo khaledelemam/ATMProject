@@ -17,9 +17,8 @@ public class atmBankIntern {
 
     ObservableList<String> getBills() throws IOException {
         CashManager cm = new CashManager();
-        return FXCollections.observableArrayList(cm.getDenomList());
+        return FXCollections.observableArrayList(cm.getBillsList());
     }
-
 
     String addBills(int amount, int bill){
         try {
