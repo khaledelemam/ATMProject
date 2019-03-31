@@ -1,12 +1,12 @@
 package atm.View;
 
-import atm.Filename;
-import atm.Time;
-import atm.accounts.Account;
-import atm.accounts.AccountType;
-import atm.accounts.CreditCard;
-import atm.users.User;
-import atm.users.atmUser;
+import atm.Model.Filename;
+import atm.Model.Time;
+import atm.Model.accounts.Account;
+import atm.Model.accounts.AccountType;
+import atm.Model.accounts.CreditCard;
+import atm.Model.users.User;
+import atm.Controllers.atmUser;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;

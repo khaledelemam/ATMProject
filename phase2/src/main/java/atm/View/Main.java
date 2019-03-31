@@ -1,8 +1,8 @@
 package atm.View;
 
-import atm.Filename;
-import atm.Time;
-import atm.accounts.Calculations;
+import atm.Model.Filename;
+import atm.Model.Time;
+import atm.Model.accounts.Calculations;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;

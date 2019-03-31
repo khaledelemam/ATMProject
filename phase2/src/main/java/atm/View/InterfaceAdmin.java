@@ -1,10 +1,12 @@
 package atm.View;
 
-import atm.*;
-import atm.accounts.Account;
-import atm.admin.BankManager;
-import atm.admin.atmAdmin;
-import atm.users.User;
+import atm.Model.CashManager;
+import atm.Model.Filename;
+import atm.Model.Time;
+import atm.Model.accounts.Account;
+import atm.Model.admin.BankManager;
+import atm.Controllers.atmAdmin;
+import atm.Model.users.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
