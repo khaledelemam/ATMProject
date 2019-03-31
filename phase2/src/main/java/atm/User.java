@@ -54,27 +54,27 @@ public class User extends People implements Serializable {
         switch (accountType) {
             case CHEQUING:
                 ChequingAccount chequing = new ChequingAccount();
-                addAccount(chequing);
                 if (primaryAccount == null) {
                     primaryAccount = chequing;
                 }
                 chequing.setNumber(createAccountHelper(AccountType.CHEQUING));
+                addAccount(chequing);
                 break;
             case SAVINGS:
                 SavingsAccount savingsAccount = new SavingsAccount();
-                addAccount(savingsAccount);
                 savingsAccount.setNumber(createAccountHelper(AccountType.SAVINGS));
+                addAccount(savingsAccount);
 
                 break;
             case LINEOFCREDIT:
                 LineOfCredit lineOfCredit = new LineOfCredit();
-                addAccount(lineOfCredit);
                 lineOfCredit.setNumber(createAccountHelper(AccountType.LINEOFCREDIT));
+                addAccount(lineOfCredit);
                 break;
             case CREDIT:
                 CreditCard creditCard = new CreditCard();
-                addAccount(creditCard);
                 creditCard.setNumber(createAccountHelper(AccountType.CREDIT));
+                addAccount(creditCard);
                 break;
             case JOINT:
                 ChequingAccount acct = new ChequingAccount();
@@ -85,8 +85,8 @@ public class User extends People implements Serializable {
                 break;
             case LOTTERY:
                 LotteryAccount lotteryAccount = new LotteryAccount();
-                addAccount(lotteryAccount);
                 lotteryAccount.setNumber(createAccountHelper(AccountType.LOTTERY));
+                addAccount(lotteryAccount);
                 break;
         }
 
