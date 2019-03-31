@@ -6,7 +6,9 @@ import java.util.Calendar;
 /** Asset account that adds interest to account balance. */
 public class SavingsAccount extends Account {
 
-    public SavingsAccount() { super(); }
+    public SavingsAccount() { super();
+    type = AccountType.SAVINGS;
+    }
 
     @Override
     public void setBalance(double amount) throws InsufficientFundsException {
@@ -29,7 +31,7 @@ public class SavingsAccount extends Account {
 
     @Override
     public String toString() {
-        return "Savings Account";
+        return "Savings Account " + accountNumber;
     }
 
 }

@@ -5,6 +5,7 @@ public class LotteryAccount extends SavingsAccount {
 
     public LotteryAccount(){
         super();
+        type = AccountType.LOTTERY;
     }
 
     @Override
@@ -16,6 +17,6 @@ public class LotteryAccount extends SavingsAccount {
 
     @Override
     public String toString() {
-        return "Lottery Account";
+        return "Lottery Account " + accountNumber;
     }
 }

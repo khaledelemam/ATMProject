@@ -14,6 +14,8 @@ public abstract class Account implements Serializable {
     private Transaction lastTransaction;
     private Time dateOpened;
     private List<Transaction> allTransactions = new ArrayList<>();
+    int accountNumber;
+    AccountType type;
 
 
     public Account() {
@@ -42,11 +44,15 @@ public abstract class Account implements Serializable {
         lastTransaction = newTransaction;
     }
 
+    public void setNumber(int number) { this.accountNumber = number; }
+
 
     /** Return positive or negative (debt accounts) balance to calculate net total. */
     public double getNetTotal(){
         return balance;
     }
+
+    public AccountType getType(){ return type; }
 
     public List<Transaction> getAllTransactions(){return this.allTransactions;}
 

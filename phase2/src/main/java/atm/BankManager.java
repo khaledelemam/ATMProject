@@ -64,18 +64,17 @@ public class BankManager extends  People implements Serializable, BankWork {
             if (CreditScore.getRandomDoubleBetweenRange() > 0) {
                 // for joint accounts
 
-                if (user.getAccountRequest() != null && user.getJoint() != null) {
+                if (user.getAccountRequest() != null && user.getPartner() != null) {
 
                     //primary user
                     AccountType request = user.getAccountRequest();
                     user.createAccount(request);
-
-                    String joint = user.getJoint();
+                    String partner = user.getPartner();
 
                     //partner
-                    User partner = Database.checkExistingUser(joint);
-                    partner.setJoint(user.getUsername());
-                    partner.addAccount(user.getJointAccount());
+                    User OtherUser = Database.checkExistingUser(partner);
+                    OtherUser.setPartner(user.getUsername());
+                    OtherUser.addAccount(user.getJointAccount());
 
                 } //for single accounts
                 else if (user.getAccountRequest() != null) {
