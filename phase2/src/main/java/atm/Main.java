@@ -26,16 +26,17 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+
+        new Time(1);
         Filename f = new Filename();
         Parent root = FXMLLoader.load(getClass().getResource(f.getLoginFile()));
         Scene scene = new Scene(root);
 
-
-        setTimeInitial();
-
         primaryStage.setTitle("ATM");
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        setTimeInitial();
     }
 
     private void setTimeInitial() {
@@ -46,7 +47,7 @@ public class Main extends Application {
         System.out.println(time.toString());
         LocalTime midnight = LocalTime.MAX;
         long terminate = SECONDS.between(time, midnight);
-        date = new Time(1);
+        date = new Time();
         System.out.println(date);
 
         Calculations calc = new Calculations();

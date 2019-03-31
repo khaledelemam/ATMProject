@@ -14,7 +14,7 @@
 
 <StackPane style="-fx-background-color: #696969;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="atm.InterfaceLogin">
    <children>
-      <AnchorPane fx:id="loginScreen" prefHeight="400.0" prefWidth="600.0" >
+      <AnchorPane fx:id="loginScreen" prefHeight="400.0" prefWidth="600.0">
          <children>
             <Button fx:id="loginButton" layoutX="488.0" layoutY="325.0" mnemonicParsing="false" onAction="#userLogin" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Login" textFill="#e1e1e1" />
             <Button fx:id="newAccountButton" layoutX="325.0" layoutY="325.0" mnemonicParsing="false" onAction="#newUser" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Create new account" textFill="#e1e1e1" />
@@ -46,6 +46,7 @@
                   </GridPane>
                </graphic>
             </Label>
+            <Label fx:id="date" layoutX="406.0" layoutY="47.0" prefHeight="54.0" prefWidth="143.0" textAlignment="CENTER" textFill="e1e1e1" />
       
          </children>
       </AnchorPane>

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="adminScreen" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="atm.InterfaceAdmin" prefHeight="400.0" prefWidth="600.0">
+<AnchorPane fx:id="adminScreen" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="atm.InterfaceAdmin">
     <children>
         <TabPane fx:id="adminTabs" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #696969; -fx-border-color: #696969;" tabClosingPolicy="UNAVAILABLE">
             <tabs>
@@ -17,13 +19,14 @@
                                 <Button fx:id="acceptNewUserRequestsButton" layoutX="412.0" layoutY="113.0" mnemonicParsing="false" onAction="#acceptNewUserRequests" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Approve users" textFill="#e1e1e1" />
                                 <Button fx:id="accountRequestsButton" layoutX="412.0" layoutY="165.0" mnemonicParsing="false" onAction="#acceptNewAccountRequests" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Accept all requests" textFill="#e1e1e1" />
                                 <Button fx:id="adminLogoutButton" layoutX="521.0" layoutY="322.0" mnemonicParsing="false" onAction="#adminLogout" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Logout" textFill="#e1e1e1" />
-                                <Label fx:id="adminMessage" layoutX="353.0" layoutY="278.0" prefHeight="17.0" prefWidth="200.0" text="" textAlignment="CENTER" textFill="e1e1e1" />
+                                <Label fx:id="adminMessage" layoutX="353.0" layoutY="278.0" prefHeight="17.0" prefWidth="200.0" textAlignment="CENTER" textFill="e1e1e1" />
                                 <Label layoutX="260.0" layoutY="170.0" text="Existing user requests:" textFill="#e1e1e1" />
                                 <Label layoutX="260.0" layoutY="118.0" text="New user requests: " textFill="#e1e1e1" />
                                 <Label fx:id="adminAlertMessage" layoutX="14.0" layoutY="14.0" prefHeight="338.0" prefWidth="226.0" textFill="#e1e1e1" wrapText="true" />
                                 <Button fx:id="setTimeButton" layoutX="476.0" layoutY="218.0" mnemonicParsing="false" onAction="#advanceTime" style="-fx-background-color: #505050; -fx-border-color: #606060;" text="Set Date" textFill="#e1e1e1" />
                                 <TextField fx:id="daysField" layoutX="385.0" layoutY="218.0" prefHeight="29.0" prefWidth="68.0" promptText="#days" style="-fx-border-color: #060606;" />
                                 <Label layoutX="260.0" layoutY="224.0" prefHeight="17.0" prefWidth="125.0" text="Advance date by:" textFill="#e1e1e1" />
+                                 <Label fx:id="date" layoutX="452.0" layoutY="32.0" prefHeight="43.0" prefWidth="121.0" textAlignment="CENTER" textFill="e1e1e1" />
                             </children></AnchorPane>
                     </content>
                 </Tab>

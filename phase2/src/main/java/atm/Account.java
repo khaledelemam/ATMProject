@@ -26,9 +26,7 @@ public abstract class Account implements Serializable {
     }
 
     /** Return account balance value to display. */
-    public String getBalance(){
-        return currencyFormat.format(balance);
-    }
+    public String getBalance(){ return currencyFormat.format(balance); }
 
     public abstract void setBalance(double amount) throws InsufficientFundsException;
 
@@ -52,7 +50,8 @@ public abstract class Account implements Serializable {
         return balance;
     }
 
-    public AccountType getType(){ return type; }
+    public AccountType getType(){ return type;
+    }
 
     public List<Transaction> getAllTransactions(){return this.allTransactions;}
 

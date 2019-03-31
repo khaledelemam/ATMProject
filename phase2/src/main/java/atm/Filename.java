@@ -21,13 +21,13 @@ public class Filename implements Serializable {
     private String userFile = "InterfaceUser.fxml";
 
     /** Filename used in Time */
-    private String timeFile = "time";
+    private String timeFile = "Time.ser";
 
     /** Serial file used in Database */
-    private String usersFile = "Users";
+    private String usersFile = "Users.ser";
 
     /** Serial file used in BankManager */
-    private String requestsFile = "newUsersRequest";
+    private String requestsFile = "NewUsersRequests.ser";
 
     public String getCashFile() {
         return cashFile;

@@ -2,6 +2,7 @@ package atm;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -10,9 +11,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /** View class for logging into UI. */
-public class InterfaceLogin{
+public class InterfaceLogin implements Initializable {
 
     // ---- login ----
     public AnchorPane loginScreen;
@@ -22,12 +25,17 @@ public class InterfaceLogin{
     public Button adminButton;
     public TextField login_usernameField;
     public Label loginMessage;
+    public Label date;
 
     // initialize ATM
     atmLogin atm = new atmLogin(new BankManager());
-    Filename f = new Filename();
+    private Filename f = new Filename();
 
-
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        Time time = new Time();
+        date.setText(time.toString());
+    }
 
     // ----- login events ------
     public void userLogin(ActionEvent actionEvent) throws IOException{
@@ -64,7 +72,7 @@ public class InterfaceLogin{
         }
         else if (atm.bankTellerCheck(login_usernameField.getText(), login_passwordField.getText())){
             // do bankTeller interface stuff
-            Filename f = new Filename();
+
             Parent internScreen = FXMLLoader.load(getClass().getResource(f.getBankInternFile()));
             Scene scene = new Scene(internScreen);
             Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();

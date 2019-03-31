@@ -30,6 +30,7 @@ public class InterfaceUser {
     public Button requestAccountButton;
     public Label requestAccountMessage;
     public Button logoutButton;
+    public Label date;
 
     // accounts
     public ComboBox<Account> accounts_cbox;
@@ -63,8 +64,10 @@ public class InterfaceUser {
         String NetBalance = atm.getNetBalance();
         ObservableList<User> users = atm.getUsers();
         ObservableList<Account> accounts = atm.getAccounts();
+        Time time = new Time();
 
 
+        date.setText(time.toString());
         accounts_cbox.setItems(accounts);
         internalTransferTO_cbox.setItems(accounts);
         internalTransferFROM_cbox.setItems(accounts);
@@ -125,6 +128,7 @@ public class InterfaceUser {
         if (amount.matches("^\\d+\\.?\\d{0,2}")) {
             depositMessage.setText(atm.deposit(Double.parseDouble(amount)));
             depositAmountField.setText("");
+//            netBalance.setText("Net balance: $" + atm.getNetBalance());
         } else {
             depositMessage.setText("Please enter an amount.");
         }
@@ -134,6 +138,7 @@ public class InterfaceUser {
 
     public void withdraw(ActionEvent actionEvent) {
         withdrawMessage.setText(atm.withdraw((Double.valueOf(withdraw_cbox.getSelectionModel().getSelectedItem()))));
+//        netBalance.setText("Net balance: $" + atm.getNetBalance());
     }
 
     public void internalTransfer(ActionEvent actionEvent) {
@@ -151,6 +156,7 @@ public class InterfaceUser {
             else {
                 internalTransferMessage.setText(atm.internalTransfer(sender, recipient, amount));
                 internalTransferAmount.setText("");
+//                netBalance.setText("Net balance: $" + atm.getNetBalance());
             }
         } else {
             internalTransferMessage.setText("Please enter an amount.");
@@ -170,8 +176,11 @@ public class InterfaceUser {
             else {
                 externalTransferMessage.setText(atm.externalTransfer(recipient, amount, sender));
                 externalTransferAmount.setText("");
+//                netBalance.setText("Net balance: $" + atm.getNetBalance());
+
             }
-        } else {
+        }
+        else {
             externalTransferMessage.setText("Please enter an amount.");
         }
 
@@ -183,6 +192,7 @@ public class InterfaceUser {
         if (inputAmount.matches("^\\d+\\.?\\d{0,2}")) {
             double amount = Double.parseDouble(inputAmount);
             billPayMessage.setText(atm.payBill(sender, amount));
+//            netBalance.setText("Net balance: $" + atm.getNetBalance());
         } else {
             billPayMessage.setText("Please enter an amount.");
         }

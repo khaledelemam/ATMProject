@@ -24,6 +24,7 @@ public class InterfaceAdmin implements Initializable{
 
 
     public AnchorPane adminScreen;
+    public Label date;
     public Label adminMessage;
     public Button acceptNewUserRequestsButton, accountRequestsButton;
     public Button adminLogoutButton;
@@ -64,6 +65,8 @@ public class InterfaceAdmin implements Initializable{
         adminUser_cbox.setItems(users);
         adminAlertMessage.setText(alerts);
         addBills_cbox.setItems(bills);
+        Time time = new Time();
+        date.setText(time.toString());
 
     }
 
@@ -80,6 +83,9 @@ public class InterfaceAdmin implements Initializable{
     public void advanceTime(ActionEvent actionEvent) {
         atm.advanceDate(Integer.parseInt(daysField.getText()));
         daysField.setText("");
+        Time time = new Time();
+        date.setText(time.toString());
+
     }
 
     public void addBills(ActionEvent actionEvent) throws IOException {
