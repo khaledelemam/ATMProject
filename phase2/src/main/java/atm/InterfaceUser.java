@@ -104,10 +104,6 @@ public class InterfaceUser {
         shareAccountField.setVisible(true);
     }
 
-    public void hideShareAccount(ActionEvent actionEvent) {
-        shareAccountField.setVisible(false);
-    }
-
     public void showAccountInfo(ActionEvent actionEvent) {
         if (accounts_cbox.getSelectionModel().getSelectedItem() != null) {
             accounts_infoArea.setText(atm.viewAccountInfo(accounts_cbox.getSelectionModel().getSelectedItem()));
@@ -184,8 +180,8 @@ public class InterfaceUser {
 
 
     public void logout(ActionEvent actionEvent) throws IOException{
-
-        Parent mainScreen = FXMLLoader.load(getClass().getResource("InterfaceLogin.fxml"));
+        Filename f = new Filename();
+        Parent mainScreen = FXMLLoader.load(getClass().getResource(f.getLoginFile()));
         Scene scene = new Scene(mainScreen);
         Stage window = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
         window.setScene(scene);

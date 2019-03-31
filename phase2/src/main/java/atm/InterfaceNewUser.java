@@ -44,7 +44,8 @@ public class InterfaceNewUser implements Initializable {
         newUserMessage.setText("");
         new_usernameField.clear();
 
-        Parent newUserScreen = FXMLLoader.load(getClass().getResource("InterfaceLogin.fxml"));
+        Filename f = new Filename();
+        Parent newUserScreen = FXMLLoader.load(getClass().getResource(f.getLoginFile()));
         Scene scene = new Scene(newUserScreen);
         Stage window = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
         window.setScene(scene);

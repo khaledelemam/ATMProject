@@ -1,21 +1,24 @@
 package atm;
 
 
-public class ChequingAccount extends Account {
+public class ChequingAccount extends Account implements JointAccount{
 
     private boolean joint = false;
+    private String partner;
+    private String user;
 
     public ChequingAccount() {
     super();
+    type = AccountType.CHEQUING;
     }
 
     @Override
     public String toString() {
         if (joint){
-            return "Joint Chequing Account";
+            return "Joint Chequing Account between " + user + " and " + partner;
         }
         else{
-            return "Chequing Account";
+            return "Chequing Account " + accountNumber;
         }
     }
 
@@ -36,6 +39,11 @@ public class ChequingAccount extends Account {
 
     public void setJoint(){
         joint = true;
+    }
+
+    public void setNames(String partnerName, String username){
+        partner= partnerName;
+        user = username;
     }
 
 }

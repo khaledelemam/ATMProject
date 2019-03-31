@@ -3,7 +3,9 @@ package atm;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class User extends People implements Serializable {
 
@@ -11,9 +13,10 @@ public class User extends People implements Serializable {
     private DecimalFormat currencyFormat = new DecimalFormat("0.00");
     private List<Account> accounts = new ArrayList<>();
     private AccountType accountRequest;
-    private String joint;
+    private String partner;
     private Account jointAccount;
     private ChequingAccount primaryAccount;
+    private Map<AccountType, Integer> accountNumber = new HashMap<>();
 
     public User(String username) {
         this.username = username;
@@ -21,8 +24,7 @@ public class User extends People implements Serializable {
     }
 
     // important for bank teller
-    public User(){
-    }
+    public User(){}
 
     @Override
     public String toString() {
@@ -31,19 +33,19 @@ public class User extends People implements Serializable {
 
     void setPassword (String password){ this.password = password;}
 
-    String getJoint() {return this.joint;}
-
-    Account getJointAccount() { return this.jointAccount; }
-
-    void setJoint(String username){
-        this.joint = username;
-    }
-
     List<Account> getAccounts() { return accounts; }
 
     AccountType getAccountRequest(){ return accountRequest; }
 
     ChequingAccount getPrimaryAccount() { return this.primaryAccount; }
+
+    String getPartner() {return this.partner;}
+
+    Account getJointAccount() { return this.jointAccount; }
+
+    void setPartner(String username){
+        this.partner = username;
+    }
 
     void createAccount(AccountType accountType){
         System.out.println(accountType);
@@ -51,29 +53,39 @@ public class User extends People implements Serializable {
         switch (accountType) {
             case CHEQUING:
                 ChequingAccount chequing = new ChequingAccount();
-                addAccount(chequing);
                 if (primaryAccount == null) {
                     primaryAccount = chequing;
                 }
+                chequing.setNumber(createAccountHelper(AccountType.CHEQUING));
+                addAccount(chequing);
                 break;
             case SAVINGS:
-                addAccount(new SavingsAccount());
+                SavingsAccount savingsAccount = new SavingsAccount();
+                savingsAccount.setNumber(createAccountHelper(AccountType.SAVINGS));
+                addAccount(savingsAccount);
+
                 break;
             case LINEOFCREDIT:
-                addAccount(new LineOfCredit());
+                LineOfCredit lineOfCredit = new LineOfCredit();
+                lineOfCredit.setNumber(createAccountHelper(AccountType.LINEOFCREDIT));
+                addAccount(lineOfCredit);
                 break;
             case CREDIT:
-                addAccount(new CreditCard());
+                CreditCard creditCard = new CreditCard();
+                creditCard.setNumber(createAccountHelper(AccountType.CREDIT));
+                addAccount(creditCard);
                 break;
             case JOINT:
-                // TODO: ??????
-                Account acct = new ChequingAccount();
-                ((ChequingAccount) acct).setJoint();
+                ChequingAccount acct = new ChequingAccount();
+                acct.setJoint();
+                acct.setNames(partner,getUsername());
                 jointAccount = acct;
                 addAccount(acct);
                 break;
             case LOTTERY:
-                addAccount(new LotteryAccount());
+                LotteryAccount lotteryAccount = new LotteryAccount();
+                lotteryAccount.setNumber(createAccountHelper(AccountType.LOTTERY));
+                addAccount(lotteryAccount);
                 break;
         }
 
@@ -85,6 +97,32 @@ public class User extends People implements Serializable {
     void addAccount(Account account){
         accounts.add(account);
         accountRequest = null;
+    }
+
+
+    private Integer createAccountHelper(AccountType type) {
+        int newNumber = 1;
+
+        if (accountNumber.size() >= 1 && findType(type)){
+            Integer number = accountNumber.get(type);
+            newNumber = number+=1;
+            accountNumber.replace(type, number, newNumber);
+        }
+        else{
+            accountNumber.put(type, newNumber);
+        }
+
+        return newNumber;
+
+    }
+
+    private boolean findType(AccountType type) {
+        for (Account acc : accounts) {
+            if (acc.getType().equals(type)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     String viewAccountInfo(Account account) {
@@ -106,7 +144,6 @@ public class User extends People implements Serializable {
     }
 
 
-    // TODO: can this be overloaded???????
     void requestAccount(AccountType account){
         accountRequest = account;
 
@@ -115,9 +152,9 @@ public class User extends People implements Serializable {
     }
 
     // Overloading for joint accounts
-    void requestAccount(String partner, AccountType account){
+    void requestAccount(String name, AccountType account){
         accountRequest = account;
-        joint = partner;
+        partner = name;
 
         Database Database = new Database();
         Database.store();
@@ -127,7 +164,6 @@ public class User extends People implements Serializable {
         return false;
     }
 
-//    public Account getSpecificAccount()
 
 
 

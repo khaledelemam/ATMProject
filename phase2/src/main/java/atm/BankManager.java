@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.io.*;
 import java.util.List;
 
-public class BankManager extends  People implements Serializable, BankWork {
+public class BankManager extends People implements Serializable, BankWork {
 
     private List<List<Object>> newUsersRequests = new ArrayList<>();
     private Database Database = new Database();
+    private Filename file = new Filename();
+
 
     public BankManager() {
         this.username = "admin";
@@ -64,18 +66,16 @@ public class BankManager extends  People implements Serializable, BankWork {
             if (CreditScore.getRandomDoubleBetweenRange() > 0) {
                 // for joint accounts
 
-                if (user.getAccountRequest() != null && user.getJoint() != null) {
-
+                if (user.getAccountRequest() != null && user.getPartner() != null) {
                     //primary user
                     AccountType request = user.getAccountRequest();
                     user.createAccount(request);
-
-                    String joint = user.getJoint();
+                    String partner = user.getPartner();
 
                     //partner
-                    User partner = Database.checkExistingUser(joint);
-                    partner.setJoint(user.getUsername());
-                    partner.addAccount(user.getJointAccount());
+                    User OtherUser = Database.checkExistingUser(partner);
+                    OtherUser.setPartner(user.getUsername());
+                    OtherUser.addAccount(user.getJointAccount());
 
                 } //for single accounts
                 else if (user.getAccountRequest() != null) {
@@ -102,6 +102,7 @@ public class BankManager extends  People implements Serializable, BankWork {
                         for (int i = account.getAllTransactions().size() - 1; i > 0; i--) {
                             Transaction t = account.getAllTransactions().get(i);
                             if (t.getTransactionType() == TransactionType.InternalTransfer || t.getTransactionType() == TransactionType.ExternalTransfer) {
+                                //TODO: I think something is wrong here
                                 Transaction transaction2 = account.getAllTransactions().get(account.getAllTransactions().size() - 1);
                                 ReverseTransferHelper(transaction2);
                                 break;
@@ -193,35 +194,16 @@ public class BankManager extends  People implements Serializable, BankWork {
     }
 
     private void storeRequests(){
-        try{
-            FileOutputStream fos= new FileOutputStream("newUsersRequests");
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(newUsersRequests);
-            oos.close();
-            fos.close();
-        }catch(IOException ioe){
-            ioe.printStackTrace();
-        }
+        Serialize ser = new Serialize(file.getRequestsFile(), newUsersRequests);
+        ser.store();
     }
 
     @SuppressWarnings("unchecked")
 
     private void retrieveRequests() {
-        File f = new File("newUsersRequests");
-        if (f.exists()) {
-            try {
-                FileInputStream fis = new FileInputStream("newUsersRequests");
-                ObjectInputStream ois = new ObjectInputStream(fis);
-                newUsersRequests = (List<List<Object>>) ois.readObject();
-                ois.close();
-                fis.close();
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-            } catch (ClassNotFoundException c) {
-                System.out.println("Class not found");
-                c.printStackTrace();
-            }
-        }
+        Serialize ser = new Serialize(file.getRequestsFile(), newUsersRequests);
+        Object retrieve = ser.retrieve();
+        if (retrieve != null) newUsersRequests = (List<List<Object>>) retrieve;
     }
 
 }

@@ -68,7 +68,8 @@ public class InterfaceBankIntern implements Initializable {
 
     public void logout(ActionEvent actionEvent) throws IOException{
 
-        Parent mainScreen = FXMLLoader.load(getClass().getResource("InterfaceLogin.fxml"));
+        Filename f = new Filename();
+        Parent mainScreen = FXMLLoader.load(getClass().getResource(f.getLoginFile()));
         Scene scene = new Scene(mainScreen);
         Stage window = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
         window.setScene(scene);

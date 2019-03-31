@@ -27,7 +27,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         Filename f = new Filename();
-        Parent root = FXMLLoader.load(getClass().getResource(f.getFxmlFile()));
+        Parent root = FXMLLoader.load(getClass().getResource(f.getLoginFile()));
         Scene scene = new Scene(root);
 
 
@@ -47,6 +47,7 @@ public class Main extends Application {
         LocalTime midnight = LocalTime.MAX;
         long terminate = SECONDS.between(time, midnight);
         date = new Time(1);
+        System.out.println(date);
 
         Calculations calc = new Calculations();
 
