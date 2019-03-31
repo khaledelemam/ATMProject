@@ -1,7 +1,9 @@
-package atm.admin;
+package atm.View;
 
 import atm.*;
 import atm.accounts.Account;
+import atm.admin.BankManager;
+import atm.admin.atmAdmin;
 import atm.users.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -1,8 +1,9 @@
-package atm.users;
+package atm.View;
 
 import atm.Filename;
 import atm.admin.BankManager;
 import atm.login.atmLogin;
+import atm.users.UserType;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;

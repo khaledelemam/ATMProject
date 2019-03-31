@@ -1,4 +1,4 @@
-package atm.users;
+package atm.View;
 
 import atm.Filename;
 import atm.Time;

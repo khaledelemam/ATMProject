@@ -1,7 +1,9 @@
-package atm.users;
+package atm.View;
 
 import atm.CashManager;
 import atm.Filename;
+import atm.users.BankIntern;
+import atm.users.atmBankIntern;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;

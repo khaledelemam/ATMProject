@@ -1,5 +1,7 @@
-package atm;
+package atm.View;
 
+import atm.Filename;
+import atm.Time;
 import atm.accounts.Calculations;
 import javafx.application.Application;
 import javafx.application.Platform;

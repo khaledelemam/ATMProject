@@ -7,56 +7,37 @@ public class Filename implements Serializable {
     private static final long serialVersionUID = 200L;
 
     /** Filenames used in CashManager */
-    private String cashFile = "phase2/src/main/java/atm/cash.txt";
-    private String alertFile = "phase2/src/main/java/atm/alerts.txt";
-
-    /** File path for outgoing file used in PayBills */
-    private String outgoingFile = "phase2/src/main/java/atm/outgoing.txt";
-
-    /** FXML files */
-    private String loginFile = "InterfaceLogin.fxml";
-    private  String adminFile = "InterfaceAdmin.fxml";
-    private String bankInternFile = "InterfaceBankIntern.fxml";
-    private String newUserFile = "InterfaceNewUser.fxml";
-    private String userFile = "InterfaceUser.fxml";
-
-    /** Filename used in Time */
-    private String timeFile = "Time.ser";
-
-    /** Serial file used in Database */
-    private String usersFile = "Users.ser";
-
-    /** Serial file used in BankManager */
-    private String requestsFile = "NewUsersRequests.ser";
-
-    public String getCashFile() {
-        return cashFile;
-    }
+    public String getCashFile() { return "phase2/src/main/java/atm/textFiles/cash.txt"; }
 
     public String getAlertFile() {
-        return alertFile;
+        return "phase2/src/main/java/atm/textFiles/alerts.txt";
     }
 
+
+    /** File path for outgoing file used in PayBills */
+    public String getOutgoingFile() { return "phase2/src/main/java/atm/textFiles/outgoing.txt";}
+
+    /** FXML files */
     public String getLoginFile() {
-        return loginFile;
+        return "InterfaceLogin.fxml";
     }
 
-    public String getOutgoingFile() {
-        return outgoingFile;
-    }
+    public String getAdminFile(){return "InterfaceAdmin.fxml";}
 
-    public String getTimeFile() {return timeFile;}
+    public String getBankInternFile(){return "InterfaceBankIntern.fxml";}
 
-    public String getUsersFile() {return usersFile;}
+    public String getNewUserFile(){return "InterfaceNewUser.fxml";}
 
-    public String getRequestsFile() {return requestsFile;}
+    public String getUserFile(){return "InterfaceUser.fxml";}
 
-    public String getAdminFile(){return adminFile;}
+    /** Filename used in Time */
+    public String getTimeFile() {return "Time.ser";}
 
-    public String getBankInternFile(){return bankInternFile;}
+    /** Serial file used in Database */
+    public String getUsersFile() {return "Users.ser";}
 
-    public String getNewUserFile(){return newUserFile;}
+    /** Serial file used in BankManager */
+    public String getRequestsFile() {return "NewUsersRequests.ser";}
 
-    public String getUserFile(){return userFile;}
 
 }

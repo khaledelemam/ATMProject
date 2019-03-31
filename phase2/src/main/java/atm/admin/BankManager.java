@@ -58,7 +58,7 @@ public class BankManager extends People implements Serializable, BankWork {
                         setUserPassword(user);
                         break;
                     case BankIntern:
-                        BankIntern bankIntern = new BankIntern(username);
+                        User bankIntern = new BankIntern(username);
                         bankIntern.createAccount(AccountType.CHEQUING);
                         setUserPassword(bankIntern);
                         break;
@@ -112,8 +112,8 @@ public class BankManager extends People implements Serializable, BankWork {
                             Transaction t = account.getAllTransactions().get(i);
                             if (t.getTransactionType() == TransactionType.InternalTransfer || t.getTransactionType() == TransactionType.ExternalTransfer) {
                                 //TODO: I think something is wrong here
-                                Transaction transaction2 = account.getAllTransactions().get(account.getAllTransactions().size() - 1);
-                                ReverseTransferHelper(transaction2);
+//                                Transaction transaction2 = account.getAllTransactions().get(account.getAllTransactions().size() - 1);
+                                ReverseTransferHelper(t);
                                 break;
                             }
                         }
