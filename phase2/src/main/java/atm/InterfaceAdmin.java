@@ -44,20 +44,19 @@ public class InterfaceAdmin implements Initializable{
     public Label transactionMessage;
 
     private String alerts;
-    private  ObservableList<String> bills;
+    private ObservableList<String> bills;
     private ObservableList<User> users;
 
 
     atmAdmin atm = new atmAdmin(new BankManager());
 
-    public InterfaceAdmin () throws IOException{
+    public InterfaceAdmin() throws IOException {
         CashManager cm = new CashManager();
         alerts = cm.showAlerts();
         bills = atm.getBills();
         users = atm.getUsers();
 
     }
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -78,21 +77,27 @@ public class InterfaceAdmin implements Initializable{
     }
 
     public void advanceTime(ActionEvent actionEvent) {
-        atm.advanceDate(Integer.parseInt(daysField.getText()));
-        daysField.setText("");
+        try {
+            int days = checkInput(daysField.getText());
+            atm.advanceDate(days);
+            daysField.setText("");
+            adminMessage.setText("New date set.");
+        } catch (InvalidInputException e) {
+            adminMessage.setText(e.getMessage());
+        }
     }
 
     public void addBills(ActionEvent actionEvent) throws IOException {
-
         CashManager cm = new CashManager();
-        int amount = Integer.parseInt(addBillsAmountField.getText());
-        int bill = Integer.parseInt(addBills_cbox.getSelectionModel().getSelectedItem());
-        adminCashMessage.setText(atm.addBills(amount,bill));
-        adminAlertMessage.setText(cm.showAlerts());
-
+        try {
+            int amount = checkInput(addBillsAmountField.getText());
+            int bill = Integer.parseInt(addBills_cbox.getSelectionModel().getSelectedItem());
+            adminCashMessage.setText(atm.addBills(amount, bill));
+            adminAlertMessage.setText(cm.showAlerts());
+        } catch (InvalidInputException e) {
+            adminCashMessage.setText(e.getMessage());
+        }
         addBillsAmountField.setText("");
-
-
     }
 
     public void showUserAccounts(ActionEvent actionEvent) {
@@ -101,21 +106,25 @@ public class InterfaceAdmin implements Initializable{
     }
 
     public void reverseLastTransaction(ActionEvent actionEvent) {
-
         transactionMessage.setText(atm.reverseTransaction(adminAccount_cbox.getSelectionModel().getSelectedItem()));
         atm.setUser(null);
-
     }
 
     public void adminLogout(ActionEvent actionEvent) throws IOException {
-
         Parent mainScreen = FXMLLoader.load(getClass().getResource("InterfaceLogin.fxml"));
         Scene scene = new Scene(mainScreen);
-        Stage window = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
+        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         window.setScene(scene);
         window.show();
+    }
 
-
+    /** Helper method to check if text input is in correct integer format. */
+    private int checkInput(String fieldInput) throws InvalidInputException {
+        if (fieldInput.matches("^\\d+")) {
+            return Integer.parseInt(fieldInput);
+        } else {
+            throw new InvalidInputException("Enter a number.");
+        }
     }
 
 

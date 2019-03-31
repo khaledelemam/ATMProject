@@ -14,3 +14,4 @@ InterfaceUser
 + externalTransfer(actionEvent: ActionEvent): void
 + payBill(actionEvent: ActionEvent): void
 + logout(actionEvent: ActionEvent): void
+- checkInput(fieldInput: String): double
