@@ -84,6 +84,8 @@ public class InterfaceAdmin implements Initializable{
             int days = checkInput(daysField.getText());
             atm.advanceDate(days);
             daysField.setText("");
+            Time time = new Time();
+            date.setText(time.toString());
             adminMessage.setText("New date set.");
         } catch (InvalidInputException e) {
             adminMessage.setText(e.getMessage());
