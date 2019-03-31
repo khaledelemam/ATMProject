@@ -48,10 +48,10 @@ public class Main extends Application {
         long terminate = SECONDS.between(time, midnight);
         date = new Time(1);
 
-        SavingsAccount savings = new SavingsAccount();
+        Calculations calc = new Calculations();
 
         if (date.date.getDay() == 1) {
-            savings.applyInterest(1);
+            calc.applyInterest(1);
         }
         Executors.newSingleThreadScheduledExecutor().schedule(Platform::exit, terminate, TimeUnit.SECONDS);
         Executors.newSingleThreadScheduledExecutor().schedule(() -> System.exit(0), terminate, TimeUnit.SECONDS);

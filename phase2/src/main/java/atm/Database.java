@@ -8,11 +8,7 @@ import java.util.List;
 public class Database{
     //TODO: Try passing in the serializable stuff in Database constructor and storing each thing ( pass in transactions, users, accounts..)
 
-    static private List<User> users = new ArrayList<>();
-
-
-    public Database(){
-    }
+    private static List<User> users = new ArrayList<>();
 
 
     List<User> getUsers() {
@@ -67,10 +63,7 @@ public class Database{
                 users = (List) ois.readObject();
                 ois.close();
                 fis.close();
-                //
-                store();
 
-                //
             } catch (IOException ioe) {
                 ioe.printStackTrace();
             } catch (ClassNotFoundException c) {

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.*;
 import java.util.List;
 
-public class BankManager extends  People implements Serializable, BankWorker {
+public class BankManager extends  People implements Serializable, BankWork {
 
     private List<List<Object>> newUsersRequests = new ArrayList<>();
     private Database Database = new Database();
@@ -20,8 +20,8 @@ public class BankManager extends  People implements Serializable, BankWorker {
         long plusOneDay = (1000 * 60 * 60 * 24);
         long NumberOfDays = plusOneDay * days;
 
-        SavingsAccount savings = new SavingsAccount();
-        savings.numInterestApplications(days, oldDate);
+        Calculations calc = new Calculations();
+        calc.numInterestApplications(days, oldDate);
 
         new Time(NumberOfDays);
     }
@@ -47,11 +47,12 @@ public class BankManager extends  People implements Serializable, BankWorker {
                         setUserPassword(user);
                         break;
                     case BankIntern:
-                        BankIntern bankIntern= new BankIntern(username);
+                        BankIntern bankIntern = new BankIntern(username);
                         bankIntern.createAccount(AccountType.CHEQUING);
                         setUserPassword(bankIntern);
                         break;
                 }
+
             }
         }
         newUsersRequests.clear();

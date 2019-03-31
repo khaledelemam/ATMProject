@@ -4,14 +4,14 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BankIntern extends User implements BankWorker{
+public class BankIntern extends User implements BankWork{
     private static final long serialVersionUID = 69L;
 
     public BankIntern(String username) {
         super(username);
     }
-    public BankIntern(){
 
+    public BankIntern(){
     }
 
     @Override

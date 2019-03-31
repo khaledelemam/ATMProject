@@ -3,9 +3,7 @@ package atm;
 
 public class CreditCard extends DebtAccounts {
 
-    public CreditCard() {
-        super();
-    }
+    public CreditCard() { super(); }
 
     @Override
     public String toString() {
