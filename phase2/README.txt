@@ -1,35 +1,49 @@
 ----- How to use the program -----
 
-1) run atmInterface.main()
-2) log in as A. admin or B. user
+1) run Main in View package
+2) log in as admin or user
 
 Note:
 - program will close at system's midnight
 
---- A. How to run as admin ---
+--- How to run as admin ---
+(A)
 
 1) log in:
-    > defalt username: admin
+    > default username: admin
     > default password: 123
     > press button 'admin login'
 
 (1) Approve new user requests
 (2) Approve account requests for existing users
 (3) Reverse transactions
-*Bank manager reverses transactions between accounts.*
-bank manager reverses all transfer transactions.
+*Bank manager reverses all transactions between accounts(transfer).*
 (4) Set the date
 (5) Restock denominations
 
+(B)
+
+-- Bank Intern --
+
+Bank Intern can login as a user and as an admin.
+
+Enter username and password
+- Click on login to login as a user. Intern has same user functionality.
+- Click on admin login to login as an employee
+ -- as an employee intern can restock the ATM machine.
+
+
 --- How to register as a user ---
 
-(1) Login as a user
-*default password for user is "1"*
-(2) Request a new user account
+(1) Request a new user account
+(2) Choose Normal User or Bank Intern
+(3) Enter your preferred username.
 (3) Wait until administrator approves your account, based on your credit score
 * you have to login as an admin to approve the user request *
 (5) Once approved by the admin, you can login and will be given your temporary password
 *temporary password is 1*
+
+(6) After being approved enter your username and password to login.
 
 --- What you can do as a registered user ---
 
@@ -48,17 +62,10 @@ bank manager reverses all transfer transactions.
 - Pay your bills
     > Bill payments will be recorded in "outgoing.txt"
 
+- Withdraw an amount
+    > choose an mount from the drop menu to withdraw
+
 - Open a new account
     > Only one account can be requested at a time per user
 
 - Change your password
-
-- Have money deposited to your account
-    > Cash/cheques are deposited according to what is in the file "deposits.txt"
-    > Only one bill can be deposited at a time, and must be a valid denomination ($5, $10, $20, $50)
-    > FILE FORMAT: user type amount
-        > type can be "cash" or "cheque"
-        > amount does not include "$"
-        > deposit only occurs if the user exists in the system already
-
---- Other features ---
