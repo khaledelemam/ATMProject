@@ -3,7 +3,7 @@ package atm.View;
 import atm.Model.Filename;
 import atm.Model.Time;
 import atm.Model.admin.BankManager;
-import atm.Controllers.atmLogin;
+import atm.Controllers.LoginController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -32,7 +32,7 @@ public class InterfaceLogin implements Initializable {
     public Label date;
 
     // initialize ATM
-    atmLogin atm = new atmLogin(new BankManager());
+    LoginController atm = new LoginController(new BankManager());
     private Filename f = new Filename();
 
     @Override

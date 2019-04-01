@@ -8,12 +8,12 @@ import javafx.collections.ObservableList;
 
 import java.io.IOException;
 
-public class atmBankIntern {
+public class BankInternController {
 
 
     private BankIntern bankIntern;
 
-    public atmBankIntern(BankIntern bankIntern){
+    public BankInternController(BankIntern bankIntern){
         this.bankIntern = bankIntern;
 
     }

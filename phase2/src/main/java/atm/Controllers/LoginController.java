@@ -8,14 +8,14 @@ import atm.Model.users.UserType;
 import atm.Model.users.UsernameTakenException;
 
 /** Controller class for login data for users and creating new login for new users. */
-public class atmLogin {
+public class LoginController {
 
 
     private BankManager bankManager;
 
     // ----- login -----
 
-    public atmLogin(BankManager bankManager){
+    public LoginController(BankManager bankManager){
          this.bankManager = bankManager;
 
          Database Database = new Database();
@@ -42,17 +42,6 @@ public class atmLogin {
         Database Database = new Database();
         User USER = Database.login(username, password);
         return USER != null;
-    }
-
-    // ----- new user -----
-
-    public String newUserRequest(String username, UserType type) {
-        try {
-            bankManager.newUserRequest(username, type);
-            return "Please wait until an admin approves your account.";
-        } catch (UsernameTakenException u) {
-            return (u.getMessage());
-        }
     }
 
 

@@ -1,12 +1,13 @@
 package atm.View;
 
+import atm.Controllers.UserTransactionsController;
 import atm.Model.Filename;
 import atm.Model.Time;
 import atm.Model.accounts.Account;
 import atm.Model.accounts.AccountType;
 import atm.Model.accounts.CreditCard;
 import atm.Model.users.User;
-import atm.Controllers.atmUser;
+import atm.Controllers.UserController;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -60,14 +61,16 @@ public class InterfaceUser {
     public Label depositMessage, withdrawMessage;
     // end
 
-    atmUser atm;
+    UserController atm;
+    UserTransactionsController atm2;
 
 
     public void setUpUser(String username) throws IOException {
 
-        atm = new atmUser(username);
+        atm = new UserController(username);
+        atm2 = new UserTransactionsController(username);
 
-        ObservableList<String> withdrawValues = atm.getWithdrawValues();
+        ObservableList<String> withdrawValues = atm2.getWithdrawValues();
         String NetBalance = atm.getNetBalance();
         ObservableList<User> users = atm.getUsers();
         ObservableList<Account> accounts = atm.getAccounts();
@@ -105,12 +108,12 @@ public class InterfaceUser {
     }
 
     public void requestAccount(ActionEvent actionEvent) {
-        // TODO: better way to do this?
         AccountType account = (AccountType) newAccountsGroup.getSelectedToggle().getUserData();
         requestAccountMessage.setText(atm.requestNewAccount(account, shareAccountField.getText()));
         shareAccountField.setVisible(false);
         shareAccountField.setText("");
     }
+
 
     public void showShareAccount(ActionEvent actionEvent) {
         shareAccountField.setVisible(true);
@@ -130,7 +133,7 @@ public class InterfaceUser {
         if (checkInput(depositAmountField.getText())){
 
             double amount = Double.parseDouble(depositAmountField.getText());
-            depositMessage.setText(atm.deposit(amount));
+            depositMessage.setText(atm2.deposit(amount));
         }
         else{
             depositMessage.setText("Please enter a number.");
@@ -139,10 +142,8 @@ public class InterfaceUser {
 
     }
 
-
-
     public void withdraw(ActionEvent actionEvent) {
-        withdrawMessage.setText(atm.withdraw(Double.valueOf((withdraw_cbox.getSelectionModel().getSelectedItem()))));
+        withdrawMessage.setText(atm2.withdraw(Double.valueOf((withdraw_cbox.getSelectionModel().getSelectedItem()))));
     }
 
     public void internalTransfer(ActionEvent actionEvent) {
@@ -158,7 +159,7 @@ public class InterfaceUser {
             } else if (sender instanceof CreditCard) {
                 internalTransferMessage.setText("Can't transfer out of a credit card account.");
             } else {
-                internalTransferMessage.setText(atm.internalTransfer(sender, recipient, amount));
+                internalTransferMessage.setText(atm2.internalTransfer(sender, recipient, amount));
             }
         } else{
             internalTransferMessage.setText("Please enter a number.");
@@ -176,7 +177,7 @@ public class InterfaceUser {
             if (sender instanceof CreditCard) {
                 externalTransferMessage.setText("Can't transfer out of a credit card account.");
             } else {
-                externalTransferMessage.setText(atm.externalTransfer(recipient, amount, sender));
+                externalTransferMessage.setText(atm2.externalTransfer(recipient, amount, sender));
             }
         }
         else{
@@ -190,7 +191,7 @@ public class InterfaceUser {
         if(checkInput(billPayAmount.getText())){
             Account sender = billPay_cbox.getSelectionModel().getSelectedItem();
             double amount = Double.parseDouble(billPayAmount.getText());
-            billPayMessage.setText(atm.payBill(sender, amount));
+            billPayMessage.setText(atm2.payBill(sender, amount));
         }
         else{
             billPayMessage.setText("Please enter a number.");
@@ -198,7 +199,6 @@ public class InterfaceUser {
         billPayAmount.setText("");
 
     }
-
 
     public void logout(ActionEvent actionEvent) throws IOException{
         Filename f = new Filename();

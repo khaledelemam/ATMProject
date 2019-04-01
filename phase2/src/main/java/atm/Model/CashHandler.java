@@ -3,12 +3,18 @@ package atm.Model;
 import atm.Model.CashManager;
 import atm.Model.transactions.WithdrawException;
 import com.sun.prism.impl.ps.CachingShapeRep;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import java.io.*;
 
 public class CashHandler {
     public CashManager cm;
+
+    private List<String> bills = new ArrayList<>();
+
+
     public CashHandler() throws IOException{
         cm = new CashManager();
     }
@@ -47,9 +53,9 @@ public class CashHandler {
 
         for (int i = 0 ; i < cm.getDenominations().length; i++) {
             int num = cm.getDenominations()[i];
-            cm.getBills().add(Integer.toString(num));
+            bills.add(Integer.toString(num));
         }
-        return cm.getBills();
+        return bills;
 
     }
 }

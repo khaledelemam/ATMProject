@@ -1,8 +1,9 @@
 package atm.View;
 
+import atm.Controllers.NewUsersController;
 import atm.Model.Filename;
 import atm.Model.admin.BankManager;
-import atm.Controllers.atmLogin;
+import atm.Controllers.LoginController;
 import atm.Model.users.UserType;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -33,7 +34,7 @@ public class InterfaceNewUser implements Initializable {
     public Label newUserMessage;
     public ComboBox<UserType> UserType_cbox;
 
-    atmLogin atm = new atmLogin(new BankManager());
+    NewUsersController atm = new NewUsersController(new BankManager());
 
     // ----- new user events -----
 

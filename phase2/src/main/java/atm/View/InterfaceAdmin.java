@@ -5,7 +5,7 @@ import atm.Model.Filename;
 import atm.Model.Time;
 import atm.Model.accounts.Account;
 import atm.Model.admin.BankManager;
-import atm.Controllers.atmAdmin;
+import atm.Controllers.AdminController;
 import atm.Model.users.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -56,7 +56,7 @@ public class InterfaceAdmin implements Initializable{
     private ObservableList<User> users;
 
 
-    atmAdmin atm = new atmAdmin(new BankManager());
+    AdminController atm = new AdminController(new BankManager());
 
     public InterfaceAdmin() throws IOException {
         CashManager cm = new CashManager();

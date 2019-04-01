@@ -3,7 +3,7 @@ package atm.View;
 import atm.Model.CashManager;
 import atm.Model.Filename;
 import atm.Model.users.BankIntern;
-import atm.Controllers.atmBankIntern;
+import atm.Controllers.BankInternController;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -37,7 +37,7 @@ public class InterfaceBankIntern implements Initializable {
 
 
 
-    atmBankIntern atm = new atmBankIntern(new BankIntern());
+    BankInternController atm = new BankInternController(new BankIntern());
 
 
     public InterfaceBankIntern() throws IOException{

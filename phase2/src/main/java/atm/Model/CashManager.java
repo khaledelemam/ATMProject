@@ -17,7 +17,7 @@ public class CashManager {
     private String[] denominationString;
 
     private List<String> withdrawAmounts = new ArrayList<>();
-    private List<String> bills = new ArrayList<>();
+
 
     private String cashFile;
     private String alertFile;
@@ -57,24 +57,6 @@ public class CashManager {
     private String getBill(int index){
         return denominationString[index] + "-dollar bills";
     }
-
-    public List getBills(){return this.bills;}
-
-    /*private boolean checkDenominationAmount(int index){
-        return (billNumber[billNumber.length-1-index] > 0);
-    }
-
-    private void changeDenomination(int index, int amount) throws WithdrawException, IOException {
-        if (checkDenominationAmount(index)) {
-            billNumber[billNumber.length - 1 - index] -= amount;
-            writeToFile();
-        } else {
-            throw new WithdrawException();
-
-        }
-    }
-    */
-
 
     //sets denominations as the values from text file
     private void cashFromFile() throws IOException {
@@ -158,36 +140,6 @@ public class CashManager {
         return sb.toString();
 
     }
-/*
-    public void subtractDenominations(double amount, int index) throws WithdrawException, IOException {
-
-        int DecreaseBy = 1;
-
-        if (amount == 0 || getDenominations().length == index) {
-            assert true;
-        }
-        // if the greatestBill is not greater than the amount you're withdrawing
-        // and if there is at least one denomination of the greatestBill
-        else if (amount - getLargestDenomination(index) >= 0) {
-            amount -= getLargestDenomination(index);
-            changeDenomination(index, DecreaseBy);
-            subtractDenominations(amount, index);
-        } else {
-            subtractDenominations(amount, index + 1);
-        }
-
-    }
-
-   public  List<String> getBillsList(){
-
-        for (int i = 0 ; i < getDenominations().length; i++) {
-            int num = getDenominations()[i];
-            bills.add(Integer.toString(num));
-        }
-        return bills;
-
-    }
-*/
     public void ReStockATM(int amount, int bill) throws IOException{
         for (int i = 0; i < getDenominations().length; i++){
             if (getDenominations()[i] == bill){

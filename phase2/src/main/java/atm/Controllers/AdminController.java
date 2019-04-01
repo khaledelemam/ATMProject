@@ -5,6 +5,7 @@ import atm.Model.CashHandler;
 import atm.Model.CashManager;
 import atm.Model.Database;
 import atm.Model.accounts.Account;
+import atm.Model.admin.ReverseTransactions;
 import atm.Model.transactions.InsufficientFundsException;
 import atm.Model.admin.BankManager;
 import atm.Model.users.User;
@@ -15,13 +16,13 @@ import javafx.collections.ObservableList;
 import java.io.IOException;
 
 /** Controller class for admin data and functionality. */
-public class atmAdmin {
+public class AdminController {
 
     private User USER;
     private BankManager bankManager;
-    atm.Model.Database Database = new Database();
+    private atm.Model.Database Database = new Database();
 
-    public atmAdmin(BankManager bankManager){
+    public AdminController(BankManager bankManager){
         this.bankManager = bankManager;
 
     }
@@ -48,7 +49,7 @@ public class atmAdmin {
     public void acceptNewUserRequests() { bankManager.createUser(); }
 
     public void acceptNewAccountRequests() {
-        bankManager.newAccountRequest();
+        bankManager.createAccounts();
     }
 
     public void advanceDate(int days) {
@@ -57,7 +58,8 @@ public class atmAdmin {
 
     public String reverseTransaction(Account account) {
         try {
-            bankManager.ReverseLastTransfer(account);
+            ReverseTransactions reverseTransactions = new ReverseTransactions();
+            reverseTransactions.ReverseLastTransfer(account);
             return "Transfer for " + USER + " reversed";
         } catch (InsufficientFundsException e) {
             return "Transfer could not be reversed.";
