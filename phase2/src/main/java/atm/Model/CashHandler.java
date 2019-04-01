@@ -19,6 +19,7 @@ public class CashHandler {
         cm = new CashManager();
     }
 
+    /** Determines how many of each denomination to withdraw. */
     public void subtractDenominations(double amount, int index) throws WithdrawException, IOException {
 
         int DecreaseBy = 1;
@@ -37,6 +38,8 @@ public class CashHandler {
         }
 
     }
+
+    /** Change number of bills left for this denomination. */
     private void changeDenomination(int index, int amount) throws WithdrawException, IOException {
         if (checkDenominationAmount(index)) {
             cm.getBillNumber()[cm.getBillNumber().length - 1 - index] -= amount;
@@ -46,6 +49,8 @@ public class CashHandler {
 
         }
     }
+
+    /** Return true if there are any bills left of that denomination. */
     private boolean checkDenominationAmount(int index){
         return (cm.getBillNumber()[cm.getBillNumber().length-1-index]) > 0;
     }

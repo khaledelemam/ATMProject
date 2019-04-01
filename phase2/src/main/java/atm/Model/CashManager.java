@@ -53,13 +53,13 @@ public class CashManager {
         return denominations[denominations.length-1-index];
     }
 
-    // this method is for the alert part in admin
+    /** This method is for the alert part in admin */
     private String getBill(int index){
         return denominationString[index] + "-dollar bills";
     }
 
 
-    //sets denominations as the values from text file
+    /** sets denominations as the values from text file */
     private void cashFromFile() throws IOException {
         File file = new File(cashFile);
         BufferedReader cashReader = new BufferedReader(new FileReader(file));
@@ -96,7 +96,7 @@ public class CashManager {
         return stringArray.length;
     }
 
-    //writes current denominations to file
+    /** writes current denominations to file */
    public void writeToFile() throws IOException {
         File file = new File(cashFile);
         PrintWriter writer = new PrintWriter(new FileWriter(file));
@@ -108,7 +108,7 @@ public class CashManager {
         writer.close();
     }
 
-    // sends an alert when a denomination falls below the threshold
+    /** Sends an alert when a denomination falls below the threshold */
     public void update() throws IOException {
 
         final int threshold = 20;
@@ -123,7 +123,7 @@ public class CashManager {
         writer.close();
     }
 
-    // Returns the alerts or a string that says "No Alerts"
+    /** Returns the alerts or a string that says "No Alerts" */
      public String showAlerts() throws IOException {
         File file = new File(alertFile);
         Scanner input = new Scanner(file);
