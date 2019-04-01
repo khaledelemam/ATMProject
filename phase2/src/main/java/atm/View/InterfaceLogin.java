@@ -43,7 +43,7 @@ public class InterfaceLogin implements Initializable {
 
     // ----- login events ------
     public void userLogin(ActionEvent actionEvent) throws IOException{
-        // TODO: use regex to control user input amount format
+
         if (atm.userLogin(login_usernameField.getText(), login_passwordField.getText())) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(f.getUserFile()));
             Parent UserScreen = loader.load();
@@ -65,7 +65,7 @@ public class InterfaceLogin implements Initializable {
 
 
     public void adminLogin(ActionEvent actionEvent) throws IOException {
-        // TODO: use regex to control user input amount format
+
         if (atm.adminCheck(login_usernameField.getText(), login_passwordField.getText())) {
 
             Parent adminScreen = FXMLLoader.load(getClass().getResource(f.getAdminFile()));

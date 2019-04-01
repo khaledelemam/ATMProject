@@ -87,7 +87,8 @@ public class BankManager extends People implements Serializable, BankWork {
     public void newUserRequest(String username, UserType type) throws UsernameTakenException {
         retrieveRequests();
 
-        if ((Database.checkExistingUser(username) != null) || (checkUserRequests(username))) {
+        // checks if the username is in the requests list or a current user has the same username.
+        if ((Database.checkExistingUser(username) != null) || (checkUsername(username))) {
             throw new UsernameTakenException();
         } else {
             List<Object> userTypes = new ArrayList<>();
@@ -101,7 +102,7 @@ public class BankManager extends People implements Serializable, BankWork {
     }
 
 
-    private boolean checkUserRequests(String username){
+    private boolean checkUsername(String username){
         for(List users: newUsersRequests){
             String user = (String)users.get(0);
             System.out.println(user);
