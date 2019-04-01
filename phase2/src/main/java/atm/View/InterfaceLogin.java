@@ -34,6 +34,7 @@ public class InterfaceLogin implements Initializable {
     // initialize ATM
     LoginController atm = new LoginController(new BankManager());
     private Filename f = new Filename();
+    private String inputWarning = "Invalid username or password.";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -42,52 +43,55 @@ public class InterfaceLogin implements Initializable {
     }
 
     // ----- login events ------
-    public void userLogin(ActionEvent actionEvent) throws IOException{
-        // TODO: use regex to control user input amount format
-        if (atm.userLogin(login_usernameField.getText(), login_passwordField.getText())) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(f.getUserFile()));
-            Parent UserScreen = loader.load();
-            InterfaceUser controller = loader.getController();
-            controller.setUpUser(login_usernameField.getText());
+    public void userLogin(ActionEvent actionEvent) throws IOException {
+        if (checkInput(login_usernameField.getText()) && checkInput(login_passwordField.getText())) {
+            if (atm.userLogin(login_usernameField.getText(), login_passwordField.getText())) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(f.getUserFile()));
+                Parent UserScreen = loader.load();
+                InterfaceUser controller = loader.getController();
+                controller.setUpUser(login_usernameField.getText());
 
-            Scene scene = new Scene(UserScreen);
-            Stage window = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
-            window.setScene(scene);
-            window.show();
+                Scene scene = new Scene(UserScreen);
+                Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                window.setScene(scene);
+                window.show();
 
+            } else {
+                loginMessage.setText(inputWarning);
+            }
+        } else {
+            loginMessage.setText(inputWarning);
         }
-        else {
-            clearLoginFields();
-            loginMessage.setText("Invalid username or password.");
-        }
+        clearLoginFields();
     }
 
 
 
     public void adminLogin(ActionEvent actionEvent) throws IOException {
-        // TODO: use regex to control user input amount format
-        if (atm.adminCheck(login_usernameField.getText(), login_passwordField.getText())) {
+        if (checkInput(login_usernameField.getText()) && checkInput(login_passwordField.getText())) {
+            if (atm.adminCheck(login_usernameField.getText(), login_passwordField.getText())) {
 
-            Parent adminScreen = FXMLLoader.load(getClass().getResource(f.getAdminFile()));
-            Scene scene = new Scene(adminScreen);
-            Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            window.setScene(scene);
-            window.show();
-        }
-        else if (atm.bankTellerCheck(login_usernameField.getText(), login_passwordField.getText())){
-            // do bankTeller interface stuff
+                Parent adminScreen = FXMLLoader.load(getClass().getResource(f.getAdminFile()));
+                Scene scene = new Scene(adminScreen);
+                Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                window.setScene(scene);
+                window.show();
+            } else if (atm.bankTellerCheck(login_usernameField.getText(), login_passwordField.getText())) {
+                // do bankTeller interface stuff
 
-            Parent internScreen = FXMLLoader.load(getClass().getResource(f.getBankInternFile()));
-            Scene scene = new Scene(internScreen);
-            Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            window.setScene(scene);
-            window.show();
+                Parent internScreen = FXMLLoader.load(getClass().getResource(f.getBankInternFile()));
+                Scene scene = new Scene(internScreen);
+                Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                window.setScene(scene);
+                window.show();
 
+            } else {
+                loginMessage.setText("Admin access denied");
+            }
+        } else {
+            loginMessage.setText(inputWarning);
         }
-        else {
-            clearLoginFields();
-            loginMessage.setText("Admin access denied");
-        }
+        clearLoginFields();
     }
 
     public void newUser(ActionEvent actionEvent) throws IOException {
@@ -105,7 +109,11 @@ public class InterfaceLogin implements Initializable {
     private void clearLoginFields() {
         login_usernameField.setText("");
         login_passwordField.setText("");
-        loginMessage.setText("");
+    }
+
+    /** Helper method to check if text input is in correct format. */
+    private boolean checkInput(String fieldInput) {
+        return fieldInput.matches("^\\w+");
     }
 
 

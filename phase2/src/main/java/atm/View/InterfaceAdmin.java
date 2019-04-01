@@ -57,6 +57,7 @@ public class InterfaceAdmin implements Initializable{
 
 
     AdminController atm = new AdminController(new BankManager());
+    private String inputWarning = "Please enter a number.";
 
     public InterfaceAdmin() throws IOException {
         CashManager cm = new CashManager();
@@ -96,7 +97,7 @@ public class InterfaceAdmin implements Initializable{
             adminMessage.setText("New date set.");
         }
         else {
-            adminMessage.setText("Please enter a number.");
+            adminMessage.setText(inputWarning);
         }
         daysField.setText("");
     }
@@ -111,7 +112,7 @@ public class InterfaceAdmin implements Initializable{
             adminAlertMessage.setText(cm.showAlerts());
         }
         else {
-            adminCashMessage.setText("Please enter a number.");
+            adminCashMessage.setText(inputWarning);
         }
         addBillsAmountField.setText("");
     }
