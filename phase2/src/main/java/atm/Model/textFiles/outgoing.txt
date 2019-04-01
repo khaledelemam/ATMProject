@@ -12,3 +12,4 @@ garfield payed $1.0 on 2019-04-03
 garfield payed $600.0 on 2019-04-03
 a payed $10.0 on 2019-04-05
 a payed $12.0 on 2019-04-06
+mimi payed $20.0 on 2019-04-01

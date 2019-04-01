@@ -1,5 +1,6 @@
 package atm.Controllers;
 
+import atm.Model.CashHandler;
 import atm.Model.CashManager;
 import atm.Model.users.BankIntern;
 import javafx.collections.FXCollections;
@@ -18,8 +19,8 @@ public class atmBankIntern {
     }
 
     public ObservableList<String> getBills() throws IOException {
-        CashManager cm = new CashManager();
-        return FXCollections.observableArrayList(cm.getBillsList());
+        CashHandler ch = new CashHandler();
+        return FXCollections.observableArrayList(ch.getBillsList());
     }
 
     public String addBills(int amount, int bill){

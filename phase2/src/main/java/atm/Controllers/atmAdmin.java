@@ -1,6 +1,7 @@
 package atm.Controllers;
 
 //import com.sun.xml.internal.rngom.digested.DAnnotation;
+import atm.Model.CashHandler;
 import atm.Model.CashManager;
 import atm.Model.Database;
 import atm.Model.accounts.Account;
@@ -35,8 +36,8 @@ public class atmAdmin {
 
 
     public ObservableList<String> getBills() throws IOException {
-        CashManager cm = new CashManager();
-        return FXCollections.observableArrayList(cm.getBillsList());
+        CashHandler ch = new CashHandler();
+        return FXCollections.observableArrayList(ch.getBillsList());
     }
 
 

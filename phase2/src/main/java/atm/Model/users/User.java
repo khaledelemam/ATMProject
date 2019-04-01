@@ -47,6 +47,7 @@ public class User extends People implements Serializable {
 
     public Account getJointAccount() { return this.jointAccount; }
 
+    /** Set the other user for a joint account.*/
     public void setPartner(String username){
         this.partner = username;
     }
@@ -103,7 +104,6 @@ public class User extends People implements Serializable {
         accountRequest = null;
     }
 
-
     private Integer createAccountHelper(AccountType type) {
         int newNumber = 1;
 
@@ -117,9 +117,8 @@ public class User extends People implements Serializable {
         }
 
         return newNumber;
-
     }
-
+    /**Check if there is an instance of an account of AccountType type in the accounts list.*/
     private boolean findType(AccountType type) {
         for (Account acc : accounts) {
             if (acc.getType().equals(type)) {
@@ -128,7 +127,7 @@ public class User extends People implements Serializable {
         }
         return false;
     }
-
+    /**View account balance, date opened and the last transaction to/from the given account.*/
     public String viewAccountInfo(Account account) {
         String accountInfo = "--------------------------\n" + account +
                 "\n--------------------------\nBalance: $" + account.getBalance() +
@@ -163,15 +162,4 @@ public class User extends People implements Serializable {
         Database Database = new Database();
         Database.store();
     }
-
-    public boolean isEmployee(){
-        return false;
-    }
-
-
-
-
-
-
-
 }

@@ -15,10 +15,6 @@ public class BankIntern extends User implements BankWork {
     public BankIntern(){
     }
 
-    @Override
-    public boolean isEmployee() {
-        return true;
-    }
 
     public void ReStockATM(int amount, int bill) throws IOException{
         CashManager cashManager = new CashManager();

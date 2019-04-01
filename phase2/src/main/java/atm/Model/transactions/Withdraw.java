@@ -1,10 +1,12 @@
 package atm.Model.transactions;
 
+import atm.Model.CashHandler;
 import atm.Model.CashManager;
 import atm.Model.Database;
 import atm.Model.accounts.Account;
 
 import java.io.IOException;
+
 
 public class Withdraw implements UserDo {
 
@@ -20,9 +22,10 @@ public class Withdraw implements UserDo {
     public void doTransaction(double amount) throws InsufficientFundsException, WithdrawException {
 
         try {
-            CashManager cm = new CashManager();
-            cm.subtractDenominations(amount, 0);
-            cm.update();
+            //CashManager cm = new CashManager();
+            CashHandler ch = new CashHandler();
+            ch.subtractDenominations(amount, 0);
+            ch.cm.update();
 
             account.setBalance(-amount);
             Transaction withdrawal = new Transaction(account, amount, TransactionType.Withdraw);

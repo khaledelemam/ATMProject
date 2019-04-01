@@ -39,17 +39,17 @@ public class CashManager {
 
         }
     }
-    private int[] getDenominations(){
+    public int[] getDenominations(){
         return denominations;
     }
 
-    private int[] getBillNumber() {return billNumber;}
+    public int[] getBillNumber() {return billNumber;}
 
     public List<String> getWithdrawAmounts(){
         return withdrawAmounts;
     }
 
-    private int getLargestDenomination(int index){
+    public int getLargestDenomination(int index){
         return denominations[denominations.length-1-index];
     }
 
@@ -58,8 +58,9 @@ public class CashManager {
         return denominationString[index] + "-dollar bills";
     }
 
+    public List getBills(){return this.bills;}
 
-    private boolean checkDenominationAmount(int index){
+    /*private boolean checkDenominationAmount(int index){
         return (billNumber[billNumber.length-1-index] > 0);
     }
 
@@ -72,7 +73,7 @@ public class CashManager {
 
         }
     }
-
+    */
 
 
     //sets denominations as the values from text file
@@ -101,6 +102,7 @@ public class CashManager {
     }
 
 
+
     private int FileLines() throws IOException{
         File file = new File(cashFile);
         FileInputStream fis = new FileInputStream(file);
@@ -112,7 +114,7 @@ public class CashManager {
     }
 
     //writes current denominations to file
-   private void writeToFile() throws IOException {
+   public void writeToFile() throws IOException {
         File file = new File(cashFile);
         PrintWriter writer = new PrintWriter(new FileWriter(file));
         for (int i = 0; i< denominations.length; i++){
@@ -156,7 +158,7 @@ public class CashManager {
         return sb.toString();
 
     }
-
+/*
     public void subtractDenominations(double amount, int index) throws WithdrawException, IOException {
 
         int DecreaseBy = 1;
@@ -185,7 +187,7 @@ public class CashManager {
         return bills;
 
     }
-
+*/
     public void ReStockATM(int amount, int bill) throws IOException{
         for (int i = 0; i < getDenominations().length; i++){
             if (getDenominations()[i] == bill){

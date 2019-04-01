@@ -19,7 +19,7 @@ public class PayBills implements UserDo {
         this.source = account;
         this.user = user;
     }
-
+    /**Pays bills and writes to a file. */
     public void doTransaction(double amount) throws IOException, InsufficientFundsException {
         source.setBalance(-amount);
 
