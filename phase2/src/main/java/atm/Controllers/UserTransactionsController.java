@@ -71,7 +71,6 @@ public class UserTransactionsController {
 
     public String deposit(double amount) {
         UserExecutes transaction = new UserExecutes(new Deposit(USER.getPrimaryAccount()));
-        System.out.println(USER.getPrimaryAccount());
         try {
             transaction.executeTransaction(amount);
             return "Deposit completed.";
@@ -85,7 +84,6 @@ public class UserTransactionsController {
 
     public String withdraw(double amount) {
         UserExecutes transaction = new UserExecutes(new Withdraw(USER.getPrimaryAccount()));
-        System.out.println(USER.getPrimaryAccount());
         try {
             transaction.executeTransaction(amount);
             return "Withdraw completed.";
