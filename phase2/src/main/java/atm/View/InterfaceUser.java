@@ -210,7 +210,6 @@ public class InterfaceUser {
 
     }
 
-
     /** Helper method to check if amount input is in correct decimal format. */
     private boolean checkInput(String fieldInput) {
         return fieldInput.matches("^\\d+\\.?\\d{0,2}");

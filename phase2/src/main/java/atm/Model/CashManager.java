@@ -58,6 +58,7 @@ public class CashManager {
         return denominationString[index] + "-dollar bills";
     }
 
+
     //sets denominations as the values from text file
     private void cashFromFile() throws IOException {
         File file = new File(cashFile);

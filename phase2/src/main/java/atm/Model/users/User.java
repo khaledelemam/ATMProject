@@ -104,6 +104,7 @@ public class User extends People implements Serializable {
         accountRequest = null;
     }
 
+    /** Returns the number of the new account*/
     private Integer createAccountHelper(AccountType type) {
         int newNumber = 1;
 
@@ -118,6 +119,7 @@ public class User extends People implements Serializable {
 
         return newNumber;
     }
+
     /**Check if there is an instance of an account of AccountType type in the accounts list.*/
     private boolean findType(AccountType type) {
         for (Account acc : accounts) {
@@ -127,6 +129,7 @@ public class User extends People implements Serializable {
         }
         return false;
     }
+
     /**View account balance, date opened and the last transaction to/from the given account.*/
     public String viewAccountInfo(Account account) {
         String accountInfo = "--------------------------\n" + account +
