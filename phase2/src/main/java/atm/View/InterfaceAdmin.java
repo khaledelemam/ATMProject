@@ -67,6 +67,7 @@ public class InterfaceAdmin implements Initializable{
     }
 
     @Override
+    /**Setup the admin screen*/
     public void initialize(URL location, ResourceBundle resources) {
         adminUser_cbox.setItems(users);
         adminAlertMessage.setText(alerts);
@@ -85,7 +86,7 @@ public class InterfaceAdmin implements Initializable{
         atm.acceptNewUserRequests();
         adminMessage.setText("New users created.");
     }
-
+    /**Advance the date by the number of days that the admin inputs in the daysField.*/
     public void advanceTime(ActionEvent actionEvent) {
         if (checkInput(daysField.getText())){
             int days = Integer.parseInt(daysField.getText());
@@ -99,7 +100,7 @@ public class InterfaceAdmin implements Initializable{
         }
         daysField.setText("");
     }
-
+    /**Restocks admin*/
     public void addBills(ActionEvent actionEvent) throws IOException {
         CashManager cm = new CashManager();
         if(checkInput(addBillsAmountField.getText())){
