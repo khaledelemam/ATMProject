@@ -1,5 +1,5 @@
-five 5 229
-ten 10 18
-twenty 20 19
-fifty 50 59
-hundred 100 59
+five 5 50
+ten 10 50
+twenty 20 50
+fifty 50 50
+hundred 100 50
