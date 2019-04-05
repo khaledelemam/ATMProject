@@ -39,7 +39,7 @@ Enter username and password
 (2) Choose Normal User or Bank Intern
 (3) Enter your preferred username.
 (3) Wait until administrator approves your account, based on your credit score
-* you have to login as an admin to approve the user request *
+* you have to login as an admin to approve the user request by clicking "accept users" *
 (5) Once approved by the admin, you can login and will be given your temporary password
 *temporary password is 1*
 
@@ -67,5 +67,8 @@ Enter username and password
 
 - Open a new account
     > Only one account can be requested at a time per user
+    * When you request an account, logout as a user and login as an admin and click "accept all requests"
+    to accept the account the request. When you log in as a user again you will find the requested account
+    in your accounts list. *
 
 - Change your password
