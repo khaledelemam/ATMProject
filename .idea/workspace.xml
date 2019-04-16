@@ -1,0 +1,834 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="54b2688b-3925-4b2f-96d5-700dc7949820" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/accounts/AccountFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/src/main/java/smile.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ATMProject.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NewUsersRequests.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectGroup/.gitkeep" beforeDir="false" afterPath="$PROJECT_DIR$/project/.gitkeep" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Time.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Users.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/markus-hooks/multihook_client.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/markus-hooks/pre-commit" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/markus-hooks/pre-commit.d/02-block_change_top_level_master.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/markus-hooks/pre-commit.d/03-check_required_files_master.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Controllers/AdminController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Controllers/BankInternController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Controllers/LoginController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Controllers/NewUsersController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Controllers/UserController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Controllers/UserTransactionsController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/BankWork.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/CashHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/CashManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/Database.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/Filename.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/People.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/Serialize.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/Time.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/accounts/Account.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/accounts/AccountType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/accounts/Calculations.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/accounts/ChequingAccount.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/accounts/CreditCard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/accounts/DebtAccounts.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/accounts/JointAccount.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/accounts/LineOfCredit.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/accounts/LotteryAccount.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/accounts/SavingsAccount.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/admin/BankManager$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/admin/BankManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/admin/ReverseTransactions$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/admin/ReverseTransactions.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/textFiles/alerts.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/textFiles/cash.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/textFiles/outgoing.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/transactions/Deposit.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/transactions/ExternalTransfer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/transactions/InsufficientFundsException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/transactions/InternalTransfer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/transactions/PayBills.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/transactions/Transaction$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/transactions/Transaction.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/transactions/TransactionType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/transactions/UserDo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/transactions/UserExecutes.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/transactions/Withdraw.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/transactions/WithdrawException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/users/BankIntern.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/users/CreditScore.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/users/User$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/users/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/users/UserType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/Model/users/UsernameTakenException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/View/InterfaceAdmin.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/View/InterfaceAdmin.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/View/InterfaceBankIntern.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/View/InterfaceBankIntern.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/View/InterfaceLogin.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/View/InterfaceLogin.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/View/InterfaceNewUser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/View/InterfaceNewUser.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/View/InterfaceUser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/View/InterfaceUser.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/atm/View/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/group_0350F/garfield.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase1/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/README.txt" beforeDir="false" afterPath="$PROJECT_DIR$/project/README.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/group.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Controllers/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Controllers/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Controllers/BankInternController.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Controllers/BankInternController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Controllers/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Controllers/NewUsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Controllers/NewUsersController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Controllers/UserTransactionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Controllers/UserTransactionsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/BankWork.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/BankWork.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/CashHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/CashHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/CashManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/CashManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/Filename.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/Filename.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/People.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/People.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/Serialize.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/Serialize.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/Time.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/Time.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/accounts/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/accounts/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/accounts/AccountType.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/accounts/AccountType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/accounts/Calculations.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/accounts/Calculations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/accounts/ChequingAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/accounts/ChequingAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/accounts/CreditCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/accounts/CreditCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/accounts/DebtAccounts.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/accounts/DebtAccounts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/accounts/JointAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/accounts/JointAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/accounts/LineOfCredit.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/accounts/LineOfCredit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/accounts/LotteryAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/accounts/LotteryAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/accounts/SavingsAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/accounts/SavingsAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/admin/BankManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/admin/BankManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/admin/ReverseTransactions.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/admin/ReverseTransactions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/textFiles/alerts.txt" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/textFiles/alerts.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/textFiles/cash.txt" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/textFiles/cash.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/textFiles/outgoing.txt" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/textFiles/outgoing.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/transactions/Deposit.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/transactions/Deposit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/transactions/ExternalTransfer.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/transactions/ExternalTransfer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/transactions/InsufficientFundsException.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/transactions/InsufficientFundsException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/transactions/InternalTransfer.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/transactions/InternalTransfer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/transactions/PayBills.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/transactions/PayBills.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/transactions/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/transactions/Transaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/transactions/TransactionType.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/transactions/TransactionType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/transactions/UserDo.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/transactions/UserDo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/transactions/UserExecutes.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/transactions/UserExecutes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/transactions/Withdraw.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/transactions/Withdraw.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/transactions/WithdrawException.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/transactions/WithdrawException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/users/BankIntern.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/users/BankIntern.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/users/CreditScore.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/users/CreditScore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/users/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/users/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/users/UserType.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/users/UserType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/Model/users/UsernameTakenException.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/Model/users/UsernameTakenException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/View/InterfaceAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/View/InterfaceAdmin.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/View/InterfaceAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/View/InterfaceAdmin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/View/InterfaceBankIntern.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/View/InterfaceBankIntern.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/View/InterfaceBankIntern.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/View/InterfaceBankIntern.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/View/InterfaceLogin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/View/InterfaceLogin.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/View/InterfaceLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/View/InterfaceLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/View/InterfaceNewUser.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/View/InterfaceNewUser.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/View/InterfaceNewUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/View/InterfaceNewUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/View/InterfaceUser.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/View/InterfaceUser.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/View/InterfaceUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/View/InterfaceUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/java/atm/View/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/main/java/atm/View/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/src/main/main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/Account.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/AccountTypes.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/Accounts.png" beforeDir="false" afterPath="$PROJECT_DIR$/project/UMLs/Accounts.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/BankManager.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/BankTeller.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/BankWorker.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/Cash.png" beforeDir="false" afterPath="$PROJECT_DIR$/project/UMLs/Cash.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/CashManager.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/ChequingAccount.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/Controller.png" beforeDir="false" afterPath="$PROJECT_DIR$/project/UMLs/Controller.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/CreditCard.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/CreditScore.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/Database.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/DebtAccounts.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/Deposit.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/Exception.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/ExternalTransfer.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/InsufficientFundsException.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/InterfaceAdmin.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/InterfaceLogin.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/InterfaceNewUser.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/InterfaceUser.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/InternalTransfer.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/InvalidInputException.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/LineOfCredit.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/LotteryAccount.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/Main.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/NegativeDenominationException.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/PayBills.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/People.png" beforeDir="false" afterPath="$PROJECT_DIR$/project/UMLs/People.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/ReverseATM.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/SavingsAccount.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/Serializable.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/Time.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/Transaction.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/TransactionType.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/Transactions.png" beforeDir="false" afterPath="$PROJECT_DIR$/project/UMLs/Transactions.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/User.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/UserDo.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/UserExecutes.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/Userdo.png" beforeDir="false" afterPath="$PROJECT_DIR$/project/UMLs/Userdo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/UsernameTakenException.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/Withdraw.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/WithdrawException.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/atmAdmin.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/atmLogin.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phase2/umls/atmUser.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/main/java/garfield.png" beforeDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/out/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/View/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="578">
+              <caret line="34" selection-start-line="34" selection-end-line="34" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>newUserScreen</find>
+    </findStrings>
+    <replaceStrings>
+      <replace />
+    </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$/src</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/phase2/src/main/java/atm/Model/textFiles/outgoing.txt" />
+        <option value="$PROJECT_DIR$/phase2/src/main/java/atm/Model/textFiles/cash.txt" />
+        <option value="$PROJECT_DIR$/phase2/README.txt" />
+        <option value="$PROJECT_DIR$/phase2/src/main/java/atm/Model/CashManager.java" />
+        <option value="$PROJECT_DIR$/phase2/src/main/java/atm/View/Main.java" />
+        <option value="$PROJECT_DIR$/phase2/src/main/java/atm/View/InterfaceLogin.java" />
+        <option value="$PROJECT_DIR$/phase2/src/main/java/atm/View/InterfaceLogin.fxml" />
+        <option value="$PROJECT_DIR$/phase2/src/main/java/atm/Model/users/User.java" />
+        <option value="$PROJECT_DIR$/phase2/src/main/java/atm/Model/accounts/AccountFactory.java" />
+        <option value="$PROJECT_DIR$/phase2/src/main/java/atm/Model/Time.java" />
+        <option value="$PROJECT_DIR$/phase2/src/main/java/atm/Controllers/AdminController.java" />
+        <option value="$PROJECT_DIR$/phase2/src/main/java/atm/Controllers/BankInternController.java" />
+        <option value="$PROJECT_DIR$/phase2/src/main/java/atm/Model/admin/BankManager.java" />
+        <option value="$PROJECT_DIR$/phase2/src/main/java/atm/Model/users/BankIntern.java" />
+        <option value="$PROJECT_DIR$/phase2/src/main/java/atm/Model/accounts/ChequingAccount.java" />
+        <option value="$PROJECT_DIR$/phase2/src/main/java/atm/Model/accounts/DebtAccounts.java" />
+        <option value="$PROJECT_DIR$/phase2/src/main/java/atm/Controllers/UserTransactionsController.java" />
+        <option value="$PROJECT_DIR$/phase2/src/main/java/atm/View/InterfaceUser.java" />
+        <option value="$PROJECT_DIR$/phase2/src/main/java/atm/View/InterfaceUser.fxml" />
+        <option value="$PROJECT_DIR$/project/README.txt" />
+        <option value="$PROJECT_DIR$/project/src/main/java/atm/View/InterfaceLogin.fxml" />
+        <option value="$PROJECT_DIR$/project/src/main/java/atm/Model/Filename.java" />
+        <option value="$PROJECT_DIR$/project/src/main/java/atm/View/InterfaceUser.fxml" />
+        <option value="$PROJECT_DIR$/project/src/main/java/atm/Model/textFiles/outgoing.txt" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1680" />
+    <option name="height" value="1050" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="ATMProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ATMProject" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ATMProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ATMProject" type="462c0819:PsiDirectoryNode" />
+              <item name="project" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ATMProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ATMProject" type="462c0819:PsiDirectoryNode" />
+              <item name="project" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ATMProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ATMProject" type="462c0819:PsiDirectoryNode" />
+              <item name="project" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ATMProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ATMProject" type="462c0819:PsiDirectoryNode" />
+              <item name="project" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ATMProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ATMProject" type="462c0819:PsiDirectoryNode" />
+              <item name="project" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="atm" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ATMProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ATMProject" type="462c0819:PsiDirectoryNode" />
+              <item name="project" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="atm" type="462c0819:PsiDirectoryNode" />
+              <item name="Model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ATMProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ATMProject" type="462c0819:PsiDirectoryNode" />
+              <item name="project" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="atm" type="462c0819:PsiDirectoryNode" />
+              <item name="View" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555388706050" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/project/UML" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="atm.View.Main" />
+      <module name="ATMProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="atm.View.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="54b2688b-3925-4b2f-96d5-700dc7949820" name="Default Changelist" comment="" />
+      <created>1554244195836</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1554244195836</updated>
+    </task>
+    <task id="LOCAL-00001" summary="edited README">
+      <created>1554424698372</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1554424698372</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.32173383" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32857144" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.070408165" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32959184" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Maven" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+    </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23687424" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32857144" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.030612245" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32959184" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Maven" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+    </layout-to-restore>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="edited README" />
+    <option name="LAST_COMMIT_MESSAGE" value="edited README" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/View/InterfaceBankIntern.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/Controllers/LoginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/Model/Serialize.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/Model/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="20" column="24" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/View/InterfaceNewUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/Model/accounts/Account.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/Model/admin/ReverseTransactions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/Model/BankWork.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/Model/Time.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/Model/CashHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/Model/CashManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="683">
+          <caret line="150" column="17" selection-start-line="150" selection-start-column="17" selection-end-line="150" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/Controllers/BankInternController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="26" column="13" lean-forward="true" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/View/InterfaceBankIntern.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="39" column="56" selection-start-line="39" selection-start-column="56" selection-end-line="39" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/Model/users/BankIntern.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/Model/admin/BankManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1309">
+          <caret line="86" column="50" selection-start-line="86" selection-start-column="50" selection-end-line="86" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/Controllers/AdminController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="986">
+          <caret line="66" column="42" lean-forward="true" selection-start-line="66" selection-start-column="42" selection-end-line="66" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/Model/accounts/ChequingAccount.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="5" lean-forward="true" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/Model/accounts/DebtAccounts.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="28" column="35" selection-start-line="28" selection-start-column="35" selection-end-line="28" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/View/InterfaceNewUser.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="193" lean-forward="true" selection-start-line="15" selection-start-column="193" selection-end-line="15" selection-end-column="200" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/Model/accounts/JointAccount.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/Model/accounts/AccountFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="17" column="32" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/Controllers/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/Controllers/UserTransactionsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="899">
+          <caret line="85" column="74" selection-start-line="85" selection-start-column="74" selection-end-line="85" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/umls/LineOfCredit.txt" />
+    <entry file="file://$PROJECT_DIR$/project/umls/BankTeller.txt" />
+    <entry file="file://$PROJECT_DIR$/project/umls/InvalidInputException.txt" />
+    <entry file="file://$PROJECT_DIR$/project/umls/InterfaceNewUser.txt" />
+    <entry file="file://$PROJECT_DIR$/project/umls/InsufficientFundsException.txt" />
+    <entry file="file://$PROJECT_DIR$/project/umls/SavingsAccount.txt" />
+    <entry file="file://$PROJECT_DIR$/project/UMLs/Controller.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/UMLs/Cash.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/UMLs/People.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/UMLs/Transactions.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/umls/LotteryAccount.txt" />
+    <entry file="file://$PROJECT_DIR$/project/umls/PayBills.txt" />
+    <entry file="file://$PROJECT_DIR$/project/UMLs/Userdo.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/UMLs/Accounts.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/View/InterfaceAdmin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1175">
+          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/main.iml" />
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/Model/users/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/View/InterfaceUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1971">
+          <caret line="143" column="61" selection-start-line="143" selection-start-column="61" selection-end-line="143" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/View/InterfaceUser.fxml">
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
+      <provider editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/Model/textFiles/cash.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/Model/textFiles/alerts.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/Model/textFiles/outgoing.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/README.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1105">
+          <caret line="65" column="17" selection-start-line="65" selection-start-column="17" selection-end-line="65" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/View/InterfaceLogin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="57" selection-start-line="57" selection-end-line="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/Model/Filename.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="53" selection-start-line="17" selection-start-column="53" selection-end-line="17" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/View/InterfaceLogin.fxml">
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="27" column="24" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/smile.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/main/java/atm/View/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>lib</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>ATMProject</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8 (2)</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
