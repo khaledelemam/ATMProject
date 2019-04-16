@@ -1,5 +1,0 @@
-InsufficientFundsException
---
---
-+ InsufficientFundsException()
-InsufficientFundsException(message: String)

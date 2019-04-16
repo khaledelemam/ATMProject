@@ -1,9 +1,0 @@
-SavingsAccount
---
---
-+ LotteryAccount()
-+ addInterest(i: int): void
-+ toString(): String
-
-
-***extends SavingsAccount

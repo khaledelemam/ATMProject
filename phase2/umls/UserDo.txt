@@ -1,6 +1,0 @@
-UserDo
---
-# doTransaction(amount: double)
-
-
-***is interface

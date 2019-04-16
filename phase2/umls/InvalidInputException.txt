@@ -1,3 +1,0 @@
-InvalidInputException
---
-+ InvalidInputException(message: String)

@@ -1,9 +1,0 @@
-atmLogin
---
---
-+ adminCheck(username: String, password: String): boolean
-# userLogin(username: String, password: String): boolean
-# newUserRequest(username: String): String
-
-
-***controller class for newUser login views

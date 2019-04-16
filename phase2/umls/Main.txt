@@ -1,9 +1,0 @@
-Main
---
---
-_+ main(args: String[ ]): void_
-+ start(primaryStage Stage): void
-- startTimeInitial(): void
-
-
-*** extends application

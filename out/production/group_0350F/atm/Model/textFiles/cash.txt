@@ -1,4 +1,0 @@
-five 5 35
-ten 10 55
-twenty 20 50
-fifty 50 50

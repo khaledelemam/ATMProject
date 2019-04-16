@@ -1,9 +1,0 @@
-Withdraw
---
-- account: Account
---
-+ PayBills(account: Account)
-+ doTransaction(amount: double): void
-
-
-***implements UserDo
